@@ -1,3 +1,4 @@
+package Monitor;
 //Esta  clase  representa  a  una  persona  que  se  encarga  de  dirigir  las  actividades  que  suceden  en  el  campamento
 
 public class Monitor{

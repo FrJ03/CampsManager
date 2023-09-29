@@ -1,3 +1,4 @@
+package Persona;
 //Esta  clase  representa  a  una  persona
 
 public class Persona{

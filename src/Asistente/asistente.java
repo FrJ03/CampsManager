@@ -1,4 +1,4 @@
-
+package Asistente;
 /**
  * Clase que representa a un asistente al campamento
  * @author Francisco José Mellado Ortiz
