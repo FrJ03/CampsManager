@@ -1,22 +1,30 @@
 package Asistente;
+import java.util.Date;
+import Persona.Persona;
+
 /**
  * Clase que representa a un asistente al campamento
  * @author Francisco José Mellado Ortiz
  */
-//Paquete para la Clase Date
-import java.util.Date;
-import Persona.Persona;
-
  public class Asistente extends Persona{
-     /*Contiene si el Asistente requiere una atención
-      especial. Será verdadero si la requiere o falso
-      en caso contrario.*/
+     
+	 /**
+	  * Representa si el asistente necesita atención especial
+	  * */
      private boolean especial;
+     /**
+      * Fecha de nacimiento del asistente
+      * */
      private Date fecha_nacimiento;
 
+     /**
+      * Construye un objeto vacio*/
      public Asistente(){
 
      }
+     /**
+      * Construye un objeto con todos sus datos
+      * */
      public Asistente(int id, String nombre, String apellidos, Date fecha_nacimiento,boolean especial){
     	 super(id, nombre, apellidos);
         this.fecha_nacimiento = fecha_nacimiento;
