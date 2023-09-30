@@ -1,19 +1,33 @@
 package Persona;
 
+	/**
+	* Clase que representa a una persona
+ 	@author Lucía Téllez López
+	**/
 public class Persona {
-	//Identificador de la persona, de tipo entero
+	/**
+	* Identificador de la persona, de tipo entero
+	**/
 	  private int id;
-	  //Nombre y apellidos, de tipo cadena de caracteres
+	/**
+	* Nombre y apellidos, de tipo cadena de caracteres
+	**/
 	  private String nombre;
 	  private String apellidos;
-
-	  //Métodos get/set para todos los atributos
+	
+	/**
+	* Creadores de la clase con y sin parámetros
+	**/
 	  public Persona() {}
 	  public Persona(int id, String nombre, String apellidos) {
 		  this.id = id;
 		  this.nombre = nombre;
 		  this.apellidos = apellidos;
 	  }
+
+	/**
+	* Métodos get/set para todos los atributos
+	**/
 	  public int get_id() {return id;}
 	  public String get_nombre() {return nombre;}
 	  public String get_apellidos() {return apellidos;}
