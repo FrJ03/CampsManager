@@ -161,4 +161,23 @@ import Actividad.nivel;
 		
 		return aux;
 	}
+	 	
+	/**
+	  * Función permita añadir una actividad al campamento si la actividad es del mismo nivel educativo que el campamento y te devuelve si se ha hecho correctamente o no. 
+	  * */
+	public String asociarActividad(Actividad act) {
+		
+		if(this.nivel_==act.getNivel_()){
+			listaActividad_.add(act);
+			return "Se ha añadido correctamente la actividad al campamento";
+		}
+				
+		return "Error, tienen diferente nivel educativo";
+	}
+	/**
+	  * Función permita establecer el monitor responsable de entre aquellos que están encargados de alguna de las actividades que conforman el campamento.  
+	  * */
+	public void asociarMonitor(Monitor mon) {
+		this.listaMonitor_.add(mon);
+	}
 }
