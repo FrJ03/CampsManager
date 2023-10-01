@@ -33,11 +33,11 @@ public class Actividad	{
 	/**
 	  * Construye un objeto vacio
 	  * */
-	public actividad() {};
+	public Actividad() {};
 	/**
 	  * COnstruye un objeto con todos sus datos, a excepción de la lista de monitores que se inicializa vacía
 	  * */
-	public actividad(String name, nivel nivel, int participantesMax, 
+	public Actividad(String name, nivel nivel, int participantesMax, 
 			int monitoresMax, turno turno) {
 		this.name_=name;
 		this.nivel_=nivel;
