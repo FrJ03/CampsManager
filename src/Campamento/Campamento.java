@@ -143,4 +143,22 @@ import Actividad.nivel;
 	public void setListaMonitor_(ArrayList<Monitor> listaMonitor) {
 		this.listaMonitor_ = listaMonitor;
 	};
+	/**
+	  * Función que devuelve un string con la información del campamento
+	  * */
+	public String toString(){
+		String aux = "Información del Campamento\nId:" + this.id_ + "\nFecha de Inicio:" + this.iniciocampamento_ + 
+				"\nFin del campamento:" + this.fincampamento_ + "\nNivel Academico:"+ this.nivel_ + "\nNumero maximo de asistentes:" + this.asistentesMax_ + "\n";
+		
+		
+		for(Monitor mon : this.listaMonitor_) {
+			aux.concat(mon.get_nombre() + mon.get_apellidos());
+		}
+		
+		for(Actividad act : this.listaActividad_) {
+			aux.concat(act.getName_());
+		}
+		
+		return aux;
+	}
 }
