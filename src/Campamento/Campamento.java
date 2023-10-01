@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import Monitor.Monitor;
 import Actividad.Actividad;
-
+import Actividad.nivel;
 
 /**
  * Clase que representa  la organización de un conjunto de actividades durante un periodo de tiempo limitado
@@ -45,13 +45,20 @@ import Actividad.Actividad;
 	  * */
 	public Campamento() {};
 	/**
-	  * COnstruye un objeto con todos sus datos, a excepción de la lista de monitores que se inicializa vacía
+	  * Construye un objeto con todos sus datos, a excepción de todas las listas que se inicializan vacías
 	  * */
-	public Campamento(String name, nivel nivel, int participantesMax, 
-			int monitoresMax, turno turno) {
+	public Campamento(int id, Date iniciocampamento, Date fincampamento, nivel nivel, int asistentesMax) {
 
-		this.listaMonitores_.clear();
-	};
+		this.id_=id;
+		this.iniciocampamento_=iniciocampamento;
+		this.fincampamento_=fincampamento;
+		this.nivel_=nivel;
+		this.asistentesMax_=asistentesMax;
+		
+		
+		this.listaActividad_.clear();
+		this.listaMonitor_.clear();
+	}
 	 /**
 	  * Observador de la varible id
 	  * */
