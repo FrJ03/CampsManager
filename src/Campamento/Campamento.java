@@ -19,7 +19,7 @@ import Actividad.Actividad;
 	  * Representa la fecha del inicio del campamento
 	  * */
 	private Date iniciocampamento_;
-    /**
+	    /**
 	  * Representa la fecha del fin del campamento
 	  * */
 	private Date fincampamento_;
@@ -35,7 +35,7 @@ import Actividad.Actividad;
 	  * Representa una lista con las Actividades
 	  * */
 	private ArrayList<Actividad>	listaActividad_;
-    /**
+        /**
 	  * Representa una lista con los nombres y apellidos de los monitores
 	  * */
 	private ArrayList<Monitor>	listaMonitor_;
@@ -51,5 +51,89 @@ import Actividad.Actividad;
 			int monitoresMax, turno turno) {
 
 		this.listaMonitores_.clear();
+	};
+	 /**
+	  * Observador de la varible id
+	  * */
+	public int getId_() {
+		return id_;
+	}
+	/**
+	  * Modificador de la variable id
+	  * */
+	public void setId_(int id) {
+		this.id_ = id;
+	}
+	/**
+	  * Observador de la varible iniciocampamento
+	  * */
+	public Date getIniciocampamento_() {
+		return iniciocampamento_;
+	}
+	/**
+	  * Modificador de la variable iniciocampamento
+	  * */
+	public void setIniciocampamento_(Date iniciocampamento) {
+		this.iniciocampamento_ = iniciocampamento;
+	}
+	/**
+	  * Observador de la varible fincampamento
+	  * */
+	public Date getFincampamento_() {
+		return fincampamento_;
+	}
+	/**
+	  * Modificador de la variable fincampamento
+	  * */
+	public void setFincampamento_(Date fincampamento) {
+		this.fincampamento_ = fincampamento;
+	}
+	/**
+	  * Observador de la varible nivel
+	  * */
+	public nivel getNivel_() {
+		return nivel_;
+	}
+	/**
+	  * Modificador de la variable nivel
+	  * */
+	public void setNivel_(nivel nivel) {
+		this.nivel_ = nivel;
+	}
+	/**
+	  * Observador de la varible asistentesmax
+	  * */
+	public int getAsistentesMax_() {
+		return asistentesMax_;
+	}
+	/**
+	  * Modificador de la variable asistentesmax
+	  * */
+	public void setAsistentesMax_(int asistentesMax) {
+		this.asistentesMax_ = asistentesMax;
+	}
+	/**
+	  * Observador de la varible ListaActividad
+	  * */
+	public ArrayList<Actividad> getListaActividad_() {
+		return listaActividad_;
+	}
+	/**
+	  * Modificador de la variable ListaActividad
+	  * */
+	public void setListaActividad_(ArrayList<Actividad> listaActividad) {
+		this.listaActividad_ = listaActividad;
+	}
+	/**
+	  * Observador de la varible ListaMonitor
+	  * */
+	public ArrayList<Monitor> getListaMonitor_() {
+		return listaMonitor_;
+	}
+	/**
+	  * Modificador de la variable ListaMonitor
+	  * */
+	public void setListaMonitor_(ArrayList<Monitor> listaMonitor) {
+		this.listaMonitor_ = listaMonitor;
 	};
 }
