@@ -5,7 +5,7 @@ import Monitor.Monitor;
  * Clase que representa una actividad que realizan los monitores y asistentes
  * @author Enrique de los Reyes Montilla
  */
-public class actividad	{
+public class Actividad	{
 	/**
 	  * Representa el nombre de la actividad
 	  * */
