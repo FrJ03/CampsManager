@@ -180,23 +180,23 @@ import Actividad.nivel;
 	public void asociarMonitor(Monitor mon) {
 		this.listaMonitor_.add(mon);
 	}
-	 /**
+	/**
 	  * Función permita establecer un segundo monitor responsable entre aquellos identificados como de atención especial. Dicho monitor no puede estar asociado a ninguna de las actividades que componen el campamento, pues se trata de un refuerzo que estará de apoyo a todas ellas.  
 	  * */
-	public String asociarMonitorEspecial(Monitor mon) {
+	public boolean asociarMonitorEspecial(Monitor mon) {
 	
 		if(mon.get_especial()==true) { 
 			for(int i=0; i< listaActividad_.size(); i++) {
-				int x=0;
-				if(listaActividad_[i].getListaMonitores_()[x].get_nombre_completo()==mon.get_nombre_completo()) {
-					return "Error, el monitor no es un monitor de atencion especial";
-				}
-				x++;
+				ArrayList<Monitor> ListaMonitores = listaActividad_.get(i).getListaMonitores_();
+				for(int x=0;x<ListaMonitores.size();x++) {
+					if(ListaMonitores.get(x).get_nombre_completo()==mon.get_nombre_completo()) {
+						return false;//Error, el monitor no es un monitor de atencion especial
+					}
+				}	
 			}
 			this.listaMonitor_.add(mon);
-			return "Se ha incorporado correctamente";
+			return true;//Se ha incorporado correctamente
 		}
-		return "Error, el monitor no es un monitor de atencion especial";
+		return false;//Error, el monitor no es un monitor de atencion especial
 	}
-}
 }
