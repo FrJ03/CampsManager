@@ -7,7 +7,7 @@ package Registro;
 
 public abstract class AbstractRegistro(){
   /**
-  *Creador sin parámetros
+  *Constructor sin parámetros
   **/ 
   public Registro() {}
   
