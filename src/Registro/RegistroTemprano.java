@@ -35,7 +35,7 @@ public class RegistroTemprano extends Registro{
         System.out.println("Se ha pedido un registro a un campamento que empieza en menos de 15 días, no se ha permitido.");
       }
     else{
-        this.reserva=true;
+        this.setStatus(true);
         System.out.println("Se ha realizado el registro correctamente.");
     }
   }
@@ -44,8 +44,8 @@ public class RegistroTemprano extends Registro{
   **/
   @Override
   public void cancelacion(){
-    this.reserva=false;
-    System.out.println("Se ha cancelado la reserva");
+    this.setStatus(false);
+    System.out.println("Se ha cancelado el registro.");
   }
     
 }
