@@ -1,7 +1,7 @@
 package Registro
 import java.uil.Date;
 
-public class RegistroTemprano extends AbstractRegistro{
+public class RegistroTemprano extends Registro{
   /**
   *Constructor sin parámetros
   **/
