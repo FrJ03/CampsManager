@@ -30,7 +30,7 @@ public class RegistroTardio extends Registro{
       long diferencia = diaInicioCamp - diaInicioInsc;
     
     if(diferencia<15 && diferencia>2){
-        this.reserva=true;
+        this.setStatus(true);
         System.out.println("Se ha realizado el registro correctamente.");
       }
     else{
