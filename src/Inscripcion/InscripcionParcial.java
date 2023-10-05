@@ -6,10 +6,10 @@ import Registro.RegistroTemprano;
 import Registro.RegistroTardio;
 
 public class InscripcionParcial {
-	public InscripcionCompleta() {
+	public InscripcionParcial() {
 		super();
 	}
-	public InscripcionCompleta(int idParticipante, int idCampamento, Date fechaInscripcion, float precio) {
+	public InscripcionParcial(int idParticipante, int idCampamento, Date fechaInscripcion, float precio) {
 		super(idParticipante, idCampamento, fechaInscripcion, precio);
 	}
 	
