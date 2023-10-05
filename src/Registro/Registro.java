@@ -6,7 +6,7 @@ import java.util.Date;
  	@author Lucía Téllez López
 	**/
 
-public abstract class AbstractRegistro(){
+public abstract class Registro(){
 
 	/**
  	* Atributos del registro, "reserva" expresa si la reserva se ha registrado correctamente
@@ -27,6 +27,16 @@ public abstract class AbstractRegistro(){
 	public abstract Registro(boolean reserva, int idAsociado){
 		this.reserva=false;
 		this.idAsociado=idAsociado;
+	}
+
+	/**
+ 	* Devuelve el estado del registro, es decir,
+  	si se ha registrado correctamente o por el contrario
+   	aún no se ha llamado a la función registro() o no se puede
+    	validar por incompatibilidad de fechas.
+ 	**/
+	public boolean getStatus(){
+		return this.reserva;
 	}
 	
   /**
