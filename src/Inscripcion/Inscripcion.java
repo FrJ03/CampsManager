@@ -1,8 +1,8 @@
 package Inscripcion;
 
 import java.util.Date;
-import RegistroTemprano.RegistroTemprano;
-import RegistroTardio.RegistroTardio;
+import Registro.RegistroTemprano;
+import Registro.RegistroTardio;
 
 public abstract class Inscripcion {
 	private int idParticipante;
