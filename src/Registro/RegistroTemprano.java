@@ -17,7 +17,7 @@ public class RegistroTemprano extends AbstractRegistro{
 
 
   /**
-  * Registra la inscripción
+  * Registra el registro para que se considerede válido
   Recibe las fechas de inscripción e inicio del campamento, las transforma para poder
   restarlas y comparar los días de diferencia.
   Si hay 15 días o más entre la fecha de inscripción y la fecha de comienzo del
@@ -40,7 +40,7 @@ public class RegistroTemprano extends AbstractRegistro{
     }
   }
   /**
-  * Cancela la inscripción
+  * Cancela el registro
   **/
   @Override
   public void cancelacion(){
