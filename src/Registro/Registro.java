@@ -44,6 +44,15 @@ public abstract class Registro(){
 	public boolean getIdAsociado(){
 		return this.idAsociado;
 	}
+
+	/**
+ 	* Función que permite cambiar la validez
+  	* del registro, para poder registrarlo o
+   	* cancelarlo
+  	**/
+	public void setStatus(boolean status){
+		this.reserva=status;
+	}
 	
   /**
   * Funciones que permiten registrar o cancelar un registro
