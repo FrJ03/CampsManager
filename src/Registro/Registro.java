@@ -6,7 +6,7 @@ import java.util.Date;
  	@author Lucía Téllez López
 	**/
 
-public abstract class Registro(){
+public abstract class Registro{
 
 	/**
  	* Atributos del registro, "reserva" expresa si la reserva se ha registrado correctamente
@@ -18,13 +18,13 @@ public abstract class Registro(){
 	/**
  	* Constructor sin parámetros
  	**/
-	public abstract Registro(){}
+	public Registro(){}
 	/**
  	* Constructor con parámetros, en la función registro
   	* se cambiará el valor de la reserva a true si se
    	* cumplen los requisitos
  	**/
-	public abstract Registro(boolean reserva, int idAsociado){
+	public Registro(boolean reserva, int idAsociado){
 		this.reserva=false;
 		this.idAsociado=idAsociado;
 	}
@@ -41,7 +41,7 @@ public abstract class Registro(){
 	/**
  	* Devuelve el ID del participante que solicita el registro
   	**/
-	public boolean getIdAsociado(){
+	public int getIdAsociado(){
 		return this.idAsociado;
 	}
 
@@ -57,6 +57,6 @@ public abstract class Registro(){
   /**
   * Funciones que permiten registrar o cancelar un registro
   **/
-  public abstract registro(Date fechaInscripcion, Date inicioCampamento);
-  public abstract cancelacion();
+  public abstract void registro(Date fechaInscripcion, Date inicioCampamento);
+  public abstract void cancelacion();
 }
