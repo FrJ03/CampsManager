@@ -21,13 +21,14 @@ public class RegistroTardio extends Registro{
   }
 
   /**
-	 * Método que valida un registro.
-	 * @param fechaInscripcion Fecha en la que se solicita registrarse.
-   * @param inicioCampamento Fecha en la que comienza el campamento.
-	 */
+	* Método que valida un registro.
+	* @param fechaInscripcion Fecha en la que se solicita registrarse.
+   	* @param inicioCampamento Fecha en la que comienza el campamento.
+    	* Transforma el tiempo en días y compara los días que hay entre ambos
+  */
   @Override
   public void registro(Date fechaInscripcion, Date inicioCampamento){
-      long diaInscripcion = fechaInscripcion.getTime() ; 
+      long diaInscripcion = fechaInscripcion.getTime(); 
       long diaCampamento = fechaHasta.getTime();
       long diaInicioInsc = (long) Math.floor(diaInscripcion / (1000*60*60*24));
       long diaInicioCamp = (long) Math.floor(diaCampamento / (1000*60*60*24));
@@ -35,19 +36,19 @@ public class RegistroTardio extends Registro{
     
     if(diferencia<15 && diferencia>2){
         this.setStatus(true);
-        System.out.println("Se ha realizado el registro correctamente.");
+        //System.out.println("Se ha realizado el registro correctamente.");
       }
     else{
-        System.out.println("La solicitud de un registro tardío se debe realizar como muy tarde 2 días antes y como muy pronto 15 días antes del comienzo del campamento. No se ha permitido el registro.");
+        //System.out.println("La solicitud de un registro tardío se debe realizar como muy tarde 2 días antes y como muy pronto 15 días antes del comienzo del campamento. No se ha permitido el registro.");
     }
   }
   
   /**
-	 * Método que cancela un registro.
-	 */
+  * Método que cancela un registro.
+  */
   @Override
   public void cancelacion(){
-    System.out.println("No se permite cancelar un registro tardío. No se ha cancelado.");
+    //System.out.println("No se permite cancelar un registro tardío. No se ha cancelado.");
   }
     
 }
