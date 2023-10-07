@@ -13,7 +13,6 @@ public abstract class Registro{
   	* y "idAsociado" muestra el ID del participante del campamento que se asocia a la reserva
   	**/
 	private boolean reserva;
-	private int idAsociado;
 	
 	/**
  	* Constructor sin parámetros
@@ -24,9 +23,8 @@ public abstract class Registro{
   	* se cambiará el valor de la reserva a true si se
    	* cumplen los requisitos
  	**/
-	public Registro(boolean reserva, int idAsociado){
+	public Registro(boolean reserva){
 		this.reserva=false;
-		this.idAsociado=idAsociado;
 	}
 
 	/**
@@ -37,12 +35,6 @@ public abstract class Registro{
  	**/
 	public boolean getStatus(){
 		return this.reserva;
-	}
-	/**
- 	* Devuelve el ID del participante que solicita el registro
-  	**/
-	public int getIdAsociado(){
-		return this.idAsociado;
 	}
 
 	/**
