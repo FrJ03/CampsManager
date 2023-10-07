@@ -1,26 +1,30 @@
 package Registro
 import java.uil.Date;
 
+/**
+	* Clase que representa los registros tardíos que se pueden hacer en una inscripción.
+ 	@author Lucía Téllez López
+	**/
+
 public class RegistroTardio extends Registro{
   /**
-  *Constructor sin parámetros
+  *  Construye un objeto de la clase registro tardío sin información.
   **/
   public RegistroTardio(){
     super();
   }
   /**
-  *Constructor con parámetros
+  *  Construye un objeto de la clase registro tardío estableciendo el valor de reserva.
   **/
-  public RegistroTardio(boolean reserva){
-    super(reserva);
+  public RegistroTardio(){
+    super();
   }
 
   /**
-  * Registra el registro para que sea válido
-  Recibe las fechas de inscripción e inicio del campamento, las transforma para poder
-  restarlas y comparar los días de diferencia.
-  Si hay menos de 15 días pero 2 o más, se puede realizar el registro correctamente.
-  **/
+	 * Método que valida un registro.
+	 * @param fechaInscripcion Fecha en la que se solicita registrarse.
+   * @param inicioCampamento Fecha en la que comienza el campamento.
+	 */
   @Override
   public void registro(Date fechaInscripcion, Date inicioCampamento){
       long diaInscripcion = fechaInscripcion.getTime() ; 
@@ -37,9 +41,10 @@ public class RegistroTardio extends Registro{
         System.out.println("La solicitud de un registro tardío se debe realizar como muy tarde 2 días antes y como muy pronto 15 días antes del comienzo del campamento. No se ha permitido el registro.");
     }
   }
+  
   /**
-  * Cancela el registro
-  **/
+	 * Método que cancela un registro.
+	 */
   @Override
   public void cancelacion(){
     System.out.println("No se permite cancelar un registro tardío. No se ha cancelado.");
