@@ -9,46 +9,42 @@ import java.util.Date;
 public abstract class Registro{
 
 	/**
- 	* Atributos del registro, "reserva" expresa si la reserva se ha registrado correctamente
-  	* y "idAsociado" muestra el ID del participante del campamento que se asocia a la reserva
+ 	* Estado del registro, true si se ha validado con el método registro()
   	**/
 	private boolean reserva;
 	
 	/**
- 	* Constructor sin parámetros
+ 	* Construye un objeto de la clase registro sin información.
  	**/
 	public Registro(){}
 	/**
- 	* Constructor con parámetros, en la función registro
-  	* se cambiará el valor de la reserva a true si se
-   	* cumplen los requisitos
+ 	* Construye un objeto de la clase registro estableciendo el valor de reserva.
  	**/
-	public Registro(boolean reserva){
+	public Registro(){
 		this.reserva=false;
 	}
 
 	/**
- 	* Devuelve el estado del registro, es decir,
-  	* si se ha registrado correctamente o por el contrario
-   	* aún no se ha llamado a la función registro() o no se puede
-    	* validar por incompatibilidad de fechas.
+ 	* Método que devuelve el estado del registro.
  	**/
 	public boolean getStatus(){
 		return this.reserva;
 	}
 
 	/**
- 	* Función que permite cambiar la validez
-  	* del registro, para poder registrarlo o
-   	* cancelarlo
+ 	* Método para la modificación del estado del registro.
+	 * @param status True o False según se quiera validar o cancelar un registro
   	**/
 	public void setStatus(boolean status){
 		this.reserva=status;
 	}
 	
   /**
-  * Funciones que permiten registrar o cancelar un registro
+  * Método para la validación de un registro. Será definido por sus descendientes.
   **/
   public abstract void registro(Date fechaInscripcion, Date inicioCampamento);
+  /**
+  * Método para la cancelación de un registro. Será definido por sus descendientes.
+  **/
   public abstract void cancelacion();
 }
