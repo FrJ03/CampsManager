@@ -11,8 +11,8 @@ public class RegistroTemprano extends Registro{
   /**
   *Constructor con parámetros
   **/
-  public RegistroTemprano(boolean reserva, int idAsociado){
-    super(reserva,idAsociado);
+  public RegistroTemprano(boolean reserva){
+    super(reserva);
   }
 
 
