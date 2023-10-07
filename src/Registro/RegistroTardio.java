@@ -1,7 +1,7 @@
 package Registro
 import java.uil.Date;
 
-/**
+	/**
 	* Clase que representa los registros tardíos que se pueden hacer en una inscripción.
  	@author Lucía Téllez López
 	**/
