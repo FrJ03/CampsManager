@@ -11,8 +11,8 @@ public class RegistroTardio extends Registro{
   /**
   *Constructor con parámetros
   **/
-  public RegistroTardio(boolean reserva, int idAsociado){
-    super(reserva,idAsociado);
+  public RegistroTardio(boolean reserva){
+    super(reserva);
   }
 
   /**
