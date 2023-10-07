@@ -2,7 +2,7 @@ package Registro;
 import java.util.Date;
 
   	/**
-	* Clase que representa datos básicos de registros que se pueden hacer en una inscripcion
+	* Clase que representa los registros que se pueden hacer en una inscripción.
  	@author Lucía Téllez López
 	**/
 
