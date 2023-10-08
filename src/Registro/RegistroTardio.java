@@ -7,14 +7,10 @@ import java.uil.Date;
 	**/
 
 public class RegistroTardio extends Registro{
-  /**
-  *  Construye un objeto de la clase registro tardío sin información.
-  **/
-  public RegistroTardio(){
-    super();
+
   }
   /**
-  *  Construye un objeto de la clase registro tardío estableciendo el valor de reserva.
+  *  Construye un objeto de la clase registro tardío
   **/
   public RegistroTardio(){
     super();
