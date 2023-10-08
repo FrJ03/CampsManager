@@ -14,10 +14,6 @@ public abstract class Registro{
 	private boolean reserva;
 	
 	/**
- 	* Construye un objeto de la clase registro sin información.
- 	**/
-	public Registro(){}
-	/**
  	* Construye un objeto de la clase registro estableciendo el valor de reserva.
  	**/
 	public Registro(){
