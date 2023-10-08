@@ -29,7 +29,7 @@ public class GestorCampamentos {
 		 */
 		private ArrayList<Actividad> listaActividades_;
 		/**
-		 * Constructor privado que crea una lista de campamentos vacia.
+		 * Constructor privado que crea una lista de campamentos, monitores y actividades vacia.
 		 */
 		private GestorCampamentos() {
 			this.listaCampamentos_.clear();
@@ -45,6 +45,27 @@ public class GestorCampamentos {
 				instance_ = new GestorCampamentos();
 			}
 			return instance_;
+		}
+		/**
+		 * Método que devuelve la lista de campamentos del gestor.
+		 * @return ArrayList<Campamento>.
+		 */
+		public ArrayList<Campamento> getListaCampamentos_() {
+			return listaCampamentos_;
+		}
+		/**
+		 * Método que devuelve la lista de monitores del gestor.
+		 * @return ArrayList<Monitor>.
+		 */
+		public ArrayList<Monitor> getListaMonitores_() {
+			return listaMonitores_;
+		}
+		/**
+		 * Método que devuelve la lista de actividades del gestor.
+		 * @return ArrayList<Actividad>.
+		 */
+		public ArrayList<Actividad> getListaActividades_() {
+			return listaActividades_;
 		}
 		/**
 		 * Metodo que crea monitores mediante valores introducidos por el usuario.
@@ -226,7 +247,7 @@ public class GestorCampamentos {
 		}
 		/**
 		 * Metodo para asociar un monitor a un campmento.
-		 * @param idCampamento Id del campamento al que se va a asociar una actividad.
+		 * @param idCampamento Id del campamento al que se va a asociar un monitor.
 		 * @param monitor Monitor que se va a asociar al campamento.
 		 * @return Boolean.
 		 */
@@ -258,7 +279,7 @@ public class GestorCampamentos {
 		}
 		/**
 		 * Metodo para asociar un monitor especial a un campmento.
-		 * @param idCampamento Id del campamento al que se va a asociar una actividad.
+		 * @param idCampamento Id del campamento al que se va a asociar un monitor.
 		 * @param monitor Monitor que se va a asociar al campamento.
 		 * @return Boolean.
 		 */
