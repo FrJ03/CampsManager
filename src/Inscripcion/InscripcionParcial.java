@@ -9,7 +9,7 @@ import Registro.RegistroTardio;
  * Clase que representa una inscripción en las actividades matinales del campamento. Se trata de una clase concreta del patrón de diseño Abstract Factory.
  * @author Francisco José Mellado Ortiz
  */
-public class InscripcionParcial{
+public class InscripcionParcial extends Inscripcion{
 	/**
 	 * Construye un objeto de la clase InscripcParcial sin información.
 	 */
