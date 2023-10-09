@@ -66,13 +66,13 @@ public class GestorAsistentes {
 	}
 	/**
 	 * Metodo Modificar toda la información de un asistente identificado por su id.
-	  * @param id_antiguo Identificador antiguo único del asistente.
-	  * @param id_nuevo Identificador nuevo único del asistente.
-      * @param nombre Nombre del asistente.
-      * @param apellidos Apellidos del asistente.
-      * @param fechaNacimiento Representa la fecha de nacimiento del asistente.
-      * @param especial Indica si en asistente pertenece a un grupo especial (true) o no (false).
-	  * @return void.
+	 * @param id_antiguo Identificador antiguo único del asistente.
+	 * @param id_nuevo Identificador nuevo único del asistente.
+      	 * @param nombre Nombre del asistente.
+      	 * @param apellidos Apellidos del asistente.
+      	 * @param fechaNacimiento Representa la fecha de nacimiento del asistente.
+      	 * @param especial Indica si en asistente pertenece a un grupo especial (true) o no (false).
+	 * @return void.
 	 */
 	public void ModificarAsistente(int id_antiguo, int id_nuevo, String nombre, String apellidos, Date fechaNacimiento,boolean especial){
 		for(int aux=0;aux<listaAsistente_.size();aux++) {
