@@ -96,12 +96,16 @@ public abstract class Inscripcion {
 	}
 	/**
 	 * Método para la creación de un registro en el campamento de forma temprana. Será definido por sus descendientes.
+	 * @param fechaInicio Fecha de inicio del campamento.
+	 * @throws Exception Error: " + fechaInicio +" es mayor que " + fechaInscripcion + "."
 	 */
-	public abstract RegistroTemprano crearRegistroTemprano();
+	public abstract RegistroTemprano crearRegistroTemprano(LocalDate fechaInicio) throws Exception;
 	/**
 	 * Método para la creación de un registro en el campamento de forma tardía. Será definido por sus descendientes.
+	 * @param fechaInicio Fecha de inicio del campamento.
+	 * @throws Exception Error: " + fechaInicio +" es menor que " + fechaInscripcion + ".".
 	 */
-	public abstract RegistroTardio crearRegistroTardio();
+	public abstract RegistroTardio crearRegistroTardio(LocalDate fechaInicio)throws Exception;
 	/**
 	 * Método que devuelve la información de la inscripción en una cadena. Será definido por sus descendientes.
 	 */

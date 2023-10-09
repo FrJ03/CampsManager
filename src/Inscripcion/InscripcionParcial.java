@@ -29,18 +29,30 @@ public class InscripcionParcial extends Inscripcion{
 	
 	/**
 	 * Método para la creación de un registro en el campamento de forma temprana.
+	 * @param fechaInicio Fecha de inicio del campamento.
+	 * @throws Exception Error: " + fechaInicio +" es mayor que " + fechaInscripcion + ".".
 	 */
-	@Override public RegistroTemprano crearRegistroTemprano() {
+	@Override public RegistroTemprano crearRegistroTemprano(LocalDate fechaInicio) throws Exception {
+		LocalDate fechaInscripcion = LocalDate.now();
 		RegistroTemprano r = new RegistroTemprano();
-		r.registro();
+		if(fechaInscripcion.compareTo(fechaInicio) > 0)
+			r.registro(fechaInscripcion, fechaInicio);
+		else
+			throw new Exception("Error: " + fechaInicio +" es mayor que " + fechaInscripcion + ".");
 		return r;
 	}
 	/**
 	 * Método para la creación de un registro en el campamento de forma tardía.
+	 * @param fechaInicio Fecha de inicio del campamento.
+	 * @throws Exception Error: " + fechaInicio +" es menor que " + fechaInscripcion + ".".
 	 */
-	@Override public RegistroTardio crearRegistroTardio() {
+	@Override public RegistroTardio crearRegistroTardio(LocalDate fechaInicio) throws Exception {
+		LocalDate fechaInscripcion = LocalDate.now();
 		RegistroTardio r = new RegistroTardio();
-		r.registro();
+		if(fechaInscripcion.compareTo(fechaInicio) > 0)
+			r.registro(fechaInscripcion, fechaInicio);
+		else
+			throw new Exception("Error: " + fechaInicio +" es menor que " + fechaInscripcion + ".");
 		return r;
 	}
 	/**
