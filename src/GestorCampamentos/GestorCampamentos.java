@@ -1,7 +1,10 @@
 package GestorCampamentos;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import Campamento.Campamento;
 import Monitor.Monitor;
 import Actividad.Actividad;
@@ -71,7 +74,7 @@ public class GestorCampamentos {
 		 * Metodo que crea monitores mediante valores introducidos por el usuario.
 		 * @return void.
 		 */
-		public void crearMonitor() {
+		public void crearMonitor() {	
 			Scanner aux = new Scanner(System.in);
 			Monitor mon = new Monitor();
 			
@@ -97,10 +100,13 @@ public class GestorCampamentos {
 			}
 			else {
 				System.out.println("Error, valor introducido no reconocido");
+				aux.close();
 				return;
 			}
 			
 			this.listaMonitores_.add(mon);
+			aux.close();
+
 		}
 		/**
 		 * Metodo que crea actividades mediante valores introducidos por el usuario.
@@ -130,6 +136,7 @@ public class GestorCampamentos {
 			}
 			else {
 				System.out.println("Error, valor introducido no reconocido");
+				var.close();
 				return;
 			}
 			
@@ -146,6 +153,7 @@ public class GestorCampamentos {
 			}
 			else {
 				System.out.println("Error, valor introducido no reconocido");
+				var.close();
 				return;
 			}
 			
@@ -154,6 +162,7 @@ public class GestorCampamentos {
 			
 			System.out.println("Introduzca el numero maximo de monitores de la actividad");
 			act.setParticipantesMax_(var.nextInt());
+			var.close();
 			
 		}
 		/**
@@ -184,35 +193,43 @@ public class GestorCampamentos {
 			}
 			else {
 				System.out.println("Error, valor introducido no reconocido");
+				aux.close();
 				return;
 			}
 			
-			System.out.println("Introduzca el aforo de la actividad");
-			cam.setAsistentesMax_(aux.nextInt());
-			
-			System.out.println("Introduzca el anio en el que empezará el campamento");
-			int anio = aux.nextInt();
-			
-			System.out.println("Introduzca el mes del anio(Entero) en el que empezara el campamento");
-			int mes = aux.nextInt();
-			
-			System.out.println("Introduzca el dia del mes en el que empezara el campamento");
-			int dia = aux.nextInt();
-			
-			Date d = new Date(anio, mes, dia);
-			cam.setIniciocampamento_(d);
-
-			System.out.println("Introduzca el anio en el que terminara el campamento");
-			anio = aux.nextInt();
-			
-			System.out.println("Introduzca el mes del anio(Entero) en el que terminara el campamento");
-			mes = aux.nextInt();
-			
-			System.out.println("Introduzca el dia del mes en el que terminara el campamento");
-			dia = aux.nextInt();
-			
-			d = new Date(anio, mes, dia);
-			cam.setFincampamento_(d);	
+			System.out.print("Por favor, introduce la fecha de inicio del campamento(en formato yyyy-MM-dd): ");
+	        String inputFecha = aux.nextLine();
+	        
+	        // Define un formateador de fecha
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        LocalDate fecha = null;
+	        try {
+	            // Intenta analizar la cadena en un objeto LocalDate
+	        	fecha = LocalDate.parse(inputFecha, formatter);
+	            System.out.println("Fecha introducida: " + fecha.toString());
+	        } catch (DateTimeParseException e) {
+	            System.out.println("Error al analizar la fecha. Asegúrate de usar el formato yyyy-MM-dd.");
+	        }
+	        cam.setIniciocampamento_(fecha);
+	        
+	        System.out.print("Por favor, introduce la fecha de terminacion del campamento(en formato yyyy-MM-dd): ");
+	        inputFecha = aux.nextLine();
+	        
+	        // Define un formateador de fecha
+	        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        fecha = null;
+	        try {
+	            // Intenta analizar la cadena en un objeto LocalDate
+	        	fecha = LocalDate.parse(inputFecha, formatter);
+	            System.out.println("Fecha introducida: " + fecha.toString());
+	        } catch (DateTimeParseException e) {
+	            System.out.println("Error al analizar la fecha. Asegúrate de usar el formato yyyy-MM-dd.");
+	            aux.close();
+	            return;
+	        }
+	        
+	        listaCampamentos_.add(cam);
+	        aux.close();
 		}
 		/**
 		 * Metodo para asociar una actividad a un monitor.
