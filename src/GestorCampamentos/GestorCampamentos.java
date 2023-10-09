@@ -71,165 +71,51 @@ public class GestorCampamentos {
 			return listaActividades_;
 		}
 		/**
-		 * Metodo que crea monitores mediante valores introducidos por el usuario.
+		 * Método que establece la lista de actividades del gestor.
+		 * @param listaActividades
 		 * @return void.
 		 */
-		public void crearMonitor() {	
-			Scanner aux = new Scanner(System.in);
-			Monitor mon = new Monitor();
-			
-			System.out.println("Introduzca el Id del monitor");
-			mon.set_id(aux.nextInt());
-			
-			System.out.println("Introduzca el nombre del monitor");
-			mon.set_nombre(aux.nextLine());
-			
-			System.out.println("Introduzca el apellido del monitor");
-			mon.set_apellidos(aux.nextLine());
-			
-			System.out.println("Introduzca si el monitor es un educador especial");
-			System.out.println("1. Si");
-			System.out.println("2. No");
-			int eleccion = aux.nextInt();
-			
-			if(eleccion == 1) {
-				mon.set_especial(true);
-			}
-			else if(eleccion == 2) {
-				mon.set_especial(false);
-			}
-			else {
-				System.out.println("Error, valor introducido no reconocido");
-				aux.close();
-				return;
-			}
-			
-			this.listaMonitores_.add(mon);
-			aux.close();
-
+		public void setListaActividades_(ArrayList<Actividad> listaActividades){
+			this.listaActividades_=listaActividades;
 		}
 		/**
-		 * Metodo que crea actividades mediante valores introducidos por el usuario.
-		 * @retun void.
+		 * Método que establece la lista de monitores del gestor.
+		 * @param listaMonitores
+		 * @return void.
 		 */
-		public void crearActividad() {
-			Actividad act = new Actividad();
-			Scanner var = new Scanner(System.in);
-			
-			System.out.println("Introduzca el nombre de la actividad");
-			act.setName_(var.nextLine());
-			
-			System.out.println("Introduzca el nivel de la actividad");
-			System.out.println("1. Infantil");
-			System.out.println("2. Juvenil");
-			System.out.println("3. Adolescente");
-			int eleccion = var.nextInt();
-			
-			if(eleccion == 1) {
-				act.setNivel_(nivel.Infantil);
-			}
-			else if(eleccion == 2) {
-				act.setNivel_(nivel.Juvenil);
-			}
-			else if(eleccion == 3){
-				act.setNivel_(nivel.Adolescente);
-			}
-			else {
-				System.out.println("Error, valor introducido no reconocido");
-				var.close();
-				return;
-			}
-			
-			System.out.println("Introduzca el turno de la actividad");
-			System.out.println("1. Manana");
-			System.out.println("2. Tarde");
-			eleccion = var.nextInt();
-			
-			if(eleccion == 1) {
-				act.setTurno_(turno.Mañana);
-			}
-			else if(eleccion == 2) {
-				act.setTurno_(turno.Tarde);
-			}
-			else {
-				System.out.println("Error, valor introducido no reconocido");
-				var.close();
-				return;
-			}
-			
-			System.out.println("Introduzca el numero maximo de monitores de la actividad");
-			act.setMonitoresMax_(var.nextInt());
-			
-			System.out.println("Introduzca el numero maximo de monitores de la actividad");
-			act.setParticipantesMax_(var.nextInt());
-			var.close();
-			
+		public void setListaMonitores_(ArrayList<Monitor> listaMonitores){
+			this.listaMonitores_=listaMonitores;
+		}
+		/**
+		 * Método que establece la lista de campamentos del gestor.
+		 * @param listaCampamento
+		 * @return void.
+		 */
+		public void setListaCampamentos_(ArrayList<Campamento> listaCampamentos){
+			this.listaCampamentos_=listaCampamentos;
+		}
+		/**
+		 * Metodo que añade a la lista de monitores un nuevo monitor pasado como argumento.
+		 * @param monitor Monitor que se va a añadir a la lista de monitores.
+		 * @return void.
+		 */
+		public void crearMonitor(Monitor monitor) {	
+			this.listaMonitores_.add(monitor);
+		}
+		/**
+		 * Metodo que añade a la lista de actividades una nueva actividad pasada como argumento.
+		 * @param actividad Actividad que se va a añadir a la lista de actividades.
+		 * @return void.
+		 */
+		public void crearActividad(Actividad actividad) {
+			this.listaActividades_.add(actividad);			
 		}
 		/**
 		 * Metodo que crea Campamnetos mediante valores introducidos por el usuario.
 		 * @return void
 		 */
-		public void crearCampamento() {
-			Scanner aux = new Scanner(System.in);
-			Campamento cam = new Campamento();
-			
-			System.out.println("Introduzca el Id de la actividad");
-			cam.setId_(aux.nextInt());
-			
-			System.out.println("Introduzca el nivel de la actividad");
-			System.out.println("1. Infantil");
-			System.out.println("2. Juvenil");
-			System.out.println("3. Adolescente");
-			int eleccion = aux.nextInt();
-			
-			if(eleccion == 1) {
-				cam.setNivel_(nivel.Infantil);
-			}
-			else if(eleccion == 2) {
-				cam.setNivel_(nivel.Juvenil);
-			}
-			else if(eleccion == 3){
-				cam.setNivel_(nivel.Adolescente);
-			}
-			else {
-				System.out.println("Error, valor introducido no reconocido");
-				aux.close();
-				return;
-			}
-			
-			System.out.print("Por favor, introduce la fecha de inicio del campamento(en formato yyyy-MM-dd): ");
-	        String inputFecha = aux.nextLine();
-	        
-	        // Define un formateador de fecha
-	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	        LocalDate fecha = null;
-	        try {
-	            // Intenta analizar la cadena en un objeto LocalDate
-	        	fecha = LocalDate.parse(inputFecha, formatter);
-	            System.out.println("Fecha introducida: " + fecha.toString());
-	        } catch (DateTimeParseException e) {
-	            System.out.println("Error al analizar la fecha. Asegúrate de usar el formato yyyy-MM-dd.");
-	        }
-	        cam.setIniciocampamento_(fecha);
-	        
-	        System.out.print("Por favor, introduce la fecha de terminacion del campamento(en formato yyyy-MM-dd): ");
-	        inputFecha = aux.nextLine();
-	        
-	        // Define un formateador de fecha
-	        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	        fecha = null;
-	        try {
-	            // Intenta analizar la cadena en un objeto LocalDate
-	        	fecha = LocalDate.parse(inputFecha, formatter);
-	            System.out.println("Fecha introducida: " + fecha.toString());
-	        } catch (DateTimeParseException e) {
-	            System.out.println("Error al analizar la fecha. Asegúrate de usar el formato yyyy-MM-dd.");
-	            aux.close();
-	            return;
-	        }
-	        
-	        listaCampamentos_.add(cam);
-	        aux.close();
+		public void crearCampamento(Campamento campamento) {
+	        this.listaCampamentos_.add(campamento);
 		}
 		/**
 		 * Metodo para asociar una actividad a un monitor.
