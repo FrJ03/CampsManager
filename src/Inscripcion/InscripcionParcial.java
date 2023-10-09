@@ -1,6 +1,6 @@
 package Inscripcion;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import Registro.RegistroTemprano;
 import Registro.RegistroTardio;
@@ -9,7 +9,7 @@ import Registro.RegistroTardio;
  * Clase que representa una inscripción en las actividades matinales del campamento. Se trata de una clase concreta del patrón de diseño Abstract Factory.
  * @author Francisco José Mellado Ortiz
  */
-public class InscripcionParcial {
+public class InscripcionParcial{
 	/**
 	 * Construye un objeto de la clase InscripcParcial sin información.
 	 */
@@ -23,7 +23,7 @@ public class InscripcionParcial {
 	 * @param fechaInscripcion Fecha de la realización de la inscripción.
 	 * @param precio Precio de la inscripción.
 	 */
-	public InscripcionParcial(int idParticipante, int idCampamento, Date fechaInscripcion, float precio) {
+	public InscripcionParcial(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio) {
 		super(idParticipante, idCampamento, fechaInscripcion, precio);
 	}
 	

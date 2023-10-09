@@ -1,6 +1,6 @@
 package Inscripcion;
 
-import java.util.Date;
+import java.time.LocalDate;
 import Registro.RegistroTemprano;
 import Registro.RegistroTardio;
 /**
@@ -19,7 +19,7 @@ public abstract class Inscripcion {
 	/**
 	 * Fecha de inscripción en el campamento
 	 * */
-	private Date fechaInscripcion;
+	private LocalDate fechaInscripcion;
 	/**
 	 * Precio de la inscripción.
 	 */
@@ -36,7 +36,7 @@ public abstract class Inscripcion {
 	 * @param fechaInscripcion Fecha de la realización de la inscripción.
 	 * @param precio Precio de la inscripción.
 	 */
-	public Inscripcion(int idParticipante, int idCampamento, Date fechaInscripcion, float precio) {
+	public Inscripcion(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio) {
 		this.idParticipante = idParticipante;
 		this.idCampamento = idCampamento;
 		this.fechaInscripcion = fechaInscripcion;
@@ -57,7 +57,7 @@ public abstract class Inscripcion {
 	/**
 	 * Método que devuelve la fecha de inscripción.
 	 */
-	public Date getFechaInscripcion() {
+	public LocalDate getFechaInscripcion() {
 		return this.fechaInscripcion;
 	}
 	/**
@@ -84,7 +84,7 @@ public abstract class Inscripcion {
 	 * Método para la modificación de la fecha de inscripción.
 	 * @param fecha Fecha de inscripción en el campamento.
 	 */
-	public void setFechaInscripcion(Date fecha) {
+	public void setFechaInscripcion(LocalDate fecha) {
 		this.fechaInscripcion = fecha;
 	}
 	/**

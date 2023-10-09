@@ -1,5 +1,6 @@
-package Registro
-import java.uil.Date;
+package Registro;
+import java.time.LocalDate;
+import java.time.Period;
 
 	/**
 	* Clase que representa los registros tardíos que se pueden hacer en una inscripción.
@@ -8,7 +9,6 @@ import java.uil.Date;
 
 public class RegistroTardio extends Registro{
 
-  }
   /**
   *  Construye un objeto de la clase registro tardío
   **/
@@ -23,14 +23,14 @@ public class RegistroTardio extends Registro{
     	* Transforma el tiempo en días y compara los días que hay entre ambos
   */
   @Override
-  public void registro(Date fechaInscripcion, Date inicioCampamento){
-      long diaInscripcion = fechaInscripcion.getTime(); 
-      long diaCampamento = fechaHasta.getTime();
-      long diaInicioInsc = (long) Math.floor(diaInscripcion / (1000*60*60*24));
-      long diaInicioCamp = (long) Math.floor(diaCampamento / (1000*60*60*24));
-      long diferencia = diaInicioCamp - diaInicioInsc;
+  public void registro(LocalDate fechaInscripcion, LocalDate inicioCampamento){
+      // Calcular la diferencia entre las dos fechas
+      Period periodo = fechaInscripcion.until(inicioCampamento);
+
+      // Obtener el número de días de la diferencia
+      int diferenciaDias = periodo.getDays();
     
-    if(diferencia<15 && diferencia>2){
+    if(diferenciaDias<15 && diferenciaDias>2){
         this.setStatus(true);
         //System.out.println("Se ha realizado el registro correctamente.");
       }

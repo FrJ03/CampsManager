@@ -1,6 +1,6 @@
 package Campamento;
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import Monitor.Monitor;
 import Actividad.Actividad;
 import Actividad.nivel;
@@ -18,11 +18,11 @@ import Actividad.nivel;
 	/**
 	  * Representa la fecha del inicio del campamento
 	  * */
-	private Date iniciocampamento_;
+	private LocalDate iniciocampamento_;
 	    /**
 	  * Representa la fecha del fin del campamento
 	  * */
-	private Date fincampamento_;
+	private LocalDate fincampamento_;
 	/**
 	  * Representa el nivel educativo del campamento
 	  * */
@@ -47,7 +47,7 @@ import Actividad.nivel;
 	/**
 	  * Construye un objeto con todos sus datos, a excepción de todas las listas que se inicializan vacías
 	  * */
-	public Campamento(int id, Date iniciocampamento, Date fincampamento, nivel nivel, int asistentesMax) {
+	public Campamento(int id, LocalDate iniciocampamento, LocalDate fincampamento, nivel nivel, int asistentesMax) {
 
 		this.id_=id;
 		this.iniciocampamento_=iniciocampamento;
@@ -74,25 +74,25 @@ import Actividad.nivel;
 	/**
 	  * Observador de la varible iniciocampamento
 	  * */
-	public Date getIniciocampamento_() {
+	public LocalDate getIniciocampamento_() {
 		return iniciocampamento_;
 	}
 	/**
 	  * Modificador de la variable iniciocampamento
 	  * */
-	public void setIniciocampamento_(Date iniciocampamento) {
+	public void setIniciocampamento_(LocalDate iniciocampamento) {
 		this.iniciocampamento_ = iniciocampamento;
 	}
 	/**
 	  * Observador de la varible fincampamento
 	  * */
-	public Date getFincampamento_() {
+	public LocalDate getFincampamento_() {
 		return fincampamento_;
 	}
 	/**
 	  * Modificador de la variable fincampamento
 	  * */
-	public void setFincampamento_(Date fincampamento) {
+	public void setFincampamento_(LocalDate fincampamento) {
 		this.fincampamento_ = fincampamento;
 	}
 	/**

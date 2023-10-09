@@ -1,6 +1,6 @@
 package Inscripcion;
 
-import java.util.Date;
+import java.time.LocalDate;
 import Registro.RegistroTemprano;
 import Registro.RegistroTardio;
 
@@ -23,7 +23,7 @@ public class InscripcionCompleta extends Inscripcion{
 	 * @param fechaInscripcion Fecha de la realización de la inscripción.
 	 * @param precio Precio de la inscripción.
 	 */
-	public InscripcionCompleta(int idParticipante, int idCampamento, Date fechaInscripcion, float precio) {
+	public InscripcionCompleta(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio) {
 		super(idParticipante, idCampamento, fechaInscripcion, precio);
 	}
 	

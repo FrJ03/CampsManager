@@ -1,5 +1,5 @@
 package Registro;
-import java.util.Date;
+import java.time.LocalDate;
 
   	/**
 	* Clase que representa los registros que se pueden hacer en una inscripción.
@@ -38,7 +38,7 @@ public abstract class Registro{
   /**
   * Método para la validación de un registro. Será definido por sus descendientes.
   **/
-  public abstract void registro(Date fechaInscripcion, Date inicioCampamento);
+  public abstract void registro(LocalDate fechaInscripcion, LocalDate inicioCampamento);
   /**
   * Método para la cancelación de un registro. Será definido por sus descendientes.
   **/
