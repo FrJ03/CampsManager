@@ -1,6 +1,10 @@
 package GestorInscripciones;
 
 import java.util.ArrayList;
+
+import Actividad.Actividad;
+import GestorCampamentos.GestorCampamentos;
+import Campamento.Campamento;
 import Inscripcion.InscripcionCompleta;
 import Inscripcion.InscripcionParcial;
 import java.time.Period;
@@ -8,6 +12,7 @@ import java.time.LocalDate;
 /**
  * Clase que implementa el patrón Singleton para poder ser utilizada en la validación de Inscripciones.
  * @author Enrique de los Reyes Montilla
+ * @author Manuel Garcia Obrero
  */
 public class GestorInscripciones {
 	/**
@@ -146,5 +151,62 @@ public class GestorInscripciones {
 		this.listaInscripcionParcial_.add(inscripcion);
 		
 	}
+	/**
+	 * Método que calcula el precio de la inscripción y lo devuelve como un int. Si el resultado es -1,  no existe el campamento al que está inscrito
+	 * @param inscripcion InscripcionCompleta.
+	 * @param ListaCampamentos
+	 * @return precio. 
+	 */
 	
-}
+	public int CalcularPrecio(InscripcionCompleta inscripcion, ArrayList<Campamento> ListaCampamentos) {
+		int precio=300;//Precio base sin actividades
+		for(int aux=0;aux<ListaCampamentos.size();aux++) {
+			if(ListaCampamentos.get(aux).getId_()== inscripcion.getIdCampamento()) {
+				ArrayList<Actividad> Listaactividades =ListaCampamentos.get(aux).getListaActividad_();
+				if(Listaactividades.size()==0) {
+					return precio;
+				}
+				else {
+					return Listaactividades.size()*20 + precio;
+				}
+			}
+		}	
+		return -1;//Error campamento no encontrado
+	}
+	/**
+	 * Método que calcula el precio de la inscripción y lo devuelve como un int. Si el resultado es -1,  no existe el campamento al que está inscrito
+	 * @param inscripcion InscripcionParcial.
+	 * @param ListaCampamentos
+	 * @return precio. 
+	 */
+	
+	public int CalcularPrecio(InscripcionParcial inscripcion, ArrayList<Campamento> ListaCampamentos) {
+		int precio=100;//Precio base sin actividades
+		for(int aux=0;aux<ListaCampamentos.size();aux++) {
+			if(ListaCampamentos.get(aux).getId_()== inscripcion.getIdCampamento()) {
+				ArrayList<Actividad> Listaactividades =ListaCampamentos.get(aux).getListaActividad_();
+				if(Listaactividades.size()==0) {
+					return precio;
+				}
+				else {
+					return Listaactividades.size()*20 + precio;
+				}
+			}
+		}	
+		return -1;//Error campamento no encontrado
+	}
+	/**
+	 * Método que establece el precio a una incripción pasado su id. Si se incorpora correctamente devuelve 0 y si el id no existe, se devulve un -1
+	 * @param idinscripcion 
+	 * @param ListaCampamentos
+	 * @return precio. 
+	 */
+	public int AsignarPrecio(int idinscripcion, ArrayList<Campamento> ListaCampamentos) {
+		//Miramos si esa id de inscripción pertenece a la listaInscripcionParcial_ o listaInscripcionCompleta_
+		for(int aux=0;aux<listaInscripcionParcial_.size();aux++) {
+			if(listaInscripcionParcial_.get(aux).getId_()==idinscripcion) {
+				
+			}
+		}
+		return -1;//Error id no encontrado
+	}
