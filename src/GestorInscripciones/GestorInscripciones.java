@@ -1,9 +1,7 @@
 package GestorInscripciones;
-
 import java.util.ArrayList;
-
 import Actividad.Actividad;
-import GestorCampamentos.GestorCampamentos;
+import Asistente.Asistente;
 import Campamento.Campamento;
 import Inscripcion.InscripcionCompleta;
 import Inscripcion.InscripcionParcial;
@@ -71,10 +69,11 @@ public class GestorInscripciones {
 	 * Método que añade una inscripción a la lista de inscripciones completas.
 	 * @param InscripcionCompleta inscripcion.
 	 * @param fechaInicioCamp fecha de inicio del campamento.
-	 * @return void.
+	 * @param listaAsistentes Lista de asistentes registrados.
+	 * @return boolean.
 	 * @throws Exception 
 	 */
-	public void realizarRegistro(InscripcionCompleta inscripcion, LocalDate fechaInicioCamp) throws Exception {
+	public boolean realizarRegistro(InscripcionCompleta inscripcion, LocalDate fechaInicioCamp,  ArrayList<Asistente> listaAsistentes) throws Exception {
 		
 		for(InscripcionCompleta ins : this.listaInscripcionCompleta_) {
 			
@@ -107,16 +106,25 @@ public class GestorInscripciones {
 		}
 				
 		this.listaInscripcionCompleta_.add(inscripcion);
-		
+		//Comprobamos si el asistente necesita atención especial.
+		for(Asistente as : listaAsistentes) {
+					
+			if(as.get_id() == inscripcion.getIdParticipante()) {
+				return as.getEspecial();
+			}
+						
+		}
+		return false;
 	}
 	/**
 	 * Método que añade una inscripción a la lista de inscripciones parciales.
-	 * @param InscripcionParcial inscripcion.
+	* @param InscripcionCompleta inscripcion.
 	 * @param fechaInicioCamp fecha de inicio del campamento.
-	 * @return void.
+	 * @param listaAsistentes Lista de asistentes registrados.
+	 * @return boolean.
 	 * @throws Exception 
 	 */
-	public void realizarRegistro(InscripcionParcial inscripcion, LocalDate fechaInicioCamp) throws Exception {
+	public boolean realizarRegistro(InscripcionParcial inscripcion, LocalDate fechaInicioCamp, ArrayList<Asistente> listaAsistentes) throws Exception {
 		
 		for(InscripcionCompleta ins : this.listaInscripcionCompleta_) {
 			
@@ -150,6 +158,15 @@ public class GestorInscripciones {
 		
 		this.listaInscripcionParcial_.add(inscripcion);
 		
+		//Comprobamos si el asistente necesita atención especial.
+		for(Asistente as : listaAsistentes) {
+			
+			if(as.get_id() == inscripcion.getIdParticipante()) {
+				return as.getEspecial();
+			}
+			
+		}
+		return false;
 	}
 	/**
 	 * Método que calcula el precio de la inscripción y lo devuelve como un int. Si el resultado es -1,  no existe el campamento al que está inscrito
@@ -158,7 +175,7 @@ public class GestorInscripciones {
 	 * @return precio. 
 	 */
 	
-	public float CalcularPrecio(InscripcionCompleta inscripcion, ArrayList<Campamento> ListaCampamentos) {
+	private float calcularPrecio(InscripcionCompleta inscripcion, ArrayList<Campamento> ListaCampamentos) {
 		int precio=300;//Precio base sin actividades
 		for(int aux=0;aux<ListaCampamentos.size();aux++) {
 			if(ListaCampamentos.get(aux).getId_()== inscripcion.getIdCampamento()) {
@@ -180,7 +197,7 @@ public class GestorInscripciones {
 	 * @return precio. 
 	 */
 	
-	public float CalcularPrecio(InscripcionParcial inscripcion, ArrayList<Campamento> ListaCampamentos) {
+	private float calcularPrecio(InscripcionParcial inscripcion, ArrayList<Campamento> ListaCampamentos) {
 		float precio=100;//Precio base sin actividades
 		for(int aux=0;aux<ListaCampamentos.size();aux++) {
 			if(ListaCampamentos.get(aux).getId_()== inscripcion.getIdCampamento()) {
@@ -202,11 +219,11 @@ public class GestorInscripciones {
 	 * @param ListaCampamentos
 	 * @return precio. 
 	 */
-	public int AsignarPrecio(int idcampamento, int idpersona, ArrayList<Campamento> ListaCampamentos) {
+	public int asignarPrecio(int idcampamento, int idpersona, ArrayList<Campamento> listaCampamentos) {
 		//Miramos si esa id de inscripción pertenece a la listaInscripcionParcial_ o listaInscripcionCompleta_
 		for(InscripcionParcial ins : this.listaInscripcionParcial_) {
 			if(ins.getIdParticipante() == idpersona && ins.getIdCampamento() == idcampamento) {
-				float precio = CalcularPrecio(ins ,ListaCampamentos);
+				float precio = calcularPrecio(ins ,listaCampamentos);
 				if(precio!=-1) {
 					ins.setPrecio(precio);
 					return 0;//Incorporado correctamente
@@ -215,7 +232,7 @@ public class GestorInscripciones {
 		}
 		for(InscripcionCompleta ins : this.listaInscripcionCompleta_) {
 			if(ins.getIdParticipante() == idpersona && ins.getIdCampamento() == idcampamento) {
-				float precio = CalcularPrecio(ins ,ListaCampamentos);
+				float precio = calcularPrecio(ins ,listaCampamentos);
 				if(precio!=-1) {
 					ins.setPrecio(precio);
 					return 0;//Incorporado correctamente
@@ -224,4 +241,53 @@ public class GestorInscripciones {
 		}
 		return -1;//Error id no encontrado
 	}
+	/**
+	 * Método que devuelve una lista con todos los cursos disponibles.
+	 * @param listaCampamentos
+	 * @return ArrayList<Campamento>. 
+	 */
+	public ArrayList<Campamento> obtenerCursosDisponibles(ArrayList<Campamento> listaCampamentos){
+		
+		ArrayList<Campamento> listaAux = null;
+		int sumaAsistentes = 0;
+		
+		for(Campamento cam : listaCampamentos) {
+			Period periodo = cam.getIniciocampamento_().until(LocalDate.now());
+	        // Obtener el número de días de la diferencia
+	        int diferenciaDias = periodo.getDays();
+	        
+			if(diferenciaDias > 2 ) {
+				
+				for(InscripcionParcial ins : this.listaInscripcionParcial_) {
+					
+					if(ins.getIdCampamento() == cam.getId_()) {
+						
+						sumaAsistentes ++;
+						
+					}
+					
+				}
+				for(InscripcionCompleta ins : this.listaInscripcionCompleta_) {
+					
+					if(ins.getIdCampamento() == cam.getId_()) {
+						
+						sumaAsistentes ++;
+						
+					}
+					
+				}
+				
+				if(cam.getAsistentesMax_() > sumaAsistentes) {
+					listaAux.add(cam);
+				}
+				
+			}
+			
+				
+		}
+		
+		return listaAux;
+	}
+	
+	
 }
