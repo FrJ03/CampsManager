@@ -158,7 +158,7 @@ public class GestorInscripciones {
 	 * @return precio. 
 	 */
 	
-	public int CalcularPrecio(InscripcionCompleta inscripcion, ArrayList<Campamento> ListaCampamentos) {
+	public float CalcularPrecio(InscripcionCompleta inscripcion, ArrayList<Campamento> ListaCampamentos) {
 		int precio=300;//Precio base sin actividades
 		for(int aux=0;aux<ListaCampamentos.size();aux++) {
 			if(ListaCampamentos.get(aux).getId_()== inscripcion.getIdCampamento()) {
@@ -180,8 +180,8 @@ public class GestorInscripciones {
 	 * @return precio. 
 	 */
 	
-	public int CalcularPrecio(InscripcionParcial inscripcion, ArrayList<Campamento> ListaCampamentos) {
-		int precio=100;//Precio base sin actividades
+	public float CalcularPrecio(InscripcionParcial inscripcion, ArrayList<Campamento> ListaCampamentos) {
+		float precio=100;//Precio base sin actividades
 		for(int aux=0;aux<ListaCampamentos.size();aux++) {
 			if(ListaCampamentos.get(aux).getId_()== inscripcion.getIdCampamento()) {
 				ArrayList<Actividad> Listaactividades =ListaCampamentos.get(aux).getListaActividad_();
@@ -197,16 +197,31 @@ public class GestorInscripciones {
 	}
 	/**
 	 * Método que establece el precio a una incripción pasado su id. Si se incorpora correctamente devuelve 0 y si el id no existe, se devulve un -1
-	 * @param idinscripcion 
+	 * @param idcampamento
+	 * @param idpersona
 	 * @param ListaCampamentos
 	 * @return precio. 
 	 */
-	public int AsignarPrecio(int idinscripcion, ArrayList<Campamento> ListaCampamentos) {
+	public int AsignarPrecio(int idcampamento, int idpersona, ArrayList<Campamento> ListaCampamentos) {
 		//Miramos si esa id de inscripción pertenece a la listaInscripcionParcial_ o listaInscripcionCompleta_
-		for(int aux=0;aux<listaInscripcionParcial_.size();aux++) {
-			if(listaInscripcionParcial_.get(aux).getId_()==idinscripcion) {
-				
+		for(InscripcionParcial ins : this.listaInscripcionParcial_) {
+			if(ins.getIdParticipante() == idpersona && ins.getIdCampamento() == idcampamento) {
+				float precio = CalcularPrecio(ins ,ListaCampamentos);
+				if(precio!=-1) {
+					ins.setPrecio(precio);
+					return 0;//Incorporado correctamente
+				}
+			}
+		}
+		for(InscripcionCompleta ins : this.listaInscripcionCompleta_) {
+			if(ins.getIdParticipante() == idpersona && ins.getIdCampamento() == idcampamento) {
+				float precio = CalcularPrecio(ins ,ListaCampamentos);
+				if(precio!=-1) {
+					ins.setPrecio(precio);
+					return 0;//Incorporado correctamente
+				}
 			}
 		}
 		return -1;//Error id no encontrado
 	}
+}
