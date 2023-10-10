@@ -1,15 +1,9 @@
 package GestorCampamentos;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import Campamento.Campamento;
 import Monitor.Monitor;
 import Actividad.Actividad;
-import Actividad.nivel;
-import Actividad.turno;
 /**
  * Clase que implementa el patrón Singleton para poder ser utilizada en la creación de Campamentos.
  * @author Enrique de los Reyes Montilla

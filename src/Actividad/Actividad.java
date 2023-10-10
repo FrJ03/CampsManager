@@ -134,10 +134,16 @@ public class Actividad	{
 	/**
 	  * Añade un monitor a la lista de monitores, siempre que lista.size() < monitoresMax
 	  * */
-	public void asociarMonitor(Monitor mon) {
+	public boolean asociarMonitor(Monitor mon) {
 		if (this.listaMonitores_.size() < this.monitoresMax_) {
-			this.listaMonitores_.add(mon);
+			
+			if(!this.listaMonitores_.contains(mon)) {
+				this.listaMonitores_.add(mon);
+			}
+			
 		}
+		
+		return false;
 	}
 	
 }
