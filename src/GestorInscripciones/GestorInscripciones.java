@@ -242,14 +242,19 @@ public class GestorInscripciones {
 		return -1;//Error id no encontrado
 	}
 	/**
-	 * Método que devuelve una lista con todos los cursos disponibles.
+	 * Método que devuelve una lista con todos los campamentos disponibles.
 	 * @param listaCampamentos
 	 * @return ArrayList<Campamento>. 
+	 * @throws Exception 
 	 */
-	public ArrayList<Campamento> obtenerCursosDisponibles(ArrayList<Campamento> listaCampamentos){
+	public String obtenerCampamentosDisponibles(ArrayList<Campamento> listaCampamentos) throws Exception{
 		
-		ArrayList<Campamento> listaAux = null;
+		String listaAux = "";
 		int sumaAsistentes = 0;
+		
+		if(listaCampamentos.size() == 0) {
+			throw new Exception("Error: No hay campamentos registrados.");
+		}
 		
 		for(Campamento cam : listaCampamentos) {
 			Period periodo = cam.getIniciocampamento_().until(LocalDate.now());
@@ -278,7 +283,7 @@ public class GestorInscripciones {
 				}
 				
 				if(cam.getAsistentesMax_() > sumaAsistentes) {
-					listaAux.add(cam);
+					listaAux.concat(cam.toString());
 				}
 				
 			}
