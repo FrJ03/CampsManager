@@ -25,7 +25,7 @@ public class RegistroTemprano extends Registro{
    * Transforma el tiempo en días y compara los días que hay entre ambos
    */
   @Override
-  public void registro(LocalDate fechaInscripcion, LocalDate inicioCampamento){
+  public void registro(LocalDate fechaInscripcion, LocalDate inicioCampamento) throws Exception {
 	  // Calcular la diferencia entre las dos fechas
       Period periodo = fechaInscripcion.until(inicioCampamento);
 
@@ -33,11 +33,11 @@ public class RegistroTemprano extends Registro{
       int diferenciaDias = periodo.getDays();
     
     if(diferenciaDias<15){
-        //System.out.println("Se ha pedido un registro a un campamento que empieza en menos de 15 días, no se ha permitido.");
+	throw new Exception("Error: Se ha pedido un registro a un campamento que empieza en menos de 15 días, no se ha permitido.");
       }
     else{
         this.setStatus(true);
-        //System.out.println("Se ha realizado el registro correctamente.");
+        //Se ha realizado el registro correctamente
     }
   }
   /**
@@ -46,7 +46,7 @@ public class RegistroTemprano extends Registro{
   @Override
   public void cancelacion(){
     this.setStatus(false);
-    //System.out.println("Se ha cancelado el registro.");
+    //Se ha cancelado el registro
   }
     
 }
