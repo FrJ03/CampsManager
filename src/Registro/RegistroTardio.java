@@ -23,7 +23,7 @@ public class RegistroTardio extends Registro{
     	* Transforma el tiempo en días y compara los días que hay entre ambos
   */
   @Override
-  public void registro(LocalDate fechaInscripcion, LocalDate inicioCampamento){
+  public void registro(LocalDate fechaInscripcion, LocalDate inicioCampamento) throws Exception {
       // Calcular la diferencia entre las dos fechas
       Period periodo = fechaInscripcion.until(inicioCampamento);
 
@@ -32,10 +32,10 @@ public class RegistroTardio extends Registro{
     
     if(diferenciaDias<15 && diferenciaDias>2){
         this.setStatus(true);
-        //System.out.println("Se ha realizado el registro correctamente.");
+        //Se ha realizado el registro correctamente
       }
     else{
-        //System.out.println("La solicitud de un registro tardío se debe realizar como muy tarde 2 días antes y como muy pronto 15 días antes del comienzo del campamento. No se ha permitido el registro.");
+	throw new Exception("Error: La solicitud de un registro tardío se debe realizar como muy tarde 2 días antes y como muy pronto 15 días antes del comienzo del campamento. No se ha permitido el registro.");
     }
   }
   
@@ -43,8 +43,8 @@ public class RegistroTardio extends Registro{
   * Método que cancela un registro.
   */
   @Override
-  public void cancelacion(){
-    //System.out.println("No se permite cancelar un registro tardío. No se ha cancelado.");
+  public void cancelacion() throws Exception {
+	throw new Exception("Error: No se permite cancelar un registro tardío. No se ha cancelado.");
   }
     
 }
