@@ -88,17 +88,24 @@ public class GestorAsistentes {
 	}
 	/**
 	 * Metodo que lista a los asistentes actualmente registrados.
-	  * @return void.
+	 * @return String String con la información de los participantes registrados.
+	 * @throws Exception 
 	 */
-	public void ListaAsistencia() {
+	public String ListaAsistencia() throws Exception {
+		
+		String infoAsistentes = "";
+		
 		if(listaAsistente_.size()==0) {
-			System.out.println("Todavia no existe ningun asistente");
+			throw new Exception("Error: No hay asistentes registrados.");
 		}
 		else{
-			for(int aux=0;aux<listaAsistente_.size();aux++) {
-				String informacion = listaAsistente_.get(aux).toString();
-				System.out.println("Asistente numero\n" + aux + ": \n" + informacion);
+			
+			for(Asistente asis : listaAsistente_ ) {
+				
+				infoAsistentes = asis.toString();
+				
 			}
 		}
+		return infoAsistentes;
 	}
 }
