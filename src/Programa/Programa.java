@@ -1,22 +1,47 @@
 package Programa;
 
+import GestorAsistentes.GestorAsistentes;
+import GestorCampamentos.GestorCampamentos;
+import GestorInscripciones.GestorInscripciones;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import Asistente.Asistente;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class Programa {
 	public static void main(String args[]) throws IOException {
 		int opcion = 0;
+		GestorAsistentes asistentes = GestorAsistentes.getInstance();
+		GestorCampamentos campamentos = GestorCampamentos.getInstance();
+		GestorInscripciones inscripciones = GestorInscripciones.getInstance();
 		do {
 			opcion = menuPrincipal();
-			if(opcion == 1) {
+			if(opcion == 1) {				
 				do {
 					opcion = menuGestorAsistentes();
 					if(opcion == 1) {
-					
+						ArrayList<Asistente> listaAsistentes = asistentes.getListaAsistente_();
+						for(Asistente asistente : listaAsistentes) {
+							System.out.println(asistente.toString());
+						}
 					}
 					else if(opcion == 2) {
-						
+						Asistente nuevo;
+						BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+						//Llamar al módulo de datos para obtener el último id
+						System.out.print("Inserte el nombre del asistente: ");
+						nuevo.set_nombre(teclado.readLine());
+						System.out.print("Inserte los apellidos del asistente: ");
+						nuevo.set_apellidos(teclado.readLine());
+						System.out.print("Inserte la fecha de nacimiento (yyyy/mm/dd): ");
+						String fecha = teclado.readLine();
+						fecha.replace('-', ' ');
+						int year;
+						int month;
+						int day;
+						System.out.print("¿Necesita atención especial? (S/N): ");
 					}
 					else if(opcion == 3) {
 						
