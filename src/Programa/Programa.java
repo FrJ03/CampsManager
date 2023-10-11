@@ -52,10 +52,33 @@ public class Programa {
 						asistentes.DarAltaAsistente(nuevo);
 					}
 					else if(opcion == 3) {
-						
+						BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+						System.out.print("Inserte el id del asistente a modificar: ");
+						int idAntiguo = Integer.parseInt(teclado.readLine());
+						System.out.print("Inserte el nuevo id: ");
+						int idNuevo = Integer.parseInt(teclado.readLine());
+						System.out.print("Inserte el nuevo nombre: ");
+						String nombre = teclado.readLine();
+						System.out.print("Inserte los nuevos apellidos: ");
+						String apellidos = teclado.readLine();
+						System.out.print("Inserte la nueva fecha de nacimiento (yyyy/mm/dd): ");
+						String aux = teclado.readLine();
+						Date fecha = new Date(Integer.parseInt(aux.substring(0, 3)), Integer.parseInt(aux.substring(5, 6)), Integer.parseInt(aux.substring(8, 9)));
+						char letra = 'a';
+						boolean especial = false;
+						do {
+							System.out.print("¿Necesita atención especial? (S/N): ");
+							letra = (char)teclado.read();
+							if(letra == 'S' || letra == 's')
+								especial = true;
+							else if(letra == 'N' || letra == 'n')
+								especial = false;
+								
+						}while(letra != 'S' && letra != 'N' && letra != 's' && letra != 'n');
+						asistentes.ModificarAsistente(idAntiguo, idNuevo, nombre, apellidos, fecha, especial);
 					}
 					else if(opcion == 4) {
-						
+						System.out.println(asistentes.ListaAsistencia());						
 					}
 					else if(opcion == 5) 
 						System.out.println("Volviendo al menú principal..............");
