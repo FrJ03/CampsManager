@@ -28,7 +28,7 @@ public class Programa {
 						}
 					}
 					else if(opcion == 2) {
-						Asistente nuevo;
+						Asistente nuevo = new Asistente();
 						BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 						//Llamar al módulo de datos para obtener el último id
 						System.out.print("Inserte el nombre del asistente: ");
@@ -36,12 +36,20 @@ public class Programa {
 						System.out.print("Inserte los apellidos del asistente: ");
 						nuevo.set_apellidos(teclado.readLine());
 						System.out.print("Inserte la fecha de nacimiento (yyyy/mm/dd): ");
-						String fecha = teclado.readLine();
-						fecha.replace('-', ' ');
-						int year;
-						int month;
-						int day;
-						System.out.print("¿Necesita atención especial? (S/N): ");
+						String aux = teclado.readLine();
+						Date fecha = new Date(Integer.parseInt(aux.substring(0, 3)), Integer.parseInt(aux.substring(5, 6)), Integer.parseInt(aux.substring(8, 9)));
+						nuevo.setFechaNacimiento(fecha);
+						char letra = 'a';
+						do {
+							System.out.print("¿Necesita atención especial? (S/N): ");
+							letra = (char)teclado.read();
+							if(letra == 'S' || letra == 's')
+								nuevo.setEspecial(true);
+							else if(letra == 'N' || letra == 'n')
+								nuevo.setEspecial(false);
+								
+						}while(letra != 'S' && letra != 'N' && letra != 's' && letra != 'n');
+						asistentes.DarAltaAsistente(nuevo);
 					}
 					else if(opcion == 3) {
 						
