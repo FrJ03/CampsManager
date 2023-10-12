@@ -21,6 +21,7 @@ public class RegistroTardio extends Registro{
 	* @param fechaInscripcion Fecha en la que se solicita registrarse.
    	* @param inicioCampamento Fecha en la que comienza el campamento.
     	* Transforma el tiempo en días y compara los días que hay entre ambos
+ * @throws Exception 
   */
   @Override
   public void registro(LocalDate fechaInscripcion, LocalDate inicioCampamento) throws Exception {
@@ -35,7 +36,7 @@ public class RegistroTardio extends Registro{
         //Se ha realizado el registro correctamente
       }
     else{
-	throw new Exception("Error: La solicitud de un registro tardío se debe realizar como muy tarde 2 días antes y como muy pronto 15 días antes del comienzo del campamento. No se ha permitido el registro.");
+    	throw new Exception("Error: La solicitud de un registro tardío se debe realizar como muy tarde 2 días antes y como muy pronto 15 días antes del comienzo del campamento. No se ha permitido el registro.");
     }
   }
   

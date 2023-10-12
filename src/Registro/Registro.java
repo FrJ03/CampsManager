@@ -37,10 +37,12 @@ public abstract class Registro{
 	
   /**
   * Método para la validación de un registro. Será definido por sus descendientes.
+ * @throws Exception 
   **/
-  public abstract void registro(LocalDate fechaInscripcion, LocalDate inicioCampamento);
+  public abstract void registro(LocalDate fechaInscripcion, LocalDate inicioCampamento) throws Exception;
   /**
   * Método para la cancelación de un registro. Será definido por sus descendientes.
+ * @throws Exception 
   **/
-  public abstract void cancelacion();
+  public abstract void cancelacion() throws Exception;
 }

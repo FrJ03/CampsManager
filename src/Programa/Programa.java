@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Programa {
-	public static void main(String args[]) throws IOException {
+	public static void main(String args[]) throws Exception {
 		int opcion = 0;
 		GestorAsistentes asistentes = GestorAsistentes.getInstance();
 		GestorCampamentos campamentos = GestorCampamentos.getInstance();
