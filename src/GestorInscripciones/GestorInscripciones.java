@@ -98,7 +98,7 @@ public class GestorInscripciones {
 		// Obtener el número de días de la diferencia
 		int diferenciaDias = periodo.getDays();
 		        
-		if(diferenciaDias > 2 ) {
+		if(diferenciaDias >= 15 ) {
 			inscripcion.crearRegistroTemprano(fechaInicioCamp);
 		}
 		else {
@@ -149,7 +149,7 @@ public class GestorInscripciones {
         // Obtener el número de días de la diferencia
         int diferenciaDias = periodo.getDays();
         
-		if(diferenciaDias > 2 ) {
+		if(diferenciaDias >= 15 ) {
 			inscripcion.crearRegistroTemprano(fechaInicioCamp);
 		}
 		else {
