@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import Asistente.Asistente;
 import java.util.ArrayList;
 import java.util.Date;
+import Inscripcion.InscripcionParcial;
+import Inscripcion.InscripcionCompleta;
 
 public class Programa {
 	public static void main(String args[]) throws Exception {
@@ -88,7 +90,7 @@ public class Programa {
 			}
 			else if(opcion == 2) {
 				do {
-					opcion = menuGestorAsistentes();
+					opcion = menuGestorCampamentos();
 					if(opcion == 1) {
 					
 					}
@@ -127,12 +129,16 @@ public class Programa {
 			}
 			else if(opcion == 3) {
 				do {
-					opcion = menuGestorAsistentes();
+					opcion = menuGestorInscripciones();
 					if(opcion == 1) {
-					
+						ArrayList<InscripcionParcial> lista = inscripciones.getListaInscripcionParcial_();
+						for (InscripcionParcial inscripcion : lista)
+							System.out.println(inscripcion.toString());
 					}
 					else if(opcion == 2) {
-						
+						ArrayList<InscripcionCompleta> lista = inscripciones.getListaInscripcionCompleta_();
+						for (InscripcionCompleta inscripcion : lista)
+							System.out.println(inscripcion.toString());
 					}
 					else if(opcion == 3) {
 						
@@ -144,7 +150,7 @@ public class Programa {
 						
 					}
 					else if(opcion == 6) {
-						
+						System.out.println(inscripciones.obtenerCampamentosDisponibles());
 					}
 					else if(opcion == 7) 
 						System.out.println("Volviendo al menú principal..............");
@@ -215,7 +221,7 @@ public class Programa {
 		System.out.println("3. Realizar registro parcial.");
 		System.out.println("4. Realizar registro completo.");
 		System.out.println("5. Asignar precio.");
-		System.out.println("6. Listar cursos disponibles.");
+		System.out.println("6. Listar campamentos disponibles.");
 		System.out.println("7. Atrás.");
 		System.out.println("----------------------------------");
 		System.out.print("Seleccione una opción: ");
