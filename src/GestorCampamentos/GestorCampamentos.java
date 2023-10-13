@@ -200,7 +200,7 @@ public class GestorCampamentos {
 						
 					}
 					
-					if(monitor.get_especial()) {
+					if(monitor.getEspecial()) {
 						aux = cam.getListaMonitor_().add(monitor);
 					}
 					

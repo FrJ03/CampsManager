@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import Monitor.Monitor;
 import Actividad.Actividad;
-import Actividad.nivel;
+import Actividad.Nivel;
 
 /**
  * Clase que representa  la organización de un conjunto de actividades durante un periodo de tiempo limitado
@@ -26,7 +26,7 @@ import Actividad.nivel;
 	/**
 	  * Representa el nivel educativo del campamento
 	  * */
-	private nivel nivel_;
+	private Nivel nivel_;
 	/**
 	  * Representa el numero máximo de asistentes
 	  * */
@@ -52,7 +52,7 @@ import Actividad.nivel;
 	  * @param nivel Representa el nivel educativo del campamento
 	  * @param asistentesMax Representa el numero máximo de asistentes
 	  * */
-	public Campamento(int id, LocalDate iniciocampamento, LocalDate fincampamento, nivel nivel, int asistentesMax) {
+	public Campamento(int id, LocalDate iniciocampamento, LocalDate fincampamento, Nivel nivel, int asistentesMax) {
 
 		this.id_=id;
 		this.iniciocampamento_=iniciocampamento;
@@ -113,7 +113,7 @@ import Actividad.nivel;
 	  * Observador de la varible nivel
 	  * @return nivel_ del campamento.
 	  * */
-	public nivel getNivel_() {
+	public Nivel getNivel_() {
 		return nivel_;
 	}
 	/**
@@ -121,7 +121,7 @@ import Actividad.nivel;
 	  * @param nivel del campamento.
 	  * @return void.
 	  * */
-	public void setNivel_(nivel nivel) {
+	public void setNivel_(Nivel nivel) {
 		this.nivel_ = nivel;
 	}
 	/**
@@ -225,7 +225,7 @@ import Actividad.nivel;
 	  * */
 	public boolean asociarMonitorEspecial(Monitor mon) {
 	
-		if(mon.get_especial()==true) { 
+		if(mon.getEspecial()==true) { 
 			for(int i=0; i< listaActividad_.size(); i++) {
 				ArrayList<Monitor> ListaMonitores = listaActividad_.get(i).getListaMonitores_();
 				for(int x=0;x<ListaMonitores.size();x++) {

@@ -31,14 +31,14 @@ public Monitor(int id, String nombre, String apellidos, boolean especial){
  * Método que devuelve si un monitor puede impartir actividades en las que participen asistentes con necesidades especiales.
  * @return true si puede impartir las actividades o false en caso contrario.
  */
-public boolean get_especial() {
+public boolean getEspecial() {
 	  return this.especial;
 }
 /**
  * Establece si el monitor puede impartir actividades para asistentes con necesidades especiales.
  * @param especial Valdrá true si puede impartir las actividades o false en caso contrario.
  */
-public void set_especial(boolean especial) {
+public void setEspecial(boolean especial) {
 	  this.especial = especial;
 }
 /**

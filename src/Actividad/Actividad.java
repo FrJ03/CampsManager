@@ -13,11 +13,11 @@ public class Actividad	{
 	/**
 	  * Representa el nivel educativo de la actividad
 	  * */
-	private nivel nivel_;
+	private Nivel nivel_;
 	/**
 	  * Representa el turno en el cual se realiza la actividad. Puede ser tanto mañanas como tardes.
 	  * */
-	private turno turno_;
+	private Turno turno_;
 	/**
 	  * Representa el numero máximo de participantes
 	  * */
@@ -39,8 +39,8 @@ public class Actividad	{
 	  * COnstruye un objeto con todos sus datos, a excepción de la lista de monitores que se inicializa vacía.
 	  * @return void
 	  * */
-	public Actividad(String name, nivel nivel, int participantesMax, 
-			int monitoresMax, turno turno) {
+	public Actividad(String name, Nivel nivel, int participantesMax, 
+			int monitoresMax, Turno turno) {
 		this.name_=name;
 		this.nivel_=nivel;
 		this.participantesMax_=participantesMax;
@@ -111,7 +111,7 @@ public class Actividad	{
 	  * Observador de la variable nivel.
 	  * @return nivel
 	  * */
-	public nivel getNivel_() {
+	public Nivel getNivel_() {
 		return nivel_;
 	}
 	/**
@@ -119,14 +119,14 @@ public class Actividad	{
 	  * @param nivel Enumeración que india el nivel de la actividad
 	  * @return void
 	  * */
-	public void setNivel_(nivel nivel) {
+	public void setNivel_(Nivel nivel) {
 		this.nivel_=nivel;
 	}
 	/**
 	  * Observador de la variable turno.
 	  * @return turno
 	  * */
-	public turno getTurno_() {
+	public Turno getTurno_() {
 		return turno_;
 	}
 	/**
@@ -134,7 +134,7 @@ public class Actividad	{
 	  * @param turno Enumeración que india el turno de la actividad
 	  * @return void
 	  * */
-	public void setTurno_(turno turno) {
+	public void setTurno_(Turno turno) {
 		this.turno_=turno;
 	}
 	/**
