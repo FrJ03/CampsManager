@@ -270,7 +270,46 @@ public class Programa {
 						}
 					}
 					else if(opcion == 8) {
-						
+						/** Encuentra el campamento, encuentra la actividad, los asocia **/
+						System.out.println("Inserte el id del campamento que quiera asociar: ");
+						int idc=Integer.parseInt(teclado.readLine());
+						ArrayList<Campamento> camps=campamentos.getListaCampamentos_();
+						Iterator<Campamento> itc=camps.iterator();
+						Campamento camp;
+						while(itc.hasNext()){
+							if(itc.getId()==idc){
+								camp=itc.current();
+							}
+							itc = itc.next();
+						}
+						if(camp==null){
+							System.out.println("No existe un campamento con ese id.");
+						}
+						else{
+							System.out.println("Inserte el id de la actividad que quiera asociar: ");
+							int ida=Integer.parseInt(teclado.readLine());
+							ArrayList<Actividad> acts=camp.getListaActividad_();
+							Iterator<Actividad> ita=acts.iterator();
+							Actividad act;
+							while(ita.hasNext()){
+									if(ita.getId()==ida){
+										act=ita.current();
+									}
+									ita=ita.next();
+							}
+							if(act==null){
+								System.out.println("No existe una actividad con ese id.");
+							}
+							else{
+								boolean status=camp.asociarActividad(act);
+								if(status==true){
+									System.out.println("Asociación procesada correctamente.");
+								}
+								else{
+									System.out.println("Hubo un error al asociar la actividad al campamento.");
+								}
+							}
+						}
 					}
 					else if(opcion == 9) {
 						/** Recorre la lista de campamentos, encuentra el campamento, recorre la lista de
