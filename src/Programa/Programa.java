@@ -212,7 +212,62 @@ public class Programa {
 						campamentos.crearMonitor(nuevo);
 					}
 					else if(opcion == 7) {
-						
+						/** Encuentra el campamento, encuentra el monitor, encuentra la actividad, los asocia **/
+						System.out.println("Inserte el id del campamento que contiene la actividad y el monitor: ");
+						int idc=Integer.parseInt(teclado.readLine());
+						ArrayList<Campamento> camps=campamentos.getListaCampamentos_();
+						Iterator<Campamento> itc=camps.iterator();
+						Campamento camp;
+						while(itc.hasNext()){
+							if(itc.getId()==idc){
+								camp=itc.current();
+							}
+							itc = itc.next();
+						}
+						if(camp==null){
+							System.out.println("No existe un campamento con ese id.");
+						}
+						else{
+							System.out.println("Inserte el id del monitor que quiera asociar a la actividad: ");
+							int idm=Integer.parseInt(teclado.readLine());
+							ArrayList<Monitor> mons=camp.getListaMonitor_();
+							Iterator<Monitor> itm=mons.iterator();
+							Monitor mon;
+							while(itm.hasNext()){
+								if(itm.getId()==idm){
+									mon=itm.current();
+								}
+								itm = itm.next();
+							}
+							if(mon==null){
+								System.out.println("No existe un monitor con ese id.");
+							}
+							else{
+								System.out.println("Inserte el id de la actividad que quiera asociar al monitor");
+								int ida=Integer.parseInt(teclado.readLine());
+								ArrayList<Actividad> acts=camp.getListaActividad_();
+								Iterator<Actividad> ita=acts.iterator();
+								Actividad act;
+								while(ita.hasNext()){
+									if(ita.getId()==ida){
+										act=ita.current();
+									}
+									ita=ita.next();
+								}
+								if(act==null){
+									System.out.println("No existe una actividad con ese id.");
+								}
+								else{
+									boolean status=act.asociarMonitor(mon);
+									if(status==true){
+										System.out.println("Asociación procesada correctamente.");
+									}
+									else{
+										System.out.println("Hubo un error al asociar el monitor a la actividad.");
+									}
+								}
+							}
+						}
 					}
 					else if(opcion == 8) {
 						
