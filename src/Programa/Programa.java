@@ -419,7 +419,20 @@ public class Programa {
 						
 					}
 					else if(opcion == 5) {
+						/** Asigna precio a una inscripción y comprueba que se ha realizado correctamente **/
+						System.out.println("Introduzca el id del campamento asociado a la inscripcion: ");
+						int idc=Integer.parseInt(teclado.readLine());
+						System.out.println("Introduzca el id del participante asociado a la inscripcion: ");
+						int idp=Integer.parseInt(teclado.readLine());
+						ArrayList<Campamento> camps=campamentos.getListaCampamentos_();
 						
+						int resultado=asignarPrecio(idc, idp, camps);
+						if(resultado==0){
+							System.out.println("Precio asignado correctamente");
+						}
+						if(resultado==-1){
+							System.out.println("Hubo un error, no se encontró el id.");
+						}
 					}
 					else if(opcion == 6) {
 						System.out.println(inscripciones.obtenerCampamentosDisponibles());
