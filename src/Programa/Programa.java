@@ -11,6 +11,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import Inscripcion.InscripcionParcial;
 import Inscripcion.InscripcionCompleta;
+import Actividad.Actividad;
+import Actividad.Nivel;
+import Actividad.Turno;
+import java.time.LocalDate;
+import Campamento.Campamento;
+import Monitor.Monitor;
 
 public class Programa {
 	public static void main(String args[]) throws Exception {
@@ -18,6 +24,7 @@ public class Programa {
 		GestorAsistentes asistentes = GestorAsistentes.getInstance();
 		GestorCampamentos campamentos = GestorCampamentos.getInstance();
 		GestorInscripciones inscripciones = GestorInscripciones.getInstance();
+		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		do {
 			opcion = menuPrincipal();
 			if(opcion == 1) {				
@@ -31,7 +38,6 @@ public class Programa {
 					}
 					else if(opcion == 2) {
 						Asistente nuevo = new Asistente();
-						BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 						//Llamar al módulo de datos para obtener el último id
 						System.out.print("Inserte el nombre del asistente: ");
 						nuevo.set_nombre(teclado.readLine());
@@ -54,7 +60,6 @@ public class Programa {
 						asistentes.DarAltaAsistente(nuevo);
 					}
 					else if(opcion == 3) {
-						BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 						System.out.print("Inserte el id del asistente a modificar: ");
 						int idAntiguo = Integer.parseInt(teclado.readLine());
 						System.out.print("Inserte el nuevo id: ");
@@ -92,22 +97,119 @@ public class Programa {
 				do {
 					opcion = menuGestorCampamentos();
 					if(opcion == 1) {
-					
+						System.out.println(campamentos.getListaCampamentos_());
 					}
 					else if(opcion == 2) {
-						
+						System.out.println(campamentos.getListaActividades_());
 					}
 					else if(opcion == 3) {
-						
+						System.out.println(campamentos.getListaMonitores_());
 					}
 					else if(opcion == 4) {
-						
+						//Seleccionar id
+						int id;
+						int day = 1;
+						int month = 1;
+						int year = 1;
+						LocalDate fechaFin;
+						LocalDate fechaInicio;
+						do {
+							do {
+								System.out.print("Inserte el día de inicio: ");
+								day = Integer.parseInt(teclado.readLine());
+								System.out.print("Inserte el mes de inicio: ");
+								month = Integer.parseInt(teclado.readLine());
+								System.out.print("Inserte el año de inicio: ");
+								year = Integer.parseInt(teclado.readLine());
+							}while(!dateValid(year, month, day));							
+							fechaInicio.of(year, month, day);
+							do {
+								System.out.print("Inserte el día de finalización: ");
+								day = Integer.parseInt(teclado.readLine());
+								System.out.print("Inserte el mes de finalización: ");
+								month = Integer.parseInt(teclado.readLine());
+								System.out.print("Inserte el año de finalización: ");
+								year = Integer.parseInt(teclado.readLine());
+							}while(!dateValid(year, month, day));							
+							fechaFin.of(year, month, day);
+						}while(fechaFin.compareTo(fechaInicio) <= 0);
+						char n = 'b';
+						Nivel nivel;
+						do {
+							System.out.print("Indique para quién va dirigido (I (Infantil) / J (Juvenil) / A (Adolescente)): ");
+							n = (char)teclado.read();
+							if(n == 'I' || n == 'i')
+								nivel = Nivel.Infantil;
+							else if(n == 'J' || n == 'j')
+								nivel = Nivel.Juvenil;
+							else if(n == 'A' || n == 'a')
+								nivel = Nivel.Adolescente;
+								
+						}while(n != 'I' && n != 'i' && n != 'J' && n != 'j' && n != 'A' && n != 'a');
+						int max = 0;
+						do {
+							System.out.print("Inserte el número máximo de participantes: ");
+							max = Integer.parseInt(teclado.readLine());
+						}while(max < 1);
+						campamentos.crearCampamento(new Campamento(id, fechaInicio, fechaFin, nivel, max));
 					}
 					else if(opcion == 5) {
-						
+						System.out.print("Inserte el nombre de la actividad: ");
+						String nombre = teclado.readLine();
+						char n = 'b';
+						Nivel nivel;
+						do {
+							System.out.print("Indique para quién va dirigido (I (Infantil) / J (Juvenil) / A (Adolescente)): ");
+							n = (char)teclado.read();
+							if(n == 'I' || n == 'i')
+								nivel = Nivel.Infantil;
+							else if(n == 'J' || n == 'j')
+								nivel = Nivel.Juvenil;
+							else if(n == 'A' || n == 'a')
+								nivel = Nivel.Adolescente;
+								
+						}while(n != 'I' && n != 'i' && n != 'J' && n != 'j' && n != 'A' && n != 'a');
+						int maxP = 0;
+						do {
+							System.out.print("Inserte el número máximo de participantes: ");
+							maxP = Integer.parseInt(teclado.readLine());
+						}while(maxP < 1);
+						int maxM = 0;
+						do {
+							System.out.print("Inserte el número máximo de monitores: ");
+							maxM = Integer.parseInt(teclado.readLine());
+						}while(maxM < 1);
+						char t = 'a';
+						Turno turno;
+						do {
+							System.out.print("¿La actividad se realizará por la mañana o por la tarde?: ");
+							t = (char) teclado.read();
+							if(t == 'T' || t == 't')
+								turno = Turno.Tarde;
+							else if(t == 'M' || t == 'm')
+								turno = Turno.Mañana;
+						}while (t != 'M' && t != 'm' && t != 'T' && t != 't');
+						Actividad actividad = new Actividad(nombre, nivel, maxP, maxM, turno);
+						campamentos.crearActividad(actividad);
 					}
 					else if(opcion == 6) {
-						
+						Monitor nuevo = new Monitor();
+						//Llamar al módulo de datos para obtener el último id
+						System.out.print("Inserte el nombre del monitor: ");
+						nuevo.set_nombre(teclado.readLine());
+						System.out.print("Inserte los apellidos del monitor: ");
+						nuevo.set_apellidos(teclado.readLine());
+						char letra = 'a';
+						do {
+							System.out.print("¿Necesita atención especial? (S/N): ");
+							letra = (char)teclado.read();
+							if(letra == 'S' || letra == 's')
+								nuevo.setEspecial(true);
+							else if(letra == 'N' || letra == 'n')
+								nuevo.setEspecial(false);
+								
+						}while(letra != 'S' && letra != 'N' && letra != 's' && letra != 'n');
+						campamentos.crearMonitor(nuevo);
 					}
 					else if(opcion == 7) {
 						
@@ -229,5 +331,21 @@ public class Programa {
         int opcion = Integer.parseInt(teclado.readLine());
         System.out.println("----------------------------------");
         return opcion;
+	}
+	private static boolean dateValid(int year, int month, int day) {
+		if((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && day <= 31 && day > 0)
+			return true;
+		else if((month == 4 || month == 6 || month == 9 || month == 11) && day <= 30 && day > 0)
+			return true;
+		else if(month == 2) {
+			if((year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) && day <= 29 && day > 0)
+				return true;
+			else if(!(year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) && day <= 28 && day > 0)
+				return true;
+			else 
+				return false;
+		}
+		else 
+			return false;
 	}
 }
