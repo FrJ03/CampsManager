@@ -40,7 +40,7 @@ public class GestorAsistentes {
 	 * Método que devuelve la lista de asistentes del gestor.
 	 * @return ArrayList<Asistente>.
 	 */
-	public ArrayList<Asistente> getListaAsistente_() {
+	public ArrayList<Asistente> getListaAsistente() {
 		return listaAsistente_;
 	}
 	/**
@@ -48,7 +48,7 @@ public class GestorAsistentes {
 	 * @param listaAsistentes
 	 * @return void.
 	 */
-	public void setListaAsistentes_(ArrayList<Asistente> listaAsistentes){
+	public void setListaAsistentes(ArrayList<Asistente> listaAsistentes){
 		this.listaAsistente_ = listaAsistentes;
 	}
 	/**
@@ -56,7 +56,7 @@ public class GestorAsistentes {
 	 * @param Asistente asistente que se va a añadir a la lista de asistente.
 	 * @return boolean(false error, true no error).
 	 */
-	public boolean DarAltaAsistente(Asistente asistente) {	
+	public boolean darAltaAsistente(Asistente asistente) {	
 		for(int aux=0;aux<listaAsistente_.size();aux++) {
 			if(listaAsistente_.get(aux).getId()==asistente.getId()) {
 				return false;//Error, el asistente ya está inscrito
@@ -76,7 +76,7 @@ public class GestorAsistentes {
       	 * @param especial Indica si en asistente pertenece a un grupo especial (true) o no (false).
 	 * @return void.
 	 */
-	public void ModificarAsistente(int id_antiguo, int id_nuevo, String nombre, String apellidos, Date fechaNacimiento,boolean especial){
+	public void modificarAsistente(int id_antiguo, int id_nuevo, String nombre, String apellidos, Date fechaNacimiento,boolean especial){
 		for(int aux=0;aux<listaAsistente_.size();aux++) {
 			if(listaAsistente_.get(aux).getId()==id_antiguo) {
 				listaAsistente_.get(aux).setId(id_nuevo);
@@ -93,7 +93,7 @@ public class GestorAsistentes {
 	 * @return String String con la información de los participantes registrados.
 	 * @throws Exception 
 	 */
-	public String ListaAsistencia() throws Exception {
+	public String listaAsistencia() throws Exception {
 		
 		String infoAsistentes = "";
 		

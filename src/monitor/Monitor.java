@@ -9,7 +9,7 @@ public class Monitor extends Persona implements Comparable<Monitor>{
 	
 /**Representa si el educador esta cualificado para monitorizar actividades donde participen asistentes con necesidades especiales
  */
-private boolean especial;
+private boolean especial_;
 
 /**
  * Construye un objeto de la clase monitor vacío.
@@ -24,7 +24,7 @@ public Monitor() {}
  */
 public Monitor(int id, String nombre, String apellidos, boolean especial){
 	super(id, nombre, apellidos);
-  this.especial=especial;
+  this.especial_=especial;
 }
 /**Método que indica la versión de la clase que se va a serializar.
  */
@@ -34,14 +34,14 @@ private static final long serialVersionUID = 2L;
  * @return true si puede impartir las actividades o false en caso contrario.
  */
 public boolean getEspecial() {
-	  return this.especial;
+	  return this.especial_;
 }
 /**
  * Establece si el monitor puede impartir actividades para asistentes con necesidades especiales.
  * @param especial Valdrá true si puede impartir las actividades o false en caso contrario.
  */
 public void setEspecial(boolean especial) {
-	  this.especial = especial;
+	  this.especial_ = especial;
 }
 /**
  * Función que devuelve una cadena de caracteres con información del monitor.
@@ -54,7 +54,7 @@ public String toString() {
 	 String ret ="Id: " + this.getId() + 
 			 	"\nNombre Completo: " + this.getNombreCompleto()+ 
 			 	"\nGrupo especial: ";
-	 if(this.especial) {
+	 if(this.especial_) {
 		 ret.concat("Si\n");
 	 }
 	 else {

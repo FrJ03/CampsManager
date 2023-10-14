@@ -8,10 +8,14 @@ import java.io.Serializable;
  * Clase que representa una actividad que se encuentra en un campamento.
  * @author Enrique de los Reyes Montilla
  */
-public class Actividad	implements Serializable{
+public class Actividad	implements Serializable, Comparable<Actividad>{
 	/** Metodo para indicar la versión de la clase a serializar
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * Identificador de la actividad
+	 */
+	private int id_;
 	/**
 	  * Representa el nombre de la actividad
 	  * */
@@ -55,10 +59,24 @@ public class Actividad	implements Serializable{
 		this.listaMonitores_.clear();
 	};
 	/**
+	 * Observador del identificador de la actividad.
+	 * @return
+	 */
+	public int getId() {
+		return id_;
+	}
+	/**
+	 * Modificador del identificador de la actividad.
+	 * @param id Nuevo identificador.
+	 */
+	public void setId(int id) {
+		id_ = id;
+	}
+	/**
 	  * Observador de la varible nombre
 	  * @return string
 	  * */
-	public String getName_() {
+	public String getName() {
 		return name_;
 	}
 	/**
@@ -66,14 +84,14 @@ public class Actividad	implements Serializable{
 	  * @param name Nombre de la actividad
 	  * @return void
 	  * */
-	public void setName_(String name) {
+	public void setName(String name) {
 		this.name_ = name;
 	}
 	/**
 	  * Observador de la variable participantesMax
 	  * @return int
 	  * */
-	public int getParticipantesMax_() {
+	public int getParticipantesMax() {
 		return participantesMax_;
 	}
 	/**
@@ -81,28 +99,28 @@ public class Actividad	implements Serializable{
 	  * @param participantesMax Numero de participantes maximmos en la actividad
 	  * @return void
 	  * */
-	public void setParticipantesMax_(int participantesMax) {
+	public void setParticipantesMax(int participantesMax) {
 		this.participantesMax_ = participantesMax;
 	}
 	/**
 	  * Observador de la variable monitoresMax.
 	  * @return int
 	  * */
-	public int getMonitoresMax_() {
+	public int getMonitoresMax() {
 		return monitoresMax_;
 	}
 	/**
 	  * Modificador de la variable monitoresMax.
 	  * @param monitoresMax Número de monitores maximos en la actividad
 	  * */
-	public void setMonitoresMax_(int monitoresMax) {
+	public void setMonitoresMax(int monitoresMax) {
 		this.monitoresMax_ = monitoresMax;
 	}
 	/**
 	  * Observador de la variable listaMonitores.
 	  * @return ArrayList<Monitor>
 	  * */
-	public ArrayList<Monitor> getListaMonitores_() {
+	public ArrayList<Monitor> getListaMonitores() {
 		return listaMonitores_;
 	}
 	/**
@@ -110,14 +128,14 @@ public class Actividad	implements Serializable{
 	  * @param lista_monitores Lista de monitores de la actividad
 	  * @return void
 	  * */
-	public void setListaMonitores_(ArrayList<Monitor> lista_monitores) {
+	public void setListaMonitores(ArrayList<Monitor> lista_monitores) {
 		this.listaMonitores_ = lista_monitores;
 	}
 	/**
 	  * Observador de la variable nivel.
 	  * @return nivel
 	  * */
-	public Nivel getNivel_() {
+	public Nivel getNivel() {
 		return nivel_;
 	}
 	/**
@@ -125,14 +143,14 @@ public class Actividad	implements Serializable{
 	  * @param nivel Enumeración que india el nivel de la actividad
 	  * @return void
 	  * */
-	public void setNivel_(Nivel nivel) {
+	public void setNivel(Nivel nivel) {
 		this.nivel_=nivel;
 	}
 	/**
 	  * Observador de la variable turno.
 	  * @return turno
 	  * */
-	public Turno getTurno_() {
+	public Turno getTurno() {
 		return turno_;
 	}
 	/**
@@ -140,7 +158,7 @@ public class Actividad	implements Serializable{
 	  * @param turno Enumeración que india el turno de la actividad
 	  * @return void
 	  * */
-	public void setTurno_(Turno turno) {
+	public void setTurno(Turno turno) {
 		this.turno_=turno;
 	}
 	/**
@@ -173,5 +191,14 @@ public class Actividad	implements Serializable{
 		
 		return false;
 	}
-	
+	@Override
+    public int compareTo(Actividad a) {
+		if(a.getId() > this.getId())
+			return -1;
+		else if(a.getId() > this.getId()) 
+			return 1;
+		else 
+			return 0;
+   	 
+    }
 }

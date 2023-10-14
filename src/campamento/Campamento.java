@@ -73,7 +73,7 @@ import monitor.Monitor;
 	  * Observador de la varible id
 	  * @return id_ del campamento.
 	  * */
-	public int getId_() {
+	public int getId() {
 		return id_;
 	}
 	/**
@@ -81,14 +81,14 @@ import monitor.Monitor;
 	  * @param id del campamento.
 	  * @return void.
 	  * */
-	public void setId_(int id) {
+	public void setId(int id) {
 		this.id_ = id;
 	}
 	/**
 	  * Observador de la varible iniciocampamento
 	  * @return iniciocampamento_.
 	  * */
-	public LocalDate getIniciocampamento_() {
+	public LocalDate getInicioCampamento() {
 		return iniciocampamento_;
 	}
 	/**
@@ -96,14 +96,14 @@ import monitor.Monitor;
 	  * @param iniciocampamento_
 	  * @return void.
 	  * */
-	public void setIniciocampamento_(LocalDate iniciocampamento) {
+	public void setInicioCampamento(LocalDate iniciocampamento) {
 		this.iniciocampamento_ = iniciocampamento;
 	}
 	/**
 	  * Observador de la varible fincampamento
 	  * @return fincampamento_.
 	  * */
-	public LocalDate getFincampamento_() {
+	public LocalDate getFinCampamento() {
 		return fincampamento_;
 	}
 	/**
@@ -111,14 +111,14 @@ import monitor.Monitor;
 	  * @param fincampamento_
 	  * @return void.
 	  * */
-	public void setFincampamento_(LocalDate fincampamento) {
+	public void setFinCampamento(LocalDate fincampamento) {
 		this.fincampamento_ = fincampamento;
 	}
 	/**
 	  * Observador de la varible nivel
 	  * @return nivel_ del campamento.
 	  * */
-	public Nivel getNivel_() {
+	public Nivel getNivel() {
 		return nivel_;
 	}
 	/**
@@ -126,14 +126,14 @@ import monitor.Monitor;
 	  * @param nivel del campamento.
 	  * @return void.
 	  * */
-	public void setNivel_(Nivel nivel) {
+	public void setNivel(Nivel nivel) {
 		this.nivel_ = nivel;
 	}
 	/**
 	  * Observador de la varible asistentesmax
 	  * @return asistentesMax_ del campamento.
 	  * */
-	public int getAsistentesMax_() {
+	public int getAsistentesMax() {
 		return asistentesMax_;
 	}
 	/**
@@ -141,14 +141,14 @@ import monitor.Monitor;
 	  * @param asistentesMax del campamento.
 	  * @return void.
 	  * */
-	public void setAsistentesMax_(int asistentesMax) {
+	public void setAsistentesMax(int asistentesMax) {
 		this.asistentesMax_ = asistentesMax;
 	}
 	/**
 	  * Observador de la varible ListaActividad
 	  * @return listaActividad_.
 	  * */
-	public ArrayList<Actividad> getListaActividad_() {
+	public ArrayList<Actividad> getListaActividad() {
 		return listaActividad_;
 	}
 	/**
@@ -156,14 +156,14 @@ import monitor.Monitor;
 	  * @param listaActividad.
 	  * @return void.
 	  * */
-	public void setListaActividad_(ArrayList<Actividad> listaActividad) {
+	public void setListaActividad(ArrayList<Actividad> listaActividad) {
 		this.listaActividad_ = listaActividad;
 	}
 	/**
 	  * Observador de la varible ListaMonitor
 	  * @return listaMonitor_.
 	  * */
-	public ArrayList<Monitor> getListaMonitor_() {
+	public ArrayList<Monitor> getListaMonitor() {
 		return listaMonitor_;
 	}
 	/**
@@ -171,7 +171,7 @@ import monitor.Monitor;
 	  * @param listaMonitor.
 	  * @return void.
 	  * */
-	public void setListaMonitor_(ArrayList<Monitor> listaMonitor) {
+	public void setListaMonitor(ArrayList<Monitor> listaMonitor) {
 		this.listaMonitor_ = listaMonitor;
 	};
 	/**
@@ -196,7 +196,7 @@ import monitor.Monitor;
 		}
 		
 		for(Actividad act : this.listaActividad_) {
-			aux.concat(act.getName_());
+			aux.concat(act.getName());
 		}
 		
 		return aux;
@@ -209,7 +209,7 @@ import monitor.Monitor;
 	  * */
 	public boolean asociarActividad(Actividad act) {
 		
-		if(this.nivel_==act.getNivel_()){
+		if(this.nivel_==act.getNivel()){
 			listaActividad_.add(act);
 			return true;//Se ha añadido correctamente la actividad al campamento
 		}
@@ -232,7 +232,7 @@ import monitor.Monitor;
 	
 		if(mon.getEspecial()==true) { 
 			for(int i=0; i< listaActividad_.size(); i++) {
-				ArrayList<Monitor> ListaMonitores = listaActividad_.get(i).getListaMonitores_();
+				ArrayList<Monitor> ListaMonitores = listaActividad_.get(i).getListaMonitores();
 				for(int x=0;x<ListaMonitores.size();x++) {
 					if(ListaMonitores.get(x).getNombreCompleto()==mon.getNombreCompleto()) {
 						return false;//Error, el monitor no es un monitor de atencion especial
@@ -246,9 +246,9 @@ import monitor.Monitor;
 	}
 	@Override
     public int compareTo(Campamento c) {
-		if(c.getId_() > this.getId_())
+		if(c.getId() > this.getId())
 			return -1;
-		else if(c.getId_() > this.getId_()) 
+		else if(c.getId() > this.getId()) 
 			return 1;
 		else 
 			return 0;

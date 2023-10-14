@@ -8,32 +8,32 @@ public class Persona {
 	/**
 	* Identificador de la persona, de tipo entero
 	**/
-	  private int id;
+	  private int id_;
 	/**
 	* Nombre y apellidos, de tipo cadena de caracteres
 	**/
-	  private String nombre;
-	  private String apellidos;
+	  private String nombre_;
+	  private String apellidos_;
 	
 	/**
 	* Creadores de la clase con y sin parámetros
 	**/
 	  public Persona() {}
 	  public Persona(int id, String nombre, String apellidos) {
-		  this.id = id;
-		  this.nombre = nombre;
-		  this.apellidos = apellidos;
+		  this.id_ = id;
+		  this.nombre_ = nombre;
+		  this.apellidos_ = apellidos;
 	  }
 
 	/**
 	* Métodos get/set para todos los atributos
 	**/
-	  public int getId() {return id;}
-	  public String getNombre() {return nombre;}
-	  public String getApellidos() {return apellidos;}
-	  public String getNombreCompleto() {   String nombrecompleto=this.nombre+this.apellidos;
+	  public int getId() {return id_;}
+	  public String getNombre() {return nombre_;}
+	  public String getApellidos() {return apellidos_;}
+	  public String getNombreCompleto() {   String nombrecompleto=this.nombre_+this.apellidos_;
 	                                          return nombrecompleto;}
-	  public void setId(int id) {this.id=id;}
-	  public void setNombre(String nombre) {this.nombre=nombre;}
-	  public void setApellidos(String apellidos) {this.apellidos=apellidos;}
+	  public void setId(int id) {this.id_=id;}
+	  public void setNombre(String nombre) {this.nombre_=nombre;}
+	  public void setApellidos(String apellidos) {this.apellidos_=apellidos;}
 }

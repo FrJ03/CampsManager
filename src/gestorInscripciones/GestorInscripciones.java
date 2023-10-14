@@ -40,7 +40,7 @@ public class GestorInscripciones {
 	 * Método que devuelve la lista de InscripcionesParciales del gestor.
 	 * @return ArrayList<InscripcionParcial>.
 	 */
-	public ArrayList<InscripcionParcial> getListaInscripcionParcial_() {
+	public ArrayList<InscripcionParcial> getListaInscripcionParcial() {
 		return listaInscripcionParcial_;
 	}
 	/**
@@ -48,14 +48,14 @@ public class GestorInscripciones {
 	 * @param ArrayList<InscripcionParcial> listaInscripcionParcial
 	 * @return void.
 	 */
-	public void setListaInscripcionParcial_(ArrayList<InscripcionParcial> listaInscripcionParcial) {
+	public void setListaInscripcionParcial(ArrayList<InscripcionParcial> listaInscripcionParcial) {
 		this.listaInscripcionParcial_ = listaInscripcionParcial;
 	}
 	/**
 	 * Método que devuelve la lista de campamentos del gestor.
 	 * @return ArrayList<InscripcionCompleta>.
 	 */
-	public ArrayList<InscripcionCompleta> getListaInscripcionCompleta_() {
+	public ArrayList<InscripcionCompleta> getListaInscripcionCompleta() {
 		return listaInscripcionCompleta_;
 	}
 	/**
@@ -63,7 +63,7 @@ public class GestorInscripciones {
 	 * @param ArrayList<InscripcionCompleta> listaInscripcionCompleta
 	 * @return void.
 	 */
-	public void setListaInscripcionCompleta_(ArrayList<InscripcionCompleta> listaInscripcionCompleta) {
+	public void setListaInscripcionCompleta(ArrayList<InscripcionCompleta> listaInscripcionCompleta) {
 		this.listaInscripcionCompleta_ = listaInscripcionCompleta;
 	}
 	/**
@@ -179,8 +179,8 @@ public class GestorInscripciones {
 	private float calcularPrecio(InscripcionCompleta inscripcion, ArrayList<Campamento> ListaCampamentos) {
 		int precio=300;//Precio base sin actividades
 		for(int aux=0;aux<ListaCampamentos.size();aux++) {
-			if(ListaCampamentos.get(aux).getId_()== inscripcion.getIdCampamento()) {
-				ArrayList<Actividad> Listaactividades =ListaCampamentos.get(aux).getListaActividad_();
+			if(ListaCampamentos.get(aux).getId()== inscripcion.getIdCampamento()) {
+				ArrayList<Actividad> Listaactividades =ListaCampamentos.get(aux).getListaActividad();
 				if(Listaactividades.size()==0) {
 					return precio;
 				}
@@ -201,8 +201,8 @@ public class GestorInscripciones {
 	private float calcularPrecio(InscripcionParcial inscripcion, ArrayList<Campamento> ListaCampamentos) {
 		float precio=100;//Precio base sin actividades
 		for(int aux=0;aux<ListaCampamentos.size();aux++) {
-			if(ListaCampamentos.get(aux).getId_()== inscripcion.getIdCampamento()) {
-				ArrayList<Actividad> Listaactividades =ListaCampamentos.get(aux).getListaActividad_();
+			if(ListaCampamentos.get(aux).getId()== inscripcion.getIdCampamento()) {
+				ArrayList<Actividad> Listaactividades =ListaCampamentos.get(aux).getListaActividad();
 				if(Listaactividades.size()==0) {
 					return precio;
 				}
@@ -258,7 +258,7 @@ public class GestorInscripciones {
 		}
 		
 		for(Campamento cam : listaCampamentos) {
-			Period periodo = cam.getIniciocampamento_().until(LocalDate.now());
+			Period periodo = cam.getInicioCampamento().until(LocalDate.now());
 	        // Obtener el número de días de la diferencia
 	        int diferenciaDias = periodo.getDays();
 	        
@@ -266,7 +266,7 @@ public class GestorInscripciones {
 				
 				for(InscripcionParcial ins : this.listaInscripcionParcial_) {
 					
-					if(ins.getIdCampamento() == cam.getId_()) {
+					if(ins.getIdCampamento() == cam.getId()) {
 						
 						sumaAsistentes ++;
 						
@@ -275,7 +275,7 @@ public class GestorInscripciones {
 				}
 				for(InscripcionCompleta ins : this.listaInscripcionCompleta_) {
 					
-					if(ins.getIdCampamento() == cam.getId_()) {
+					if(ins.getIdCampamento() == cam.getId()) {
 						
 						sumaAsistentes ++;
 						
@@ -283,7 +283,7 @@ public class GestorInscripciones {
 					
 				}
 				
-				if(cam.getAsistentesMax_() > sumaAsistentes) {
+				if(cam.getAsistentesMax() > sumaAsistentes) {
 					listaAux.concat(cam.toString());
 				}
 				

@@ -15,20 +15,20 @@ public abstract class Registro implements Serializable{
 	/**
  	* Estado del registro, true si se ha validado con el método registro()
   	**/
-	private boolean reserva;
+	private boolean reserva_;
 	
 	/**
  	* Construye un objeto de la clase registro estableciendo el valor de reserva.
  	**/
 	public Registro(){
-		this.reserva=false;
+		this.reserva_=false;
 	}
 
 	/**
  	* Método que devuelve el estado del registro.
  	**/
 	public boolean getStatus(){
-		return this.reserva;
+		return this.reserva_;
 	}
 
 	/**
@@ -36,7 +36,7 @@ public abstract class Registro implements Serializable{
 	 * @param status True o False según se quiera validar o cancelar un registro
   	**/
 	public void setStatus(boolean status){
-		this.reserva=status;
+		this.reserva_=status;
 	}
 	
   /**

@@ -12,11 +12,11 @@ import persona.Persona;
 	 /**
 	  * Representa si el asistente necesita atención especial
 	  * */
-     private boolean especial;
+     private boolean especial_;
      /**
       * Fecha de nacimiento del asistente
       * */
-     private Date fechaNacimiento;
+     private Date fechaNacimiento_;
 
      /**
       * Construye un objeto vacio*/
@@ -36,35 +36,35 @@ import persona.Persona;
       * */
      public Asistente(int id, String nombre, String apellidos, Date fechaNacimiento,boolean especial){
     	 super(id, nombre, apellidos);
-        this.fechaNacimiento = fechaNacimiento;
-        this.especial = especial;
+        this.fechaNacimiento_ = fechaNacimiento;
+        this.especial_ = especial;
      }
      /**
       * Devuelve la fecha de nacimiento del asistente.
       * */
      public Date get_fechaNacimiento() {
-    	 return this.fechaNacimiento;
+    	 return this.fechaNacimiento_;
      }
      /**
       * Devuelve si asistente necesita atención especial.
       * @return true si es necesaria una atención especial, false en caso contrario.
       * */
      public boolean getEspecial() {
-    	 return especial;
+    	 return especial_;
      }
      /**
       * Establece una nueva fecha de nacimiento del asistente.
       * @param fechaNacimiento fecha de nacimiento a establecer.
       */
      public void setFechaNacimiento(Date fechaNacimiento) {
-    	 this.fechaNacimiento = fechaNacimiento;
+    	 this.fechaNacimiento_ = fechaNacimiento;
      }
      /**
       * Modifica si el asistente necesita atención especial.
       * @param especial true si es requerida una atención especial, false en caso contrario.
       */
      public void setEspecial(boolean especial) {
-    	 this.especial = especial;
+    	 this.especial_ = especial;
      }
      /**
       * Función que devuelve una cadena de caracteres con información del asistente.
@@ -77,9 +77,9 @@ import persona.Persona;
      public String toString() {
     	 String ret ="Id: " + this.getId()+ 
     			 	"\nNombre Completo: " + this.getNombreCompleto()+ 
-    			 	"\nFecha de Nacimiento: " + this.fechaNacimiento.toString() + 
+    			 	"\nFecha de Nacimiento: " + this.fechaNacimiento_.toString() + 
     			 	"\nGrupo Especial: ";
-    	 if(this.especial) {
+    	 if(this.especial_) {
     		 ret.concat("Si\n");
     	 }
     	 else {

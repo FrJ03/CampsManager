@@ -50,21 +50,21 @@ public class GestorCampamentos {
 		 * Método que devuelve la lista de campamentos del gestor.
 		 * @return ArrayList<Campamento>.
 		 */
-		public ArrayList<Campamento> getListaCampamentos_() {
+		public ArrayList<Campamento> getListaCampamentos() {
 			return listaCampamentos_;
 		}
 		/**
 		 * Método que devuelve la lista de monitores del gestor.
 		 * @return ArrayList<Monitor>.
 		 */
-		public ArrayList<Monitor> getListaMonitores_() {
+		public ArrayList<Monitor> getListaMonitores() {
 			return listaMonitores_;
 		}
 		/**
 		 * Método que devuelve la lista de actividades del gestor.
 		 * @return ArrayList<Actividad>.
 		 */
-		public ArrayList<Actividad> getListaActividades_() {
+		public ArrayList<Actividad> getListaActividades() {
 			return listaActividades_;
 		}
 		/**
@@ -72,7 +72,7 @@ public class GestorCampamentos {
 		 * @param listaActividades
 		 * @return void.
 		 */
-		public void setListaActividades_(ArrayList<Actividad> listaActividades){
+		public void setListaActividades(ArrayList<Actividad> listaActividades){
 			this.listaActividades_=listaActividades;
 		}
 		/**
@@ -80,7 +80,7 @@ public class GestorCampamentos {
 		 * @param listaMonitores
 		 * @return void.
 		 */
-		public void setListaMonitores_(ArrayList<Monitor> listaMonitores){
+		public void setListaMonitores(ArrayList<Monitor> listaMonitores){
 			this.listaMonitores_=listaMonitores;
 		}
 		/**
@@ -88,7 +88,7 @@ public class GestorCampamentos {
 		 * @param listaCampamento
 		 * @return void.
 		 */
-		public void setListaCampamentos_(ArrayList<Campamento> listaCampamentos){
+		public void setListaCampamentos(ArrayList<Campamento> listaCampamentos){
 			this.listaCampamentos_=listaCampamentos;
 		}
 		/**
@@ -106,7 +106,8 @@ public class GestorCampamentos {
 		 * @return void.
 		 */
 		public void crearActividad(Actividad actividad) {
-			this.listaActividades_.add(actividad);			
+			this.listaActividades_.add(actividad);	
+			Collections.sort(this.listaActividades_);
 		}
 		/**
 		 * Metodo que crea Campamnetos mediante valores introducidos por el usuario.
@@ -123,12 +124,10 @@ public class GestorCampamentos {
 		 * @return Void.
 		 */
 		public void asociarMonitorActividad( Actividad actividad, Monitor monitor) {
-			for(Actividad act : this.listaActividades_) {
-				
-				if(act.getName_() == actividad.getName_()) {
+			for(Actividad act : this.listaActividades_) {				
+				if(act.getId() == actividad.getId()) {
 					act.asociarMonitor(monitor);
 				}
-				
 			}
 		}
 		/**
@@ -140,8 +139,7 @@ public class GestorCampamentos {
 		public boolean asociarActividadCampamento(int idCampamento, Actividad actividad) {
 			boolean aux = false;
 			for(Campamento cam : this.listaCampamentos_) {
-				
-				if(cam.getId_() == idCampamento) {
+				if(cam.getId() == idCampamento) {
 					aux = cam.asociarActividad(actividad);
 				}
 			}
@@ -155,14 +153,13 @@ public class GestorCampamentos {
 		 */
 		public boolean asociarMonitorCampamento(int idCampamento, Monitor monitor) {
 			boolean aux = false;
-			
 			for(Campamento cam : this.listaCampamentos_) {
 				
-				if(cam.getId_() == idCampamento) {
+				if(cam.getId() == idCampamento) {
 					
-					for(Actividad act : cam.getListaActividad_()) {
+					for(Actividad act : cam.getListaActividad()) {
 						
-						for(Monitor mon : act.getListaMonitores_()) {
+						for(Monitor mon : act.getListaMonitores()) {
 							
 							if(mon.getId() == monitor.getId()) {
 								cam.asociarMonitor(monitor);
@@ -190,11 +187,11 @@ public class GestorCampamentos {
 			
 			for(Campamento cam : this.listaCampamentos_) {
 				
-				if(cam.getId_() == idCampamento) {
+				if(cam.getId() == idCampamento) {
 					
-					for(Actividad act : cam.getListaActividad_()) {
+					for(Actividad act : cam.getListaActividad()) {
 						
-						for(Monitor mon : act.getListaMonitores_()) {
+						for(Monitor mon : act.getListaMonitores()) {
 							
 							if(mon.getId() == monitor.getId()) {
 								return false;
@@ -205,7 +202,7 @@ public class GestorCampamentos {
 					}
 					
 					if(monitor.getEspecial()) {
-						aux = cam.getListaMonitor_().add(monitor);
+						aux = cam.getListaMonitor().add(monitor);
 					}
 					
 				}
