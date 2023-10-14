@@ -289,7 +289,7 @@ public class Programa {
 							itm=itm.next();
 						}
 						if(mon==null){
-							System.out.println("No existe una actividad con ese id.");
+							System.out.println("No existe un monitor con ese id.");
 						}
 						else{
 							if(mon.getEspecial()==false){
@@ -301,51 +301,31 @@ public class Programa {
 						}
 					}
 					else if(opcion == 10) {
-						/** Recorre la lista de campamentos, encuentra el campamento, recorre la lista de
-      						* monitores, encuentra el monitor, comprueba que SÍ es de atención especial, lo asocia
-						**/
-						System.out.println("Inserte el id del campamento al que quiera asociar el monitor: ");
+						/** Coge el id campamento, encuentra el monitor ESPECIAL, los asocia **/
+						System.out.println("Inserte el id del campamento que quiera asociar: ");
 						int idc=Integer.parseInt(teclado.readLine());
-						ArrayList<Campamento> camps=campamentos.getListaCampamentos_();
-						Iterator<Campamento> itc=camps.iterator();
-						Campamento camp;
-						while(itc.hasNext()){
-							if(itc.getId()==idc){
-								camp=itc.current();
+						
+						System.out.println("Inserte el id del monitor que quiera asociar: ");
+						int idm=Integer.parseInt(teclado.readLine());
+						ArrayList<Monitor> mons=campampamentos.getListaMonitores_();
+						Iterator<Monitor> itm=mons.iterator();
+						Monitor mon;
+						while(itm.hasNext()){
+							Monitor aux=itm.next();
+							if(aux.getId()==idm){
+								mon=aux;
 							}
-							itc = itc.next();
+							itm=itm.next();
 						}
-						if(camp==null){
-							System.out.println("No existe un campamento con ese id.");
+						if(mon==null){
+							System.out.println("No existe un monitor con ese id.");
 						}
 						else{
-							System.out.println("Inserte el id del monitor que quiera asociar al campamento: ");
-							int idm=Integer.parseInt(teclado.readLine());
-							ArrayList<Monitor> mons=campamentos.getListaMonitores_();
-							Iterator<Monitor> itm=mons.iterator();
-							Monitor mon;
-							while(itm.hasNext()){
-								if(itm.getId()==idm){
-									mon=itm.current();
-								}
-								itm = itm.next();
-							}
-							if(mon==null){
-								System.out.println("No existe un monitor con ese id.");
+							if(mon.getEspecial()==true){
+									campamentos.asociarMonitorCampamento(idc,mon);
 							}
 							else{
-								if(mon.getEspecial()==false){
-									System.out.println("Para asociar un monitor no especial, seleccione la opción 9.");
-								}
-								if(mon.getEspecial()==true){
-									boolean status=camp.asociarMonitor(mon);
-									if(status==true){
-										System.out.println("Asociación procesada correctamente.");
-									}
-									else{
-										System.out.println("Hubo un error al asociar el monitor al campamento.");
-									}
-								}
+								System.out.println("Para asociar un monitor no especial, seleccione la opción 9");
 							}
 						}
 					}
