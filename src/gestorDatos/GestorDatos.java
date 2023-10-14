@@ -21,6 +21,20 @@ import monitor.Monitor;
  * */
 public class GestorDatos {
 	/**
+	 * Variable privada Singleton.
+	 */
+	private static GestorDatos instance_ = null;
+	/**
+	 * Metodo que sirve de acceso a la instancia.
+	 * @return Instancia de la clase GestorCampamentos.
+	 */
+	public static GestorDatos getInstance() {
+		if(instance_ == null) {
+			instance_ = new GestorDatos();
+		}
+		return instance_;
+	}
+	/**
 	 * Método que lee todos los asistentes del fichero pasado.
 	 * @param ruta Ruta del fichero
 	 * @return ArrayList de asistentes
