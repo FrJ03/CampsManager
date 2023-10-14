@@ -217,8 +217,9 @@ public class Programa {
 						Iterator<Monitor> itm=mons.iterator();
 						Monitor mon;
 						while(itm.hasNext()){
-							if(itm.getId()==idm){
-								mon=itm.current();
+							Monitor aux=itm.next();
+							if(aux.getId()==idm){
+								mon=aux;
 							}
 							itm = itm.next();
 						}
@@ -232,8 +233,9 @@ public class Programa {
 							Iterator<Actividad> ita=acts.iterator();
 							Actividad act;
 							while(ita.hasNext()){
-								if(ita.getId()==ida){
-									act=ita.current();
+								Actividad aux=ita.next();
+								if(aux.getId()==ida){
+									act=aux;
 								}
 								ita=ita.next();
 							}
@@ -241,104 +243,60 @@ public class Programa {
 								System.out.println("No existe una actividad con ese id.");
 							}
 							else{
-								boolean status=act.asociarMonitor(mon);
-								if(status==true){
-									System.out.println("Asociación procesada correctamente.");
-								}
-								else{
-									System.out.println("Hubo un error al asociar el monitor a la actividad.");
-								}
+								campamentos.asociarMonitorActividad(act,mon);
 							}
 						}
 					}
 					else if(opcion == 8) {
-						/** Encuentra el campamento, encuentra la actividad, los asocia **/
+						/** Coge el id campamento, encuentra la actividad, los asocia **/
 						System.out.println("Inserte el id del campamento que quiera asociar: ");
 						int idc=Integer.parseInt(teclado.readLine());
-						ArrayList<Campamento> camps=campamentos.getListaCampamentos_();
-						Iterator<Campamento> itc=camps.iterator();
-						Campamento camp;
-						while(itc.hasNext()){
-							if(itc.getId()==idc){
-								camp=itc.current();
+					
+						System.out.println("Inserte el id de la actividad que quiera asociar: ");
+						int ida=Integer.parseInt(teclado.readLine());
+						ArrayList<Actividad> acts=campampamentos.getListaActividades_();
+						Iterator<Actividad> ita=acts.iterator();
+						Actividad act;
+						while(ita.hasNext()){
+							Acticidad aux=ita.next();
+							if(aux.getId()==ida){
+								act=aux;
 							}
-							itc = itc.next();
+							ita=ita.next();
 						}
-						if(camp==null){
-							System.out.println("No existe un campamento con ese id.");
+						if(act==null){
+							System.out.println("No existe una actividad con ese id.");
 						}
 						else{
-							System.out.println("Inserte el id de la actividad que quiera asociar: ");
-							int ida=Integer.parseInt(teclado.readLine());
-							ArrayList<Actividad> acts=campampamentos.getListaActividades_();
-							Iterator<Actividad> ita=acts.iterator();
-							Actividad act;
-							while(ita.hasNext()){
-								if(ita.getId()==ida){
-									act=ita.current();
-								}
-								ita=ita.next();
-							}
-							if(act==null){
-								System.out.println("No existe una actividad con ese id.");
-							}
-							else{
-								boolean status=camp.asociarActividad(act);
-								if(status==true){
-									System.out.println("Asociación procesada correctamente.");
-								}
-								else{
-									System.out.println("Hubo un error al asociar la actividad al campamento.");
-								}
-							}
+							campamentos.asociarActividadCampamento(idc,act);
 						}
 					}
 					else if(opcion == 9) {
-						/** Recorre la lista de campamentos, encuentra el campamento, recorre la lista de
-      						* monitores, encuentra el monitor, comprueba que NO es de atención especial, lo asocia
-						**/
-						System.out.println("Inserte el id del campamento al que quiera asociar el monitor: ");
+						/** Coge el id campamento, encuentra el monitor NO ESPECIAL, los asocia **/
+						System.out.println("Inserte el id del campamento que quiera asociar: ");
 						int idc=Integer.parseInt(teclado.readLine());
-						ArrayList<Campamento> camps=campamentos.getListaCampamentos_();
-						Iterator<Campamento> itc=camps.iterator();
-						Campamento camp;
-						while(itc.hasNext()){
-							if(itc.getId()==idc){
-								camp=itc.current();
+					
+						System.out.println("Inserte el id del monitor que quiera asociar: ");
+						int idm=Integer.parseInt(teclado.readLine());
+						ArrayList<Monitor> mons=campampamentos.getListaMonitores_();
+						Iterator<Monitor> itm=mons.iterator();
+						Monitor mon;
+						while(itm.hasNext()){
+							Monitor aux=itm.next();
+							if(aux.getId()==idm){
+								mon=aux;
 							}
-							itc = itc.next();
+							itm=itm.next();
 						}
-						if(camp==null){
-							System.out.println("No existe un campamento con ese id.");
+						if(mon==null){
+							System.out.println("No existe una actividad con ese id.");
 						}
 						else{
-							System.out.println("Inserte el id del monitor que quiera asociar al campamento: ");
-							int idm=Integer.parseInt(teclado.readLine());
-							ArrayList<Monitor> mons=campamentos.getListaMonitores_();
-							Iterator<Monitor> itm=mons.iterator();
-							Monitor mon;
-							while(itm.hasNext()){
-								if(itm.getId()==idm){
-									mon=itm.current();
-								}
-								itm = itm.next();
-							}
-							if(mon==null){
-								System.out.println("No existe un monitor con ese id.");
+							if(mon.getEspecial()==false){
+								campamentos.asociarMonitorCampamento(idc,mon);
 							}
 							else{
-								if(mon.getEspecial()==true){
-									System.out.println("Para asociar un monitor especial, seleccione la opción 10.");
-								}
-								if(mon.getEspecial()==false){
-									boolean status=camp.asociarMonitor(mon);
-									if(status==true){
-										System.out.println("Asociación procesada correctamente.");
-									}
-									else{
-										System.out.println("Hubo un error al asociar el monitor al campamento.");
-									}
-								}
+								System.out.println("Para asociar un monitor especial, seleccione la opción 10");
 							}
 						}
 					}
