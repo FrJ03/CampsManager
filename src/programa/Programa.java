@@ -121,23 +121,23 @@ public class Programa {
 						}
 						Date fecha = new Date(Integer.parseInt(aux.substring(0, 3)), Integer.parseInt(aux.substring(5, 6)), Integer.parseInt(aux.substring(8, 9)));
 						nuevo.setFechaNacimiento(fecha);
-						char letra = 'a';
+						String letra = null;
 						do {
 							System.out.print("¿Necesita atención especial? (S/N): ");
 							try {
-								letra = (char)teclado.read();
+								letra = teclado.readLine();
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 								salir();
 								System.exit(0);
 							}
-							if(letra == 'S' || letra == 's')
+							if(letra == "S" || letra == "s")
 								nuevo.setEspecial(true);
-							else if(letra == 'N' || letra == 'n')
+							else if(letra == "N" || letra == "n")
 								nuevo.setEspecial(false);
 								
-						}while(letra != 'S' && letra != 'N' && letra != 's' && letra != 'n');
+						}while(letra != "S" && letra != "N" && letra != "s" && letra != "n");
 						asistentes.darAltaAsistente(nuevo);
 					}
 					else if(opcion == 3) {
@@ -192,24 +192,24 @@ public class Programa {
 							System.exit(0);
 						}
 						Date fecha = new Date(Integer.parseInt(aux.substring(0, 3)), Integer.parseInt(aux.substring(5, 6)), Integer.parseInt(aux.substring(8, 9)));
-						char letra = 'a';
+						String letra = null;
 						boolean especial = false;
 						do {
 							System.out.print("¿Necesita atención especial? (S/N): ");
 							try {
-								letra = (char)teclado.read();
+								letra = teclado.readLine();
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 								salir();
 								System.exit(0);
 							}
-							if(letra == 'S' || letra == 's')
+							if(letra == "S" || letra == "s")
 								especial = true;
-							else if(letra == 'N' || letra == 'n')
+							else if(letra == "N" || letra == "n")
 								especial = false;
 								
-						}while(letra != 'S' && letra != 'N' && letra != 's' && letra != 'n');
+						}while(letra != "S" && letra != "N" && letra != "s" && letra != "n");
 						asistentes.modificarAsistente(idAntiguo, idNuevo, nombre, apellidos, fecha, especial);
 					}
 					else if(opcion == 4) {
@@ -315,26 +315,26 @@ public class Programa {
 							}while(!dateValid(year, month, day));							
 							fechaFin = LocalDate.of(year, month, day);
 						}while(fechaFin.compareTo(fechaInicio) <= 0);
-						char n = 'b';
+						String n = null;
 						Nivel nivel = null;
 						do {
 							System.out.print("Indique para quién va dirigido (I (Infantil) / J (Juvenil) / A (Adolescente)): ");
 							try {
-								n = (char)teclado.read();
+								n = teclado.readLine();
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 								salir();
 								System.exit(0);
 							}
-							if(n == 'I' || n == 'i')
+							if(n == "I" || n == "i")
 								nivel = Nivel.Infantil;
-							else if(n == 'J' || n == 'j')
+							else if(n == "J" || n == "j")
 								nivel = Nivel.Juvenil;
-							else if(n == 'A' || n == 'a')
+							else if(n == "A" || n == "a")
 								nivel = Nivel.Adolescente;
 								
-						}while(n != 'I' && n != 'i' && n != 'J' && n != 'j' && n != 'A' && n != 'a');
+						}while(n != "I" && n != "i" && n != "J" && n != "j" && n != "A" && n != "a");
 						int max = 0;
 						do {
 							System.out.print("Inserte el número máximo de participantes: ");
@@ -360,26 +360,26 @@ public class Programa {
 							salir();
 							System.exit(0);
 						}
-						char n = 'b';
+						String n = null;
 						Nivel nivel = null;
 						do {
 							System.out.print("Indique para quién va dirigido (I (Infantil) / J (Juvenil) / A (Adolescente)): ");
 							try {
-								n = (char)teclado.read();
+								n = teclado.readLine();
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 								salir();
 								System.exit(0);
 							}
-							if(n == 'I' || n == 'i')
+							if(n == "I" || n == "i")
 								nivel = Nivel.Infantil;
-							else if(n == 'J' || n == 'j')
+							else if(n == "J" || n == "j")
 								nivel = Nivel.Juvenil;
-							else if(n == 'A' || n == 'a')
+							else if(n == "A" || n == "a")
 								nivel = Nivel.Adolescente;
 								
-						}while(n != 'I' && n != 'i' && n != 'J' && n != 'j' && n != 'A' && n != 'a');
+						}while(n != "I" && n != "i" && n != "J" && n != "j" && n != "A" && n != "a");
 						int maxP = 0;
 						do {
 							System.out.print("Inserte el número máximo de participantes: ");
@@ -404,23 +404,23 @@ public class Programa {
 								System.exit(0);
 							}
 						}while(maxM < 1);
-						char t = 'a';
+						String t = null;
 						Turno turno = null;
 						do {
-							System.out.print("¿La actividad se realizará por la mañana o por la tarde?: ");
+							System.out.print("¿La actividad se realizará por la mañana (M) o por la tarde (T)?: ");
 							try {
-								t = (char) teclado.read();
+								t = teclado.readLine();
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 								salir();
 								System.exit(0);
 							}
-							if(t == 'T' || t == 't')
+							if(t == "T" || t == "t")
 								turno = Turno.Tarde;
-							else if(t == 'M' || t == 'm')
+							else if(t == "M" || t == "m")
 								turno = Turno.Mañana;
-						}while (t != 'M' && t != 'm' && t != 'T' && t != 't');
+						}while (t != "M" && t != "m" && t != "T" && t != "t");
 						Actividad actividad = new Actividad(-1, nombre, nivel, maxP, maxM, turno);
 						campamentos.crearActividad(actividad);
 					}
@@ -444,23 +444,23 @@ public class Programa {
 							salir();
 							System.exit(0);
 						}
-						char letra = 'a';
+						String letra = null;
 						do {
 							System.out.print("¿Necesita atención especial? (S/N): ");
 							try {
-								letra = (char)teclado.read();
+								letra = teclado.readLine();
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 								salir();
 								System.exit(0);
 							}
-							if(letra == 'S' || letra == 's')
+							if(letra == "S" || letra == "s")
 								nuevo.setEspecial(true);
-							else if(letra == 'N' || letra == 'n')
+							else if(letra == "N" || letra == "n")
 								nuevo.setEspecial(false);
 								
-						}while(letra != 'S' && letra != 'N' && letra != 's' && letra != 'n');
+						}while(letra != "S" && letra != "N" && letra != "s" && letra != "n");
 						campamentos.crearMonitor(nuevo);
 					}
 					else if(opcion == 7) {
