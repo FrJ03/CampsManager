@@ -352,7 +352,42 @@ public class Programa {
 						
 					}
 					else if(opcion == 4) {
+						/** Realiza una inscripción completa **/
+						ArrayList<Asistente> asists=asistentes.getListaAsistente_();
+						InscripcionCompleta nuevo=new InscripcionCompleta();
+						System.out.println("Introduce el id del participante: ");
+						nuevo.setIdParticipante(teclado.readLine());
+						System.out.println("Introduce el id del campamento: ");
+						int idc=Integer.parseInt(teclado.readLine());
+						nuevo.setIdCampamento(idc);
 						
+						ArrayList<Campamento> camps=campamentos.getListaCampamentos_();
+						Iterator<Campamento> itc=camps.iterator();
+						Campamento camp;
+						while(itc.hasNext()){
+							Campamento aux=itc.next();
+							if(aux.getId()==idc){
+								camp=aux;
+							}
+							itc=itc.next();
+						}
+						if(camp==null){
+							System.out.println("El campamento no existe.");
+						}
+						else{
+							LocalDate fecha=camp.getInicioCampamento_();
+
+							float pre=calcularPrecio(nuevo, camps);
+							nuevo.setPrecio(pre);
+							
+							boolean status=inscripciones.realizarRegistro(nuevo,fecha,asists);
+							if(status==true){
+								System.out.println("Registro realizado correctamente.");
+							}
+							else{
+								System.out.println("Hubo un error.");
+							}
+						}
 					}
 					else if(opcion == 5) {
 						/** Asigna precio a una inscripción y comprueba que se ha realizado correctamente **/
