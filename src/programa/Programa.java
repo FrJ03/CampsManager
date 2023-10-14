@@ -30,7 +30,7 @@ public class Programa {
 				do {
 					opcion = menuGestorAsistentes();
 					if(opcion == 1) {
-						ArrayList<Asistente> listaAsistentes = asistentes.getListaAsistente_();
+						ArrayList<Asistente> listaAsistentes = asistentes.getListaAsistente();
 						for(Asistente asistente : listaAsistentes) {
 							System.out.println(asistente.toString());
 						}
@@ -56,7 +56,7 @@ public class Programa {
 								nuevo.setEspecial(false);
 								
 						}while(letra != 'S' && letra != 'N' && letra != 's' && letra != 'n');
-						asistentes.DarAltaAsistente(nuevo);
+						asistentes.darAltaAsistente(nuevo);
 					}
 					else if(opcion == 3) {
 						System.out.print("Inserte el id del asistente a modificar: ");
@@ -81,10 +81,10 @@ public class Programa {
 								especial = false;
 								
 						}while(letra != 'S' && letra != 'N' && letra != 's' && letra != 'n');
-						asistentes.ModificarAsistente(idAntiguo, idNuevo, nombre, apellidos, fecha, especial);
+						asistentes.modificarAsistente(idAntiguo, idNuevo, nombre, apellidos, fecha, especial);
 					}
 					else if(opcion == 4) {
-						System.out.println(asistentes.ListaAsistencia());						
+						System.out.println(asistentes.listaAsistencia());						
 					}
 					else if(opcion == 5) 
 						System.out.println("Volviendo al menú principal..............");
@@ -96,13 +96,13 @@ public class Programa {
 				do {
 					opcion = menuGestorCampamentos();
 					if(opcion == 1) {
-						System.out.println(campamentos.getListaCampamentos_());
+						System.out.println(campamentos.getListaCampamentos());
 					}
 					else if(opcion == 2) {
-						System.out.println(campamentos.getListaActividades_());
+						System.out.println(campamentos.getListaActividades());
 					}
 					else if(opcion == 3) {
-						System.out.println(campamentos.getListaMonitores_());
+						System.out.println(campamentos.getListaMonitores());
 					}
 					else if(opcion == 4) {
 						//Seleccionar id
@@ -214,7 +214,7 @@ public class Programa {
 						/** Encuentra el monitor, encuentra la actividad, los asocia **/
 						System.out.println("Inserte el id del monitor que quiera asociar a la actividad: ");
 						int idm=Integer.parseInt(teclado.readLine());
-						ArrayList<Monitor> mons=campamentos.getListaMonitores_();
+						ArrayList<Monitor> mons=campamentos.getListaMonitores();
 						Monitor monitor = null;
 						for(Monitor aux : mons)
 							if(aux.getId() == idm)
@@ -223,12 +223,12 @@ public class Programa {
 							System.out.println("No existe un monitor con ese id.");
 						}
 						else{
-							System.out.println("Inserte el nombre de la actividad que quiera asociar al monitor: ");
-							String ida=teclado.readLine();
-							ArrayList<Actividad> acts=campamentos.getListaActividades_();
+							System.out.println("Inserte el identificador de la actividad que quiera asociar al monitor: ");
+							int ida=Integer.parseInt(teclado.readLine());
+							ArrayList<Actividad> acts=campamentos.getListaActividades();
 							Actividad actividad = null;
 							for (Actividad aux : acts)
-								if(aux.getName_() == ida)
+								if(aux.getId() == ida)
 									actividad = aux;
 							if(actividad==null){
 								System.out.println("No existe una actividad con ese id.");
@@ -243,11 +243,11 @@ public class Programa {
 						System.out.println("Inserte el id del campamento que quiera asociar: ");
 						int idc=Integer.parseInt(teclado.readLine());
 						System.out.println("Inserte el id de la actividad que quiera asociar: ");
-						String ida=teclado.readLine();
-						ArrayList<Actividad> acts=campamentos.getListaActividades_();
+						int ida=Integer.parseInt(teclado.readLine());
+						ArrayList<Actividad> acts=campamentos.getListaActividades();
 						Actividad actividad = null;
-						for(Actividad aux : acts)
-							if(aux.getName_() == ida)
+						for (Actividad aux : acts)
+							if(aux.getId() == ida)
 								actividad = aux;
 						if(actividad==null){
 							System.out.println("No existe una actividad con ese id.");
@@ -263,7 +263,7 @@ public class Programa {
 					
 						System.out.println("Inserte el id del monitor que quiera asociar: ");
 						int idm=Integer.parseInt(teclado.readLine());
-						ArrayList<Monitor> mons=campamentos.getListaMonitores_();
+						ArrayList<Monitor> mons=campamentos.getListaMonitores();
 						Monitor monitor = null;
 						for(Monitor aux : mons)
 							if(aux.getId() == idm)
@@ -287,7 +287,7 @@ public class Programa {
 						
 						System.out.println("Inserte el id del monitor que quiera asociar: ");
 						int idm=Integer.parseInt(teclado.readLine());
-						ArrayList<Monitor> mons=campamentos.getListaMonitores_();
+						ArrayList<Monitor> mons=campamentos.getListaMonitores();
 						Monitor monitor = null;
 						for(Monitor aux : mons)
 							if(aux.getId() == idm)
@@ -314,18 +314,18 @@ public class Programa {
 				do {
 					opcion = menuGestorInscripciones();
 					if(opcion == 1) {
-						ArrayList<InscripcionParcial> lista = inscripciones.getListaInscripcionParcial_();
+						ArrayList<InscripcionParcial> lista = inscripciones.getListaInscripcionParcial();
 						for (InscripcionParcial inscripcion : lista)
 							System.out.println(inscripcion.toString());
 					}
 					else if(opcion == 2) {
-						ArrayList<InscripcionCompleta> lista = inscripciones.getListaInscripcionCompleta_();
+						ArrayList<InscripcionCompleta> lista = inscripciones.getListaInscripcionCompleta();
 						for (InscripcionCompleta inscripcion : lista)
 							System.out.println(inscripcion.toString());
 					}
 					else if(opcion == 3) {
 						/** Realiza una inscripción parcial **/
-						ArrayList<Asistente> asists=asistentes.getListaAsistente_();
+						ArrayList<Asistente> asists=asistentes.getListaAsistente();
 						InscripcionParcial nuevo=new InscripcionParcial();
 						System.out.println("Introduce el id del participante: ");
 						nuevo.setIdParticipante(Integer.parseInt(teclado.readLine()));
@@ -333,17 +333,17 @@ public class Programa {
 						int idc=Integer.parseInt(teclado.readLine());
 						nuevo.setIdCampamento(idc);
 						
-						ArrayList<Campamento> camps=campamentos.getListaCampamentos_();
+						ArrayList<Campamento> camps=campamentos.getListaCampamentos();
 						Campamento campamento = null;
 						for(Campamento aux : camps)
-							if(aux.getId_() == idc)
+							if(aux.getId() == idc)
 								campamento = aux;
 								
 						if(campamento==null){
 							System.out.println("El campamento no existe.");
 						}
 						else{
-							LocalDate fecha=campamento.getIniciocampamento_();
+							LocalDate fecha=campamento.getInicioCampamento();
 							
 							float pre= inscripciones.asignarPrecio(idc, nuevo.getIdParticipante(), camps);
 							nuevo.setPrecio(pre);
@@ -359,7 +359,7 @@ public class Programa {
 					}
 					else if(opcion == 4) {
 						/** Realiza una inscripción completa **/
-						ArrayList<Asistente> asists=asistentes.getListaAsistente_();
+						ArrayList<Asistente> asists=asistentes.getListaAsistente();
 						InscripcionCompleta nuevo=new InscripcionCompleta();
 						System.out.println("Introduce el id del participante: ");
 						nuevo.setIdParticipante(Integer.parseInt(teclado.readLine()));
@@ -367,17 +367,17 @@ public class Programa {
 						int idc=Integer.parseInt(teclado.readLine());
 						nuevo.setIdCampamento(idc);
 						
-						ArrayList<Campamento> camps=campamentos.getListaCampamentos_();
+						ArrayList<Campamento> camps=campamentos.getListaCampamentos();
 						Campamento campamento = null;
 						for(Campamento aux : camps)
-							if(aux.getId_() == idc)
+							if(aux.getId() == idc)
 								campamento = aux;
 								
 						if(campamento==null){
 							System.out.println("El campamento no existe.");
 						}
 						else{
-							LocalDate fecha=campamento.getIniciocampamento_();
+							LocalDate fecha=campamento.getInicioCampamento();
 
 							float pre= inscripciones.asignarPrecio(idc, nuevo.getIdParticipante(), camps);
 							nuevo.setPrecio(pre);
@@ -397,7 +397,7 @@ public class Programa {
 						int idc=Integer.parseInt(teclado.readLine());
 						System.out.println("Introduzca el id del participante asociado a la inscripcion: ");
 						int idp=Integer.parseInt(teclado.readLine());
-						ArrayList<Campamento> camps=campamentos.getListaCampamentos_();
+						ArrayList<Campamento> camps=campamentos.getListaCampamentos();
 						
 						int resultado= inscripciones.asignarPrecio(idc, idp, camps);
 						if(resultado==0){
@@ -409,7 +409,7 @@ public class Programa {
 					}
 					else if(opcion == 6) {
 						
-						System.out.println(inscripciones.obtenerCampamentosDisponibles(campamentos.getListaCampamentos_()));
+						System.out.println(inscripciones.obtenerCampamentosDisponibles(campamentos.getListaCampamentos()));
 					}
 					else if(opcion == 7) 
 						System.out.println("Volviendo al menú principal..............");
