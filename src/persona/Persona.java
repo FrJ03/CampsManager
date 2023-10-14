@@ -1,10 +1,15 @@
 package persona;
 
-	/**
+import java.io.Serializable;
+
+/**
 	* Clase que representa a una persona
  	@author Lucía Téllez López
 	**/
-public class Persona {
+public class Persona implements Serializable{
+	/**Método que indica la versión de la clase que se va a serializar.
+	 */
+		private static final long serialVersionUID = 1L;
 	/**
 	* Identificador de la persona, de tipo entero
 	**/
