@@ -1,6 +1,7 @@
 package gestorAsistentes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import asistente.Asistente;
 
@@ -48,7 +49,7 @@ public class GestorAsistentes {
 	 * @return void.
 	 */
 	public void setListaAsistentes_(ArrayList<Asistente> listaAsistentes){
-		this.listaAsistente_=listaAsistentes;
+		this.listaAsistente_ = listaAsistentes;
 	}
 	/**
 	 * Metodo que añade a la lista de asistente un nuevo asistente pasado como argumento, comprobando si no estaba registrado. Si estaba registrado devuelve false y si no lo estaba true
@@ -57,11 +58,12 @@ public class GestorAsistentes {
 	 */
 	public boolean DarAltaAsistente(Asistente asistente) {	
 		for(int aux=0;aux<listaAsistente_.size();aux++) {
-			if(listaAsistente_.get(aux).get_id()==asistente.get_id()) {
+			if(listaAsistente_.get(aux).getId()==asistente.getId()) {
 				return false;//Error, el asistente ya está inscrito
 			}		
 		}
 		this.listaAsistente_.add(asistente);
+		Collections.sort(this.listaAsistente_);
 		return true;//Se ha registrado correctamente ya que no estaba inscrito
 	}
 	/**
@@ -76,10 +78,10 @@ public class GestorAsistentes {
 	 */
 	public void ModificarAsistente(int id_antiguo, int id_nuevo, String nombre, String apellidos, Date fechaNacimiento,boolean especial){
 		for(int aux=0;aux<listaAsistente_.size();aux++) {
-			if(listaAsistente_.get(aux).get_id()==id_antiguo) {
-				listaAsistente_.get(aux).set_id(id_nuevo);
-				listaAsistente_.get(aux).set_nombre(nombre);
-				listaAsistente_.get(aux).set_apellidos(apellidos);
+			if(listaAsistente_.get(aux).getId()==id_antiguo) {
+				listaAsistente_.get(aux).setId(id_nuevo);
+				listaAsistente_.get(aux).setNombre(nombre);
+				listaAsistente_.get(aux).setApellidos(apellidos);
 				listaAsistente_.get(aux).setFechaNacimiento(fechaNacimiento);
 				listaAsistente_.get(aux).setEspecial(especial);
 				aux=listaAsistente_.size();

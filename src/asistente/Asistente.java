@@ -7,7 +7,7 @@ import persona.Persona;
  * Clase que representa a un asistente al campamento
  * @author Francisco José Mellado Ortiz
  */
- public class Asistente extends Persona{
+ public class Asistente extends Persona implements Comparable<Asistente>{
      
 	 /**
 	  * Representa si el asistente necesita atención especial
@@ -72,8 +72,8 @@ import persona.Persona;
       * Grupo Especial: (Si/No)\n
       */
      public String toString() {
-    	 String ret ="Id: " + this.get_id()+ 
-    			 	"\nNombre Completo: " + this.get_nombre_completo()+ 
+    	 String ret ="Id: " + this.getId()+ 
+    			 	"\nNombre Completo: " + this.getNombreCompleto()+ 
     			 	"\nFecha de Nacimiento: " + this.fechaNacimiento.toString() + 
     			 	"\nGrupo Especial: ";
     	 if(this.especial) {
@@ -83,5 +83,15 @@ import persona.Persona;
     		 ret.concat("No\n");
     	 }
     	 return ret;
+     }
+     @Override
+     public int compareTo(Asistente a) {
+		if(a.getId() > this.getId())
+			return -1;
+		else if(a.getId() > this.getId()) 
+			return 1;
+		else 
+			return 0;
+    	 
      }
  };

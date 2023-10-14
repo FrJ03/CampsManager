@@ -148,7 +148,7 @@ public class Actividad	{
 				"\nTurno:" + this.turno_ + "\nNumero maximo de participantes:" + this.participantesMax_ + 
 				"\nNumero de monitores:" + this.monitoresMax_ + "\n";
 		for(Monitor mon : this.listaMonitores_) {
-			aux.concat(mon.get_nombre() + mon.get_apellidos());
+			aux.concat(mon.getNombre() + mon.getApellidos());
 		}
 		
 		return aux;

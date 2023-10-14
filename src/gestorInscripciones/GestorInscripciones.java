@@ -110,7 +110,7 @@ public class GestorInscripciones {
 		//Comprobamos si el asistente necesita atención especial.
 		for(Asistente as : listaAsistentes) {
 					
-			if(as.get_id() == inscripcion.getIdParticipante()) {
+			if(as.getId() == inscripcion.getIdParticipante()) {
 				return as.getEspecial();
 			}
 						
@@ -162,7 +162,7 @@ public class GestorInscripciones {
 		//Comprobamos si el asistente necesita atención especial.
 		for(Asistente as : listaAsistentes) {
 			
-			if(as.get_id() == inscripcion.getIdParticipante()) {
+			if(as.getId() == inscripcion.getIdParticipante()) {
 				return as.getEspecial();
 			}
 			

@@ -10,7 +10,7 @@ import monitor.Monitor;
  * Clase que representa  la organización de un conjunto de actividades durante un periodo de tiempo limitado
  * @author Manuel García Obrero
  */
- public class Campamento {
+ public class Campamento implements Comparable<Campamento>{
      
 	/**
 	  * Representa el identificador del campamento
@@ -188,7 +188,7 @@ import monitor.Monitor;
 		
 		
 		for(Monitor mon : this.listaMonitor_) {
-			aux.concat(mon.get_nombre() + mon.get_apellidos());
+			aux.concat(mon.getNombre() + mon.getApellidos());
 		}
 		
 		for(Actividad act : this.listaActividad_) {
@@ -230,7 +230,7 @@ import monitor.Monitor;
 			for(int i=0; i< listaActividad_.size(); i++) {
 				ArrayList<Monitor> ListaMonitores = listaActividad_.get(i).getListaMonitores_();
 				for(int x=0;x<ListaMonitores.size();x++) {
-					if(ListaMonitores.get(x).get_nombre_completo()==mon.get_nombre_completo()) {
+					if(ListaMonitores.get(x).getNombreCompleto()==mon.getNombreCompleto()) {
 						return false;//Error, el monitor no es un monitor de atencion especial
 					}
 				}	
@@ -240,4 +240,14 @@ import monitor.Monitor;
 		}
 		return false;//Error, el monitor no es un monitor de atencion especial
 	}
+	@Override
+    public int compareTo(Campamento c) {
+		if(c.getId_() > this.getId_())
+			return -1;
+		else if(c.getId_() > this.getId_()) 
+			return 1;
+		else 
+			return 0;
+   	 
+    }
 }

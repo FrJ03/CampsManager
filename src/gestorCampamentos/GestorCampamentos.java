@@ -1,6 +1,8 @@
 package gestorCampamentos;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 import actividad.Actividad;
 import campamento.Campamento;
 import monitor.Monitor;
@@ -96,6 +98,7 @@ public class GestorCampamentos {
 		 */
 		public void crearMonitor(Monitor monitor) {	
 			this.listaMonitores_.add(monitor);
+			Collections.sort(this.listaMonitores_);
 		}
 		/**
 		 * Metodo que añade a la lista de actividades una nueva actividad pasada como argumento.
@@ -111,6 +114,7 @@ public class GestorCampamentos {
 		 */
 		public void crearCampamento(Campamento campamento) {
 	        this.listaCampamentos_.add(campamento);
+	        Collections.sort(this.listaCampamentos_);
 		}
 		/**
 		 * Metodo para asociar una actividad a un monitor.
@@ -160,7 +164,7 @@ public class GestorCampamentos {
 						
 						for(Monitor mon : act.getListaMonitores_()) {
 							
-							if(mon.get_id() == monitor.get_id()) {
+							if(mon.getId() == monitor.getId()) {
 								cam.asociarMonitor(monitor);
 								aux = true;
 							}
@@ -192,7 +196,7 @@ public class GestorCampamentos {
 						
 						for(Monitor mon : act.getListaMonitores_()) {
 							
-							if(mon.get_id() == monitor.get_id()) {
+							if(mon.getId() == monitor.getId()) {
 								return false;
 							}
 							

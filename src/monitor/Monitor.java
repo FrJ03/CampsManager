@@ -5,7 +5,7 @@ import persona.Persona;
 /**Esta  clase  representa  a  una  persona  que  se  encarga  de  dirigir  las  actividades  que  suceden  en  el  campamento
  * @author Francisco José Mellado Ortiz
  */
-public class Monitor extends Persona{
+public class Monitor extends Persona implements Comparable<Monitor>{
 	
 /**Representa si el educador esta cualificado para monitorizar actividades donde participen asistentes con necesidades especiales
  */
@@ -49,8 +49,8 @@ public void setEspecial(boolean especial) {
  * Grupo Especial: (Si/No)\n
  */
 public String toString() {
-	 String ret ="Id: " + this.get_id() + 
-			 	"\nNombre Completo: " + this.get_nombre_completo()+ 
+	 String ret ="Id: " + this.getId() + 
+			 	"\nNombre Completo: " + this.getNombreCompleto()+ 
 			 	"\nGrupo especial: ";
 	 if(this.especial) {
 		 ret.concat("Si\n");
@@ -60,5 +60,14 @@ public String toString() {
 	 }
 	 return ret;
 }
-
+@Override
+public int compareTo(Monitor m) {
+	if(m.getId() > this.getId())
+		return -1;
+	else if(m.getId() > this.getId()) 
+		return 1;
+	else 
+		return 0;
+	 
+}
 }
