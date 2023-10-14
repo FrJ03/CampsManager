@@ -22,7 +22,7 @@ import inscripcion.InscripcionParcial;
 import monitor.Monitor;
 
 public class Programa {
-	private static String dir_ = "../../rutas.txt";
+	private static String dir_ = "rutas.txt";
 	
 	public static void main(String args[]){
 		int opcion = 0;

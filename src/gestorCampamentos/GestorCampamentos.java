@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import actividad.Actividad;
+import asistente.Asistente;
 import campamento.Campamento;
 import monitor.Monitor;
 
@@ -32,9 +33,12 @@ public class GestorCampamentos {
 		 * Constructor privado que crea una lista de campamentos, monitores y actividades vacia.
 		 */
 		private GestorCampamentos() {
-			this.listaCampamentos_.clear();
+			this.listaActividades_ = new ArrayList<Actividad>();
+			this.listaCampamentos_ = new ArrayList<Campamento>();
+			this.listaMonitores_ = new ArrayList<Monitor>();
+			/*this.listaCampamentos_.clear();
 			this.listaMonitores_.clear();
-			this.listaActividades_.clear();
+			this.listaActividades_.clear();*/
 		};
 		/**
 		 * Metodo que sirve de acceso a la instancia.

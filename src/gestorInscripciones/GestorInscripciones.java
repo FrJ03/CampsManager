@@ -36,6 +36,10 @@ public class GestorInscripciones {
 		}
 		return instance_;
 	}
+	private GestorInscripciones() {
+		this.listaInscripcionCompleta_ = new ArrayList<InscripcionCompleta>();
+		this.listaInscripcionParcial_ = new ArrayList<InscripcionParcial>();
+	}
 	/**
 	 * Método que devuelve la lista de InscripcionesParciales del gestor.
 	 * @return ArrayList<InscripcionParcial>.

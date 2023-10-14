@@ -24,7 +24,8 @@ public class GestorAsistentes {
 	 * Constructor privado que crea una lista de asistente vacia.
 	 */
 	private GestorAsistentes() {
-		this.listaAsistente_.clear();
+		this.listaAsistente_ = new ArrayList<Asistente>();
+		//this.listaAsistente_.clear();
 	};
 	/**
 	 * Metodo que sirve de acceso a la instancia.
