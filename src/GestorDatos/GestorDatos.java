@@ -1,8 +1,10 @@
 package GestorDatos;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import actividad.Actividad;
@@ -13,159 +15,240 @@ import inscripcion.InscripcionParcial;
 import monitor.Monitor;
 
 /**
- * Clase diseñada para interactuar con los datos permanentes
+ * Clase diseñada para interactuar con los datos permanentes.
  * @author Francisco José Mellado Ortiz
+ * @author Enrique de los Reyes Montilla
  * */
 public class GestorDatos {
 	/**
-	 * Función que lee todos los asistentes del fichero pasado. Cada línea corresponde con un asistente.
+	 * Método que lee todos los asistentes del fichero pasado.
 	 * @param ruta Ruta del fichero
 	 * @return ArrayList de asistentes
-	 * @throws IOException
+	 * @throws IOException, ClassNotFoundException
 	 */
-	public ArrayList<Asistente> getAsistentes(String ruta) throws IOException{
+	public ArrayList<Asistente> getAsistentes(String ruta) throws IOException, ClassNotFoundException{
 		ArrayList<Asistente> list = new ArrayList<Asistente>();
-		BufferedReader br = new BufferedReader(new FileReader(ruta));
-		String line;
-		while((line = br.readLine()) != null) {
-			list.add(readLineAsistente(line));
-		}
-		br.close();
+		try {
+            // Crea un ObjectInputStream y lo conecta a un FileInputStream
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(ruta));
+
+            // Lee la lista de Asistentees desde el archivo
+             list  = (ArrayList<Asistente>) inputStream.readObject();
+
+
+            // Cierra el flujo
+            inputStream.close();
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+		
 		return list;
 	}
 	/**
-	 * Función que lee todos los monitores del fichero pasado. Cada línea corresponde con un monitor.
+	 * Método que lee todos los monitores del fichero pasado.
 	 * @param ruta Ruta del fichero
 	 * @return ArrayList de monitores
 	 * @throws IOException
 	 */
-	public ArrayList<Monitor> getMonitores(String ruta) throws IOException{
-		BufferedReader br = new BufferedReader(new FileReader(ruta));
+	public ArrayList<Monitor> getMonitores(String ruta) throws IOException, ClassNotFoundException{
 		ArrayList<Monitor> list = new ArrayList<Monitor>();
-		String line;
-		while((line = br.readLine()) != null) {
-			list.add(readLineMonitor(line));
-		}
-		br.close();
+		try {
+            // Crea un ObjectInputStream y lo conecta a un FileInputStream
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(ruta));
+
+            // Lee la lista de Monitores desde el archivo
+             list  = (ArrayList<Monitor>) inputStream.readObject();
+
+
+            // Cierra el flujo
+            inputStream.close();
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+		
 		return list;
+
 	}
 	/**
-	 * Función que lee todos los campamentos del fichero pasado. Cada línea corresponde con un campamento.
+	 * Método que lee todos los campamentos del fichero pasado.
 	 * @param ruta Ruta del fichero
 	 * @return ArrayList de campamentos
 	 * @throws IOException
 	 */
-	public ArrayList<Campamento> getCampamentos(String ruta) throws IOException{
-		BufferedReader br = new BufferedReader(new FileReader(ruta));
+	public ArrayList<Campamento> getCampamentos(String ruta) throws IOException, ClassNotFoundException{
 		ArrayList<Campamento> list = new ArrayList<Campamento>();
-		String line;
-		while((line = br.readLine()) != null) {
-			list.add(readLineCampamento(line));
-		}
-		br.close();
+		try {
+            // Crea un ObjectInputStream y lo conecta a un FileInputStream
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(ruta));
+
+            // Lee la lista de Campamentos desde el archivo
+             list  = (ArrayList<Campamento>) inputStream.readObject();
+
+
+            // Cierra el flujo
+            inputStream.close();
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+		
 		return list;
+
 	}
+	
+
 	/**
-	 * Función que lee todos las actividades del fichero pasado. Cada línea corresponde con una actividad.
+	 * Método que lee todos las actividades del fichero pasado.
 	 * @param ruta Ruta del fichero
 	 * @return ArrayList de actividades
 	 * @throws IOException
 	 */
-	public ArrayList<Actividad> getActividades(String ruta) throws IOException{
-		BufferedReader br = new BufferedReader(new FileReader(ruta));
+	public ArrayList<Actividad> getActividades(String ruta) throws IOException, ClassNotFoundException{
 		ArrayList<Actividad> list = new ArrayList<Actividad>();
-		String line;
-		while((line = br.readLine()) != null) {
-			list.add(readLineActividad(line));
-		}
-		br.close();
+		try {
+            // Crea un ObjectInputStream y lo conecta a un FileInputStream
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(ruta));
+
+            // Lee la lista de Actividades desde el archivo
+             list  = (ArrayList<Actividad>) inputStream.readObject();
+
+
+            // Cierra el flujo
+            inputStream.close();
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+		
 		return list;
+
 	}
 	/**
-	 * Función que lee todos las inscripciones completas del fichero pasado. Cada línea corresponde con una inscripción.
+	 * Método que lee todos las inscripciones completas del fichero pasado.
 	 * @param ruta Ruta del fichero
 	 * @return ArrayList de inscripciones completas
 	 * @throws IOException
 	 */
-	public ArrayList<InscripcionCompleta> getInscripcionesCompletas(String ruta) throws IOException{
-		BufferedReader br = new BufferedReader(new FileReader(ruta));
+	public ArrayList<InscripcionCompleta> getInscripcionesCompletas(String ruta) throws IOException, ClassNotFoundException{
 		ArrayList<InscripcionCompleta> list = new ArrayList<InscripcionCompleta>();
-		String line;
-		while((line = br.readLine()) != null) {
-			list.add(readLineInscripcionCompleta(line));
-		}
-		br.close();
+		try {
+            // Crea un ObjectInputStream y lo conecta a un FileInputStream
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(ruta));
+
+            // Lee la lista de InscripcionCompletas desde el archivo
+             list  = (ArrayList<InscripcionCompleta>) inputStream.readObject();
+
+
+            // Cierra el flujo
+            inputStream.close();
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+		
 		return list;
+
 	}
 	/**
-	 * Función que lee todos las inscripciones parciales del fichero pasado. Cada línea corresponde con una inscripción.
+	 * Método que lee todos las inscripciones parciales del fichero pasado.
 	 * @param ruta Ruta del fichero
 	 * @return ArrayList de inscripciones parciales
 	 * @throws IOException
 	 */
-	public ArrayList<InscripcionParcial> getInscripcionesTardias(String ruta) throws IOException{
-		BufferedReader br = new BufferedReader(new FileReader(ruta));
+	public ArrayList<InscripcionParcial> getInscripcionesParciales(String ruta) throws IOException, ClassNotFoundException{
 		ArrayList<InscripcionParcial> list = new ArrayList<InscripcionParcial>();
-		String line;
-		while((line = br.readLine()) != null) {
-			list.add(readLineInscripcionParcial(line));
-		}
-		br.close();
+		try {
+            // Crea un ObjectInputStream y lo conecta a un FileInputStream
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(ruta));
+
+            // Lee la lista de InscripcionesParciales desde el archivo
+             list  = (ArrayList<InscripcionParcial>) inputStream.readObject();
+
+
+            // Cierra el flujo
+            inputStream.close();
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+		
 		return list;
 	}
+
 	/**
-	 * Función que convierte una línea de información en un objeto de la clase Asistente. La estructura de la línea es:'id' 'nombre' 'apellidos' 'fecha de nacimiento' 'especial'.
-	 * @param line Línea de información.
-	 * @return Asistente
+	 *  Método que guarda la lista de asistentes en un fichero.
+	 * @param ruta Cadena con la ruta del fichero.
+	 * @param lista ArrayList con la informacion de los asistentes que se desean guardar.
 	 */
-	private static Asistente readLineAsistente(String line) {
-		Asistente elemento = new Asistente();
-		
-		return elemento;
+	public void setAsistentes(String ruta, ArrayList<Asistente> lista) throws IOException{
+		try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(ruta))) {
+            outputStream.writeObject(lista);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 	/**
-	 * Función que convierte una línea de información en un objeto de la clase Monitor. La estructura de la línea es:'id' 'nombre' 'apellidos' 'especial'.
-	 * @param line Línea de información.
-	 * @return Monitor
+	 * Método que guarda la lista de monitores en un fichero.
+	 * @param ruta Cadena con la ruta del fichero.
+	 * @param lista ArrayList con la informacion de los monitores que se desean guardar.
 	 */
-	private static Monitor readLineMonitor(String line) {
-		Monitor elemento = new Monitor();
-		return elemento;
+	public void setMonitores(String ruta, ArrayList<Monitor> lista) throws IOException{
+		try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(ruta))) {
+            outputStream.writeObject(lista);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 	/**
-	 * Función que convierte una línea de información en un objeto de la clase Campamento. La estructura de la línea es:'id' 'inicio' 'fin' 'nivel' 'capacidad' 'actividad1'&'actividad2'&'...'&'actividadN' 'monitor1'&'monitor2'&'...'&'monitorN'. Los datos de los monitores y actividades se separan con '%'
-	 * @param line Línea de información.
-	 * @return Campamento
+	 * Método que guarda la lista de campamentos en un fichero.
+	 * @param ruta Cadena con la ruta del fichero.
+	 * @param lista ArrayList con la informacion de los campamentos que se desean guardar.
 	 */
-	private static Campamento readLineCampamento(String line) {
-		Campamento elemento = new Campamento();
-		return elemento;
+	public void setCampamentos(String ruta, ArrayList<Campamento> lista) throws IOException{
+		try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(ruta))) {
+            outputStream.writeObject(lista);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 	/**
-	 * Función que convierte una línea de información en un objeto de la clase Actividad. La estructura de la línea es:'nombre' 'nivel' 'turno' 'participantes máximos' 'monitores máximos' 'monitor1'&'monitor2'&'...'&'monitorN'. Los datos de los monitores se separan con '%'.
-	 * @param line Línea de información.
-	 * @return Actividad
+	 * Método que guarda la lista de actividades en un fichero.
+	 * @param ruta Cadena con la ruta del fichero.
+	 * @param lista ArrayList con la informacion de las actividades que se desean guardar.
 	 */
-	private static Actividad readLineActividad(String line) {
-		Actividad elemento = new Actividad();
-		return elemento;
+	public void setActividades(String ruta, ArrayList<Actividad> lista) throws IOException{
+		try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(ruta))) {
+            outputStream.writeObject(lista);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 	/**
-	 * Función que convierte una línea de información en un objeto de la clase InscripcionCompleta. La estructura de la línea es:'id asistete' 'id campamento' 'fecha de inscripcion' 'precio'.
-	 * @param line Línea de información.
-	 * @return InscripcionCompleta
+	 * Método que guarda la lista de inscripciones completas en un fichero.
+	 * @param ruta Cadena con la ruta del fichero.
+	 * @param lista ArrayList con la informacion de las inscripciones completas que se desean guardar.
 	 */
-	private static InscripcionCompleta readLineInscripcionCompleta(String line) {
-		InscripcionCompleta elemento = new InscripcionCompleta();
-		return elemento;
+	public void setInscripcionesCompletas(String ruta, ArrayList<InscripcionCompleta> lista) throws IOException{
+		try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(ruta))) {
+            outputStream.writeObject(lista);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 	/**
-	 * Función que convierte una línea de información en un objeto de la clase asistente. La estructura de la línea es:'id asistete' 'id campamento' 'fecha de inscripcion' 'precio'.
-	 * @param line Línea de información.
-	 * @return Asistente
+	 * Método que guarda la lista de inscripciones parciales en un fichero.
+	 * @param ruta Cadena con la ruta del fichero.
+	 * @param lista ArrayList con la informacion de las inscripciones parciales que se desean guardar.
 	 */
-	private static InscripcionParcial readLineInscripcionParcial(String line) {
-		InscripcionParcial elemento = new InscripcionParcial();
-		return elemento;
+	public void setInscripcionesParciales(String ruta, ArrayList<InscripcionParcial> lista) throws IOException{
+		try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(ruta))) {
+            outputStream.writeObject(lista);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 }
+	
+	
