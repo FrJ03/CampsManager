@@ -56,7 +56,6 @@ public class Programa {
 					}
 					else if(opcion == 2) {
 						Asistente nuevo = new Asistente();
-						//Llamar al módulo de datos para obtener el último id
 						System.out.print("Inserte el nombre del asistente: ");
 						nuevo.setNombre(teclado.readLine());
 						System.out.print("Inserte los apellidos del asistente: ");
@@ -124,8 +123,6 @@ public class Programa {
 						System.out.println(campamentos.getListaMonitores());
 					}
 					else if(opcion == 4) {
-						//Seleccionar id
-						int id = -1;
 						int day = 1;
 						int month = 1;
 						int year = 1;
@@ -169,7 +166,7 @@ public class Programa {
 							System.out.print("Inserte el número máximo de participantes: ");
 							max = Integer.parseInt(teclado.readLine());
 						}while(max < 1);
-						campamentos.crearCampamento(new Campamento(id, fechaInicio, fechaFin, nivel, max));
+						campamentos.crearCampamento(new Campamento(-1, fechaInicio, fechaFin, nivel, max));
 					}
 					else if(opcion == 5) {
 						System.out.print("Inserte el nombre de la actividad: ");
@@ -207,12 +204,11 @@ public class Programa {
 							else if(t == 'M' || t == 'm')
 								turno = Turno.Mañana;
 						}while (t != 'M' && t != 'm' && t != 'T' && t != 't');
-						Actividad actividad = new Actividad(nombre, nivel, maxP, maxM, turno);
+						Actividad actividad = new Actividad(-1, nombre, nivel, maxP, maxM, turno);
 						campamentos.crearActividad(actividad);
 					}
 					else if(opcion == 6) {
 						Monitor nuevo = new Monitor();
-						//Llamar al módulo de datos para obtener el último id
 						System.out.print("Inserte el nombre del monitor: ");
 						nuevo.setNombre(teclado.readLine());
 						System.out.print("Inserte los apellidos del monitor: ");
@@ -230,7 +226,7 @@ public class Programa {
 						campamentos.crearMonitor(nuevo);
 					}
 					else if(opcion == 7) {
-						/** Encuentra el monitor, encuentra la actividad, los asocia **/
+						/* Encuentra el monitor, encuentra la actividad, los asocia */
 						System.out.println("Inserte el id del monitor que quiera asociar a la actividad: ");
 						int idm=Integer.parseInt(teclado.readLine());
 						ArrayList<Monitor> mons=campamentos.getListaMonitores();
@@ -276,7 +272,7 @@ public class Programa {
 						}
 					}
 					else if(opcion == 9) {
-						/** Coge el id campamento, encuentra el monitor NO ESPECIAL, los asocia **/
+						/* Coge el id campamento, encuentra el monitor NO ESPECIAL, los asocia */
 						System.out.println("Inserte el id del campamento que quiera asociar: ");
 						int idc=Integer.parseInt(teclado.readLine());
 					
@@ -300,7 +296,7 @@ public class Programa {
 						}
 					}
 					else if(opcion == 10) {
-						/** Coge el id campamento, encuentra el monitor ESPECIAL, los asocia **/
+						/* Coge el id campamento, encuentra el monitor ESPECIAL, los asocia */
 						System.out.println("Inserte el id del campamento que quiera asociar: ");
 						int idc=Integer.parseInt(teclado.readLine());
 						
@@ -343,7 +339,7 @@ public class Programa {
 							System.out.println(inscripcion.toString());
 					}
 					else if(opcion == 3) {
-						/** Realiza una inscripción parcial **/
+						/* Realiza una inscripción parcial */
 						ArrayList<Asistente> asists=asistentes.getListaAsistente();
 						InscripcionParcial nuevo=new InscripcionParcial();
 						System.out.println("Introduce el id del participante: ");
@@ -377,7 +373,7 @@ public class Programa {
 						}
 					}
 					else if(opcion == 4) {
-						/** Realiza una inscripción completa **/
+						/* Realiza una inscripción completa */
 						ArrayList<Asistente> asists=asistentes.getListaAsistente();
 						InscripcionCompleta nuevo=new InscripcionCompleta();
 						System.out.println("Introduce el id del participante: ");
@@ -411,7 +407,7 @@ public class Programa {
 						}
 					}
 					else if(opcion == 5) {
-						/** Asigna precio a una inscripción y comprueba que se ha realizado correctamente **/
+						/* Asigna precio a una inscripción y comprueba que se ha realizado correctamente */
 						System.out.println("Introduzca el id del campamento asociado a la inscripcion: ");
 						int idc=Integer.parseInt(teclado.readLine());
 						System.out.println("Introduzca el id del participante asociado a la inscripcion: ");

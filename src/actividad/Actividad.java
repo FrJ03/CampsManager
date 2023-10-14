@@ -49,8 +49,9 @@ public class Actividad	implements Serializable, Comparable<Actividad>{
 	  * COnstruye un objeto con todos sus datos, a excepción de la lista de monitores que se inicializa vacía.
 	  * @return void
 	  * */
-	public Actividad(String name, Nivel nivel, int participantesMax, 
+	public Actividad(int id, String name, Nivel nivel, int participantesMax, 
 			int monitoresMax, Turno turno) {
+		this.id_ = id;
 		this.name_=name;
 		this.nivel_=nivel;
 		this.participantesMax_=participantesMax;
