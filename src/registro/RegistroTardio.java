@@ -16,7 +16,9 @@ public class RegistroTardio extends Registro{
   public RegistroTardio(){
     super();
   }
-
+  /**Método que indica la versión de la clase que se va a serializar.
+	 */
+	private static final long serialVersionUID = 2L;
   /**
 	* Método que valida un registro.
 	* @param fechaInscripcion Fecha en la que se solicita registrarse.

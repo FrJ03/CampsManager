@@ -1,14 +1,17 @@
 package registro;
 
 import java.time.LocalDate;
+import java.io.Serializable;
 
   	/**
 	* Clase que representa los registros que se pueden hacer en una inscripción.
  	@author Lucía Téllez López
 	**/
 
-public abstract class Registro{
-
+public abstract class Registro implements Serializable{
+	/**Método que indica la versión de la clase que se va a serializar.
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
  	* Estado del registro, true si se ha validado con el método registro()
   	**/

@@ -26,7 +26,9 @@ public Monitor(int id, String nombre, String apellidos, boolean especial){
 	super(id, nombre, apellidos);
   this.especial=especial;
 }
-
+/**Método que indica la versión de la clase que se va a serializar.
+ */
+private static final long serialVersionUID = 2L;
 /**
  * Método que devuelve si un monitor puede impartir actividades en las que participen asistentes con necesidades especiales.
  * @return true si puede impartir las actividades o false en caso contrario.

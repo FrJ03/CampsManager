@@ -2,12 +2,16 @@ package actividad;
 
 import java.util.ArrayList;
 import monitor.Monitor;
+import java.io.Serializable;
 
 /**
  * Clase que representa una actividad que se encuentra en un campamento.
  * @author Enrique de los Reyes Montilla
  */
-public class Actividad	{
+public class Actividad	implements Serializable{
+	/** Metodo para indicar la versión de la clase a serializar
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	  * Representa el nombre de la actividad
 	  * */

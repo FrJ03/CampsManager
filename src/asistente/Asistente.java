@@ -23,6 +23,9 @@ import persona.Persona;
      public Asistente(){
 
      }
+     /**Método que indica la versión de la clase que se va a serializar.
+ 	 */
+ 	 private static final long serialVersionUID = 3L;
      /**
       * Construye un objeto con todos sus datos.
       * @param id Identificador único del asistente.

@@ -17,7 +17,9 @@ public class RegistroTemprano extends Registro{
   public RegistroTemprano(){
     super();
   }
-
+  /**Método que indica la versión de la clase que se va a serializar.
+   */
+	private static final long serialVersionUID = 3L;
 
    /**
    * Método que valida un registro.
