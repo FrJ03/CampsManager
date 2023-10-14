@@ -1,4 +1,4 @@
-package GestorDatos;
+package gestorDatos;
 
 import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
