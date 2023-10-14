@@ -132,12 +132,12 @@ public class Programa {
 								salir();
 								System.exit(0);
 							}
-							if(letra == "S" || letra == "s")
+							if(letra.equalsIgnoreCase("s"))
 								nuevo.setEspecial(true);
-							else if(letra == "N" || letra == "n")
+							else if(letra.equalsIgnoreCase("n"))
 								nuevo.setEspecial(false);
 								
-						}while(letra != "S" && letra != "N" && letra != "s" && letra != "n");
+						}while(!letra.equalsIgnoreCase("s") && !letra.equalsIgnoreCase("n"));
 						asistentes.darAltaAsistente(nuevo);
 					}
 					else if(opcion == 3) {
@@ -204,12 +204,12 @@ public class Programa {
 								salir();
 								System.exit(0);
 							}
-							if(letra == "S" || letra == "s")
+							if(letra.equalsIgnoreCase("s"))
 								especial = true;
-							else if(letra == "N" || letra == "n")
+							else if(letra.equalsIgnoreCase("n"))
 								especial = false;
 								
-						}while(letra != "S" && letra != "N" && letra != "s" && letra != "n");
+						}while(!letra.equalsIgnoreCase("s") && !letra.equalsIgnoreCase("n"));
 						asistentes.modificarAsistente(idAntiguo, idNuevo, nombre, apellidos, fecha, especial);
 					}
 					else if(opcion == 4) {
@@ -327,14 +327,14 @@ public class Programa {
 								salir();
 								System.exit(0);
 							}
-							if(n == "I" || n == "i")
+							if(n.equalsIgnoreCase("i"))
 								nivel = Nivel.Infantil;
-							else if(n == "J" || n == "j")
+							else if(n.equalsIgnoreCase("j"))
 								nivel = Nivel.Juvenil;
-							else if(n == "A" || n == "a")
+							else if(n.equalsIgnoreCase("a"))
 								nivel = Nivel.Adolescente;
 								
-						}while(n != "I" && n != "i" && n != "J" && n != "j" && n != "A" && n != "a");
+						}while(!n.equalsIgnoreCase("i") && !n.equalsIgnoreCase("j") && !n.equalsIgnoreCase("a"));
 						int max = 0;
 						do {
 							System.out.print("Inserte el número máximo de participantes: ");
@@ -372,14 +372,14 @@ public class Programa {
 								salir();
 								System.exit(0);
 							}
-							if(n == "I" || n == "i")
+							if(n.equalsIgnoreCase("i"))
 								nivel = Nivel.Infantil;
-							else if(n == "J" || n == "j")
+							else if(n.equalsIgnoreCase("j"))
 								nivel = Nivel.Juvenil;
-							else if(n == "A" || n == "a")
+							else if(n.equalsIgnoreCase("a"))
 								nivel = Nivel.Adolescente;
 								
-						}while(n != "I" && n != "i" && n != "J" && n != "j" && n != "A" && n != "a");
+						}while(!n.equalsIgnoreCase("i") && !n.equalsIgnoreCase("j") && !n.equalsIgnoreCase("a"));
 						int maxP = 0;
 						do {
 							System.out.print("Inserte el número máximo de participantes: ");
@@ -416,11 +416,11 @@ public class Programa {
 								salir();
 								System.exit(0);
 							}
-							if(t == "T" || t == "t")
+							if(t.equalsIgnoreCase("t"))
 								turno = Turno.Tarde;
-							else if(t == "M" || t == "m")
+							else if(t.equalsIgnoreCase("m"))
 								turno = Turno.Mañana;
-						}while (t != "M" && t != "m" && t != "T" && t != "t");
+						}while (!t.equalsIgnoreCase("t") && !t.equalsIgnoreCase("m"));
 						Actividad actividad = new Actividad(-1, nombre, nivel, maxP, maxM, turno);
 						campamentos.crearActividad(actividad);
 					}
@@ -446,7 +446,7 @@ public class Programa {
 						}
 						String letra = null;
 						do {
-							System.out.print("¿Necesita atención especial? (S/N): ");
+							System.out.print("¿Puede dirigir actividades con asistentes que necesiten atención especial? (S/N): ");
 							try {
 								letra = teclado.readLine();
 							} catch (IOException e) {
@@ -455,12 +455,12 @@ public class Programa {
 								salir();
 								System.exit(0);
 							}
-							if(letra == "S" || letra == "s")
+							if(letra.equalsIgnoreCase("s"))
 								nuevo.setEspecial(true);
-							else if(letra == "N" || letra == "n")
+							else if(letra.equalsIgnoreCase("n"))
 								nuevo.setEspecial(false);
 								
-						}while(letra != "S" && letra != "N" && letra != "s" && letra != "n");
+						}while(!letra.equalsIgnoreCase("s") && !letra.equalsIgnoreCase("n"));
 						campamentos.crearMonitor(nuevo);
 					}
 					else if(opcion == 7) {
