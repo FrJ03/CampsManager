@@ -1,28 +1,47 @@
 package programa;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
+import java.util.Properties;
 import java.time.LocalDate;
 import actividad.*;
 import asistente.Asistente;
 import campamento.Campamento;
 import gestorAsistentes.GestorAsistentes;
 import gestorCampamentos.GestorCampamentos;
+import gestorDatos.GestorDatos;
 import gestorInscripciones.GestorInscripciones;
 import inscripcion.InscripcionCompleta;
 import inscripcion.InscripcionParcial;
 import monitor.Monitor;
 
 public class Programa {
+	private static String dir_ = "../../rutas.txt";
+	
 	public static void main(String args[]) throws Exception {
 		int opcion = 0;
+		
+		Properties p = new Properties();
+		BufferedReader reader = new BufferedReader(new FileReader(new File(dir_)));
+		p.load(reader);
+		GestorDatos datos = GestorDatos.getInstance();
+		
 		GestorAsistentes asistentes = GestorAsistentes.getInstance();
+		asistentes.setListaAsistentes(datos.getAsistentes(p.getProperty("asistentes")));
 		GestorCampamentos campamentos = GestorCampamentos.getInstance();
+		campamentos.setListaActividades(datos.getActividades(p.getProperty("actividades")));
+		campamentos.setListaCampamentos(datos.getCampamentos(p.getProperty("campamentos")));
+		campamentos.setListaMonitores(datos.getMonitores(p.getProperty("monitores")));
 		GestorInscripciones inscripciones = GestorInscripciones.getInstance();
+		inscripciones.setListaInscripcionCompleta(datos.getInscripcionesCompletas(p.getProperty("inscripcionesCompletas")));
+		inscripciones.setListaInscripcionParcial(datos.getInscripcionesParciales(p.getProperty("inscripcionesParciales")));
+		reader.close();
+		
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		do {
 			opcion = menuPrincipal();
@@ -417,9 +436,8 @@ public class Programa {
 						System.out.println("Opción incorrecta.");
 				}while(opcion != 7);
 			}
-			else if(opcion == 4) {
-				System.out.println("Saliendo del sistema.................");
-			}
+			else if(opcion == 4) 
+				salir();
 			else {
 				System.out.println("Opción incorrecta.");
 			}
@@ -504,5 +522,25 @@ public class Programa {
 		}
 		else 
 			return false;
+	}
+	private static void salir() {
+		Properties p = new Properties();
+		BufferedReader reader = new BufferedReader(new FileReader(new File(dir_)));
+		p.load(reader);
+		GestorDatos datos = GestorDatos.getInstance();
+		
+		GestorAsistentes asistentes = GestorAsistentes.getInstance();
+		datos.setAsistentes(p.getProperty("asistentes"), asistentes.getListaAsistente());
+		GestorCampamentos campamentos = GestorCampamentos.getInstance();
+		datos.setActividades(p.getProperty("actividades"), campamentos.getListaActividades());
+		datos.setCampamentos(p.getProperty("campamentos"), campamentos.getListaCampamentos());
+		datos.setMonitores(p.getProperty("monitores"), campamentos.getListaMonitores());
+		GestorInscripciones inscripciones = GestorInscripciones.getInstance();
+		datos.setInscripcionesCompletas(p.getProperty("inscripcionesCompletas"), inscripciones.getListaInscripcionCompleta());
+		datos.setInscripcionesParciales(p.getProperty("inscripcionesParciales"), inscripciones.getListaInscripcionParcial());
+		
+		reader.close();
+		
+		System.out.println("Saliendo del sistema.................");
 	}
 }

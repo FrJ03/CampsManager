@@ -1,0 +1,6 @@
+actividades=
+asistentes=
+campamentos=
+inscripcionesCompletas=
+inscripcionesParciales=
+monitor=
