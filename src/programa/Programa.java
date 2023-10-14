@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.time.LocalDate;
 import actividad.*;
 import asistente.Asistente;
@@ -38,9 +39,9 @@ public class Programa {
 						Asistente nuevo = new Asistente();
 						//Llamar al módulo de datos para obtener el último id
 						System.out.print("Inserte el nombre del asistente: ");
-						nuevo.set_nombre(teclado.readLine());
+						nuevo.setNombre(teclado.readLine());
 						System.out.print("Inserte los apellidos del asistente: ");
-						nuevo.set_apellidos(teclado.readLine());
+						nuevo.setApellidos(teclado.readLine());
 						System.out.print("Inserte la fecha de nacimiento (yyyy/mm/dd): ");
 						String aux = teclado.readLine();
 						Date fecha = new Date(Integer.parseInt(aux.substring(0, 3)), Integer.parseInt(aux.substring(5, 6)), Integer.parseInt(aux.substring(8, 9)));
@@ -105,7 +106,7 @@ public class Programa {
 					}
 					else if(opcion == 4) {
 						//Seleccionar id
-						int id;
+						int id = -1;
 						int day = 1;
 						int month = 1;
 						int year = 1;
@@ -120,7 +121,7 @@ public class Programa {
 								System.out.print("Inserte el año de inicio: ");
 								year = Integer.parseInt(teclado.readLine());
 							}while(!dateValid(year, month, day));							
-							fechaInicio.of(year, month, day);
+							fechaInicio = LocalDate.of(year, month, day);
 							do {
 								System.out.print("Inserte el día de finalización: ");
 								day = Integer.parseInt(teclado.readLine());
@@ -129,10 +130,10 @@ public class Programa {
 								System.out.print("Inserte el año de finalización: ");
 								year = Integer.parseInt(teclado.readLine());
 							}while(!dateValid(year, month, day));							
-							fechaFin.of(year, month, day);
+							fechaFin = LocalDate.of(year, month, day);
 						}while(fechaFin.compareTo(fechaInicio) <= 0);
 						char n = 'b';
-						Nivel nivel;
+						Nivel nivel = null;
 						do {
 							System.out.print("Indique para quién va dirigido (I (Infantil) / J (Juvenil) / A (Adolescente)): ");
 							n = (char)teclado.read();
@@ -155,7 +156,7 @@ public class Programa {
 						System.out.print("Inserte el nombre de la actividad: ");
 						String nombre = teclado.readLine();
 						char n = 'b';
-						Nivel nivel;
+						Nivel nivel = null;
 						do {
 							System.out.print("Indique para quién va dirigido (I (Infantil) / J (Juvenil) / A (Adolescente)): ");
 							n = (char)teclado.read();
@@ -178,7 +179,7 @@ public class Programa {
 							maxM = Integer.parseInt(teclado.readLine());
 						}while(maxM < 1);
 						char t = 'a';
-						Turno turno;
+						Turno turno = null;
 						do {
 							System.out.print("¿La actividad se realizará por la mañana o por la tarde?: ");
 							t = (char) teclado.read();
@@ -194,9 +195,9 @@ public class Programa {
 						Monitor nuevo = new Monitor();
 						//Llamar al módulo de datos para obtener el último id
 						System.out.print("Inserte el nombre del monitor: ");
-						nuevo.set_nombre(teclado.readLine());
+						nuevo.setNombre(teclado.readLine());
 						System.out.print("Inserte los apellidos del monitor: ");
-						nuevo.set_apellidos(teclado.readLine());
+						nuevo.setApellidos(teclado.readLine());
 						char letra = 'a';
 						do {
 							System.out.print("¿Necesita atención especial? (S/N): ");
@@ -214,61 +215,45 @@ public class Programa {
 						System.out.println("Inserte el id del monitor que quiera asociar a la actividad: ");
 						int idm=Integer.parseInt(teclado.readLine());
 						ArrayList<Monitor> mons=campamentos.getListaMonitores_();
-						Iterator<Monitor> itm=mons.iterator();
-						Monitor mon;
-						while(itm.hasNext()){
-							Monitor aux=itm.next();
-							if(aux.getId()==idm){
-								mon=aux;
-							}
-							itm = itm.next();
-						}
-						if(mon==null){
+						Monitor monitor = null;
+						for(Monitor aux : mons)
+							if(aux.getId() == idm)
+								monitor = aux;
+						if(monitor == null){
 							System.out.println("No existe un monitor con ese id.");
 						}
 						else{
-							System.out.println("Inserte el id de la actividad que quiera asociar al monitor: ");
-							int ida=Integer.parseInt(teclado.readLine());
+							System.out.println("Inserte el nombre de la actividad que quiera asociar al monitor: ");
+							String ida=teclado.readLine();
 							ArrayList<Actividad> acts=campamentos.getListaActividades_();
-							Iterator<Actividad> ita=acts.iterator();
-							Actividad act;
-							while(ita.hasNext()){
-								Actividad aux=ita.next();
-								if(aux.getId()==ida){
-									act=aux;
-								}
-								ita=ita.next();
-							}
-							if(act==null){
+							Actividad actividad = null;
+							for (Actividad aux : acts)
+								if(aux.getName_() == ida)
+									actividad = aux;
+							if(actividad==null){
 								System.out.println("No existe una actividad con ese id.");
 							}
 							else{
-								campamentos.asociarMonitorActividad(act,mon);
+								campamentos.asociarMonitorActividad(actividad,monitor);
 							}
 						}
 					}
 					else if(opcion == 8) {
-						/** Coge el id campamento, encuentra la actividad, los asocia **/
+						/* Coge el id campamento, encuentra la actividad, los asocia */
 						System.out.println("Inserte el id del campamento que quiera asociar: ");
 						int idc=Integer.parseInt(teclado.readLine());
-					
 						System.out.println("Inserte el id de la actividad que quiera asociar: ");
-						int ida=Integer.parseInt(teclado.readLine());
-						ArrayList<Actividad> acts=campampamentos.getListaActividades_();
-						Iterator<Actividad> ita=acts.iterator();
-						Actividad act;
-						while(ita.hasNext()){
-							Acticidad aux=ita.next();
-							if(aux.getId()==ida){
-								act=aux;
-							}
-							ita=ita.next();
-						}
-						if(act==null){
+						String ida=teclado.readLine();
+						ArrayList<Actividad> acts=campamentos.getListaActividades_();
+						Actividad actividad = null;
+						for(Actividad aux : acts)
+							if(aux.getName_() == ida)
+								actividad = aux;
+						if(actividad==null){
 							System.out.println("No existe una actividad con ese id.");
 						}
 						else{
-							campamentos.asociarActividadCampamento(idc,act);
+							campamentos.asociarActividadCampamento(idc,actividad);
 						}
 					}
 					else if(opcion == 9) {
@@ -278,22 +263,17 @@ public class Programa {
 					
 						System.out.println("Inserte el id del monitor que quiera asociar: ");
 						int idm=Integer.parseInt(teclado.readLine());
-						ArrayList<Monitor> mons=campampamentos.getListaMonitores_();
-						Iterator<Monitor> itm=mons.iterator();
-						Monitor mon;
-						while(itm.hasNext()){
-							Monitor aux=itm.next();
-							if(aux.getId()==idm){
-								mon=aux;
-							}
-							itm=itm.next();
-						}
-						if(mon==null){
+						ArrayList<Monitor> mons=campamentos.getListaMonitores_();
+						Monitor monitor = null;
+						for(Monitor aux : mons)
+							if(aux.getId() == idm)
+								monitor = aux;
+						if(monitor==null){
 							System.out.println("No existe un monitor con ese id.");
 						}
 						else{
-							if(mon.getEspecial()==false){
-								campamentos.asociarMonitorCampamento(idc,mon);
+							if(monitor.getEspecial()==false){
+								campamentos.asociarMonitorCampamento(idc,monitor);
 							}
 							else{
 								System.out.println("Para asociar un monitor especial, seleccione la opción 10");
@@ -307,22 +287,17 @@ public class Programa {
 						
 						System.out.println("Inserte el id del monitor que quiera asociar: ");
 						int idm=Integer.parseInt(teclado.readLine());
-						ArrayList<Monitor> mons=campampamentos.getListaMonitores_();
-						Iterator<Monitor> itm=mons.iterator();
-						Monitor mon;
-						while(itm.hasNext()){
-							Monitor aux=itm.next();
-							if(aux.getId()==idm){
-								mon=aux;
-							}
-							itm=itm.next();
-						}
-						if(mon==null){
+						ArrayList<Monitor> mons=campamentos.getListaMonitores_();
+						Monitor monitor = null;
+						for(Monitor aux : mons)
+							if(aux.getId() == idm)
+								monitor = aux;
+						if(monitor==null){
 							System.out.println("No existe un monitor con ese id.");
 						}
 						else{
-							if(mon.getEspecial()==true){
-									campamentos.asociarMonitorCampamento(idc,mon);
+							if(monitor.getEspecial()==true){
+									campamentos.asociarMonitorCampamento(idc,monitor);
 							}
 							else{
 								System.out.println("Para asociar un monitor no especial, seleccione la opción 9");
@@ -353,28 +328,24 @@ public class Programa {
 						ArrayList<Asistente> asists=asistentes.getListaAsistente_();
 						InscripcionParcial nuevo=new InscripcionParcial();
 						System.out.println("Introduce el id del participante: ");
-						nuevo.setIdParticipante(teclado.readLine());
+						nuevo.setIdParticipante(Integer.parseInt(teclado.readLine()));
 						System.out.println("Introduce el id del campamento: ");
 						int idc=Integer.parseInt(teclado.readLine());
 						nuevo.setIdCampamento(idc);
 						
 						ArrayList<Campamento> camps=campamentos.getListaCampamentos_();
-						Iterator<Campamento> itc=camps.iterator();
-						Campamento camp;
-						while(itc.hasNext()){
-							Campamento aux=itc.next();
-							if(aux.getId()==idc){
-								camp=aux;
-							}
-							itc=itc.next();		
-						}
-						if(camp==null){
+						Campamento campamento = null;
+						for(Campamento aux : camps)
+							if(aux.getId_() == idc)
+								campamento = aux;
+								
+						if(campamento==null){
 							System.out.println("El campamento no existe.");
 						}
 						else{
-							LocalDate fecha=camp.getInicioCampamento_();
+							LocalDate fecha=campamento.getIniciocampamento_();
 							
-							float pre=calcularPrecio(nuevo, camps);
+							float pre= inscripciones.asignarPrecio(idc, nuevo.getIdParticipante(), camps);
 							nuevo.setPrecio(pre);
 													
 							boolean status=inscripciones.realizarRegistro(nuevo,fecha,asists);
@@ -391,28 +362,24 @@ public class Programa {
 						ArrayList<Asistente> asists=asistentes.getListaAsistente_();
 						InscripcionCompleta nuevo=new InscripcionCompleta();
 						System.out.println("Introduce el id del participante: ");
-						nuevo.setIdParticipante(teclado.readLine());
+						nuevo.setIdParticipante(Integer.parseInt(teclado.readLine()));
 						System.out.println("Introduce el id del campamento: ");
 						int idc=Integer.parseInt(teclado.readLine());
 						nuevo.setIdCampamento(idc);
 						
 						ArrayList<Campamento> camps=campamentos.getListaCampamentos_();
-						Iterator<Campamento> itc=camps.iterator();
-						Campamento camp;
-						while(itc.hasNext()){
-							Campamento aux=itc.next();
-							if(aux.getId()==idc){
-								camp=aux;
-							}
-							itc=itc.next();
-						}
-						if(camp==null){
+						Campamento campamento = null;
+						for(Campamento aux : camps)
+							if(aux.getId_() == idc)
+								campamento = aux;
+								
+						if(campamento==null){
 							System.out.println("El campamento no existe.");
 						}
 						else{
-							LocalDate fecha=camp.getInicioCampamento_();
+							LocalDate fecha=campamento.getIniciocampamento_();
 
-							float pre=calcularPrecio(nuevo, camps);
+							float pre= inscripciones.asignarPrecio(idc, nuevo.getIdParticipante(), camps);
 							nuevo.setPrecio(pre);
 							
 							boolean status=inscripciones.realizarRegistro(nuevo,fecha,asists);
@@ -432,7 +399,7 @@ public class Programa {
 						int idp=Integer.parseInt(teclado.readLine());
 						ArrayList<Campamento> camps=campamentos.getListaCampamentos_();
 						
-						int resultado=asignarPrecio(idc, idp, camps);
+						int resultado= inscripciones.asignarPrecio(idc, idp, camps);
 						if(resultado==0){
 							System.out.println("Precio asignado correctamente");
 						}
@@ -441,7 +408,8 @@ public class Programa {
 						}
 					}
 					else if(opcion == 6) {
-						System.out.println(inscripciones.obtenerCampamentosDisponibles());
+						
+						System.out.println(inscripciones.obtenerCampamentosDisponibles(campamentos.getListaCampamentos_()));
 					}
 					else if(opcion == 7) 
 						System.out.println("Volviendo al menú principal..............");
