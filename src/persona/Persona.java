@@ -1,4 +1,4 @@
-package Persona;
+package persona;
 
 	/**
 	* Clase que representa a una persona

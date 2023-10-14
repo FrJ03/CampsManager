@@ -1,4 +1,4 @@
-package Actividad;
+package actividad;
 /**
  * Enumeración que representa los niveles academicos que puede tener una actividad.
  * @author Enrique de los Reyes Montilla

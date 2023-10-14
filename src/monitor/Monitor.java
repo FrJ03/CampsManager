@@ -1,6 +1,6 @@
-package Monitor;
+package monitor;
 
-import Persona.Persona;
+import persona.Persona;
 
 /**Esta  clase  representa  a  una  persona  que  se  encarga  de  dirigir  las  actividades  que  suceden  en  el  campamento
  * @author Francisco José Mellado Ortiz

@@ -4,12 +4,13 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import Asistente.Asistente;
-import Monitor.Monitor;
-import Campamento.Campamento;
-import Actividad.Actividad;
-import Inscripcion.InscripcionCompleta;
-import Inscripcion.InscripcionParcial;
+
+import actividad.Actividad;
+import asistente.Asistente;
+import campamento.Campamento;
+import inscripcion.InscripcionCompleta;
+import inscripcion.InscripcionParcial;
+import monitor.Monitor;
 
 /**
  * Clase diseñada para interactuar con los datos permanentes

@@ -1,6 +1,7 @@
-package Asistente;
+package asistente;
+
 import java.util.Date;
-import Persona.Persona;
+import persona.Persona;
 
 /**
  * Clase que representa a un asistente al campamento

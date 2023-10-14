@@ -1,9 +1,10 @@
-package Campamento;
+package campamento;
+
 import java.util.ArrayList;
 import java.time.LocalDate;
-import Monitor.Monitor;
-import Actividad.Actividad;
-import Actividad.Nivel;
+import actividad.Actividad;
+import actividad.Nivel;
+import monitor.Monitor;
 
 /**
  * Clase que representa  la organización de un conjunto de actividades durante un periodo de tiempo limitado

@@ -1,8 +1,8 @@
-package GestorAsistentes;
+package gestorAsistentes;
 
 import java.util.ArrayList;
 import java.util.Date;
-import Asistente.Asistente;
+import asistente.Asistente;
 
 /**
  * Clase que gestiona la información de los asistentes al campamento

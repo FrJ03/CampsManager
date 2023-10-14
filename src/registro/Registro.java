@@ -1,4 +1,5 @@
-package Registro;
+package registro;
+
 import java.time.LocalDate;
 
   	/**

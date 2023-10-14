@@ -1,22 +1,20 @@
-package Programa;
+package programa;
 
-import GestorAsistentes.GestorAsistentes;
-import GestorCampamentos.GestorCampamentos;
-import GestorInscripciones.GestorInscripciones;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import Asistente.Asistente;
 import java.util.ArrayList;
 import java.util.Date;
-import Inscripcion.InscripcionParcial;
-import Inscripcion.InscripcionCompleta;
-import Actividad.Actividad;
-import Actividad.Nivel;
-import Actividad.Turno;
 import java.time.LocalDate;
-import Campamento.Campamento;
-import Monitor.Monitor;
+import actividad.*;
+import asistente.Asistente;
+import campamento.Campamento;
+import gestorAsistentes.GestorAsistentes;
+import gestorCampamentos.GestorCampamentos;
+import gestorInscripciones.GestorInscripciones;
+import inscripcion.InscripcionCompleta;
+import inscripcion.InscripcionParcial;
+import monitor.Monitor;
 
 public class Programa {
 	public static void main(String args[]) throws Exception {

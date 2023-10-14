@@ -1,6 +1,8 @@
-package Actividad;
+package actividad;
+
 import java.util.ArrayList;
-import Monitor.Monitor;
+import monitor.Monitor;
+
 /**
  * Clase que representa una actividad que se encuentra en un campamento.
  * @author Enrique de los Reyes Montilla

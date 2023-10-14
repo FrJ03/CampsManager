@@ -1,10 +1,10 @@
-package GestorCampamentos;
+package gestorCampamentos;
 
 import java.util.ArrayList;
-import Campamento.Campamento;
-import java.time.Period;
-import Monitor.Monitor;
-import Actividad.Actividad;
+import actividad.Actividad;
+import campamento.Campamento;
+import monitor.Monitor;
+
 /**
  * Clase que implementa el patrón Singleton para poder ser utilizada en la creación de Campamentos.
  * @author Enrique de los Reyes Montilla
