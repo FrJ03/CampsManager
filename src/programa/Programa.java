@@ -215,21 +215,11 @@ public class Programa {
 						}while(!letra.equalsIgnoreCase("s") && !letra.equalsIgnoreCase("n"));
 						asistentes.modificarAsistente(idAntiguo, idNuevo, nombre, apellidos, fecha, especial);
 					}
-					else if(opcion == 4) {
-						try {
-							System.out.println(asistentes.listaAsistencia());
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}						
-					}
-					else if(opcion == 5) 
+					else if(opcion == 4) 
 						System.out.println("Volviendo al menú principal..............");
 					else
 						System.out.println("Opción incorrecta.");
-				}while(opcion != 5);
+				}while(opcion != 4);
 			}
 			else if(opcion == 2) {
 				do {
@@ -806,8 +796,7 @@ public class Programa {
 		System.out.println("1. Lista de asistentes.");
 		System.out.println("2. Dar de alta asistente.");
 		System.out.println("3. Modificar asistente.");
-		System.out.println("4. Lista de asistencia.");
-		System.out.println("5. Atrás.");
+		System.out.println("4. Atrás.");
 		System.out.println("----------------------------------");
 		System.out.print("Seleccione una opción: ");
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
