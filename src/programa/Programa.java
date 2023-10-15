@@ -647,10 +647,10 @@ public class Programa {
 							}
 							inscripciones.asignarPrecio(idc, nuevo.getIdParticipante(), camps);
 							if(status==true){
-								System.out.println("Registro realizado correctamente.");
+								System.out.println("Registro realizado correctamente. El asistente necesitará una atención especial.");
 							}
 							else{
-								System.out.println("Registro realizado correctamente. El asistente necesitará una atención especial.");
+								System.out.println("Registro realizado correctamente.");
 							}
 						}
 					}
@@ -703,10 +703,10 @@ public class Programa {
 							}
 							inscripciones.asignarPrecio(idc, nuevo.getIdParticipante(), camps);
 							if(status==true){
-								System.out.println("Registro realizado correctamente.");
+								System.out.println("Registro realizado correctamente. El asistente necesitará una atención especial.");
 							}
 							else{
-								System.out.println("Registro realizado correctamente. El asistente necesitará una atención especial.");
+								System.out.println("Registro realizado correctamente.");
 							}
 						}
 					}
