@@ -251,239 +251,270 @@ public class Programa {
 						System.out.println("Opción incorrecta.");
 				}while(opcion != 4);
 			}
+			//Gestor de campamentos
 			else if(opcion == 2) {
 				do {
 					try {
 						opcion = menuGestorCampamentos();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 						guardar();
 						System.exit(0);
 					}
+					//Listar campamentos
 					if(opcion == 1) {
 						System.out.println(campamentos.getListaCampamentos());
 					}
+					//Listar actividades
 					else if(opcion == 2) {
 						System.out.println(campamentos.getListaActividades());
 					}
+					//Listar monitores
 					else if(opcion == 3) {
 						System.out.println(campamentos.getListaMonitores());
 					}
+					//Crear campamento
 					else if(opcion == 4) {
 						LocalDate fechaFin;
 						LocalDate fechaInicio;
+						String aux = null;
 						do {
-							String aux = null;
 							do {
 								System.out.print("Inserte la fecha de inicio (yyyy/mm/dd): ");
 								try {
 									aux = teclado.readLine();
 								} catch (IOException e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 									guardar();
 									System.exit(0);
 								}
 							}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
 							fechaInicio = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
+							
+							aux = null;
 							do {
 								System.out.print("Inserte la fecha de finalización (yyyy/mm/dd): ");
 								try {
 									aux = teclado.readLine();
 								} catch (IOException e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 									guardar();
 									System.exit(0);
 								}
 							}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));;			
 							fechaFin = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
+							
 						}while(fechaFin.compareTo(fechaInicio) <= 0);
-						String n = null;
+						
+						aux = null;
 						Nivel nivel = null;
 						do {
 							System.out.print("Indique para quién va dirigido (I (Infantil) / J (Juvenil) / A (Adolescente)): ");
 							try {
-								n = teclado.readLine();
+								aux = teclado.readLine();
 							} catch (IOException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 								guardar();
 								System.exit(0);
 							}
-							if(n.equalsIgnoreCase("i"))
+							if(aux.equalsIgnoreCase("i"))
 								nivel = Nivel.Infantil;
-							else if(n.equalsIgnoreCase("j"))
+							else if(aux.equalsIgnoreCase("j"))
 								nivel = Nivel.Juvenil;
-							else if(n.equalsIgnoreCase("a"))
+							else if(aux.equalsIgnoreCase("a"))
 								nivel = Nivel.Adolescente;
 								
-						}while(!n.equalsIgnoreCase("i") && !n.equalsIgnoreCase("j") && !n.equalsIgnoreCase("a"));
+						}while(!aux.equalsIgnoreCase("i") && !aux.equalsIgnoreCase("j") && !aux.equalsIgnoreCase("a"));
+						
+						aux = null;
 						int max = 0;
 						do {
-							System.out.print("Inserte el número máximo de participantes: ");
 							try {
-								max = Integer.parseInt(teclado.readLine());
+								do {
+									System.out.print("Inserte el número máximo de participantes: ");
+									aux = teclado.readLine();
+								}while(!isNumber(aux));
+								max = Integer.parseInt(aux);
 							} catch (NumberFormatException | IOException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 								guardar();
 								System.exit(0);
 							}
 						}while(max < 1);
+						
 						campamentos.crearCampamento(new Campamento(-1, fechaInicio, fechaFin, nivel, max));
 					}
+					//Crear actividad
 					else if(opcion == 5) {
+						
 						System.out.print("Inserte el nombre de la actividad: ");
 						String nombre = null;
 						try {
 							nombre = teclado.readLine();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
-						String n = null;
+						
+						String aux = null;
 						Nivel nivel = null;
 						do {
 							System.out.print("Indique para quién va dirigido (I (Infantil) / J (Juvenil) / A (Adolescente)): ");
 							try {
-								n = teclado.readLine();
+								aux = teclado.readLine();
 							} catch (IOException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 								guardar();
 								System.exit(0);
 							}
-							if(n.equalsIgnoreCase("i"))
+							if(aux.equalsIgnoreCase("i"))
 								nivel = Nivel.Infantil;
-							else if(n.equalsIgnoreCase("j"))
+							else if(aux.equalsIgnoreCase("j"))
 								nivel = Nivel.Juvenil;
-							else if(n.equalsIgnoreCase("a"))
+							else if(aux.equalsIgnoreCase("a"))
 								nivel = Nivel.Adolescente;
 								
-						}while(!n.equalsIgnoreCase("i") && !n.equalsIgnoreCase("j") && !n.equalsIgnoreCase("a"));
+						}while(!aux.equalsIgnoreCase("i") && !aux.equalsIgnoreCase("j") && !aux.equalsIgnoreCase("a"));
+						
+						aux = null;
 						int maxP = 0;
 						do {
-							System.out.print("Inserte el número máximo de participantes: ");
 							try {
-								maxP = Integer.parseInt(teclado.readLine());
+								do {
+									System.out.print("Inserte el número máximo de participantes: ");
+									aux = teclado.readLine();
+								}while(!isNumber(aux));
+								maxP = Integer.parseInt(aux);
 							} catch (NumberFormatException | IOException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 								guardar();
 								System.exit(0);
 							}
 						}while(maxP < 1);
+						
+						aux = null;
 						int maxM = 0;
 						do {
-							System.out.print("Inserte el número máximo de monitores: ");
 							try {
-								maxM = Integer.parseInt(teclado.readLine());
+								do {
+									System.out.print("Inserte el número máximo de monitores: ");
+									aux = teclado.readLine();
+								}while(!isNumber(aux));
+								maxM = Integer.parseInt(aux);
 							} catch (NumberFormatException | IOException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 								guardar();
 								System.exit(0);
 							}
 						}while(maxM < 1);
-						String t = null;
+						
+						aux = null;
 						Turno turno = null;
 						do {
 							System.out.print("¿La actividad se realizará por la mañana (M) o por la tarde (T)?: ");
 							try {
-								t = teclado.readLine();
+								aux = teclado.readLine();
 							} catch (IOException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 								guardar();
 								System.exit(0);
 							}
-							if(t.equalsIgnoreCase("t"))
+							if(aux.equalsIgnoreCase("t"))
 								turno = Turno.Tarde;
-							else if(t.equalsIgnoreCase("m"))
+							else if(aux.equalsIgnoreCase("m"))
 								turno = Turno.Mañana;
-						}while (!t.equalsIgnoreCase("t") && !t.equalsIgnoreCase("m"));
-						Actividad actividad = new Actividad(-1, nombre, nivel, maxP, maxM, turno);
-						campamentos.crearActividad(actividad);
+						}while (!aux.equalsIgnoreCase("t") && !aux.equalsIgnoreCase("m"));
+						
+						campamentos.crearActividad(new Actividad(-1, nombre, nivel, maxP, maxM, turno));
 					}
+					//Crear monitor
 					else if(opcion == 6) {
 						Monitor nuevo = new Monitor();
 						System.out.print("Inserte el nombre del monitor: ");
 						try {
 							nuevo.setNombre(teclado.readLine());
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
+						
 						System.out.print("Inserte los apellidos del monitor: ");
 						try {
 							nuevo.setApellidos(teclado.readLine());
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
-						String letra = null;
+						
+						String aux = null;
 						do {
 							System.out.print("¿Puede dirigir actividades con asistentes que necesiten atención especial? (S/N): ");
 							try {
-								letra = teclado.readLine();
+								aux = teclado.readLine();
 							} catch (IOException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 								guardar();
 								System.exit(0);
 							}
-							if(letra.equalsIgnoreCase("s"))
+							if(aux.equalsIgnoreCase("s"))
 								nuevo.setEspecial(true);
-							else if(letra.equalsIgnoreCase("n"))
+							else if(aux.equalsIgnoreCase("n"))
 								nuevo.setEspecial(false);
 								
-						}while(!letra.equalsIgnoreCase("s") && !letra.equalsIgnoreCase("n"));
+						}while(!aux.equalsIgnoreCase("s") && !aux.equalsIgnoreCase("n"));
+						
 						campamentos.crearMonitor(nuevo);
 					}
+					//Asociar un monitor a una actividad
 					else if(opcion == 7) {
-						/* Encuentra el monitor, encuentra la actividad, los asocia */
-						System.out.println("Inserte el id del monitor que quiera asociar a la actividad: ");
-						int idm = -1;
+						
+						int idMonitor = -1;
+						String aux = null;
 						try {
-							idm = Integer.parseInt(teclado.readLine());
+							do {
+								System.out.println("Inserte el id del monitor que quiera asociar a la actividad: ");
+								aux = teclado.readLine();
+							}while(!isNumber(aux));
+							idMonitor = Integer.parseInt(aux);
 						} catch (NumberFormatException | IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
-						ArrayList<Monitor> mons=campamentos.getListaMonitores();
+						
+						ArrayList<Monitor> monitores = campamentos.getListaMonitores();
 						Monitor monitor = null;
-						for(Monitor aux : mons)
-							if(aux.getId() == idm)
-								monitor = aux;
+						for(Monitor m : monitores)
+							if(m.getId() == idMonitor)
+								monitor = m;
+						
 						if(monitor == null){
 							System.out.println("No existe un monitor con ese id.");
 						}
 						else{
-							System.out.println("Inserte el identificador de la actividad que quiera asociar al monitor: ");
-							int ida = -1;
+							aux = null;
+							int idActividad = -1;
 							try {
-								ida = Integer.parseInt(teclado.readLine());
+								do {
+									System.out.println("Inserte el identificador de la actividad que quiera asociar al monitor: ");
+									aux = teclado.readLine();
+								}while(!isNumber(aux));
+								idActividad = Integer.parseInt(aux);
 							} catch (NumberFormatException | IOException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 								guardar();
 								System.exit(0);
 							}
+							
 							ArrayList<Actividad> acts=campamentos.getListaActividades();
 							Actividad actividad = null;
-							for (Actividad aux : acts)
-								if(aux.getId() == ida)
-									actividad = aux;
+							for (Actividad a : acts)
+								if(a.getId() == idActividad)
+									actividad = a;
+							
 							if(actividad==null){
 								System.out.println("No existe una actividad con ese id.");
 							}
@@ -492,190 +523,223 @@ public class Programa {
 							}
 						}
 					}
+					//Asociar actividad a un campamento
 					else if(opcion == 8) {
-						/* Coge el id campamento, encuentra la actividad, los asocia */
-						System.out.println("Inserte el id del campamento que quiera asociar: ");
-						int idc = -1;
+						int idCampamento = -1;
+						String aux = null;
 						try {
-							idc = Integer.parseInt(teclado.readLine());
+							do {
+								System.out.println("Inserte el id del campamento que quiera asociar: ");
+								aux = teclado.readLine();
+							}while(!isNumber(aux));
+							idCampamento = Integer.parseInt(aux);
 						} catch (NumberFormatException | IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
-						System.out.println("Inserte el id de la actividad que quiera asociar: ");
-						int ida = -1;
+						
+						int idActividad = -1;
+						aux = null;
 						try {
-							ida = Integer.parseInt(teclado.readLine());
+							do {
+								System.out.println("Inserte el id de la actividad que quiera asociar: ");
+								aux = teclado.readLine();
+							}while(!isNumber(aux));
+							idActividad = Integer.parseInt(aux);
 						} catch (NumberFormatException | IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
+						
 						ArrayList<Actividad> acts=campamentos.getListaActividades();
 						Actividad actividad = null;
-						for (Actividad aux : acts)
-							if(aux.getId() == ida)
-								actividad = aux;
+						for (Actividad a : acts)
+							if(a.getId() == idActividad)
+								actividad = a;
+						
 						if(actividad==null){
 							System.out.println("No existe una actividad con ese id.");
 						}
 						else{
-							campamentos.asociarActividadCampamento(idc,actividad);
+							campamentos.asociarActividadCampamento(idCampamento,actividad);
 						}
 					}
+					//Asociar un monitor NO especial a un campamento
 					else if(opcion == 9) {
-						/* Coge el id campamento, encuentra el monitor NO ESPECIAL, los asocia */
-						System.out.println("Inserte el id del campamento que quiera asociar: ");
-						int idc = -1;
+						int idCampamento = -1;
+						String aux = null;
 						try {
-							idc = Integer.parseInt(teclado.readLine());
+							do {
+								System.out.println("Inserte el id del campamento que quiera asociar: ");
+								aux = teclado.readLine();
+							}while(!isNumber(aux));
+							idCampamento = Integer.parseInt(aux);
 						} catch (NumberFormatException | IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
 					
-						System.out.println("Inserte el id del monitor que quiera asociar: ");
-						int idm = -1;
+						aux = null;
+						int idMonitor = -1;
 						try {
-							idm = Integer.parseInt(teclado.readLine());
+							do {
+								System.out.println("Inserte el id del monitor que quiera asociar: ");
+								aux = teclado.readLine();
+							}while(!isNumber(aux));
+							idMonitor = Integer.parseInt(aux);
 						} catch (NumberFormatException | IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
-						ArrayList<Monitor> mons=campamentos.getListaMonitores();
-						Monitor monitor = null;
-						for(Monitor aux : mons)
-							if(aux.getId() == idm)
-								monitor = aux;
-						if(monitor==null){
-							System.out.println("No existe un monitor con ese id.");
-						}
-						else{
-							boolean status = campamentos.asociarMonitorCampamento(idc, monitor);
-							if(status==false){
-								System.out.println("Hubo un error.");
-							}
-						}
-					}
-					else if(opcion == 10) {
-						/* Coge el id campamento, encuentra el monitor ESPECIAL, los asocia */
-						System.out.println("Inserte el id del campamento que quiera asociar: ");
-						int idc = -1;
-						try {
-							idc = Integer.parseInt(teclado.readLine());
-						} catch (NumberFormatException | IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
 						
-						System.out.println("Inserte el id del monitor que quiera asociar: ");
-						int idm = -1;
-						try {
-							idm = Integer.parseInt(teclado.readLine());
-						} catch (NumberFormatException | IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
 						ArrayList<Monitor> mons=campamentos.getListaMonitores();
 						Monitor monitor = null;
-						for(Monitor aux : mons)
-							if(aux.getId() == idm)
-								monitor = aux;
+						for(Monitor m : mons)
+							if(m.getId() == idMonitor)
+								monitor = m;
+						
 						if(monitor==null){
 							System.out.println("No existe un monitor con ese id.");
 						}
 						else{
-							boolean status = campamentos.asociarMonitorEspCampamento(idc, monitor);
+							boolean status = campamentos.asociarMonitorCampamento(idCampamento, monitor);
 							if(status==false){
 								System.out.println("Hubo un error.");
 							}
 						}
 					}
+					//Asignar un monitor especial a un campamento
+					else if(opcion == 10) {
+						String aux = null;
+						int idCampamento = -1;
+						try {
+							do {
+								System.out.println("Inserte el id del campamento que quiera asociar: ");
+								aux = teclado.readLine();
+							}while(!isNumber(aux));
+							idCampamento = Integer.parseInt(aux);
+						} catch (NumberFormatException | IOException e) {
+							e.printStackTrace();
+							guardar();
+							System.exit(0);
+						}
+						
+						aux = null;
+						int idMonitor = -1;
+						try {
+							do {
+								System.out.println("Inserte el id del monitor que quiera asociar: ");
+								aux = teclado.readLine();
+							}while(!isNumber(aux));
+							idMonitor = Integer.parseInt(aux);
+						} catch (NumberFormatException | IOException e) {
+							e.printStackTrace();
+							guardar();
+							System.exit(0);
+						}
+						
+						ArrayList<Monitor> mons=campamentos.getListaMonitores();
+						Monitor monitor = null;
+						for(Monitor m : mons)
+							if(m.getId() == idMonitor)
+								monitor = m;
+						
+						if(monitor==null){
+							System.out.println("No existe un monitor con ese id.");
+						}
+						else{
+							boolean status = campamentos.asociarMonitorEspCampamento(idCampamento, monitor);
+							if(status==false){
+								System.out.println("Hubo un error.");
+							}
+						}
+					}
+					//Volver al menú principal
 					else if(opcion == 11) 
 						System.out.println("Volviendo al menú principal..............");
+					//Error
 					else
 						System.out.println("Opción incorrecta.");
 				}while(opcion != 11);
 			}
+			//Gestor de inscripciones
 			else if(opcion == 3) {
 				do {
 					try {
 						opcion = menuGestorInscripciones();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 						guardar();
 						System.exit(0);
 					}
+					//Listar inscripciones parciales
 					if(opcion == 1) {
 						ArrayList<InscripcionParcial> lista = inscripciones.getListaInscripcionParcial();
 						for (InscripcionParcial inscripcion : lista)
 							System.out.println(inscripcion.toString());
 					}
+					//Listar inscripciones completas
 					else if(opcion == 2) {
 						ArrayList<InscripcionCompleta> lista = inscripciones.getListaInscripcionCompleta();
 						for (InscripcionCompleta inscripcion : lista)
 							System.out.println(inscripcion.toString());
 					}
+					//Crear una inscripción parcial
 					else if(opcion == 3) {
-						/* Realiza una inscripción parcial */
-						ArrayList<Asistente> asists=asistentes.getListaAsistente();
-						InscripcionParcial nuevo=new InscripcionParcial();
-						System.out.println("Introduce el id del participante: ");
+						ArrayList<Asistente> asists = asistentes.getListaAsistente();
+						InscripcionParcial nuevo = new InscripcionParcial();
+						String aux = null;
 						try {
-							nuevo.setIdParticipante(Integer.parseInt(teclado.readLine()));
+							do {
+								System.out.println("Introduce el id del participante: ");
+								aux = teclado.readLine();
+							}while(!isNumber(aux));
+							nuevo.setIdParticipante(Integer.parseInt(aux));
 						} catch (NumberFormatException | IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
-						System.out.println("Introduce el id del campamento: ");
-						int idc = -1;
+						
+						aux = null;
 						try {
-							idc = Integer.parseInt(teclado.readLine());
+							do {
+								System.out.println("Introduce el id del campamento: ");
+								aux = teclado.readLine();
+							}while(!isNumber(aux));							
+							nuevo.setIdCampamento(Integer.parseInt(aux));
 						} catch (NumberFormatException | IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
-						nuevo.setIdCampamento(idc);
 						
 						ArrayList<Campamento> camps=campamentos.getListaCampamentos();
 						Campamento campamento = null;
-						for(Campamento aux : camps)
-							if(aux.getId() == idc)
-								campamento = aux;
+						for(Campamento c : camps)
+							if(c.getId() == nuevo.getIdCampamento())
+								campamento = c;
 								
 						if(campamento==null){
 							System.out.println("El campamento no existe.");
 						}
 						else{
-							LocalDate fecha=campamento.getInicioCampamento();
+							LocalDate fecha = campamento.getInicioCampamento();
 							nuevo.setPrecio(-1);
 							
 							boolean status = false;
 							try {
 								status = inscripciones.realizarRegistro(nuevo,fecha,asists);
 							} catch (Exception e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 								guardar();
 								System.exit(0);
 							}
-							inscripciones.asignarPrecio(idc, nuevo.getIdParticipante(), camps);
+							inscripciones.asignarPrecio(nuevo.getIdCampamento(), nuevo.getIdParticipante(), camps);
 							if(status==true){
 								System.out.println("Registro realizado correctamente. El asistente necesitará una atención especial.");
 							}
@@ -684,36 +748,42 @@ public class Programa {
 							}
 						}
 					}
+					//Realiza una inscripción completa
 					else if(opcion == 4) {
-						/* Realiza una inscripción completa */
+						
 						ArrayList<Asistente> asists=asistentes.getListaAsistente();
 						InscripcionCompleta nuevo=new InscripcionCompleta();
-						System.out.println("Introduce el id del participante: ");
+						String aux = null;
 						try {
-							nuevo.setIdParticipante(Integer.parseInt(teclado.readLine()));
+							do {
+								System.out.println("Introduce el id del participante: ");
+								aux = teclado.readLine();
+							}while(!isNumber(aux));		
+							nuevo.setIdParticipante(Integer.parseInt(aux));
 						} catch (NumberFormatException | IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
-						System.out.println("Introduce el id del campamento: ");
-						int idc = -1;
+						
+						aux = null;
 						try {
-							idc = Integer.parseInt(teclado.readLine());
+							do {
+								System.out.println("Introduce el id del campamento: ");
+								aux = teclado.readLine();
+							}while(!isNumber(aux));	
+							nuevo.setIdCampamento(Integer.parseInt(aux));
 						} catch (NumberFormatException | IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
-						nuevo.setIdCampamento(idc);
 						
 						ArrayList<Campamento> camps=campamentos.getListaCampamentos();
 						Campamento campamento = null;
-						for(Campamento aux : camps)
-							if(aux.getId() == idc)
-								campamento = aux;
+						for(Campamento c : camps)
+							if(c.getId() == nuevo.getIdCampamento())
+								campamento = c;
 								
 						if(campamento==null){
 							System.out.println("El campamento no existe.");
@@ -726,12 +796,11 @@ public class Programa {
 							try {
 								status = inscripciones.realizarRegistro(nuevo,fecha,asists);
 							} catch (Exception e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 								guardar();
 								System.exit(0);
 							}
-							inscripciones.asignarPrecio(idc, nuevo.getIdParticipante(), camps);
+							inscripciones.asignarPrecio(nuevo.getIdCampamento(), nuevo.getIdParticipante(), camps);
 							if(status==true){
 								System.out.println("Registro realizado correctamente. El asistente necesitará una atención especial.");
 							}
@@ -772,29 +841,34 @@ public class Programa {
 							System.out.println("Hubo un error, no se encontró el id.");
 						}
 					}
+					//Listar campamentos disponibles.
 					else if(opcion == 6) {
 						
 						try {
 							System.out.println(inscripciones.obtenerCampamentosDisponibles(campamentos.getListaCampamentos()));
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
 					}
+					//Volver al menú principal
 					else if(opcion == 7) 
 						System.out.println("Volviendo al menú principal..............");
+					//Error
 					else
 						System.out.println("Opción incorrecta.");
 				}while(opcion != 7);
 			}
+			//Guardar progreso
 			else if(opcion == 4) 
 				guardar();
+			//Salir del sistema
 			else if(opcion == 5) {
 				guardar();
 				System.out.println("Saliendo del sistema.................");
 			}
+			//Error
 			else {
 				System.out.println("Opción incorrecta.");
 			}
