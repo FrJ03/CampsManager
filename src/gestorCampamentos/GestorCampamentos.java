@@ -101,7 +101,10 @@ public class GestorCampamentos {
 		 * @return void.
 		 */
 		public void crearMonitor(Monitor monitor) {	
-			monitor.setId(this.listaMonitores_.get(this.listaMonitores_.size()).getId() + 1);
+			if(this.listaMonitores_.size() > 0)
+				monitor.setId(this.listaMonitores_.get(this.listaMonitores_.size()).getId() + 1);
+			else
+				monitor.setId(1);
 			this.listaMonitores_.add(monitor);
 			Collections.sort(this.listaMonitores_);
 		}
@@ -111,7 +114,10 @@ public class GestorCampamentos {
 		 * @return void.
 		 */
 		public void crearActividad(Actividad actividad) {
-			actividad.setId(this.listaActividades_.get(this.listaActividades_.size()).getId() + 1);
+			if(this.listaActividades_.size() > 0)
+				actividad.setId(this.listaActividades_.get(this.listaActividades_.size()).getId() + 1);
+			else
+				actividad.setId(1);
 			this.listaActividades_.add(actividad);	
 			Collections.sort(this.listaActividades_);
 		}
@@ -120,7 +126,10 @@ public class GestorCampamentos {
 		 * @return void
 		 */
 		public void crearCampamento(Campamento campamento) {
-			campamento.setId(this.listaCampamentos_.get(this.listaCampamentos_.size()).getId() + 1);
+			if(this.listaCampamentos_.size() > 0)
+				campamento.setId(this.listaCampamentos_.get(this.listaCampamentos_.size()).getId() + 1);
+			else
+				campamento.setId(1);
 	        this.listaCampamentos_.add(campamento);
 	        Collections.sort(this.listaCampamentos_);
 		}

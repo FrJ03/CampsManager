@@ -58,7 +58,10 @@ public class GestorAsistentes {
 	 * @return boolean(false error, true no error).
 	 */
 	public boolean darAltaAsistente(Asistente asistente) {	
-		asistente.setId(this.listaAsistente_.get(this.listaAsistente_.size()).getId() + 1);
+		if(this.listaAsistente_.size() > 0)
+			asistente.setId(this.listaAsistente_.get(this.listaAsistente_.size()).getId() + 1);
+		else
+			asistente.setId(1);
 		this.listaAsistente_.add(asistente);
 		Collections.sort(this.listaAsistente_);
 		return true;//Se ha registrado correctamente ya que no estaba inscrito
