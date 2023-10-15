@@ -218,7 +218,7 @@ public class GestorCampamentos {
 					}
 					
 					if(monitor.getEspecial()) {
-						aux = cam.getListaMonitor().add(monitor);
+						aux = cam.asociarMonitorEspecial(monitor);
 					}
 					
 				}

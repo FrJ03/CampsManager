@@ -1,6 +1,8 @@
 package inscripcion;
 
 import java.time.LocalDate;
+import java.time.Period;
+
 import registro.RegistroTardio;
 import registro.RegistroTemprano;
 
@@ -30,29 +32,33 @@ public class InscripcionCompleta extends Inscripcion{
 	/**
 	 * Método para la creación de un registro en el campamento de forma temprana.
 	 * @param fechaInicio Fecha de inicio del campamento.
-	 * @throws Exception Error: " + fechaInicio +" es mayor que " + fechaInscripcion + ".".
+	 * @throws Exception Error: Faltan menos de 15 dias para el inicio del campamento.
 	 */
 	@Override public RegistroTemprano crearRegistroTemprano(LocalDate fechaInicio) throws Exception {
 		LocalDate fechaInscripcion = LocalDate.now();
 		RegistroTemprano r = new RegistroTemprano();
-		if(fechaInscripcion.compareTo(fechaInicio) > 0)
+		
+		Period periodo = fechaInscripcion.until(fechaInicio);
+		if(periodo.getDays() >= 15)
 			r.registro(fechaInscripcion, fechaInicio);
 		else
-			throw new Exception("Error: " + fechaInicio +" es mayor que " + fechaInscripcion + ".");
+			throw new Exception("Error: Faltan menos de 15 dias para el inicio del campamento.");
 		return r;
 	}
 	/**
 	 * Método para la creación de un registro en el campamento de forma tardía.
 	 * @param fechaInicio Fecha de inicio del campamento.
-	 * @throws Exception Error: " + fechaInicio +" es menor que " + fechaInscripcion + ".".
+	 * @throws Exception Error: Faltan mas de 15 días o menos de 2 dias para el inicio..
 	 */
 	@Override public RegistroTardio crearRegistroTardio(LocalDate fechaInicio) throws Exception {
 		LocalDate fechaInscripcion = LocalDate.now();
 		RegistroTardio r = new RegistroTardio();
-		if(fechaInscripcion.compareTo(fechaInicio) > 0)
+		
+		Period periodo = fechaInscripcion.until(fechaInicio);
+		if(periodo.getDays() >= 2 && periodo.getDays() < 15)
 			r.registro(fechaInscripcion, fechaInicio);
 		else
-			throw new Exception("Error: " + fechaInicio +" es menor que " + fechaInscripcion + ".");
+			throw new Exception("Error: Faltan mas de 15 días o menos de 2 dias para el inicio.");
 		return r;
 	}
 	/**
