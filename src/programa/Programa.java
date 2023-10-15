@@ -69,7 +69,7 @@ public class Programa {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				salir();
+				guardar();
 				System.exit(0);
 			}
 			if(opcion == 1) {				
@@ -79,7 +79,7 @@ public class Programa {
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-						salir();
+						guardar();
 						System.exit(0);
 					}
 					if(opcion == 1) {
@@ -96,7 +96,7 @@ public class Programa {
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						System.out.print("Inserte los apellidos del asistente: ");
@@ -105,7 +105,7 @@ public class Programa {
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						String aux = null;
@@ -116,7 +116,7 @@ public class Programa {
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-								salir();
+								guardar();
 								System.exit(0);
 							}
 						}while(!isNumber(aux.substring(0, 4)) || !isNumber(aux.substring(5, 7)) || !isNumber(aux.substring(8, 10)) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
@@ -130,7 +130,7 @@ public class Programa {
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-								salir();
+								guardar();
 								System.exit(0);
 							}
 							if(letra.equalsIgnoreCase("s"))
@@ -149,7 +149,7 @@ public class Programa {
 						} catch (NumberFormatException | IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						System.out.print("Inserte el nuevo id: ");
@@ -159,7 +159,7 @@ public class Programa {
 						} catch (NumberFormatException | IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						System.out.print("Inserte el nuevo nombre: ");
@@ -169,7 +169,7 @@ public class Programa {
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						System.out.print("Inserte los nuevos apellidos: ");
@@ -179,7 +179,7 @@ public class Programa {
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						String aux = null;
@@ -190,7 +190,7 @@ public class Programa {
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-								salir();
+								guardar();
 								System.exit(0);
 							}
 						}while(!isNumber(aux.substring(0, 4)) || !isNumber(aux.substring(5, 7)) || !isNumber(aux.substring(8, 10)) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
@@ -204,7 +204,7 @@ public class Programa {
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-								salir();
+								guardar();
 								System.exit(0);
 							}
 							if(letra.equalsIgnoreCase("s"))
@@ -221,7 +221,7 @@ public class Programa {
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}						
 					}
@@ -238,7 +238,7 @@ public class Programa {
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-						salir();
+						guardar();
 						System.exit(0);
 					}
 					if(opcion == 1) {
@@ -262,7 +262,7 @@ public class Programa {
 								} catch (IOException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
-									salir();
+									guardar();
 									System.exit(0);
 								}
 							}while(!isNumber(aux.substring(0, 4)) || !isNumber(aux.substring(5, 7)) || !isNumber(aux.substring(8, 10)) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
@@ -274,7 +274,7 @@ public class Programa {
 								} catch (IOException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
-									salir();
+									guardar();
 									System.exit(0);
 								}
 							}while(!isNumber(aux.substring(0, 4)) || !isNumber(aux.substring(5, 7)) || !isNumber(aux.substring(8, 10)) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));;			
@@ -289,7 +289,7 @@ public class Programa {
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-								salir();
+								guardar();
 								System.exit(0);
 							}
 							if(n.equalsIgnoreCase("i"))
@@ -308,7 +308,7 @@ public class Programa {
 							} catch (NumberFormatException | IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-								salir();
+								guardar();
 								System.exit(0);
 							}
 						}while(max < 1);
@@ -322,7 +322,7 @@ public class Programa {
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						String n = null;
@@ -334,7 +334,7 @@ public class Programa {
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-								salir();
+								guardar();
 								System.exit(0);
 							}
 							if(n.equalsIgnoreCase("i"))
@@ -353,7 +353,7 @@ public class Programa {
 							} catch (NumberFormatException | IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-								salir();
+								guardar();
 								System.exit(0);
 							}
 						}while(maxP < 1);
@@ -365,7 +365,7 @@ public class Programa {
 							} catch (NumberFormatException | IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-								salir();
+								guardar();
 								System.exit(0);
 							}
 						}while(maxM < 1);
@@ -378,7 +378,7 @@ public class Programa {
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-								salir();
+								guardar();
 								System.exit(0);
 							}
 							if(t.equalsIgnoreCase("t"))
@@ -397,7 +397,7 @@ public class Programa {
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						System.out.print("Inserte los apellidos del monitor: ");
@@ -406,7 +406,7 @@ public class Programa {
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						String letra = null;
@@ -417,7 +417,7 @@ public class Programa {
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-								salir();
+								guardar();
 								System.exit(0);
 							}
 							if(letra.equalsIgnoreCase("s"))
@@ -437,7 +437,7 @@ public class Programa {
 						} catch (NumberFormatException | IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						ArrayList<Monitor> mons=campamentos.getListaMonitores();
@@ -456,7 +456,7 @@ public class Programa {
 							} catch (NumberFormatException | IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-								salir();
+								guardar();
 								System.exit(0);
 							}
 							ArrayList<Actividad> acts=campamentos.getListaActividades();
@@ -481,7 +481,7 @@ public class Programa {
 						} catch (NumberFormatException | IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						System.out.println("Inserte el id de la actividad que quiera asociar: ");
@@ -491,7 +491,7 @@ public class Programa {
 						} catch (NumberFormatException | IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						ArrayList<Actividad> acts=campamentos.getListaActividades();
@@ -515,7 +515,7 @@ public class Programa {
 						} catch (NumberFormatException | IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 					
@@ -526,7 +526,7 @@ public class Programa {
 						} catch (NumberFormatException | IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						ArrayList<Monitor> mons=campamentos.getListaMonitores();
@@ -555,7 +555,7 @@ public class Programa {
 						} catch (NumberFormatException | IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						
@@ -566,7 +566,7 @@ public class Programa {
 						} catch (NumberFormatException | IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						ArrayList<Monitor> mons=campamentos.getListaMonitores();
@@ -599,7 +599,7 @@ public class Programa {
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-						salir();
+						guardar();
 						System.exit(0);
 					}
 					if(opcion == 1) {
@@ -622,7 +622,7 @@ public class Programa {
 						} catch (NumberFormatException | IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						System.out.println("Introduce el id del campamento: ");
@@ -632,7 +632,7 @@ public class Programa {
 						} catch (NumberFormatException | IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						nuevo.setIdCampamento(idc);
@@ -658,7 +658,7 @@ public class Programa {
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-								salir();
+								guardar();
 								System.exit(0);
 							}
 							if(status==true){
@@ -679,7 +679,7 @@ public class Programa {
 						} catch (NumberFormatException | IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						System.out.println("Introduce el id del campamento: ");
@@ -689,7 +689,7 @@ public class Programa {
 						} catch (NumberFormatException | IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						nuevo.setIdCampamento(idc);
@@ -715,7 +715,7 @@ public class Programa {
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-								salir();
+								guardar();
 								System.exit(0);
 							}
 							if(status==true){
@@ -735,7 +735,7 @@ public class Programa {
 						} catch (NumberFormatException | IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						System.out.println("Introduzca el id del participante asociado a la inscripcion: ");
@@ -745,7 +745,7 @@ public class Programa {
 						} catch (NumberFormatException | IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 						ArrayList<Campamento> camps=campamentos.getListaCampamentos();
@@ -765,7 +765,7 @@ public class Programa {
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-							salir();
+							guardar();
 							System.exit(0);
 						}
 					}
@@ -776,18 +776,23 @@ public class Programa {
 				}while(opcion != 7);
 			}
 			else if(opcion == 4) 
-				salir();
+				guardar();
+			else if(opcion == 5) {
+				guardar();
+				System.out.println("Saliendo del sistema.................");
+			}
 			else {
 				System.out.println("Opción incorrecta.");
 			}
-		}while(opcion != 4);
+		}while(opcion != 5);
 	}
 	private static int menuPrincipal() throws IOException {
 		System.out.println("----------------------------------");
 		System.out.println("1. Gestión de Asistentes.");
 		System.out.println("2. Gestión de Campamentos.");
 		System.out.println("3. Gestión de Inscripciones.");
-		System.out.println("4. Salir.");
+		System.out.println("4. Guardar Cambios.");
+		System.out.println("5. Salir.");
 		System.out.println("----------------------------------");
 		System.out.print("Seleccione una opción: ");
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
@@ -862,7 +867,7 @@ public class Programa {
 		else 
 			return false;
 	}
-	private static void salir() {
+	private static void guardar() {
 		Properties p = new Properties();
 		BufferedReader reader;
 		try {
@@ -886,8 +891,7 @@ public class Programa {
 		}catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
-		System.out.println("Saliendo del sistema.................");
+		}
 	}
 	private static boolean isNumber(String s) {
 		return s != null && s.matches("[0-9]+");
