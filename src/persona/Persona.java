@@ -36,7 +36,7 @@ public class Persona implements Serializable{
 	  public int getId() {return id_;}
 	  public String getNombre() {return nombre_;}
 	  public String getApellidos() {return apellidos_;}
-	  public String getNombreCompleto() {   String nombrecompleto=this.nombre_+this.apellidos_;
+	  public String getNombreCompleto() {   String nombrecompleto=this.nombre_+ " " + this.apellidos_;
 	                                          return nombrecompleto;}
 	  public void setId(int id) {this.id_=id;}
 	  public void setNombre(String nombre) {this.nombre_=nombre;}
