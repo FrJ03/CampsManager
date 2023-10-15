@@ -174,7 +174,7 @@ public class Actividad	implements Serializable, Comparable<Actividad>{
 		for(Monitor mon : this.listaMonitores_) {
 			aux += "\n\t\tId: " + mon.getId() + "\n\t\tNombre: " + mon.getNombreCompleto(); 
 		}
-		
+		aux += "\n";
 		return aux;
 	}
 	/**

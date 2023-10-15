@@ -194,14 +194,12 @@ import monitor.Monitor;
 		
 		for(Monitor mon : this.listaMonitor_) {
 			aux += "\n\t\tId: " + mon.getId() + "\n\t\tNombre: " + mon.getNombreCompleto() + "\n";
-			//aux.concat(mon.getNombre() + mon.getApellidos());
 		}
 		aux += "\n\tLista de Actividades:";
 		for(Actividad act : this.listaActividad_) {
 			aux += "\n\t\tId: " + act.getId() + "\n\t\tNombre: " + act.getName() + "\n";
-			//aux.concat(act.getName());
 		}
-		
+		aux += "\n";
 		return aux;
 	}
 	 	
