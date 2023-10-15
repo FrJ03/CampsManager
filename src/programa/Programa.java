@@ -458,7 +458,7 @@ public class Programa {
 								System.out.println("No existe una actividad con ese id.");
 							}
 							else{
-								campamentos.Actividad(actividad,monitor);
+								campamentos.asociarMonitorActividad(actividad,monitor);
 							}
 						}
 					}
