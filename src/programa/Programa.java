@@ -651,6 +651,7 @@ public class Programa {
 								guardar();
 								System.exit(0);
 							}
+							inscripciones.asignarPrecio(idc, nuevo.getIdParticipante(), camps);
 							if(status==true){
 								System.out.println("Registro realizado correctamente.");
 							}
@@ -695,9 +696,7 @@ public class Programa {
 						}
 						else{
 							LocalDate fecha=campamento.getInicioCampamento();
-
-							float pre= inscripciones.asignarPrecio(idc, nuevo.getIdParticipante(), camps);
-							nuevo.setPrecio(pre);
+							nuevo.setPrecio(-1);
 							
 							boolean status = false;
 							try {
@@ -708,11 +707,12 @@ public class Programa {
 								guardar();
 								System.exit(0);
 							}
+							inscripciones.asignarPrecio(idc, nuevo.getIdParticipante(), camps);
 							if(status==true){
 								System.out.println("Registro realizado correctamente.");
 							}
 							else{
-								System.out.println("Hubo un error.");
+								System.out.println("Registro realizado correctamente. El asistente necesitará una atención especial.");
 							}
 						}
 					}

@@ -205,7 +205,7 @@ public class GestorInscripciones {
 	private float calcularPrecio(InscripcionParcial inscripcion, ArrayList<Campamento> ListaCampamentos) {
 		float precio=100;//Precio base sin actividades
 		for(int aux=0;aux<ListaCampamentos.size();aux++) {
-			if(ListaCampamentos.get(aux).getId()== inscripcion.getIdCampamento()) {
+			if(ListaCampamentos.get(aux).getId() == inscripcion.getIdCampamento()) {
 				ArrayList<Actividad> Listaactividades =ListaCampamentos.get(aux).getListaActividad();
 				if(Listaactividades.size()==0) {
 					return precio;
