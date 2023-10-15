@@ -809,40 +809,8 @@ public class Programa {
 							}
 						}
 					}
-					else if(opcion == 5) {
-						/* Asigna precio a una inscripción y comprueba que se ha realizado correctamente */
-						System.out.println("Introduzca el id del campamento asociado a la inscripcion: ");
-						int idc = -1;
-						try {
-							idc = Integer.parseInt(teclado.readLine());
-						} catch (NumberFormatException | IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
-						System.out.println("Introduzca el id del participante asociado a la inscripcion: ");
-						int idp = -1;
-						try {
-							idp = Integer.parseInt(teclado.readLine());
-						} catch (NumberFormatException | IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
-						ArrayList<Campamento> camps=campamentos.getListaCampamentos();
-						
-						int resultado= inscripciones.asignarPrecio(idc, idp, camps);
-						if(resultado==0){
-							System.out.println("Precio asignado correctamente");
-						}
-						if(resultado==-1){
-							System.out.println("Hubo un error, no se encontró el id.");
-						}
-					}
 					//Listar campamentos disponibles.
-					else if(opcion == 6) {
+					else if(opcion == 5) {
 						
 						try {
 							System.out.println(inscripciones.obtenerCampamentosDisponibles(campamentos.getListaCampamentos()));
@@ -853,12 +821,12 @@ public class Programa {
 						}
 					}
 					//Volver al menú principal
-					else if(opcion == 7) 
+					else if(opcion == 6) 
 						System.out.println("Volviendo al menú principal..............");
 					//Error
 					else
 						System.out.println("Opción incorrecta.");
-				}while(opcion != 7);
+				}while(opcion != 6);
 			}
 			//Guardar progreso
 			else if(opcion == 4) 
@@ -966,9 +934,8 @@ public class Programa {
 			System.out.println("2. Lista de inscripciones completas.");
 			System.out.println("3. Realizar registro parcial.");
 			System.out.println("4. Realizar registro completo.");
-			System.out.println("5. Asignar precio.");
-			System.out.println("6. Listar campamentos disponibles.");
-			System.out.println("7. Atrás.");
+			System.out.println("5. Listar campamentos disponibles.");
+			System.out.println("6. Atrás.");
 			System.out.println("----------------------------------");
 			System.out.print("Seleccione una opción: ");
 			aux = teclado.readLine();			
