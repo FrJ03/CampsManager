@@ -262,11 +262,11 @@ public class GestorInscripciones {
 		}
 		
 		for(Campamento cam : listaCampamentos) {
-			Period periodo = cam.getInicioCampamento().until(LocalDate.now());
+			Period periodo = LocalDate.now().until(cam.getInicioCampamento());
 	        // Obtener el número de días de la diferencia
 	        int diferenciaDias = periodo.getDays();
 	        
-			if(diferenciaDias > 2 ) {
+			if(diferenciaDias >= 2 ) {
 				
 				for(InscripcionParcial ins : this.listaInscripcionParcial_) {
 					
@@ -288,7 +288,7 @@ public class GestorInscripciones {
 				}
 				
 				if(cam.getAsistentesMax() > sumaAsistentes) {
-					listaAux.concat(cam.toString());
+					listaAux += cam.toString();
 				}
 				
 			}
