@@ -64,10 +64,11 @@ import monitor.Monitor;
 		this.fincampamento_=fincampamento;
 		this.nivel_=nivel;
 		this.asistentesMax_=asistentesMax;
+		this.listaActividad_ = new ArrayList<Actividad>();
+		this.listaMonitor_ = new ArrayList<Monitor>();
 		
-		
-		this.listaActividad_.clear();
-		this.listaMonitor_.clear();
+		/*this.listaActividad_.clear();
+		this.listaMonitor_.clear();*/
 	}
 	 /**
 	  * Observador de la varible id
