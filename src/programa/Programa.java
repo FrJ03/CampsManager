@@ -119,7 +119,7 @@ public class Programa {
 								guardar();
 								System.exit(0);
 							}
-						}while(!isNumber(aux.substring(0, 4)) || !isNumber(aux.substring(5, 7)) || !isNumber(aux.substring(8, 10)) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
+						}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
 						LocalDate fecha = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
 						nuevo.setFechaNacimiento(fecha);
 						String letra = null;
@@ -193,7 +193,7 @@ public class Programa {
 								guardar();
 								System.exit(0);
 							}
-						}while(!isNumber(aux.substring(0, 4)) || !isNumber(aux.substring(5, 7)) || !isNumber(aux.substring(8, 10)) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
+						}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
 						LocalDate fecha = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
 						String letra = null;
 						boolean especial = false;
@@ -255,7 +255,7 @@ public class Programa {
 									guardar();
 									System.exit(0);
 								}
-							}while(!isNumber(aux.substring(0, 4)) || !isNumber(aux.substring(5, 7)) || !isNumber(aux.substring(8, 10)) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
+							}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
 							fechaInicio = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
 							do {
 								System.out.print("Inserte la fecha de finalización (yyyy/mm/dd): ");
@@ -267,7 +267,7 @@ public class Programa {
 									guardar();
 									System.exit(0);
 								}
-							}while(!isNumber(aux.substring(0, 4)) || !isNumber(aux.substring(5, 7)) || !isNumber(aux.substring(8, 10)) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));;			
+							}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));;			
 							fechaFin = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
 						}while(fechaFin.compareTo(fechaInicio) <= 0);
 						String n = null;
@@ -777,66 +777,82 @@ public class Programa {
 		}while(opcion != 5);
 	}
 	private static int menuPrincipal() throws IOException {
-		System.out.println("----------------------------------");
-		System.out.println("1. Gestión de Asistentes.");
-		System.out.println("2. Gestión de Campamentos.");
-		System.out.println("3. Gestión de Inscripciones.");
-		System.out.println("4. Guardar Cambios.");
-		System.out.println("5. Salir.");
-		System.out.println("----------------------------------");
-		System.out.print("Seleccione una opción: ");
+		String aux = null;
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-        int opcion = Integer.parseInt(teclado.readLine());
+		do {
+			System.out.println("----------------------------------");
+			System.out.println("1. Gestión de Asistentes.");
+			System.out.println("2. Gestión de Campamentos.");
+			System.out.println("3. Gestión de Inscripciones.");
+			System.out.println("4. Guardar Cambios.");
+			System.out.println("5. Salir.");
+			System.out.println("----------------------------------");
+			System.out.print("Seleccione una opción: ");
+			aux = teclado.readLine();
+		}while(!isNumber(aux));
+        int opcion = Integer.parseInt(aux);
         System.out.println("----------------------------------");
         return opcion;
 	}
 	
 	private static int menuGestorAsistentes() throws IOException {
-		System.out.println("----------------------------------");
-		System.out.println("1. Lista de asistentes.");
-		System.out.println("2. Dar de alta asistente.");
-		System.out.println("3. Modificar asistente.");
-		System.out.println("4. Atrás.");
-		System.out.println("----------------------------------");
-		System.out.print("Seleccione una opción: ");
+		String aux = null;
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-        int opcion = Integer.parseInt(teclado.readLine());
+		do {
+			System.out.println("----------------------------------");
+			System.out.println("1. Lista de asistentes.");
+			System.out.println("2. Dar de alta asistente.");
+			System.out.println("3. Modificar asistente.");
+			System.out.println("4. Atrás.");
+			System.out.println("----------------------------------");
+			System.out.print("Seleccione una opción: ");
+			aux = teclado.readLine();
+		}while(!isNumber(aux));
+        int opcion = Integer.parseInt(aux);
         System.out.println("----------------------------------");
         return opcion;
 	}
 	private static int menuGestorCampamentos() throws IOException {
-		System.out.println("----------------------------------");
-		System.out.println("1. Lista de campamentos.");
-		System.out.println("2. Lista de actividades.");
-		System.out.println("3. Lista de monitores.");
-		System.out.println("4. Crear campamento.");
-		System.out.println("5. Crear actividad.");
-		System.out.println("6. Crear monitor.");
-		System.out.println("7. Asociar monitor a una actividad.");
-		System.out.println("8. Asociar actividad a un campamento.");
-		System.out.println("9. Asociar monitor a un campamento.");
-		System.out.println("10. Asociar monitor especial a un campamento.");
-		System.out.println("11. Atrás.");
-		System.out.println("----------------------------------");
-		System.out.print("Seleccione una opción: ");
+		String aux = null;
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-        int opcion = Integer.parseInt(teclado.readLine());
+		do {
+			System.out.println("----------------------------------");
+			System.out.println("1. Lista de campamentos.");
+			System.out.println("2. Lista de actividades.");
+			System.out.println("3. Lista de monitores.");
+			System.out.println("4. Crear campamento.");
+			System.out.println("5. Crear actividad.");
+			System.out.println("6. Crear monitor.");
+			System.out.println("7. Asociar monitor a una actividad.");
+			System.out.println("8. Asociar actividad a un campamento.");
+			System.out.println("9. Asociar monitor a un campamento.");
+			System.out.println("10. Asociar monitor especial a un campamento.");
+			System.out.println("11. Atrás.");
+			System.out.println("----------------------------------");
+			System.out.print("Seleccione una opción: ");
+			aux = teclado.readLine();
+		}while(!isNumber(aux));
+        int opcion = Integer.parseInt(aux);
         System.out.println("----------------------------------");
         return opcion;
 	}
 	private static int menuGestorInscripciones() throws IOException {
-		System.out.println("----------------------------------");
-		System.out.println("1. Lista de inscripciones parciales.");
-		System.out.println("2. Lista de inscripciones completas.");
-		System.out.println("3. Realizar registro parcial.");
-		System.out.println("4. Realizar registro completo.");
-		System.out.println("5. Asignar precio.");
-		System.out.println("6. Listar campamentos disponibles.");
-		System.out.println("7. Atrás.");
-		System.out.println("----------------------------------");
-		System.out.print("Seleccione una opción: ");
+		String aux = null;
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-        int opcion = Integer.parseInt(teclado.readLine());
+		do {
+			System.out.println("----------------------------------");
+			System.out.println("1. Lista de inscripciones parciales.");
+			System.out.println("2. Lista de inscripciones completas.");
+			System.out.println("3. Realizar registro parcial.");
+			System.out.println("4. Realizar registro completo.");
+			System.out.println("5. Asignar precio.");
+			System.out.println("6. Listar campamentos disponibles.");
+			System.out.println("7. Atrás.");
+			System.out.println("----------------------------------");
+			System.out.print("Seleccione una opción: ");
+			aux = teclado.readLine();			
+		}while(!isNumber(aux));
+        int opcion = Integer.parseInt(aux);
         System.out.println("----------------------------------");
         return opcion;
 	}
@@ -884,5 +900,8 @@ public class Programa {
 	}
 	private static boolean isNumber(String s) {
 		return s != null && s.matches("[0-9]+");
+	}
+	private static boolean isDateFormat(String date) {
+		return date.length() == 10 && isNumber(date.substring(0, 4)) && date.charAt(4) == '/' && isNumber(date.substring(5, 7)) && date.charAt(7) == '/' && isNumber(date.substring(8, 10));
 	}
 }
