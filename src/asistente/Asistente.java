@@ -80,10 +80,10 @@ import persona.Persona;
     			 	"\nFecha de Nacimiento: " + this.fechaNacimiento_.toString() + 
     			 	"\nGrupo Especial: ";
     	 if(this.especial_) {
-    		 ret.concat("Si\n");
+    		 ret += "Si\n";
     	 }
     	 else {
-    		 ret.concat("No\n");
+    		 ret += "No\n";
     	 }
     	 return ret;
      }
