@@ -189,15 +189,17 @@ import monitor.Monitor;
 	  * */
 	public String toString(){
 		String aux = "Información del Campamento\nId:" + this.id_ + "\nFecha de Inicio:" + this.iniciocampamento_ + 
-				"\nFin del campamento:" + this.fincampamento_ + "\nNivel Academico:"+ this.nivel_ + "\nNumero maximo de asistentes:" + this.asistentesMax_ + "\n";
+				"\nFin del campamento:" + this.fincampamento_ + "\nNivel Academico:"+ this.nivel_ + "\nNumero maximo de asistentes:" + this.asistentesMax_ + "\n\tLista de Monitores:";
 		
 		
 		for(Monitor mon : this.listaMonitor_) {
-			aux.concat(mon.getNombre() + mon.getApellidos());
+			aux += "\n\t\tId: " + mon.getId() + "\n\t\tNombre: " + mon.getNombreCompleto() + "\n";
+			//aux.concat(mon.getNombre() + mon.getApellidos());
 		}
-		
+		aux += "\n\tLista de Actividades:";
 		for(Actividad act : this.listaActividad_) {
-			aux.concat(act.getName());
+			aux += "\n\t\tId: " + act.getId() + "\n\t\tNombre: " + act.getName() + "\n";
+			//aux.concat(act.getName());
 		}
 		
 		return aux;
