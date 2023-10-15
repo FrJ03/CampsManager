@@ -20,101 +20,119 @@ import inscripcion.InscripcionCompleta;
 import inscripcion.InscripcionParcial;
 import monitor.Monitor;
 
+
+/**
+ * Clase que representa el programa principal.
+ */
 public class Programa {
+	
+	/**
+	 * Variable que contiene la ruta del fichero que contiene las direcciones de los ficheros de datos.
+	 */
 	private static String dir_ = "rutas.txt";
 	
+	/**
+	 * Función principal del sistema.
+	 * @param args
+	 */
 	public static void main(String args[]){
 		int opcion = 0;
-		
-		Properties p = new Properties();
 		BufferedReader reader = null;
 		GestorDatos datos = null;
 		GestorAsistentes asistentes = null;
 		GestorCampamentos campamentos = null;
 		GestorInscripciones inscripciones = null;
-		try {
+		
+		//Abro el fichero de la variable dir_ mediante la clase properties debido a que su contenido está estructurado en par clave=valor
+		Properties p = new Properties();
+		try {			
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
+			
+			//Creo una instacia del gestor de datos
 			datos = GestorDatos.getInstance();
 			
+			//Leo los asistentes de su fichero correspondientes
 			asistentes = GestorAsistentes.getInstance();
 			asistentes.setListaAsistentes(datos.getAsistentes(p.getProperty("asistentes")));
+			
+			//Leo los campamentos, actividades y monitores de sus ficheros
 			campamentos = GestorCampamentos.getInstance();
 			campamentos.setListaActividades(datos.getActividades(p.getProperty("actividades")));
 			campamentos.setListaCampamentos(datos.getCampamentos(p.getProperty("campamentos")));
 			campamentos.setListaMonitores(datos.getMonitores(p.getProperty("monitores")));
+			
+			//Leo los ficheros de inscripciones
 			inscripciones = GestorInscripciones.getInstance();
 			inscripciones.setListaInscripcionCompleta(datos.getInscripcionesCompletas(p.getProperty("inscripcionesCompletas")));
 			inscripciones.setListaInscripcionParcial(datos.getInscripcionesParciales(p.getProperty("inscripcionesParciales")));
+			
 			reader.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.exit(0);
-		}catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.exit(0);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 			System.exit(0);
 		}
 		
-		
+		//Buffer para leer datos por teclado
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+		
+		//Bucle del menú principal
 		do {
 			try {
 				opcion = menuPrincipal();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				guardar();
 				System.exit(0);
 			}
-			if(opcion == 1) {				
+			
+			//Gestor de Asistentes
+			if(opcion == 1) {	
+				
+				//Bucle del menu de asistentes
 				do {
 					try {
 						opcion = menuGestorAsistentes();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 						guardar();
 						System.exit(0);
 					}
+					//Listar asistentes
 					if(opcion == 1) {
 						ArrayList<Asistente> listaAsistentes = asistentes.getListaAsistente();
 						for(Asistente asistente : listaAsistentes) {
 							System.out.println(asistente.toString());
 						}
 					}
+					//Dar de alta un asistente
 					else if(opcion == 2) {
 						Asistente nuevo = new Asistente();
+						
 						System.out.print("Inserte el nombre del asistente: ");
 						try {
 							nuevo.setNombre(teclado.readLine());
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
+						
 						System.out.print("Inserte los apellidos del asistente: ");
 						try {
 							nuevo.setApellidos(teclado.readLine());
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
+						
 						String aux = null;
 						do {
 							System.out.print("Inserte la fecha de nacimiento (yyyy/mm/dd): ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 								guardar();
 								System.exit(0);
@@ -122,101 +140,113 @@ public class Programa {
 						}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
 						LocalDate fecha = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
 						nuevo.setFechaNacimiento(fecha);
-						String letra = null;
+						
+						aux = null;
 						do {
 							System.out.print("¿Necesita atención especial? (S/N): ");
 							try {
-								letra = teclado.readLine();
+								aux = teclado.readLine();
 							} catch (IOException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 								guardar();
 								System.exit(0);
 							}
-							if(letra.equalsIgnoreCase("s"))
+							if(aux.equalsIgnoreCase("s"))
 								nuevo.setEspecial(true);
-							else if(letra.equalsIgnoreCase("n"))
+							else if(aux.equalsIgnoreCase("n"))
 								nuevo.setEspecial(false);
 								
-						}while(!letra.equalsIgnoreCase("s") && !letra.equalsIgnoreCase("n"));
+						}while(!aux.equalsIgnoreCase("s") && !aux.equalsIgnoreCase("n"));
+						
 						asistentes.darAltaAsistente(nuevo);
 					}
+					//Modificar asistente
 					else if(opcion == 3) {
-						System.out.print("Inserte el id del asistente a modificar: ");
 						int idAntiguo = -1;
-						try {
-							idAntiguo = Integer.parseInt(teclado.readLine());
+						String aux = null;
+						try {							
+							do {
+								System.out.print("Inserte el id del asistente a modificar: ");
+								aux = teclado.readLine();
+							}while(!isNumber(aux));
+							idAntiguo = Integer.parseInt(aux);
 						} catch (NumberFormatException | IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
-						System.out.print("Inserte el nuevo id: ");
+						
+						aux = null;
 						int idNuevo = -1;
 						try {
-							idNuevo = Integer.parseInt(teclado.readLine());
+							do {
+								System.out.print("Inserte el nuevo id: ");
+								aux = teclado.readLine();
+							}while(!isNumber(aux));
+							idNuevo = Integer.parseInt(aux);
 						} catch (NumberFormatException | IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
+						
 						System.out.print("Inserte el nuevo nombre: ");
 						String nombre = null;
 						try {
 							nombre = teclado.readLine();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
+						
 						System.out.print("Inserte los nuevos apellidos: ");
 						String apellidos = null;
 						try {
 							apellidos = teclado.readLine();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 							guardar();
 							System.exit(0);
 						}
-						String aux = null;
+						
+						aux = null;
 						do {
 							System.out.print("Inserte la fecha de nacimiento (yyyy/mm/dd): ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 								guardar();
 								System.exit(0);
 							}
 						}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
 						LocalDate fecha = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
-						String letra = null;
+						
+						aux= null;
 						boolean especial = false;
 						do {
 							System.out.print("¿Necesita atención especial? (S/N): ");
 							try {
-								letra = teclado.readLine();
+								aux = teclado.readLine();
 							} catch (IOException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 								guardar();
 								System.exit(0);
 							}
-							if(letra.equalsIgnoreCase("s"))
+							if(aux.equalsIgnoreCase("s"))
 								especial = true;
-							else if(letra.equalsIgnoreCase("n"))
+							else if(aux.equalsIgnoreCase("n"))
 								especial = false;
 								
-						}while(!letra.equalsIgnoreCase("s") && !letra.equalsIgnoreCase("n"));
+						}while(!aux.equalsIgnoreCase("s") && !aux.equalsIgnoreCase("n"));
+						
 						asistentes.modificarAsistente(idAntiguo, idNuevo, nombre, apellidos, fecha, especial);
 					}
+					//Volver al menú principal
 					else if(opcion == 4) 
 						System.out.println("Volviendo al menú principal..............");
+					//Error
 					else
 						System.out.println("Opción incorrecta.");
 				}while(opcion != 4);
@@ -770,6 +800,12 @@ public class Programa {
 			}
 		}while(opcion != 5);
 	}
+	
+	/**
+	 * Función que muestra el menú principal del sistema y devuelve la opción elegida por el usuario.
+	 * @return int
+	 * @throws IOException
+	 */
 	private static int menuPrincipal() throws IOException {
 		String aux = null;
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
@@ -789,6 +825,11 @@ public class Programa {
         return opcion;
 	}
 	
+	/**
+	 * Función que muestra el menú de gestíon de asistentes y devuelve la opción elegida por el usuario.
+	 * @return
+	 * @throws IOException
+	 */
 	private static int menuGestorAsistentes() throws IOException {
 		String aux = null;
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
@@ -806,6 +847,12 @@ public class Programa {
         System.out.println("----------------------------------");
         return opcion;
 	}
+	
+	/**
+	 * Función que muestra el menú de gestíon de campamentos y devuelve la opción elegida por el usuario.
+	 * @return
+	 * @throws IOException
+	 */
 	private static int menuGestorCampamentos() throws IOException {
 		String aux = null;
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
@@ -830,6 +877,12 @@ public class Programa {
         System.out.println("----------------------------------");
         return opcion;
 	}
+	
+	/**
+	 * Función que muestra el menú de gestíon de inscripciones y devuelve la opción elegida por el usuario.
+	 * @return
+	 * @throws IOException
+	 */
 	private static int menuGestorInscripciones() throws IOException {
 		String aux = null;
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
@@ -850,6 +903,14 @@ public class Programa {
         System.out.println("----------------------------------");
         return opcion;
 	}
+	
+	/**
+	 * Función que comprueba si una fecha es válida.
+	 * @param year Año de la fecha
+	 * @param month Mes de la fecha
+	 * @param day Día de la fecha
+	 * @return
+	 */
 	private static boolean dateValid(int year, int month, int day) {
 		if((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && day <= 31 && day > 0)
 			return true;
@@ -866,6 +927,10 @@ public class Programa {
 		else 
 			return false;
 	}
+	
+	/**
+	 * Función que guarda los datos en los ficheros correspondientes.
+	 */
 	private static void guardar() {
 		Properties p = new Properties();
 		BufferedReader reader;
@@ -892,9 +957,20 @@ public class Programa {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Función que comprueba si una cadena es un número.
+	 * @param s Cadena a comprobar
+	 * @return Boolean
+	 */
 	private static boolean isNumber(String s) {
 		return s != null && s.matches("[0-9]+");
 	}
+	/**
+	 * Función que comprueba si una cadena de caracteres tiene el formato de fecha 'yyyy/mm/dd'.
+	 * @param date Cadena a comprobar
+	 * @return Booelan
+	 */
 	private static boolean isDateFormat(String date) {
 		return date.length() == 10 && isNumber(date.substring(0, 4)) && date.charAt(4) == '/' && isNumber(date.substring(5, 7)) && date.charAt(7) == '/' && isNumber(date.substring(8, 10));
 	}
