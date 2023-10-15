@@ -36,9 +36,6 @@ public class GestorCampamentos {
 			this.listaActividades_ = new ArrayList<Actividad>();
 			this.listaCampamentos_ = new ArrayList<Campamento>();
 			this.listaMonitores_ = new ArrayList<Monitor>();
-			/*this.listaCampamentos_.clear();
-			this.listaMonitores_.clear();
-			this.listaActividades_.clear();*/
 		};
 		/**
 		 * Metodo que sirve de acceso a la instancia.

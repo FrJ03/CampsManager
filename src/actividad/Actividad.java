@@ -58,7 +58,6 @@ public class Actividad	implements Serializable, Comparable<Actividad>{
 		this.monitoresMax_=monitoresMax;
 		this.turno_=turno;
 		this.listaMonitores_ = new ArrayList<Monitor>();
-		//this.listaMonitores_.clear();
 	};
 	/**
 	 * Observador del identificador de la actividad.
