@@ -170,9 +170,9 @@ public class Actividad	implements Serializable, Comparable<Actividad>{
 	public String toString(){
 		String aux = "Información de la Actividad\n\tId: " + this.id_ + "\n\tNombre:" + this.name_ + "\n\tNivel Academico:"+ this.nivel_ + 
 				"\n\tTurno:" + this.turno_ + "\n\tNumero maximo de participantes:" + this.participantesMax_ + 
-				"\n\tNumero de monitores:" + this.monitoresMax_ + "\n";
+				"\n\tNumero máximo de monitores:" + this.monitoresMax_;
 		for(Monitor mon : this.listaMonitores_) {
-			aux.concat(mon.getNombre() + mon.getApellidos());
+			aux += "\n\t\tId: " + mon.getId() + "\n\t\tNombre: " + mon.getNombreCompleto(); 
 		}
 		
 		return aux;
