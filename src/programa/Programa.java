@@ -634,10 +634,8 @@ public class Programa {
 						}
 						else{
 							LocalDate fecha=campamento.getInicioCampamento();
+							nuevo.setPrecio(-1);
 							
-							float pre= inscripciones.asignarPrecio(idc, nuevo.getIdParticipante(), camps);
-							nuevo.setPrecio(pre);
-													
 							boolean status = false;
 							try {
 								status = inscripciones.realizarRegistro(nuevo,fecha,asists);
@@ -652,7 +650,7 @@ public class Programa {
 								System.out.println("Registro realizado correctamente.");
 							}
 							else{
-								System.out.println("Hubo un error.");
+								System.out.println("Registro realizado correctamente. El asistente necesitará una atención especial.");
 							}
 						}
 					}
