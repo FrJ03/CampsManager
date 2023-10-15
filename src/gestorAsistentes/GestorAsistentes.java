@@ -59,7 +59,7 @@ public class GestorAsistentes {
 	 */
 	public boolean darAltaAsistente(Asistente asistente) {	
 		if(this.listaAsistente_.size() > 0)
-			asistente.setId(this.listaAsistente_.get(this.listaAsistente_.size()).getId() + 1);
+			asistente.setId(this.listaAsistente_.get(this.listaAsistente_.size() - 1).getId() + 1);
 		else
 			asistente.setId(1);
 		this.listaAsistente_.add(asistente);
