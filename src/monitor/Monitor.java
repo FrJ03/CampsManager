@@ -55,10 +55,10 @@ public String toString() {
 			 	"\nNombre Completo: " + this.getNombreCompleto()+ 
 			 	"\nGrupo especial: ";
 	 if(this.especial_) {
-		 ret.concat("Si\n");
+		 ret += "Si\n";
 	 }
 	 else {
-		 ret.concat("No\n");
+		 ret += "No\n";
 	 }
 	 return ret;
 }
