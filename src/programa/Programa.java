@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Properties;
 import java.time.LocalDate;
 import actividad.*;
@@ -121,7 +120,7 @@ public class Programa {
 								System.exit(0);
 							}
 						}while(!isNumber(aux.substring(0, 4)) || !isNumber(aux.substring(5, 7)) || !isNumber(aux.substring(8, 10)) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
-						Date fecha = new Date(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
+						LocalDate fecha = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
 						nuevo.setFechaNacimiento(fecha);
 						String letra = null;
 						do {
@@ -195,7 +194,7 @@ public class Programa {
 								System.exit(0);
 							}
 						}while(!isNumber(aux.substring(0, 4)) || !isNumber(aux.substring(5, 7)) || !isNumber(aux.substring(8, 10)) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
-						Date fecha = new Date(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
+						LocalDate fecha = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
 						String letra = null;
 						boolean especial = false;
 						do {

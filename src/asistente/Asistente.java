@@ -1,6 +1,6 @@
 package asistente;
 
-import java.util.Date;
+import java.time.LocalDate;
 import persona.Persona;
 
 /**
@@ -16,7 +16,7 @@ import persona.Persona;
      /**
       * Fecha de nacimiento del asistente
       * */
-     private Date fechaNacimiento_;
+     private LocalDate fechaNacimiento_;
 
      /**
       * Construye un objeto vacio*/
@@ -34,7 +34,7 @@ import persona.Persona;
       * @param fechaNacimiento Representa la fecha de nacimiento del asistente.
       * @param especial Indica si en asistente pertenece a un grupo especial (true) o no (false).
       * */
-     public Asistente(int id, String nombre, String apellidos, Date fechaNacimiento,boolean especial){
+     public Asistente(int id, String nombre, String apellidos, LocalDate fechaNacimiento,boolean especial){
     	 super(id, nombre, apellidos);
         this.fechaNacimiento_ = fechaNacimiento;
         this.especial_ = especial;
@@ -42,7 +42,7 @@ import persona.Persona;
      /**
       * Devuelve la fecha de nacimiento del asistente.
       * */
-     public Date get_fechaNacimiento() {
+     public LocalDate get_fechaNacimiento() {
     	 return this.fechaNacimiento_;
      }
      /**
@@ -56,7 +56,7 @@ import persona.Persona;
       * Establece una nueva fecha de nacimiento del asistente.
       * @param fechaNacimiento fecha de nacimiento a establecer.
       */
-     public void setFechaNacimiento(Date fechaNacimiento) {
+     public void setFechaNacimiento(LocalDate fechaNacimiento) {
     	 this.fechaNacimiento_ = fechaNacimiento;
      }
      /**

@@ -1,8 +1,8 @@
 package gestorAsistentes;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import asistente.Asistente;
 
 /**
@@ -76,7 +76,7 @@ public class GestorAsistentes {
       	 * @param especial Indica si en asistente pertenece a un grupo especial (true) o no (false).
 	 * @return void.
 	 */
-	public void modificarAsistente(int id_antiguo, int id_nuevo, String nombre, String apellidos, Date fechaNacimiento,boolean especial){
+	public void modificarAsistente(int id_antiguo, int id_nuevo, String nombre, String apellidos, LocalDate fechaNacimiento,boolean especial){
 		for(int aux=0;aux<listaAsistente_.size();aux++) {
 			if(listaAsistente_.get(aux).getId()==id_antiguo) {
 				listaAsistente_.get(aux).setId(id_nuevo);
