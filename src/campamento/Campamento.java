@@ -188,8 +188,8 @@ import monitor.Monitor;
       * listaActividad_
 	  * */
 	public String toString(){
-		String aux = "Información del Campamento\nId:" + this.id_ + "\nFecha de Inicio:" + this.iniciocampamento_ + 
-				"\nFin del campamento:" + this.fincampamento_ + "\nNivel Academico:"+ this.nivel_ + "\nNumero maximo de asistentes:" + this.asistentesMax_ + "\n\tLista de Monitores:";
+		String aux = "Información del Campamento\nId:" + this.id_ + "\n\tFecha de Inicio:" + this.iniciocampamento_ + 
+				"\n\tFin del campamento:" + this.fincampamento_ + "\n\tNivel Academico:"+ this.nivel_ + "\n\tNumero maximo de asistentes:" + this.asistentesMax_ + "\n\tLista de Monitores:";
 		
 		
 		for(Monitor mon : this.listaMonitor_) {
