@@ -109,17 +109,19 @@ public class Programa {
 							salir();
 							System.exit(0);
 						}
-						System.out.print("Inserte la fecha de nacimiento (yyyy/mm/dd): ");
 						String aux = null;
-						try {
-							aux = teclado.readLine();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-							salir();
-							System.exit(0);
-						}
-						Date fecha = new Date(Integer.parseInt(aux.substring(0, 3)), Integer.parseInt(aux.substring(5, 6)), Integer.parseInt(aux.substring(8, 9)));
+						do {
+							System.out.print("Inserte la fecha de nacimiento (yyyy/mm/dd): ");
+							try {
+								aux = teclado.readLine();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+								salir();
+								System.exit(0);
+							}
+						}while(!isNumber(aux.substring(0, 4)) || !isNumber(aux.substring(5, 7)) || !isNumber(aux.substring(8, 10)) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
+						Date fecha = new Date(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
 						nuevo.setFechaNacimiento(fecha);
 						String letra = null;
 						do {
@@ -181,17 +183,19 @@ public class Programa {
 							salir();
 							System.exit(0);
 						}
-						System.out.print("Inserte la nueva fecha de nacimiento (yyyy/mm/dd): ");
 						String aux = null;
-						try {
-							aux = teclado.readLine();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-							salir();
-							System.exit(0);
-						}
-						Date fecha = new Date(Integer.parseInt(aux.substring(0, 3)), Integer.parseInt(aux.substring(5, 6)), Integer.parseInt(aux.substring(8, 9)));
+						do {
+							System.out.print("Inserte la fecha de nacimiento (yyyy/mm/dd): ");
+							try {
+								aux = teclado.readLine();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+								salir();
+								System.exit(0);
+							}
+						}while(!isNumber(aux.substring(0, 4)) || !isNumber(aux.substring(5, 7)) || !isNumber(aux.substring(8, 10)) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
+						Date fecha = new Date(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
 						String letra = null;
 						boolean especial = false;
 						do {
@@ -248,72 +252,34 @@ public class Programa {
 						System.out.println(campamentos.getListaMonitores());
 					}
 					else if(opcion == 4) {
-						int day = 1;
-						int month = 1;
-						int year = 1;
 						LocalDate fechaFin;
 						LocalDate fechaInicio;
 						do {
+							String aux = null;
 							do {
-								System.out.print("Inserte el día de inicio: ");
+								System.out.print("Inserte la fecha de inicio (yyyy/mm/dd): ");
 								try {
-									day = Integer.parseInt(teclado.readLine());
-								} catch (NumberFormatException | IOException e) {
+									aux = teclado.readLine();
+								} catch (IOException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
 									salir();
 									System.exit(0);
 								}
-								System.out.print("Inserte el mes de inicio: ");
-								try {
-									month = Integer.parseInt(teclado.readLine());
-								} catch (NumberFormatException | IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-									salir();
-									System.exit(0);
-								}
-								System.out.print("Inserte el año de inicio: ");
-								try {
-									year = Integer.parseInt(teclado.readLine());
-								} catch (NumberFormatException | IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-									salir();
-									System.exit(0);
-								}
-							}while(!dateValid(year, month, day));							
-							fechaInicio = LocalDate.of(year, month, day);
+							}while(!isNumber(aux.substring(0, 4)) || !isNumber(aux.substring(5, 7)) || !isNumber(aux.substring(8, 10)) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
+							fechaInicio = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
 							do {
-								System.out.print("Inserte el día de finalización: ");
+								System.out.print("Inserte la fecha de finalización (yyyy/mm/dd): ");
 								try {
-									day = Integer.parseInt(teclado.readLine());
-								} catch (NumberFormatException | IOException e) {
+									aux = teclado.readLine();
+								} catch (IOException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
 									salir();
 									System.exit(0);
 								}
-								System.out.print("Inserte el mes de finalización: ");
-								try {
-									month = Integer.parseInt(teclado.readLine());
-								} catch (NumberFormatException | IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-									salir();
-									System.exit(0);
-								}
-								System.out.print("Inserte el año de finalización: ");
-								try {
-									year = Integer.parseInt(teclado.readLine());
-								} catch (NumberFormatException | IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-									salir();
-									System.exit(0);
-								}
-							}while(!dateValid(year, month, day));							
-							fechaFin = LocalDate.of(year, month, day);
+							}while(!isNumber(aux.substring(0, 4)) || !isNumber(aux.substring(5, 7)) || !isNumber(aux.substring(8, 10)) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));;			
+							fechaFin = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
 						}while(fechaFin.compareTo(fechaInicio) <= 0);
 						String n = null;
 						Nivel nivel = null;
@@ -923,5 +889,8 @@ public class Programa {
 			e.printStackTrace();
 		}		
 		System.out.println("Saliendo del sistema.................");
+	}
+	private static boolean isNumber(String s) {
+		return s != null && s.matches("[0-9]+");
 	}
 }
