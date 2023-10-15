@@ -458,7 +458,7 @@ public class Programa {
 								System.out.println("No existe una actividad con ese id.");
 							}
 							else{
-								campamentos.asociarMonitorActividad(actividad,monitor);
+								campamentos.Actividad(actividad,monitor);
 							}
 						}
 					}
@@ -528,11 +528,9 @@ public class Programa {
 							System.out.println("No existe un monitor con ese id.");
 						}
 						else{
-							if(monitor.getEspecial()==false){
-								campamentos.asociarMonitorCampamento(idc,monitor);
-							}
-							else{
-								System.out.println("Para asociar un monitor especial, seleccione la opción 10");
+							boolean status = campamentos.asociarMonitorCampamento(idc, monitor);
+							if(status==false){
+								System.out.println("Hubo un error.");
 							}
 						}
 					}
@@ -568,11 +566,9 @@ public class Programa {
 							System.out.println("No existe un monitor con ese id.");
 						}
 						else{
-							if(monitor.getEspecial()==true){
-									campamentos.asociarMonitorCampamento(idc,monitor);
-							}
-							else{
-								System.out.println("Para asociar un monitor no especial, seleccione la opción 9");
+							boolean status = campamentos.asociarMonitorEspCampamento(idc, monitor);
+							if(status==false){
+								System.out.println("Hubo un error.");
 							}
 						}
 					}
