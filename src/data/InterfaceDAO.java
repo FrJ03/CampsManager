@@ -1,22 +1,40 @@
 package data;
+
+import java.sql.Connection;
+
+
 /**
- * Interfaces que los DAO deberán de implementa/Interface which the others DAO have to implement.
+ * Interfaces que los DAO deberán de implementa
  * @author Enrique de los Reyes Montilla
  */
 public interface InterfaceDAO<T> {
 	/**
-	 * Add a new object to the data base.
-	 * @param object Object which will be added to the date base.
+	 * Añade un nuevo objeto a la base de datos.
+	 * @param object Objeto el cual se va a añadir a la base de datos.
+	 * @return int
 	 */
-	void create(T object);
+	int create(T object);
 	/**
-	 * Delete a object of the data base.
+	 * Lee un objeto de la base de datos.
+	 * @param id Id del objeto que se va a leer de la base de datos.
 	 * @return T
 	 */
-	T delete();
+	T read(int id);
 	/**
-	 * Read a object of the data base.
-	 * @param object Object which will be read of the date base.
+	 * Elimina un objeto de la base de datos.
+	 * @param object Objeto el cual se va a eliminar de la base de datos.
+	 * @return int
 	 */
-	void delete(T object);
+	int delete(T object);
+	/**
+	 * Metodo para realizar la conexión con la base de datos.
+	 * @return Connection
+	 */
+	Connection getConnection();
+	/**
+	 * Método que permite la desconexión de la base de datos.
+	 * @param Connection Conector que permite el acceso a la base de datos.
+	 * @return void
+	 */
+	void deleteConnection(Connection com);
 }
