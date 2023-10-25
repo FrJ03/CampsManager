@@ -1,4 +1,4 @@
-package persona;
+package business;
 
 import java.io.Serializable;
 

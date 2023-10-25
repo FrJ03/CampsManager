@@ -1,8 +1,6 @@
-package inscripcion;
+package business;
 
 import java.time.LocalDate;
-import registro.RegistroTardio;
-import registro.RegistroTemprano;
 
 /**
  * Clase abstracta que representa el concepto de inscripcion en el campamento y que se empleará como base en el patrón de diseño Abstract Factory entre inscripciones y registros.

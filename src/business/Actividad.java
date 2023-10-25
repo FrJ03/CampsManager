@@ -1,7 +1,6 @@
-package actividad;
+package business;
 
 import java.util.ArrayList;
-import monitor.Monitor;
 import java.io.Serializable;
 
 /**

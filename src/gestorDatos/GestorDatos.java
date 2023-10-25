@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
-import actividad.Actividad;
-import asistente.Asistente;
-import campamento.Campamento;
-import inscripcion.InscripcionCompleta;
-import inscripcion.InscripcionParcial;
-import monitor.Monitor;
+import business.Actividad;
+import business.Asistente;
+import business.Campamento;
+import business.InscripcionCompleta;
+import business.InscripcionParcial;
+import business.Monitor;
 
 /**
  * Clase diseñada para interactuar con los datos permanentes.

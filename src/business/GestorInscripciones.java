@@ -1,11 +1,6 @@
-package gestorInscripciones;
+package business;
 
 import java.util.ArrayList;
-import actividad.Actividad;
-import asistente.Asistente;
-import campamento.Campamento;
-import inscripcion.InscripcionCompleta;
-import inscripcion.InscripcionParcial;
 import java.time.Period;
 import java.time.LocalDate;
 /**

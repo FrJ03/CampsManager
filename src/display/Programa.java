@@ -1,4 +1,4 @@
-package programa;
+package display;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,16 +9,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.time.LocalDate;
-import actividad.*;
-import asistente.Asistente;
-import campamento.Campamento;
-import gestorAsistentes.GestorAsistentes;
-import gestorCampamentos.GestorCampamentos;
+import business.*;
 import gestorDatos.GestorDatos;
-import gestorInscripciones.GestorInscripciones;
-import inscripcion.InscripcionCompleta;
-import inscripcion.InscripcionParcial;
-import monitor.Monitor;
 
 
 /**
