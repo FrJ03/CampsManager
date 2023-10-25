@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS asistente;
 CREATE TABLE IF NOT EXISTS asistente (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     nombre TINYTEXT,
@@ -5,14 +6,26 @@ CREATE TABLE IF NOT EXISTS asistente (
     especial BOOL,
     fechaNacimiento DATE
 );
-
+DROP TABLE IF EXISTS monitor;
+CREATE TABLE IF NOT EXISTS monitor(
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    nombre TINYTEXT,
+    apellidos TINYTEXT,
+    especial BOOL
+);
+DROP TABLE IF EXISTS campamento;
 CREATE TABLE IF NOT EXISTS campamento (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    responsable INTEGER NOT NULL,
+    responsableEspecial INTEGER,
     inicio DATE,
     fin DATE,
     nivel VARCHAR(11) CHECK(nivel='Adolescente' || nivel='Juvenil' || nivel='Infantil'),
-    maxAsistentes INTEGER CHECK(maxAsistentes > 0)
+    maxAsistentes INTEGER CHECK(maxAsistentes > 0),
+    CONSTRAINT FK_responsable_monitor FOREIGN KEY (responsable) REFERENCES monitor(id),
+    CONSTRAINT FK_responsable_especial_monitor FOREIGN KEY (responsableEspecial) REFERENCES monitor(id)
 );
+DROP TABLE IF EXISTS inscripcion;
 CREATE TABLE IF NOT EXISTS inscripcion(
     idParticipante INTEGER,
     idCampamento INTEGER,
@@ -23,19 +36,7 @@ CREATE TABLE IF NOT EXISTS inscripcion(
     CONSTRAINT FK_inscripcion_asistente FOREIGN KEY (idParticipante) REFERENCES asistente(id),
     CONSTRAINT FK_inscripcion_campamento FOREIGN KEY (idCampamento) REFERENCES campamento(id)
 );
-CREATE TABLE IF NOT EXISTS monitor(
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    nombre TINYTEXT,
-    apellidos TINYTEXT,
-    especial BOOL
-);
-CREATE TABLE IF NOT EXISTS campamento_monitor(
-    idCampamento INTEGER,
-    idMonitor INTEGER,
-    CONSTRAINT PK_campamento_monitor PRIMARY KEY(idCampamento,idMonitor),
-    CONSTRAINT FK_campamento_monitor_monitor FOREIGN KEY (idMonitor) REFERENCES monitor(id),
-    CONSTRAINT FK_campamento_monitor_campamento FOREIGN KEY (idCampamento) REFERENCES campamento(id)
-);
+DROP TABLE IF EXISTS actividad;
 CREATE TABLE IF NOT EXISTS actividad(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     nombre TINYTEXT,
@@ -44,6 +45,7 @@ CREATE TABLE IF NOT EXISTS actividad(
     maxParticipantes INTEGER CHECK(maxParticipantes > 0),
     maxMonitores INTEGER CHECK(maxMonitores > 0)
 );
+DROP TABLE IF EXISTS actividad_monitor;
 CREATE TABLE IF NOT EXISTS actividad_monitor(
     idActividad INTEGER,
     idMonitor INTEGER,
