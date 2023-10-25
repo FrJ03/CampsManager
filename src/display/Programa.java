@@ -101,7 +101,7 @@ public class Programa {
 					else if(opcion == 2) {
 						Asistente nuevo = new Asistente();
 						
-						System.out.print("Inserte el nombre del asistente: ");
+						System.out.print("Assistant firstname: ");
 						try {
 							nuevo.setNombre(teclado.readLine());
 						} catch (IOException e) {
@@ -110,7 +110,7 @@ public class Programa {
 							System.exit(0);
 						}
 						
-						System.out.print("Inserte los apellidos del asistente: ");
+						System.out.print("Assistant lastname: ");
 						try {
 							nuevo.setApellidos(teclado.readLine());
 						} catch (IOException e) {
@@ -121,7 +121,7 @@ public class Programa {
 						
 						String aux = null;
 						do {
-							System.out.print("Inserte la fecha de nacimiento (yyyy/mm/dd): ");
+							System.out.print("Birth date (yyyy/mm/dd): ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -135,7 +135,7 @@ public class Programa {
 						
 						aux = null;
 						do {
-							System.out.print("¿Necesita atención especial? (S/N): ");
+							System.out.print("¿Special Attention? (Y/N): ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -143,12 +143,12 @@ public class Programa {
 								guardar();
 								System.exit(0);
 							}
-							if(aux.equalsIgnoreCase("s"))
+							if(aux.equalsIgnoreCase("y"))
 								nuevo.setEspecial(true);
 							else if(aux.equalsIgnoreCase("n"))
 								nuevo.setEspecial(false);
 								
-						}while(!aux.equalsIgnoreCase("s") && !aux.equalsIgnoreCase("n"));
+						}while(!aux.equalsIgnoreCase("y") && !aux.equalsIgnoreCase("n"));
 						
 						asistentes.darAltaAsistente(nuevo);
 					}
