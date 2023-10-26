@@ -1,6 +1,5 @@
 package data;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
@@ -46,7 +45,7 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 		
 		BufferedReader reader = null;
 		int status = 0;
-		
+		Connector con = new Connector();
 		try{
 			
 			Properties p = new Properties();	
@@ -54,8 +53,8 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 			p.load(reader);
 			String create = p.getProperty("createMonitor");
 			
-			Connection con=getConnection();
-			PreparedStatement ps=con.prepareStatement(create);
+			Connection c=con.getConnection();
+			PreparedStatement ps=c.prepareStatement(create);
 			
 			ps.setInt(1,object.getId());
 			ps.setString(2,object.getNombre());
@@ -63,7 +62,7 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 			ps.setBoolean(4,object.getEspecial());
 			
 			status = ps.executeUpdate();	
-			deleteConnection(con);
+			con.deleteConnection(c);
 			
 		} catch(Exception e) { System.out.println(e); }
 		
@@ -79,6 +78,7 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 		
 		Monitor monitor = null;
 		BufferedReader reader = null;
+		Connector con = new Connector();
 		
 		try{
 			
@@ -87,8 +87,9 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 			p.load(reader);
 			String query = p.getProperty("readMonitor");
 			
-			Connection con=getConnection();
-			PreparedStatement ps=con.prepareStatement(query);
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
 			ps.setInt(2,id);
 	
 			ResultSet rs = ps.executeQuery();
@@ -99,7 +100,7 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
                 
             } 
 			
-			deleteConnection(con);
+			con.deleteConnection(c);
 		} catch(Exception e) { System.out.println(e); }
 		
 		return monitor;
@@ -115,7 +116,7 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 		
 		int rs =0;
 		BufferedReader reader = null;
-		
+		Connector con = new Connector();
 		try{
 			
 			Properties p = new Properties();	
@@ -123,71 +124,19 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 			p.load(reader);
 			String query = p.getProperty("deleteMonitor");
 			
-			Connection con=getConnection();
-			PreparedStatement preparedStatement = con.prepareStatement(query);
+			Connection c=con.getConnection();
+			PreparedStatement preparedStatement = c.prepareStatement(query);
 	        preparedStatement.setInt(1, object.getId());
 	
 			rs = preparedStatement.executeUpdate(); 
 			
-			deleteConnection(con);
+			con.deleteConnection(c);
 			
 		} catch(Exception e) { System.out.println(e); }
 		
 		return rs;
 		
 	}
-	/**
-	 * Metodo para realizar la conexión con la base de datos.
-	 * @return Connection
-	 */
-	@Override
-	public Connection getConnection() {
-		BufferedReader reader = null;
-		Connection con = null;
-		
-		//Obtenermos la URI, password y usuario de la base de datos mediante Properties.
-		try{
-			
-			String password, user, dataBase;
-			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
-			p.load(reader);
-			
-			dataBase = p.getProperty("dataBase");
-			user = p.getProperty("user");
-			password = p.getProperty("password");
-			
-			Class.forName("com.mysql.jdbc.Driver");
-			con=DriverManager.getConnection(dataBase,user,password);
-			
-		} catch(Exception e) {
-			
-		System.out.println(e);
-		
-		}
-		
-		 return con;
-		
-	}
-	/**
-	 * Método que permite la desconexión de la base de datos.
-	 * @param Connection Conector que permite el acceso a la base de datos.
-	 * @return void
-	 */
-	@Override
-	public void deleteConnection(Connection conn) {
-		try {
-			
-            if (conn != null) {
-            	
-                conn.close();
-                
-            }
-        } catch (Exception e) {
-        	
-        	System.out.println(e);
-        }
-		
-	}
+	
 
 }

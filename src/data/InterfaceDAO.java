@@ -1,6 +1,5 @@
 package data;
 
-import java.sql.Connection;
 
 
 /**
@@ -26,15 +25,4 @@ public interface InterfaceDAO<T> {
 	 * @return int
 	 */
 	int delete(T object);
-	/**
-	 * Metodo para realizar la conexión con la base de datos.
-	 * @return Connection
-	 */
-	Connection getConnection();
-	/**
-	 * Método que permite la desconexión de la base de datos.
-	 * @param Connection Conector que permite el acceso a la base de datos.
-	 * @return void
-	 */
-	void deleteConnection(Connection com);
 }
