@@ -10,9 +10,9 @@ public interface InterfaceDAO<T> {
 	/**
 	 * Añade un nuevo objeto a la base de datos.
 	 * @param object Objeto el cual se va a añadir a la base de datos.
-	 * @return int
+	 * @return boolean
 	 */
-	int create(T object);
+	boolean create(T object);
 	/**
 	 * Lee un objeto de la base de datos.
 	 * @param id Id del objeto que se va a leer de la base de datos.
@@ -22,7 +22,7 @@ public interface InterfaceDAO<T> {
 	/**
 	 * Elimina un objeto de la base de datos.
 	 * @param object Objeto el cual se va a eliminar de la base de datos.
-	 * @return int
+	 * @return boolean
 	 */
-	int delete(T object);
+	boolean delete(T object);
 }

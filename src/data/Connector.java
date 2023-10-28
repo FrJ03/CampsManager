@@ -33,6 +33,7 @@ public class Connector {
 			password = p.getProperty("password");
 			
 			Class.forName("com.mysql.jdbc.Driver");
+
 			con=DriverManager.getConnection(dataBase,user,password);
 			
 		} catch(Exception e) {

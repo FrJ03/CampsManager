@@ -7,6 +7,7 @@ monitores=data/monitores.txt
 dataBase=jbdc:mysql://oraclepr.uco.es:3306/i12meorf
 user=i12meorf
 password=PracticaPW
-readMonitor=SELECT * FROM monitores WHERE id = ?
-createMonitor=insert into monitores (id,nombre,apellidos,especial) values(?,?,?,?)
-deleteMonitor=DELETE FROM monitores WHERE id = ?
+readMonitor=SELECT * FROM monitor WHERE id = ?
+createMonitor=insert into monitor (id,nombre,apellidos,especial) values(?,?,?,?)
+deleteMonitor=DELETE FROM monitor WHERE id = ?
+readAllMonitor=SELECT * FROM monitor

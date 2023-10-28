@@ -7,6 +7,7 @@ import business.Monitor;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 /**
  * Clase MonitorDAO que realiza las consultas relacionadas con los monitores.
@@ -38,13 +39,14 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 	/**
 	 * Añade un nuevo monitor a la base de datos.
 	 * @param object Monitor el cual va a ser añadido a la base de datos.
-	 * @return int
+	 * @return boolean
 	 */
 	@Override
-	public int create(Monitor object) {
+	public boolean create(Monitor object) {
 		
 		BufferedReader reader = null;
 		int status = 0;
+		boolean res = false;
 		Connector con = new Connector();
 		try{
 			
@@ -53,6 +55,7 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 			p.load(reader);
 			String create = p.getProperty("createMonitor");
 			
+			System.out.println(create);
 			Connection c=con.getConnection();
 			PreparedStatement ps=c.prepareStatement(create);
 			
@@ -62,11 +65,14 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 			ps.setBoolean(4,object.getEspecial());
 			
 			status = ps.executeUpdate();	
+			if (status == 1) {
+				res = true;
+			}
 			con.deleteConnection(c);
 			
 		} catch(Exception e) { System.out.println(e); }
 		
-		return status;
+		return res;
 	}
 	/**
 	 * Lee un monitor de la base de datos.
@@ -79,24 +85,24 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 		Monitor monitor = null;
 		BufferedReader reader = null;
 		Connector con = new Connector();
+		ArrayList<Monitor> list = new ArrayList<Monitor>();
 		
 		try{
 			
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readMonitor");
+			String query = p.getProperty("readAllMonitor");
 			
 			Connection c = con.getConnection();
 			
 			PreparedStatement ps=c.prepareStatement(query);
-			ps.setInt(2,id);
 	
 			ResultSet rs = ps.executeQuery();
 			
-			if (rs.next()) {
+			while (rs.next()) {
 				
-                monitor = new Monitor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4));
+				list.add( new Monitor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
                 
             } 
 			
@@ -109,12 +115,13 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 	/**
 	 * Elimina un monitor de la base de datos.
 	 * @param object Monitor el cual se va a eliminar de la base de datos.
-	 * @return int
+	 * @return boolean
 	 */
 	@Override
-	public int delete(Monitor object) {
+	public boolean delete(Monitor object) {
 		
 		int rs =0;
+		boolean status = false;
 		BufferedReader reader = null;
 		Connector con = new Connector();
 		try{
@@ -130,13 +137,51 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 	
 			rs = preparedStatement.executeUpdate(); 
 			
+			if(rs == 1) {
+				status = true;
+			}
+			
 			con.deleteConnection(c);
 			
 		} catch(Exception e) { System.out.println(e); }
 		
-		return rs;
+		return status;
 		
 	}
+	/**
+	 * Añade todos los monitores de la base de datos a un lista.
+	 * @return Array<Monitor>
+	 */
+	public ArrayList<Monitor>readall(){
+
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		ArrayList<Monitor> list = new ArrayList<Monitor>();
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readAllMonitor");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
 	
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				
+                list.add( new Monitor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
+                
+            } 
+			
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return list;
+	}
 
 }
