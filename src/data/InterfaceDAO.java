@@ -18,7 +18,7 @@ public interface InterfaceDAO<T> {
 	 * @param id Id del objeto que se va a leer de la base de datos.
 	 * @return T
 	 */
-	T read(int id);
+	T read(T object);
 	/**
 	 * Elimina un objeto de la base de datos.
 	 * @param object Objeto el cual se va a eliminar de la base de datos.
