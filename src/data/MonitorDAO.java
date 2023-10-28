@@ -85,24 +85,24 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 		Monitor monitor = null;
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		ArrayList<Monitor> list = new ArrayList<Monitor>();
 		
 		try{
 			
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readAllMonitor");
+			String query = p.getProperty("readMonitor");
 			
 			Connection c = con.getConnection();
 			
 			PreparedStatement ps=c.prepareStatement(query);
+			ps.setInt(1, id);
 	
 			ResultSet rs = ps.executeQuery();
 			
-			while (rs.next()) {
+			if (rs.next()) {
 				
-				list.add( new Monitor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
+			monitor	= new Monitor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4));
                 
             } 
 			

@@ -11,3 +11,7 @@ readMonitor=SELECT * FROM monitor WHERE id = ?
 createMonitor=insert into monitor (id,nombre,apellidos,especial) values(?,?,?,?)
 deleteMonitor=DELETE FROM monitor WHERE id = ?
 readAllMonitor=SELECT * FROM monitor
+createAsistente=insert into asistente (id,nombre,apellidos,especial,fechaNacimiento) values(?,?,?,?,?)
+readAsistente=SELECT * FROM asistente WHERE id = ?
+deleteAsistente=DELETE FROM asistente WHERE id = ?
+readAllAsistente=SELECT * FROM asistente
