@@ -5,11 +5,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 
 public class Connector {
 	/*
-	 * *Representa la dirección al fichero properties.
+	 * Representa la dirección al fichero properties.
 	 */
 	private static String dir_ = "config.properties";
 	/**
@@ -32,19 +33,20 @@ public class Connector {
 			user = p.getProperty("user");
 			password = p.getProperty("password");
 			
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName(p.getProperty("driver"));
 
-			con=DriverManager.getConnection(dataBase,user,password);
+			con= (Connection)DriverManager.getConnection(dataBase,user,password);
 			
-		} catch(Exception e) {
-			
-		System.out.println(e);
-		
+		}catch (SQLException e) {
+				e.printStackTrace();
+		} catch (Exception e) {
+				e.printStackTrace();
 		}
 		
 		 return con;
 		
 	}
+
 	/**
 	 * Método que permite la desconexión de la base de datos.
 	 * @param Connection Conector que permite el acceso a la base de datos.
