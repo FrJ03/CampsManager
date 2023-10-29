@@ -78,7 +78,7 @@ public class AsistenteDAO implements InterfaceDAO<Asistente>{
 	}
 	/**
 	 * Lee un asistente de la base de datos.
-	 * @param id Id del asistente que se va a leer de la base de datos.
+	 * @param Asistente Asistente con el id se va a leer de la base de datos.
 	 * @return Monitor
 	 */
 	@Override

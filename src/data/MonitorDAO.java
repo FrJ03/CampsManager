@@ -76,7 +76,7 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 	}
 	/**
 	 * Lee un monitor de la base de datos.
-	 * @param id Id del monitor que se va a leer de la base de datos.
+	 * @param Monitor Monitor con el id que se va a leer de la base de datos.
 	 * @return Monitor
 	 */
 	@Override
