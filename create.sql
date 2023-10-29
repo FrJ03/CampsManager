@@ -45,6 +45,14 @@ CREATE TABLE IF NOT EXISTS actividad(
     maxParticipantes INTEGER CHECK(maxParticipantes > 0),
     maxMonitores INTEGER CHECK(maxMonitores > 0)
 );
+DROP TABLE IF EXISTS campamento_actividad;
+CREATE TABLE IF NOT EXISTS campamento_actividad(
+    idActividad INTEGER,
+    idCampamento INTEGER,
+    CONSTRAINT PK_campamento_actividad PRIMARY KEY(idCampamento,idActividad),
+    CONSTRAINT FK_campamento_actividad_campamento FOREIGN KEY (idCampamento) REFERENCES campamento(id),
+    CONSTRAINT FK_campamento_actividad_actividad FOREIGN KEY (idActividad) REFERENCES actividad(id)
+);
 DROP TABLE IF EXISTS actividad_monitor;
 CREATE TABLE IF NOT EXISTS actividad_monitor(
     idActividad INTEGER,
