@@ -5,6 +5,7 @@ import java.time.LocalDate;
 /**
  * Clase abstracta que representa el concepto de inscripcion en el campamento y que se empleará como base en el patrón de diseño Abstract Factory entre inscripciones y registros.
  * @author Francisco José Mellado Ortiz
+ * @author Manuel Garcia Obrero
  */
 public abstract class Inscripcion {
 	/**
@@ -23,6 +24,10 @@ public abstract class Inscripcion {
 	 * Precio de la inscripción.
 	 */
 	private float precio_;
+	/**
+	 * Identificador de que tipo de Inscripcion es.
+	 */
+	private String tipo_;
 	
 	/**
 	 * Construye un objeto de la clase inscripción sin información.
@@ -40,6 +45,21 @@ public abstract class Inscripcion {
 		this.idCampamento_ = idCampamento;
 		this.fechaInscripcion_ = fechaInscripcion;
 		this.precio_ = precio;
+		this.tipo_= "";
+	}
+	/**
+	 * Construye un objeto de la clase inscripción con los datos dados pero con tipo.
+	 * @param idParticipante Identificador del participante.
+	 * @param idCampamento Identificador del campamento.
+	 * @param fechaInscripcion Fecha de la realización de la inscripción.
+	 * @param precio Precio de la inscripción.
+	 */
+	public Inscripcion(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio, String tipo) {
+		this.idParticipante_ = idParticipante;
+		this.idCampamento_ = idCampamento;
+		this.fechaInscripcion_ = fechaInscripcion;
+		this.precio_ = precio;
+		this.tipo_= tipo;
 	}
 	/**
 	 * Método que devuelve el identificador del participante.
@@ -64,6 +84,12 @@ public abstract class Inscripcion {
 	 */
 	public float getPrecio() {
 		return this.precio_;
+	}
+	/**
+	 * Método que devuelve el tipo de la inscripción.
+	 */
+	public String getTipo() {
+		return this.tipo_;
 	}
 	/**
 	 * Método para la modificación del identificador del participante.
@@ -92,6 +118,13 @@ public abstract class Inscripcion {
 	 */
 	public void setPrecio(float precio) {
 		this.precio_ = precio;
+	}
+	/**
+	 * Método para la modificación de tipo.
+	 * @param tipo Tipo de la actividad.
+	 */
+	public void setTipo(String tipo) {
+		this.tipo_ = tipo;
 	}
 	/**
 	 * Método para la creación de un registro en el campamento de forma temprana. Será definido por sus descendientes.
