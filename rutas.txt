@@ -15,3 +15,11 @@ createAsistente=insert into asistente (id,nombre,apellidos,especial,fechaNacimie
 readAsistente=SELECT * FROM asistente WHERE id = ?
 deleteAsistente=DELETE FROM asistente WHERE id = ?
 readAllAsistente=SELECT * FROM asistente
+readInscripcion=SELECT * FROM inscripcion WHERE idParticipante = ? AND idCampamento = ?
+createInscripcion=insert into inscripcion (idParticipante,idCampamento, fechaInscripcion, precio) values(?,?,?,?)
+deleteInscripcion=DELETE FROM inscripcion WHERE id = ?
+readAllInscripcion=SELECT * FROM 
+readActividad=SELECT * FROM actividad WHERE id = ?
+createActividad=insert into actividad (id, nombre, nivel, turno, maxParticipantes, maxMonitorea) values(?,?,?,?,?,?)
+deleteActividad=DELETE FROM actividad WHERE id = ?
+readAllActividad=SELECT * FROM actividad
