@@ -19,7 +19,7 @@ public class CampamentoActividadDTO {
 	  * Costruye un objeto con todos sus datos.
 	  * @return void
 	  * */
-	public CampamentoActividadDTO(int campId, int actId) {
+	public CampamentoActividadDTO(int actId, int campId) {
 		this.campId_ = campId;
 		this.actId_=actId;
 	};
