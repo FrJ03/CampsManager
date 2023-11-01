@@ -60,8 +60,8 @@ public class CampamentoActividadDAO implements InterfaceDAO<CampamentoActividadD
 			Connection c=con.getConnection();
 			PreparedStatement ps=c.prepareStatement(create);
 			
-			ps.setInt(1,object.getCampId());
-			ps.setInt(2,object.getActId());
+			ps.setInt(1,object.getActId());
+			ps.setInt(2,object.getCampId());
 			
 			status = ps.executeUpdate();	
 			if (status == 1) {
@@ -95,8 +95,8 @@ public class CampamentoActividadDAO implements InterfaceDAO<CampamentoActividadD
 			Connection c = con.getConnection();
 			
 			PreparedStatement ps=c.prepareStatement(query);
-			ps.setInt(1, object.getCampId());
-			ps.setInt(2, object.getActId());
+			ps.setInt(1, object.getActId());
+			ps.setInt(2, object.getCampId());
 	
 			ResultSet rs = ps.executeQuery();
 			
@@ -131,8 +131,8 @@ public class CampamentoActividadDAO implements InterfaceDAO<CampamentoActividadD
 			
 			Connection c=con.getConnection();
 			PreparedStatement preparedStatement = c.prepareStatement(query);
-			preparedStatement.setInt(1, object.getCampId());
-			preparedStatement.setInt(2, object.getActId());
+			preparedStatement.setInt(1, object.getActId());
+			preparedStatement.setInt(2, object.getCampId());
 	
 			rs = preparedStatement.executeUpdate(); 
 			
