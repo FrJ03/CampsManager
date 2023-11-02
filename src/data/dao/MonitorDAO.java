@@ -1,54 +1,49 @@
-package data;
+package data.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
-
-import business.Actividad;
-import business.Nivel;
-import business.Turno;
-
+import business.Monitor; 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 
 /**
- * Clase ActividadDAO que realiza las consultas relacionadas con las actividad.
- * @author Manuel García Obrero
+ * Clase MonitorDAO que realiza las consultas relacionadas con los monitores.
+ * @author Enrique de los Reyes Montilla
  */
-
-public class ActividadDAO implements InterfaceDAO<Actividad> {
+public class MonitorDAO implements InterfaceDAO<Monitor> {
 	/**
 	 * Variable privada Singleton.
 	 */
-	private static ActividadDAO instance_= null;
+	private static MonitorDAO instance_= null;
 	/*
 	 * *Representa la dirección al fichero properties.
 	 */
 	private static String dir_ = "rutas.txt";
 	/**
 	 * Metodo que sirve de acceso a la instancia.
-	 * @return Instancia de la clase ActividadDAO.
+	 * @return Instancia de la clase MonitorDAO.
 	 */
-	public static ActividadDAO getInstance() {
+	public static MonitorDAO getInstance() {
 		if(instance_ == null) {
-			return new ActividadDAO();
+			return new MonitorDAO();
 		}
 		return instance_;
 	}
 	/**
-	 * Constructor vacío de la clase ActividadDAO.
+	 * COnstructor vacío de la clase MonitorDAO.
 	 */
-	private ActividadDAO() {}
-	
+	private MonitorDAO() {}
 	/**
-	 * Añade una nueva actividad a la base de datos.
-	 * @param object Actividad el cual va a ser añadido a la base de datos.
+	 * Añade un nuevo monitor a la base de datos.
+	 * @param object Monitor el cual va a ser añadido a la base de datos.
 	 * @return boolean
 	 */
 	@Override
-	public boolean create(Actividad object) {
+	public boolean create(Monitor object) {
+		
 		BufferedReader reader = null;
 		int status = 0;
 		boolean res = false;
@@ -58,18 +53,16 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String create = p.getProperty("createActividad");
+			String create = p.getProperty("createMonitor");
 			
 			System.out.println(create);
 			Connection c=con.getConnection();
 			PreparedStatement ps=c.prepareStatement(create);
 			
 			ps.setInt(1,object.getId());
-			ps.setString(2,object.getName());
-			ps.setString(3,object.getNivel().name());
-			ps.setString(4,object.getTurno().name());
-			ps.setInt(5,object.getParticipantesMax());
-			ps.setInt(6,object.getMonitoresMax());
+			ps.setString(2,object.getNombre());
+			ps.setString(3,object.getApellidos());
+			ps.setBoolean(4,object.getEspecial());
 			
 			status = ps.executeUpdate();	
 			if (status == 1) {
@@ -81,14 +74,14 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 		
 		return res;
 	}
-	
 	/**
-	 * Lee una Actividad de la base de datos.
-	 * @param Actividad Actividad con el id que se va a leer de la base de datos.
-	 * @return Actividad
+	 * Lee un monitor de la base de datos.
+	 * @param Monitor Monitor con el id que se va a leer de la base de datos.
+	 * @return Monitor
 	 */
 	@Override
-	public Actividad read(Actividad object) {
+	public Monitor read(Monitor object) {
+		
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
@@ -98,7 +91,7 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readActividad");
+			String query = p.getProperty("readMonitor");
 			
 			Connection c = con.getConnection();
 			
@@ -109,22 +102,24 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 			
 			if (rs.next()) {
 				
-			object	= new Actividad(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4)));
+			object	= new Monitor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4));
+                
             } 
 			
 			con.deleteConnection(c);
 		} catch(Exception e) { System.out.println(e); }
 		
 		return object;
+		
 	}
-	
 	/**
-	 * Elimina una actividad de la base de datos.
-	 * @param object Actividad el cual se va a eliminar de la base de datos.
+	 * Elimina un monitor de la base de datos.
+	 * @param object Monitor el cual se va a eliminar de la base de datos.
 	 * @return boolean
 	 */
 	@Override
-	public boolean delete(Actividad object) {
+	public boolean delete(Monitor object) {
+		
 		int rs =0;
 		boolean status = false;
 		BufferedReader reader = null;
@@ -134,7 +129,7 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("deleteActividad");
+			String query = p.getProperty("deleteMonitor");
 			
 			Connection c=con.getConnection();
 			PreparedStatement preparedStatement = c.prepareStatement(query);
@@ -151,23 +146,24 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 		} catch(Exception e) { System.out.println(e); }
 		
 		return status;
+		
 	}
-	
 	/**
-	 * Añade todos las Actividades de la base de datos a un lista.
-	 * @return Array<Actividad>
+	 * Añade todos los monitores de la base de datos a un lista.
+	 * @return Array<Monitor>
 	 */
-	public ArrayList<Actividad>readAll(){
+	public ArrayList<Monitor>readAll(){
+
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		ArrayList<Actividad> list = new ArrayList<Actividad>();
+		ArrayList<Monitor> list = new ArrayList<Monitor>();
 		
 		try{
 			
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readAllActividad");
+			String query = p.getProperty("readAllMonitor");
 			
 			Connection c = con.getConnection();
 			
@@ -177,7 +173,7 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 			
 			while (rs.next()) {
 				
-                list.add( new Actividad(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4))));
+                list.add( new Monitor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
                 
             } 
 			
@@ -187,5 +183,5 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 		
 		return list;
 	}
-}
 
+}

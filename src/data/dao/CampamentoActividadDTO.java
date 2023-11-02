@@ -1,4 +1,4 @@
-package data;
+package data.dao;
 
 /**
  * DTO utilizado para hacer uso de los métodos del DAO CampamentoActividad.
