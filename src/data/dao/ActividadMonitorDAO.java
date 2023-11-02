@@ -2,6 +2,7 @@ package data.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import java.io.BufferedReader;
@@ -146,4 +147,3 @@ public class ActividadMonitorDAO implements InterfaceDAO<ActividadMonitorDTO>{
 		
 		return status;
 	}
-}

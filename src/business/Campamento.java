@@ -59,7 +59,7 @@ import java.time.LocalDate;
 	  * @param nivel Representa el nivel educativo del campamento
 	  * @param asistentesMax Representa el numero máximo de asistentes
 	  * */
-	public Campamento(int id, LocalDate iniciocampamento, LocalDate fincampamento, Nivel nivel, int asistentesMax, Monitor responsable, Monitor responsableEspecial) {
+	public Campamento(int id, LocalDate iniciocampamento, LocalDate fincampamento, Nivel nivel, int asistentesMax) {
 
 		this.id_=id;
 		this.iniciocampamento_=iniciocampamento;
@@ -67,8 +67,8 @@ import java.time.LocalDate;
 		this.nivel_=nivel;
 		this.asistentesMax_=asistentesMax;
 		this.listaActividad_ = new ArrayList<Actividad>();
-		this.responsable_=responsable;
-		this.responsableEspecial_ = responsableEspecial;
+		this.responsable_=null;
+		this.responsableEspecial_ = null;
 	}
 	 /**
 	  * Observador de la varible id

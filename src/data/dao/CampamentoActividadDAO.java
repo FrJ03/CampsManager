@@ -2,6 +2,7 @@ package data.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import java.io.BufferedReader;
@@ -146,4 +147,42 @@ public class CampamentoActividadDAO implements InterfaceDAO<CampamentoActividadD
 		
 		return status;
 	}
+	/**
+	 * Obtiene la lista de actividades relacionada con un campamento de la base de datos.
+	 * @param object CampamentoActividadDTO el cual se va a leer de la base de datos.
+	 * @return  ArrayList<ActividadMonitorDTO>
+	 */
+	public  ArrayList<CampamentoActividadDTO> readAllActividades(CampamentoActividadDTO object) {
+		
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		ArrayList <CampamentoActividadDTO> list = new ArrayList<CampamentoActividadDTO>();
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readAllActividades");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+			ps.setInt(1, object.getCampId());
+	
+			ResultSet rs = ps.executeQuery();
+			CampamentoActividadDTO dao = new CampamentoActividadDTO(0, object.getActId());
+			
+			while (rs.next()) {
+				dao.setActId(rs.getInt(1));
+				list.add(dao);
+            } 
+			
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return list;
+	}
+}
 }

@@ -6,10 +6,13 @@ import java.io.FileReader;
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Properties;
 
 import business.Campamento;
+import business.Monitor;
 import business.Actividad;
+import business.Nivel;
 
 public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	/**
@@ -74,7 +77,6 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 				
 			}
 			
-			
 		} catch(Exception e) { System.out.println(e); }
 		
 		return res;
@@ -82,7 +84,49 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 
 	@Override
 	public Campamento read(Campamento object) {
-		// TODO Auto-generated method stub
+		
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readCampamento");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+			ps.setInt(1, object.getId());
+	
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				object	= new Campamento(rs.getInt(1), rs.getDate(4).toLocalDate(), rs.getDate(5).toLocalDate(), Nivel.valueOf(rs.getString(6)), rs.getInt(7) );
+				int r = rs.getInt(2);
+				int e = rs.getInt(3);
+				
+				con.deleteConnection(c);
+				
+				MonitorDAO daoMonitor = MonitorDAO.getInstance();
+				Monitor res = new Monitor();
+				res.setId(r);
+				object.setResponsable(daoMonitor.read(res));
+				res.setId(e);
+				object.setResponsableEspecial(daoMonitor.read(res));
+            } 
+			else {
+				con.deleteConnection(c);
+			}
+			
+			
+			
+			
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return object;
 		return null;
 	}
 
