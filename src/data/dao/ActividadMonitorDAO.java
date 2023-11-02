@@ -29,7 +29,7 @@ public class ActividadMonitorDAO implements InterfaceDAO<ActividadMonitorDTO>{
 	 */
 	public static ActividadMonitorDAO getInstance() {
 		if(instance_ == null) {
-			return new ActividadMonitorDAO();
+			instance_= new ActividadMonitorDAO();
 		}
 		return instance_;
 	}

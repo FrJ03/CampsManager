@@ -18,8 +18,17 @@ import java.time.LocalDate;
 	  * */
 	private int id_;
 	/**
+	  * Representa el monitor responsable del campamento
+	  * */
+	private Monitor responsable_;
+	/**
+	  * Representa eñ monitor especial del campamento
+	  * */
+	private Monitor responsableEspecial_;
+	/**
 	  * Representa la fecha del inicio del campamento
 	  * */
+	
 	private LocalDate iniciocampamento_;
 	    /**
 	  * Representa la fecha del fin del campamento
@@ -37,10 +46,6 @@ import java.time.LocalDate;
 	  * Representa una lista con las Actividades
 	  * */
 	private ArrayList<Actividad>	listaActividad_;
-        /**
-	  * Representa una lista con los nombres y apellidos de los monitores
-	  * */
-	private ArrayList<Monitor>	listaMonitor_;
 
 	/**
 	  * Construye un objeto vacio
@@ -54,7 +59,7 @@ import java.time.LocalDate;
 	  * @param nivel Representa el nivel educativo del campamento
 	  * @param asistentesMax Representa el numero máximo de asistentes
 	  * */
-	public Campamento(int id, LocalDate iniciocampamento, LocalDate fincampamento, Nivel nivel, int asistentesMax) {
+	public Campamento(int id, LocalDate iniciocampamento, LocalDate fincampamento, Nivel nivel, int asistentesMax, Monitor responsable, Monitor responsableEspecial) {
 
 		this.id_=id;
 		this.iniciocampamento_=iniciocampamento;
@@ -62,7 +67,8 @@ import java.time.LocalDate;
 		this.nivel_=nivel;
 		this.asistentesMax_=asistentesMax;
 		this.listaActividad_ = new ArrayList<Actividad>();
-		this.listaMonitor_ = new ArrayList<Monitor>();
+		this.responsable_=responsable;
+		this.responsableEspecial_ = responsableEspecial;
 	}
 	 /**
 	  * Observador de la varible id
@@ -155,20 +161,35 @@ import java.time.LocalDate;
 		this.listaActividad_ = listaActividad;
 	}
 	/**
-	  * Observador de la varible ListaMonitor
-	  * @return listaMonitor_.
+	  * Observador de la varible responsable_
+	  * @return responsable_.
 	  * */
-	public ArrayList<Monitor> getListaMonitor() {
-		return listaMonitor_;
+	public Monitor getResponsable() {
+		return responsable_;
 	}
 	/**
-	  * Modificador de la variable ListaMonitor
-	  * @param listaMonitor.
+	  * Modificador de la variable responsable_
+	  * @param responsable.
 	  * @return void.
 	  * */
-	public void setListaMonitor(ArrayList<Monitor> listaMonitor) {
-		this.listaMonitor_ = listaMonitor;
-	};
+	public void setResponsable(Monitor responsable) {
+		this.responsable_ = responsable;
+	}
+	/**
+	  * Observador de la varible responsableEspecial
+	  * @return responsableEspecial.
+	  * */
+	public Monitor getResponsableEspecial() {
+		return responsableEspecial_;
+	}
+	/**
+	  * Modificador de la variable responsableEspecial_
+	  * @param responsableEspecial_.
+	  * @return void.
+	  * */
+	public void setResponsableEspecial(Monitor responsableEspecial_) {
+		this.responsableEspecial_ = responsableEspecial_;
+	}
 	/**
 	  * Función que devuelve un string con la información del campamento
 	  * @return La estrucutra es la siguiente:
@@ -183,12 +204,8 @@ import java.time.LocalDate;
 	  * */
 	public String toString(){
 		String aux = "Información del Campamento\n\tId:" + this.id_ + "\n\tFecha de Inicio:" + this.iniciocampamento_ + 
-				"\n\tFin del campamento:" + this.fincampamento_ + "\n\tNivel Academico:"+ this.nivel_ + "\n\tNumero maximo de asistentes:" + this.asistentesMax_ + "\n\tLista de Monitores:";
-		
-		
-		for(Monitor mon : this.listaMonitor_) {
-			aux += "\n\t\tId: " + mon.getId() + "\n\t\tNombre: " + mon.getNombreCompleto() + "\n";
-		}
+				"\n\tFin del campamento:" + this.fincampamento_ + "\n\tNivel Academico:"+ this.nivel_ + "\n\tNumero maximo de asistentes:" + this.asistentesMax_ + "\n\tMonitor Responsable:"+
+				this.getResponsable() + "\n\tMonitor especial: " + this.getResponsableEspecial();		
 		aux += "\n\tLista de Actividades:";
 		for(Actividad act : this.listaActividad_) {
 			aux += "\n\t\tId: " + act.getId() + "\n\t\tNombre: " + act.getName() + "\n";

@@ -29,7 +29,7 @@ public class CampamentoActividadDAO implements InterfaceDAO<CampamentoActividadD
 	 */
 	public static CampamentoActividadDAO getInstance() {
 		if(instance_ == null) {
-			return new CampamentoActividadDAO();
+			instance_ = new CampamentoActividadDAO();
 		}
 		return instance_;
 	}
