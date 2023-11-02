@@ -2,8 +2,10 @@ package data.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.Properties;
+import java.util.zip.ZipInputStream;
+
+import org.omg.CORBA.portable.ValueInputStream;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,14 +25,14 @@ public class ActividadMonitorDAO implements InterfaceDAO<ActividadMonitorDTO>{
 	/*
 	 * *Representa la dirección al fichero properties.
 	 */
-	private static String dir_ = "rutas.txt";
+	private static String dir_ = "sql.properties";
 	/**
 	 * Metodo que sirve de acceso a la instancia.
 	 * @return Instancia de la clase ActividadMonitorDTO.
 	 */
 	public static ActividadMonitorDAO getInstance() {
 		if(instance_ == null) {
-			instance_= new ActividadMonitorDAO();
+			instance_ = new ActividadMonitorDAO();
 		}
 		return instance_;
 	}
@@ -147,3 +149,4 @@ public class ActividadMonitorDAO implements InterfaceDAO<ActividadMonitorDTO>{
 		
 		return status;
 	}
+}

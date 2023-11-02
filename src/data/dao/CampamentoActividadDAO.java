@@ -13,6 +13,7 @@ import java.io.FileReader;
 /**
  * Clase CampamentoActividadDAO que realiza las consultas relacionada con la tabla Campamento-Actividad.
  * @author Manuel García Obrero
+ * @author Enrique de los Reyes Montilla
  */
 
 public class CampamentoActividadDAO implements InterfaceDAO<CampamentoActividadDTO>{
@@ -23,7 +24,7 @@ public class CampamentoActividadDAO implements InterfaceDAO<CampamentoActividadD
 	/*
 	 * *Representa la dirección al fichero properties.
 	 */
-	private static String dir_ = "rutas.txt";
+	private static String dir_ = "sql.properties";
 	/**
 	 * Metodo que sirve de acceso a la instancia.
 	 * @return Instancia de la clase CampamentoActividadDTO.
@@ -171,7 +172,7 @@ public class CampamentoActividadDAO implements InterfaceDAO<CampamentoActividadD
 			ps.setInt(1, object.getCampId());
 	
 			ResultSet rs = ps.executeQuery();
-			CampamentoActividadDTO dao = new CampamentoActividadDTO(0, object.getActId());
+			CampamentoActividadDTO dao = new CampamentoActividadDTO(0, object.getCampId());
 			
 			while (rs.next()) {
 				dao.setActId(rs.getInt(1));
@@ -185,4 +186,4 @@ public class CampamentoActividadDAO implements InterfaceDAO<CampamentoActividadD
 		return list;
 	}
 }
-}
+

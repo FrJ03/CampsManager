@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,10 @@ import business.Monitor;
 import business.Actividad;
 import business.Nivel;
 
+/**
+ * Clase CampamentoDAO que realiza las consultas relacionada con la tabla Campamento.
+ * @author Enrique de los Reyes Montilla
+ */
 public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	/**
 	 * Variable privada Singleton.
@@ -22,7 +27,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	/*
 	 * *Representa la dirección al fichero properties.
 	 */
-	private static String dir_ = "rutas.txt";
+	private static String dir_ = "sql.properties";
 	/**
 	 * Metodo que sirve de acceso a la instancia.
 	 * @return Instancia de la clase CampamentoDAO.
@@ -34,9 +39,14 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 		return instance_;
 	}
 	/**
-	 * Constructor vacío de la clase Campamento.
+	 * Constructor vacío de la clase CampamentoDAO.
 	 */
 	private CampamentoDAO() {}
+	/**
+	 * Añade un nuevo campamento a la base de datos.
+	 * @param object Campamento el cual va a ser añadido a la base de datos.
+	 * @return boolean
+	 */
 	@Override
 	public boolean create(Campamento object) {
 		
@@ -72,7 +82,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 			
 			for ( Actividad i : object.getListaActividad()) {
 				
-				CampamentoActividadDTO aux = new CampamentoActividadDTO(object.getId(), i.getId());
+				CampamentoActividadDTO aux = new CampamentoActividadDTO(i.getId(), object.getId());
 				res = dao.create(aux);
 				
 			}
@@ -81,7 +91,11 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 		
 		return res;
 	}
-
+	/**
+	 * Lee un Campamento de la base de datos.
+	 * @param object Campamento con el id del campamento que va a ser leido de la base de datos.
+	 * @return Campamento
+	 */
 	@Override
 	public Campamento read(Campamento object) {
 		
@@ -115,6 +129,25 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 				object.setResponsable(daoMonitor.read(res));
 				res.setId(e);
 				object.setResponsableEspecial(daoMonitor.read(res));
+				
+				CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
+				
+				ArrayList <Actividad> actividades = new ArrayList<Actividad>();
+				Actividad aux = new Actividad();
+				
+				CampamentoActividadDTO dto = new CampamentoActividadDTO(0, object.getId());
+				ArrayList <CampamentoActividadDTO> list = dao.readAllActividades(dto);
+				
+				ActividadDAO actDao = ActividadDAO.getInstance();
+				
+				for (CampamentoActividadDTO i : list) {
+					
+					aux.setId(i.getActId());
+					actividades.add(actDao.read(aux));
+					
+				}
+				
+				object.setListaActividad(actividades);
             } 
 			else {
 				con.deleteConnection(c);
@@ -127,13 +160,51 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 		} catch(Exception e) { System.out.println(e); }
 		
 		return object;
-		return null;
 	}
-
+	/**
+	 * Elimina un Campaemnto de la base de datos.
+	 * @param object Campamento el cual se va a eliminar de la base de datos.
+	 * @return boolean
+	 */
 	@Override
 	public boolean delete(Campamento object) {
-		// TODO Auto-generated method stub
-		return false;
+		int rs =0;
+		boolean status = false;
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("deleteCampamento");
+			
+			Connection c=con.getConnection();
+			PreparedStatement preparedStatement = c.prepareStatement(query);
+	        preparedStatement.setInt(1, object.getId());
+	
+			rs = preparedStatement.executeUpdate(); 
+			
+			if(rs == 1) {
+				status = true;
+			}
+			
+			con.deleteConnection(c);
+			
+			CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
+			
+			for ( Actividad i : object.getListaActividad()) {
+				
+				CampamentoActividadDTO aux = new CampamentoActividadDTO(i.getId(), object.getId());
+				status = dao.delete(aux);
+				
+			}
+			
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return status;
 	}
 
 }

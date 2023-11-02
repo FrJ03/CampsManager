@@ -25,14 +25,14 @@ public class InscripcionDAO implements InterfaceDAO<Inscripcion>{
 	/*
 	 * *Representa la dirección al fichero properties.
 	 */
-	private static String dir_ = "rutas.txt";
+	private static String dir_ = "sql.properties";
 	/**
 	 * Metodo que sirve de acceso a la instancia.
 	 * @return Instancia de la clase InscripcionDAO.
 	 */
 	public static InscripcionDAO getInstance() {
 		if(instance_ == null) {
-			return new InscripcionDAO();
+			instance_ = new InscripcionDAO();
 		}
 		return instance_;
 	}

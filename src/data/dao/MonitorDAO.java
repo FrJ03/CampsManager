@@ -21,14 +21,14 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 	/*
 	 * *Representa la dirección al fichero properties.
 	 */
-	private static String dir_ = "rutas.txt";
+	private static String dir_ = "sql.properties";
 	/**
 	 * Metodo que sirve de acceso a la instancia.
 	 * @return Instancia de la clase MonitorDAO.
 	 */
 	public static MonitorDAO getInstance() {
 		if(instance_ == null) {
-			return new MonitorDAO();
+			instance_ = new MonitorDAO();
 		}
 		return instance_;
 	}

@@ -23,14 +23,14 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 	/*
 	 * *Representa la dirección al fichero properties.
 	 */
-	private static String dir_ = "rutas.txt";
+	private static String dir_ = "sql.properties";
 	/**
 	 * Metodo que sirve de acceso a la instancia.
 	 * @return Instancia de la clase InscripcionParcialDAO.
 	 */
 	public static InscripcionParcialDAO getInstance() {
 		if(instance_ == null) {
-			return new InscripcionParcialDAO();
+			instance_ = new InscripcionParcialDAO();
 		}
 		return instance_;
 	}
