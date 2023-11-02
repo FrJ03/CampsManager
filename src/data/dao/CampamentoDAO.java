@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.util.Properties;
 
 import business.Campamento;
+import business.Actividad;
 
 public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	/**
@@ -45,23 +46,34 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String create = p.getProperty("createActividadMonitor");
+			String create = p.getProperty("createCampamento");
 			
 			System.out.println(create);
 			Connection c=con.getConnection();
 			PreparedStatement ps=c.prepareStatement(create);
 			
-             ps.setDate(2,  java.sql.Date.valueOf(object.getInicioCampamento())); // Fecha de inicio
-             ps.setInt(object.getId(), 1); // Aquí debes proporcionar el valor del responsable
-             ps.setDate(3, java.sql.Date.valueOf(object.getFinCampamento())); // Fecha de fin
-             ps.setString(4, object.getNivel().toString()); // Nivel del campamento
-             ps.setInt(5, 50); // Máximo número de asistentes
+             ps.setDate(4,  java.sql.Date.valueOf(object.getInicioCampamento())); 
+             ps.setInt(1, object.getId()); 
+             ps.setDate(5, java.sql.Date.valueOf(object.getFinCampamento())); 
+             ps.setString(6, object.getNivel().toString()); 
+             ps.setInt(7, object.getAsistentesMax()); 
+             ps.setInt(2, object.getResponsable().getId());
+             ps.setInt(3, object.getResponsableEspecial().getId());
 			
 			status = ps.executeUpdate();	
 			if (status == 1) {
 				res = true;
 			}
 			con.deleteConnection(c);
+			CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
+			
+			for ( Actividad i : object.getListaActividad()) {
+				
+				CampamentoActividadDTO aux = new CampamentoActividadDTO(object.getId(), i.getId());
+				res = dao.create(aux);
+				
+			}
+			
 			
 		} catch(Exception e) { System.out.println(e); }
 		
