@@ -1,6 +1,11 @@
 package business;
 
 import java.util.ArrayList;
+
+import data.dao.CampamentoDAO;
+import data.dao.InscripcionCompletaDAO;
+import data.dao.InscripcionParcialDAO;
+
 import java.time.Period;
 import java.time.LocalDate;
 /**
@@ -32,14 +37,18 @@ public class GestorInscripciones {
 		return instance_;
 	}
 	private GestorInscripciones() {
-		this.listaInscripcionCompleta_ = new ArrayList<InscripcionCompleta>();
-		this.listaInscripcionParcial_ = new ArrayList<InscripcionParcial>();
+		this.listaInscripcionCompleta_ = null;
+		this.listaInscripcionParcial_ = null;
 	}
 	/**
 	 * Método que devuelve la lista de InscripcionesParciales del gestor.
 	 * @return ArrayList<InscripcionParcial>.
 	 */
 	public ArrayList<InscripcionParcial> getListaInscripcionParcial() {
+		if(listaInscripcionParcial_ == null) {
+			InscripcionParcialDAO db = InscripcionParcialDAO.getInstance();
+			listaInscripcionParcial_ = db.readAll();
+		}
 		return listaInscripcionParcial_;
 	}
 	/**
@@ -55,6 +64,10 @@ public class GestorInscripciones {
 	 * @return ArrayList<InscripcionCompleta>.
 	 */
 	public ArrayList<InscripcionCompleta> getListaInscripcionCompleta() {
+		if(listaInscripcionCompleta_ == null) {
+			InscripcionCompletaDAO db = InscripcionCompletaDAO.getInstance();
+			listaInscripcionCompleta_ = db.readAll();
+		}
 		return listaInscripcionCompleta_;
 	}
 	/**
@@ -70,27 +83,10 @@ public class GestorInscripciones {
 	 * @param InscripcionCompleta inscripcion.
 	 * @param fechaInicioCamp fecha de inicio del campamento.
 	 * @param listaAsistentes Lista de asistentes registrados.
-	 * @return boolean.
-	 * @throws Exception 
+	 * @return boolean Devuelve tre si se ha realizado correctamente la inserción
 	 */
-	public boolean realizarRegistro(InscripcionCompleta inscripcion, LocalDate fechaInicioCamp,  ArrayList<Asistente> listaAsistentes) throws Exception {
-		
-		for(InscripcionCompleta ins : this.listaInscripcionCompleta_) {
-			
-			if(ins.getIdParticipante() == inscripcion.getIdParticipante() && ins.getIdCampamento() == inscripcion.getIdCampamento()) {
-				throw new Exception("Error: Inscripción del participante" +  inscripcion.getIdParticipante()+" ya ha sido realizada en el campamento  " + inscripcion.getIdCampamento() + ".");
-			}
-			
-		}
-		
-		for(InscripcionParcial ins : this.listaInscripcionParcial_) {
-			
-			if(ins.getIdParticipante() == inscripcion.getIdParticipante() && ins.getIdCampamento() == inscripcion.getIdCampamento()) {
-				throw new Exception("Error: Inscripción del participante" +  inscripcion.getIdParticipante()+" ya ha sido realizada en el campamento  " + inscripcion.getIdCampamento() + ".");
-			}
-			
-		}
-		
+	public boolean realizarRegistro(InscripcionCompleta inscripcion, LocalDate fechaInicioCamp,  ArrayList<Asistente> listaAsistentes){		
+		this.listaInscripcionCompleta_ = null;
 		// Calcular la diferencia entre las dos fechas
 		inscripcion.setFechaInscripcion(LocalDate.now());
 		Period periodo = inscripcion.getFechaInscripcion().until(fechaInicioCamp);
@@ -98,23 +94,13 @@ public class GestorInscripciones {
 		// Obtener el número de días de la diferencia
 		int diferenciaDias = periodo.getDays();
 		        
-		if(diferenciaDias >= 15 ) {
-			inscripcion.crearRegistroTemprano(fechaInicioCamp);
-		}
-		else {
-			inscripcion.crearRegistroTardio(fechaInicioCamp);
-		}
-				
-		this.listaInscripcionCompleta_.add(inscripcion);
-		//Comprobamos si el asistente necesita atención especial.
-		for(Asistente as : listaAsistentes) {
-					
-			if(as.getId() == inscripcion.getIdParticipante()) {
-				return as.getEspecial();
-			}
-						
-		}
-		return false;
+		InscripcionCompletaDAO db = InscripcionCompletaDAO.getInstance();
+		if(diferenciaDias >= 15 )
+			return db.createTemprano(inscripcion);
+		else if(diferenciaDias >= 2)
+			return db.createTardio(inscripcion);
+		else 
+			return false;
 	}
 	/**
 	 * Método que añade una inscripción a la lista de inscripciones parciales.
@@ -125,23 +111,7 @@ public class GestorInscripciones {
 	 * @throws Exception 
 	 */
 	public boolean realizarRegistro(InscripcionParcial inscripcion, LocalDate fechaInicioCamp, ArrayList<Asistente> listaAsistentes) throws Exception {
-		
-		for(InscripcionCompleta ins : this.listaInscripcionCompleta_) {
-			
-			if(ins.getIdParticipante() == inscripcion.getIdParticipante() && ins.getIdCampamento() == inscripcion.getIdCampamento()) {
-				throw new Exception("Error: Inscripción del participante" +  inscripcion.getIdParticipante()+" ya ha sido realizada en el campamento  " + inscripcion.getIdCampamento() + ".");
-			}
-			
-		}
-		
-		for(InscripcionParcial ins : this.listaInscripcionParcial_) {
-			
-			if(ins.getIdParticipante() == inscripcion.getIdParticipante() && ins.getIdCampamento() == inscripcion.getIdCampamento()) {
-				throw new Exception("Error: Inscripción del participante" +  inscripcion.getIdParticipante()+" ya ha sido realizada en el campamento  " + inscripcion.getIdCampamento() + ".");
-			}
-			
-		}
-		
+		listaInscripcionParcial_ = null;	
 		// Calcular la diferencia entre las dos fechas
 		inscripcion.setFechaInscripcion(LocalDate.now());
         Period periodo = inscripcion.getFechaInscripcion().until(fechaInicioCamp);
@@ -149,24 +119,13 @@ public class GestorInscripciones {
         // Obtener el número de días de la diferencia
         int diferenciaDias = periodo.getDays();
         
-		if(diferenciaDias >= 15 ) {
-			inscripcion.crearRegistroTemprano(fechaInicioCamp);
-		}
-		else {
-			inscripcion.crearRegistroTardio(fechaInicioCamp);
-		}
-		
-		this.listaInscripcionParcial_.add(inscripcion);
-		
-		//Comprobamos si el asistente necesita atención especial.
-		for(Asistente as : listaAsistentes) {
-			
-			if(as.getId() == inscripcion.getIdParticipante()) {
-				return as.getEspecial();
-			}
-			
-		}
-		return false;
+        InscripcionCompletaDAO db = InscripcionCompletaDAO.getInstance();
+		if(diferenciaDias >= 15 )
+			return db.createTemprano(inscripcion);
+		else if(diferenciaDias >= 2)
+			return db.createTardio(inscripcion);
+		else
+			return false;
 	}
 	/**
 	 * Método que calcula el precio de la inscripción y lo devuelve como un int. Si el resultado es -1,  no existe el campamento al que está inscrito
@@ -247,49 +206,15 @@ public class GestorInscripciones {
 	 * @return ArrayList<Campamento>. 
 	 * @throws Exception 
 	 */
-	public String obtenerCampamentosDisponibles(ArrayList<Campamento> listaCampamentos) throws Exception{
+	public String obtenerCampamentosDisponibles(){
+		CampamentoDAO db = db.getInstance();
+		ArrayList<Campamento> disponibles = db.readDisponibles();
 		
 		String listaAux = "";
-		int sumaAsistentes = 0;
 		
-		if(listaCampamentos.size() == 0) {
-			throw new Exception("Error: No hay campamentos registrados.");
-		}
-		
-		for(Campamento cam : listaCampamentos) {
-			Period periodo = LocalDate.now().until(cam.getInicioCampamento());
-	        // Obtener el número de días de la diferencia
-	        int diferenciaDias = periodo.getDays();
-	        
-			if(diferenciaDias >= 2 ) {
-				
-				for(InscripcionParcial ins : this.listaInscripcionParcial_) {
-					
-					if(ins.getIdCampamento() == cam.getId()) {
-						
-						sumaAsistentes ++;
-						
-					}
-					
-				}
-				for(InscripcionCompleta ins : this.listaInscripcionCompleta_) {
-					
-					if(ins.getIdCampamento() == cam.getId()) {
-						
-						sumaAsistentes ++;
-						
-					}
-					
-				}
-				
-				if(cam.getAsistentesMax() > sumaAsistentes) {
-					listaAux += cam.toString();
-				}
-				
-			}
-			
-				
-		}
+		if(disponibles.size() > 0) 		
+			for(Campamento cam : disponibles) 
+				listaAux += cam.toString();
 		
 		return listaAux;
 	}
