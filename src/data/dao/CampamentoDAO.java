@@ -214,7 +214,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	}
 	/**
 	 * Añade todos los campamnetos de la base de datos a un lista.
-	 * @return Array<Monitor>
+	 * @return ArrayList<Campamento>
 	 */
 	public ArrayList<Campamento> readAll(){
 		
