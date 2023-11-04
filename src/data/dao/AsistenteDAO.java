@@ -54,7 +54,6 @@ public class AsistenteDAO implements InterfaceDAO<Asistente>{
 			p.load(reader);
 			String create = p.getProperty("createAsistente");
 			
-			System.out.println(create);
 			Connection c=con.getConnection();
 			PreparedStatement ps=c.prepareStatement(create);
 			

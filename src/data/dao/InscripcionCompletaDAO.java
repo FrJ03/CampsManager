@@ -115,40 +115,4 @@ public class InscripcionCompletaDAO implements InterfaceDAO<InscripcionCompleta>
 		
 		return object;
 	}
-	
-	/**
-	 * Elimina un monitor de la base de datos.
-	 * @param object InscripcionCompleta el cual se va a eliminar de la base de datos.
-	 * @return boolean
-	 */
-	@Override
-	public boolean delete(InscripcionCompleta object) {
-		int rs =0;
-		boolean status = false;
-		BufferedReader reader = null;
-		Connector con = new Connector();
-		try{
-			
-			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
-			p.load(reader);
-			String query = p.getProperty("deleteInscripcion");
-			
-			Connection c=con.getConnection();
-			PreparedStatement preparedStatement = c.prepareStatement(query);
-	        preparedStatement.setInt(1, object.getIdParticipante());
-	        preparedStatement.setInt(2, object.getIdCampamento());
-	
-			rs = preparedStatement.executeUpdate(); 
-			
-			if(rs == 1) {
-				status = true;
-			}
-			
-			con.deleteConnection(c);
-			
-		} catch(Exception e) { System.out.println(e); }
-		
-		return status;
-	}
 }

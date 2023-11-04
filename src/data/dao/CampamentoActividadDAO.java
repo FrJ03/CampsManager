@@ -164,7 +164,7 @@ public class CampamentoActividadDAO implements InterfaceDAO<CampamentoActividadD
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readAllActividades");
+			String query = p.getProperty("readAllActividadesCampamento");
 			
 			Connection c = con.getConnection();
 			

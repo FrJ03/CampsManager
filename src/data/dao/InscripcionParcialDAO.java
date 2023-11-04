@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.Properties;
 
 import business.InscripcionParcial;
+import business.Campamento;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -116,7 +117,7 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 	}
 	
 	/**
-	 * Elimina un monitor de la base de datos.
+	 * Elimina una Inscripción de la base de datos.
 	 * @param object InscripcionParcial el cual se va a eliminar de la base de datos.
 	 * @return boolean
 	 */
@@ -150,4 +151,5 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 		
 		return status;
 	}
+	
 }

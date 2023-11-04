@@ -5,16 +5,17 @@ import java.io.File;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Properties;
 
 import business.Campamento;
 import business.Monitor;
 import business.Actividad;
 import business.Nivel;
-
+	
 /**
  * Clase CampamentoDAO que realiza las consultas relacionada con la tabla Campamento.
  * @author Enrique de los Reyes Montilla
@@ -59,19 +60,24 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String create = p.getProperty("createCampamento");
+			String create = p.getProperty("createCampameto");
 			
-			System.out.println(create);
 			Connection c=con.getConnection();
 			PreparedStatement ps=c.prepareStatement(create);
 			
              ps.setDate(4,  java.sql.Date.valueOf(object.getInicioCampamento())); 
              ps.setInt(1, object.getId()); 
-             ps.setDate(5, java.sql.Date.valueOf(object.getFinCampamento())); 
+             ps.setDate(5, java.sql.Date.valueOf(object.getFinCampamento()));
              ps.setString(6, object.getNivel().toString()); 
              ps.setInt(7, object.getAsistentesMax()); 
              ps.setInt(2, object.getResponsable().getId());
-             ps.setInt(3, object.getResponsableEspecial().getId());
+             if(object.getResponsableEspecial()!=null) {
+            	 ps.setInt(3, object.getResponsableEspecial().getId());
+             }
+             else {
+            	 ps.setInt(3, -1);
+             }
+             
 			
 			status = ps.executeUpdate();	
 			if (status == 1) {
@@ -206,5 +212,177 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 		
 		return status;
 	}
+	/**
+	 * Añade todos los campamnetos de la base de datos a un lista.
+	 * @return Array<Monitor>
+	 */
+	public ArrayList<Campamento> readAll(){
+		
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		ArrayList<Campamento> campamentos = new ArrayList<Campamento>();
+		Campamento object = new Campamento();
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readAllCampamentos");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				Actividad aux = new Actividad();
+				
+				aux.setId(rs.getInt(2));
+				object = new Campamento(rs.getInt(1), rs.getDate(4).toLocalDate(), rs.getDate(5).toLocalDate(), Nivel.valueOf(rs.getString(6)), rs.getInt(7) );
+				int r = rs.getInt(2);
+				int e = rs.getInt(3);
+				
+				
+				MonitorDAO daoMonitor = MonitorDAO.getInstance();
+				Monitor res = new Monitor();
+				res.setId(r);
+				object.setResponsable(daoMonitor.read(res));
+				res.setId(e);
+				object.setResponsableEspecial(daoMonitor.read(res));
+				
+				CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
+				
+				ArrayList <Actividad> actividades = new ArrayList<Actividad>();
+				
+				CampamentoActividadDTO dto = new CampamentoActividadDTO(0, object.getId());
+				ArrayList <CampamentoActividadDTO> list = dao.readAllActividades(dto);
+				
+				ActividadDAO actDao = ActividadDAO.getInstance();
+				
+				for (CampamentoActividadDTO i : list) {
+					
+					aux.setId(i.getActId());
+					actividades.add(actDao.read(aux));
+					
+				}
+				
+				object.setListaActividad(actividades);
+				campamentos.add(object);
+            } 
+				con.deleteConnection(c);
+				
+		} catch(Exception e) { System.out.println(e); }
+		
+		return campamentos;
+	}
+	/**
+	 * Añade todos los campamentos disponibles de la base de datos a un lista.
+	 * @return ArrayList<Campamento>
+	 */
+	ArrayList<Campamento> readAllAvailable(){
 
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		ArrayList<Campamento> campamentos = new ArrayList<Campamento>();
+		Campamento object = new Campamento();
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readCampamento");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				Actividad aux = new Actividad();
+				
+				aux.setId(rs.getInt(2));
+				object = new Campamento(rs.getInt(1), rs.getDate(4).toLocalDate(), rs.getDate(5).toLocalDate(), Nivel.valueOf(rs.getString(6)), rs.getInt(7) );
+				int r = rs.getInt(2);
+				int e = rs.getInt(3);
+				
+				
+				MonitorDAO daoMonitor = MonitorDAO.getInstance();
+				Monitor res = new Monitor();
+				res.setId(r);
+				object.setResponsable(daoMonitor.read(res));
+				res.setId(e);
+				object.setResponsableEspecial(daoMonitor.read(res));
+				
+				Period periodo = object.getInicioCampamento().until(LocalDate.now());
+
+				// Obtener el número de días de la diferencia
+				int diferenciaDias = periodo.getDays();
+				
+				if(count(object) < object.getAsistentesMax() && diferenciaDias > 2) {
+					
+					CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
+					
+					ArrayList <Actividad> actividades = new ArrayList<Actividad>();
+					
+					CampamentoActividadDTO dto = new CampamentoActividadDTO(0, object.getId());
+					ArrayList <CampamentoActividadDTO> list = dao.readAllActividades(dto);
+					
+					ActividadDAO actDao = ActividadDAO.getInstance();
+					
+					for (CampamentoActividadDTO i : list) {
+						
+						aux.setId(i.getActId());
+						actividades.add(actDao.read(aux));
+						
+					}
+					
+					object.setListaActividad(actividades);
+					campamentos.add(object);
+				}
+            } 
+				con.deleteConnection(c);
+				
+		} catch(Exception e) { System.out.println(e); }
+		
+		return campamentos;
+		
+	}
+	/**
+	 * Cuenta el numero de Inscripciones de la base de datos que tienen un determinado idCapamento.
+	 * @param object Campamento con el id que se utilizará para la consulta.
+	 * @return int
+	 */
+	private int count(Campamento object) {
+		ResultSet rs ;
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		int count = 0;
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("countParticipantes");
+			
+			Connection c=con.getConnection();
+			PreparedStatement preparedStatement = c.prepareStatement(query);
+	        preparedStatement.setInt(1, object.getId());
+	
+			rs = preparedStatement.executeQuery(); 
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return count;
+	}
 }
