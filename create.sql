@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS inscripcion(
     fechaInscripcion DATE,
     precio REAL,
     tipo VARCHAR(8) CHECK(tipo='Completo' || tipo='Parcial'),
+    temporalidad VARCHAR(10) CHECK (temporalidad='Temprana' || temporalidad='Tardia'),
     CONSTRAINT PK_inscripcion PRIMARY KEY(idCampamento,idParticipante),
     CONSTRAINT FK_inscripcion_asistente FOREIGN KEY (idParticipante) REFERENCES asistente(id),
     CONSTRAINT FK_inscripcion_campamento FOREIGN KEY (idCampamento) REFERENCES campamento(id)
