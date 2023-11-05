@@ -29,41 +29,9 @@ public class Programa {
 	 */
 	public static void main(String args[]){
 		int opcion = 0;
-		BufferedReader reader = null;
-		GestorDatos datos = null;
 		GestorAsistentes asistentes = null;
 		GestorCampamentos campamentos = null;
 		GestorInscripciones inscripciones = null;
-		
-		//Abro el fichero de la variable dir_ mediante la clase properties debido a que su contenido está estructurado en par clave=valor
-		Properties p = new Properties();
-		try {			
-			reader = new BufferedReader(new FileReader(new File(dir_)));
-			p.load(reader);
-			
-			//Creo una instacia del gestor de datos
-			datos = GestorDatos.getInstance();
-			
-			//Leo los asistentes de su fichero correspondientes
-			asistentes = GestorAsistentes.getInstance();
-			asistentes.setListaAsistentes(datos.getAsistentes(p.getProperty("asistentes")));
-			
-			//Leo los campamentos, actividades y monitores de sus ficheros
-			campamentos = GestorCampamentos.getInstance();
-			campamentos.setListaActividades(datos.getActividades(p.getProperty("actividades")));
-			campamentos.setListaCampamentos(datos.getCampamentos(p.getProperty("campamentos")));
-			campamentos.setListaMonitores(datos.getMonitores(p.getProperty("monitores")));
-			
-			//Leo los ficheros de inscripciones
-			inscripciones = GestorInscripciones.getInstance();
-			inscripciones.setListaInscripcionCompleta(datos.getInscripcionesCompletas(p.getProperty("inscripcionesCompletas")));
-			inscripciones.setListaInscripcionParcial(datos.getInscripcionesParciales(p.getProperty("inscripcionesParciales")));
-			
-			reader.close();
-		} catch (IOException | ClassNotFoundException e) {
-			e.printStackTrace();
-			System.exit(0);
-		}
 		
 		//Buffer para leer datos por teclado
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
