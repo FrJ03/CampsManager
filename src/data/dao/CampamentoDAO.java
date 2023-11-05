@@ -281,7 +281,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	 * Añade todos los campamentos disponibles de la base de datos a un lista.
 	 * @return ArrayList<Campamento>
 	 */
-	ArrayList<Campamento> readAllAvailable(){
+	public ArrayList<Campamento> readAllAvailable(){
 
 		BufferedReader reader = null;
 		Connector con = new Connector();

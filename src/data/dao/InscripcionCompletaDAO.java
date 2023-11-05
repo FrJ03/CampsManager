@@ -115,4 +115,9 @@ public class InscripcionCompletaDAO implements InterfaceDAO<InscripcionCompleta>
 		
 		return object;
 	}
+	@Override
+	public boolean delete(InscripcionCompleta object) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -228,34 +228,6 @@ import java.time.LocalDate;
 				
 		return false; //Error, tienen diferente nivel educativo
 	}
-	/**
-	  * Función permita establecer el monitor responsable de entre aquellos que están encargados de alguna de las actividades que conforman el campamento.
-	  * @param mon.  
-	  * */
-	public void asociarMonitor(Monitor mon) {
-		this.listaMonitor_.add(mon);
-	}
-	/**
-	  * Función permita establecer un segundo monitor responsable entre aquellos identificados como de atención especial. Dicho monitor no puede estar asociado a ninguna de las actividades que componen el campamento, pues se trata de un refuerzo que estará de apoyo a todas ellas. 
-	  * @param mon. 
-	  * @return boolean(True se ha añadido correctamente/ False error).
-	  * */
-	public boolean asociarMonitorEspecial(Monitor mon) {
-	
-		if(mon.getEspecial()==true) { 
-			for(int i=0; i< listaActividad_.size(); i++) {
-				ArrayList<Monitor> ListaMonitores = listaActividad_.get(i).getListaMonitores();
-				for(int x=0;x<ListaMonitores.size();x++) {
-					if(ListaMonitores.get(x).getNombreCompleto()==mon.getNombreCompleto()) {
-						return false;//Error, el monitor no es un monitor de atencion especial
-					}
-				}	
-			}
-			this.listaMonitor_.add(mon);
-			return true;//Se ha incorporado correctamente
-		}
-		return false;//Error, el monitor no es un monitor de atencion especial
-	}
 	@Override
     public int compareTo(Campamento c) {
 		if(c.getId() > this.getId())

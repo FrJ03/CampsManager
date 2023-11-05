@@ -207,8 +207,8 @@ public class GestorInscripciones {
 	 * @throws Exception 
 	 */
 	public String obtenerCampamentosDisponibles(){
-		CampamentoDAO db = db.getInstance();
-		ArrayList<Campamento> disponibles = db.readDisponibles();
+		CampamentoDAO db = CampamentoDAO.getInstance();
+		ArrayList<Campamento> disponibles = db.readAllAvailable();
 		
 		String listaAux = "";
 		
