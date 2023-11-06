@@ -151,5 +151,39 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 		
 		return status;
 	}
+	/**
+	 * Añade todos las inscripciones de la base de datos a un lista.
+	 * @return ArrayList<InscripcionParcial>
+	 */
+	public ArrayList<InscripcionParcial>readAll(){
+
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		ArrayList<InscripcionParcial> list = new ArrayList<InscripcionParcial>();
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readAllInscripcionParcial");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
 	
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				
+                list.add( new InscripcionParcial(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4), rs.getString(5), rs.getString(6)));
+            } 
+			
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return list;
+	}
+}
 }
