@@ -17,12 +17,6 @@ import gestorDatos.GestorDatos;
  * Clase que representa el programa principal.
  */
 public class Programa {
-	
-	/**
-	 * Variable que contiene la ruta del fichero que contiene las direcciones de los ficheros de datos.
-	 */
-	private static String dir_ = "rutas.txt";
-	
 	/**
 	 * Función principal del sistema.
 	 * @param args
@@ -38,26 +32,14 @@ public class Programa {
 		
 		//Bucle del menú principal
 		do {
-			try {
-				opcion = menuPrincipal();
-			} catch (IOException e) {
-				e.printStackTrace();
-				guardar();
-				System.exit(0);
-			}
-			
+			opcion = menuPrincipal();
+						
 			//Gestor de Asistentes
 			if(opcion == 1) {	
 				
 				//Bucle del menu de asistentes
 				do {
-					try {
-						opcion = menuGestorAsistentes();
-					} catch (IOException e) {
-						e.printStackTrace();
-						guardar();
-						System.exit(0);
-					}
+					opcion = menuGestorAsistentes();
 					//Listar asistentes
 					if(opcion == 1) {
 						ArrayList<Asistente> listaAsistentes = asistentes.getListaAsistente();
@@ -70,47 +52,26 @@ public class Programa {
 						Asistente nuevo = new Asistente();
 						
 						System.out.print("Assistant firstname: ");
-						try {
-							nuevo.setNombre(teclado.readLine());
-						} catch (IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						nuevo.setNombre(teclado.readLine());
 						
 						System.out.print("Assistant lastname: ");
-						try {
-							nuevo.setApellidos(teclado.readLine());
-						} catch (IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
-						
+						nuevo.setApellidos(teclado.readLine());
+											
 						String aux = null;
+						
 						do {
 							System.out.print("Birth date (yyyy/mm/dd): ");
-							try {
-								aux = teclado.readLine();
-							} catch (IOException e) {
-								e.printStackTrace();
-								guardar();
-								System.exit(0);
-							}
+							aux = teclado.readLine();							
 						}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
+						
 						LocalDate fecha = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
 						nuevo.setFechaNacimiento(fecha);
 						
 						aux = null;
 						do {
 							System.out.print("¿Special Attention? (Y/N): ");
-							try {
-								aux = teclado.readLine();
-							} catch (IOException e) {
-								e.printStackTrace();
-								guardar();
-								System.exit(0);
-							}
+							aux = teclado.readLine();
+								
 							if(aux.equalsIgnoreCase("y"))
 								nuevo.setEspecial(true);
 							else if(aux.equalsIgnoreCase("n"))
@@ -123,77 +84,48 @@ public class Programa {
 					//Modificar asistente
 					else if(opcion == 3) {
 						int idAntiguo = -1;
-						String aux = null;
-						try {							
-							do {
-								System.out.print("Inserte el id del asistente a modificar: ");
-								aux = teclado.readLine();
-							}while(!isNumber(aux));
-							idAntiguo = Integer.parseInt(aux);
-						} catch (NumberFormatException | IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						String aux = null;		
+						
+						do {
+							System.out.print("Inserte el id del asistente a modificar: ");
+							aux = teclado.readLine();
+						}while(!isNumber(aux));
+						
+						idAntiguo = Integer.parseInt(aux);
 						
 						aux = null;
 						int idNuevo = -1;
-						try {
-							do {
-								System.out.print("Inserte el nuevo id: ");
-								aux = teclado.readLine();
-							}while(!isNumber(aux));
-							idNuevo = Integer.parseInt(aux);
-						} catch (NumberFormatException | IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						
+						do {
+							System.out.print("Inserte el nuevo id: ");
+							aux = teclado.readLine();
+						}while(!isNumber(aux));
+						
+						idNuevo = Integer.parseInt(aux);
 						
 						System.out.print("Inserte el nuevo nombre: ");
 						String nombre = null;
-						try {
-							nombre = teclado.readLine();
-						} catch (IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						nombre = teclado.readLine();
 						
 						System.out.print("Inserte los nuevos apellidos: ");
 						String apellidos = null;
-						try {
-							apellidos = teclado.readLine();
-						} catch (IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						apellidos = teclado.readLine();
+						
 						
 						aux = null;
 						do {
 							System.out.print("Inserte la fecha de nacimiento (yyyy/mm/dd): ");
-							try {
-								aux = teclado.readLine();
-							} catch (IOException e) {
-								e.printStackTrace();
-								guardar();
-								System.exit(0);
-							}
+							aux = teclado.readLine();
 						}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
+						
 						LocalDate fecha = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
 						
 						aux= null;
 						boolean especial = false;
 						do {
 							System.out.print("¿Necesita atención especial? (S/N): ");
-							try {
-								aux = teclado.readLine();
-							} catch (IOException e) {
-								e.printStackTrace();
-								guardar();
-								System.exit(0);
-							}
+							aux = teclado.readLine();
+							
 							if(aux.equalsIgnoreCase("s"))
 								especial = true;
 							else if(aux.equalsIgnoreCase("n"))
@@ -214,13 +146,8 @@ public class Programa {
 			//Gestor de campamentos
 			else if(opcion == 2) {
 				do {
-					try {
-						opcion = menuGestorCampamentos();
-					} catch (IOException e) {
-						e.printStackTrace();
-						guardar();
-						System.exit(0);
-					}
+					opcion = menuGestorCampamentos();
+					
 					//Listar campamentos
 					if(opcion == 1) {
 						System.out.println(campamentos.getListaCampamentos());
@@ -241,42 +168,26 @@ public class Programa {
 						do {
 							do {
 								System.out.print("Inserte la fecha de inicio (yyyy/mm/dd): ");
-								try {
-									aux = teclado.readLine();
-								} catch (IOException e) {
-									e.printStackTrace();
-									guardar();
-									System.exit(0);
-								}
+								aux = teclado.readLine();
 							}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
+							
 							fechaInicio = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
 							
 							aux = null;
 							do {
 								System.out.print("Inserte la fecha de finalización (yyyy/mm/dd): ");
-								try {
-									aux = teclado.readLine();
-								} catch (IOException e) {
-									e.printStackTrace();
-									guardar();
-									System.exit(0);
-								}
+								aux = teclado.readLine();
 							}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));;			
-							fechaFin = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
 							
+							fechaFin = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
 						}while(fechaFin.compareTo(fechaInicio) <= 0);
 						
 						aux = null;
 						Nivel nivel = null;
 						do {
 							System.out.print("Indique para quién va dirigido (I (Infantil) / J (Juvenil) / A (Adolescente)): ");
-							try {
-								aux = teclado.readLine();
-							} catch (IOException e) {
-								e.printStackTrace();
-								guardar();
-								System.exit(0);
-							}
+							aux = teclado.readLine();
+							
 							if(aux.equalsIgnoreCase("i"))
 								nivel = Nivel.Infantil;
 							else if(aux.equalsIgnoreCase("j"))
@@ -289,17 +200,12 @@ public class Programa {
 						aux = null;
 						int max = 0;
 						do {
-							try {
-								do {
-									System.out.print("Inserte el número máximo de participantes: ");
-									aux = teclado.readLine();
-								}while(!isNumber(aux));
-								max = Integer.parseInt(aux);
-							} catch (NumberFormatException | IOException e) {
-								e.printStackTrace();
-								guardar();
-								System.exit(0);
-							}
+							do {
+								System.out.print("Inserte el número máximo de participantes: ");
+								aux = teclado.readLine();
+							}while(!isNumber(aux));
+							
+							max = Integer.parseInt(aux);
 						}while(max < 1);
 						
 						campamentos.crearCampamento(new Campamento(-1, fechaInicio, fechaFin, nivel, max));
@@ -309,25 +215,14 @@ public class Programa {
 						
 						System.out.print("Inserte el nombre de la actividad: ");
 						String nombre = null;
-						try {
-							nombre = teclado.readLine();
-						} catch (IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						nombre = teclado.readLine();
 						
 						String aux = null;
 						Nivel nivel = null;
 						do {
 							System.out.print("Indique para quién va dirigido (I (Infantil) / J (Juvenil) / A (Adolescente)): ");
-							try {
-								aux = teclado.readLine();
-							} catch (IOException e) {
-								e.printStackTrace();
-								guardar();
-								System.exit(0);
-							}
+							aux = teclado.readLine();
+					
 							if(aux.equalsIgnoreCase("i"))
 								nivel = Nivel.Infantil;
 							else if(aux.equalsIgnoreCase("j"))
@@ -340,46 +235,31 @@ public class Programa {
 						aux = null;
 						int maxP = 0;
 						do {
-							try {
-								do {
-									System.out.print("Inserte el número máximo de participantes: ");
-									aux = teclado.readLine();
-								}while(!isNumber(aux));
-								maxP = Integer.parseInt(aux);
-							} catch (NumberFormatException | IOException e) {
-								e.printStackTrace();
-								guardar();
-								System.exit(0);
-							}
+							do {
+								System.out.print("Inserte el número máximo de participantes: ");
+								aux = teclado.readLine();
+							}while(!isNumber(aux));
+							
+							maxP = Integer.parseInt(aux);
 						}while(maxP < 1);
 						
 						aux = null;
 						int maxM = 0;
 						do {
-							try {
-								do {
-									System.out.print("Inserte el número máximo de monitores: ");
-									aux = teclado.readLine();
-								}while(!isNumber(aux));
-								maxM = Integer.parseInt(aux);
-							} catch (NumberFormatException | IOException e) {
-								e.printStackTrace();
-								guardar();
-								System.exit(0);
-							}
+							do {
+								System.out.print("Inserte el número máximo de monitores: ");
+								aux = teclado.readLine();
+							}while(!isNumber(aux));
+							
+							maxM = Integer.parseInt(aux);
 						}while(maxM < 1);
 						
 						aux = null;
 						Turno turno = null;
 						do {
 							System.out.print("¿La actividad se realizará por la mañana (M) o por la tarde (T)?: ");
-							try {
-								aux = teclado.readLine();
-							} catch (IOException e) {
-								e.printStackTrace();
-								guardar();
-								System.exit(0);
-							}
+							aux = teclado.readLine();
+							
 							if(aux.equalsIgnoreCase("t"))
 								turno = Turno.Tarde;
 							else if(aux.equalsIgnoreCase("m"))
@@ -392,33 +272,16 @@ public class Programa {
 					else if(opcion == 6) {
 						Monitor nuevo = new Monitor();
 						System.out.print("Inserte el nombre del monitor: ");
-						try {
-							nuevo.setNombre(teclado.readLine());
-						} catch (IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						nuevo.setNombre(teclado.readLine());
 						
 						System.out.print("Inserte los apellidos del monitor: ");
-						try {
-							nuevo.setApellidos(teclado.readLine());
-						} catch (IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						nuevo.setApellidos(teclado.readLine());
 						
 						String aux = null;
 						do {
 							System.out.print("¿Puede dirigir actividades con asistentes que necesiten atención especial? (S/N): ");
-							try {
-								aux = teclado.readLine();
-							} catch (IOException e) {
-								e.printStackTrace();
-								guardar();
-								System.exit(0);
-							}
+							aux = teclado.readLine();
+							
 							if(aux.equalsIgnoreCase("s"))
 								nuevo.setEspecial(true);
 							else if(aux.equalsIgnoreCase("n"))
@@ -433,17 +296,13 @@ public class Programa {
 						
 						int idMonitor = -1;
 						String aux = null;
-						try {
-							do {
-								System.out.println("Inserte el id del monitor que quiera asociar a la actividad: ");
-								aux = teclado.readLine();
-							}while(!isNumber(aux));
+						
+						do {
+							System.out.println("Inserte el id del monitor que quiera asociar a la actividad: ");
+							aux = teclado.readLine();
+						}while(!isNumber(aux));
+							
 							idMonitor = Integer.parseInt(aux);
-						} catch (NumberFormatException | IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
 						
 						ArrayList<Monitor> monitores = campamentos.getListaMonitores();
 						Monitor monitor = null;
@@ -457,17 +316,12 @@ public class Programa {
 						else{
 							aux = null;
 							int idActividad = -1;
-							try {
-								do {
-									System.out.println("Inserte el identificador de la actividad que quiera asociar al monitor: ");
-									aux = teclado.readLine();
-								}while(!isNumber(aux));
-								idActividad = Integer.parseInt(aux);
-							} catch (NumberFormatException | IOException e) {
-								e.printStackTrace();
-								guardar();
-								System.exit(0);
-							}
+							do {
+								System.out.println("Inserte el identificador de la actividad que quiera asociar al monitor: ");
+								aux = teclado.readLine();
+							}while(!isNumber(aux));
+							
+							idActividad = Integer.parseInt(aux);
 							
 							ArrayList<Actividad> acts=campamentos.getListaActividades();
 							Actividad actividad = null;
@@ -487,31 +341,21 @@ public class Programa {
 					else if(opcion == 8) {
 						int idCampamento = -1;
 						String aux = null;
-						try {
-							do {
-								System.out.println("Inserte el id del campamento que quiera asociar: ");
-								aux = teclado.readLine();
-							}while(!isNumber(aux));
-							idCampamento = Integer.parseInt(aux);
-						} catch (NumberFormatException | IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						do {
+							System.out.println("Inserte el id del campamento que quiera asociar: ");
+							aux = teclado.readLine();
+						}while(!isNumber(aux));
+						
+						idCampamento = Integer.parseInt(aux);
 						
 						int idActividad = -1;
 						aux = null;
-						try {
-							do {
-								System.out.println("Inserte el id de la actividad que quiera asociar: ");
-								aux = teclado.readLine();
-							}while(!isNumber(aux));
-							idActividad = Integer.parseInt(aux);
-						} catch (NumberFormatException | IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						do {
+							System.out.println("Inserte el id de la actividad que quiera asociar: ");
+							aux = teclado.readLine();
+						}while(!isNumber(aux));
+						
+						idActividad = Integer.parseInt(aux);
 						
 						ArrayList<Actividad> acts=campamentos.getListaActividades();
 						Actividad actividad = null;
@@ -530,31 +374,21 @@ public class Programa {
 					else if(opcion == 9) {
 						int idCampamento = -1;
 						String aux = null;
-						try {
-							do {
-								System.out.println("Inserte el id del campamento que quiera asociar: ");
-								aux = teclado.readLine();
-							}while(!isNumber(aux));
-							idCampamento = Integer.parseInt(aux);
-						} catch (NumberFormatException | IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						do {
+							System.out.println("Inserte el id del campamento que quiera asociar: ");
+							aux = teclado.readLine();
+						}while(!isNumber(aux));
+						
+						idCampamento = Integer.parseInt(aux);
 					
 						aux = null;
 						int idMonitor = -1;
-						try {
-							do {
-								System.out.println("Inserte el id del monitor que quiera asociar: ");
-								aux = teclado.readLine();
-							}while(!isNumber(aux));
-							idMonitor = Integer.parseInt(aux);
-						} catch (NumberFormatException | IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						do {
+							System.out.println("Inserte el id del monitor que quiera asociar: ");
+							aux = teclado.readLine();
+						}while(!isNumber(aux));
+						
+						idMonitor = Integer.parseInt(aux);
 						
 						ArrayList<Monitor> mons=campamentos.getListaMonitores();
 						Monitor monitor = null;
@@ -576,31 +410,21 @@ public class Programa {
 					else if(opcion == 10) {
 						String aux = null;
 						int idCampamento = -1;
-						try {
-							do {
-								System.out.println("Inserte el id del campamento que quiera asociar: ");
-								aux = teclado.readLine();
-							}while(!isNumber(aux));
-							idCampamento = Integer.parseInt(aux);
-						} catch (NumberFormatException | IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						do {
+							System.out.println("Inserte el id del campamento que quiera asociar: ");
+							aux = teclado.readLine();
+						}while(!isNumber(aux));
+						
+						idCampamento = Integer.parseInt(aux);
 						
 						aux = null;
 						int idMonitor = -1;
-						try {
-							do {
-								System.out.println("Inserte el id del monitor que quiera asociar: ");
-								aux = teclado.readLine();
-							}while(!isNumber(aux));
-							idMonitor = Integer.parseInt(aux);
-						} catch (NumberFormatException | IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						do {
+							System.out.println("Inserte el id del monitor que quiera asociar: ");
+							aux = teclado.readLine();
+						}while(!isNumber(aux));
+						
+						idMonitor = Integer.parseInt(aux);
 						
 						ArrayList<Monitor> mons=campamentos.getListaMonitores();
 						Monitor monitor = null;
@@ -629,13 +453,8 @@ public class Programa {
 			//Gestor de inscripciones
 			else if(opcion == 3) {
 				do {
-					try {
-						opcion = menuGestorInscripciones();
-					} catch (IOException e) {
-						e.printStackTrace();
-						guardar();
-						System.exit(0);
-					}
+					opcion = menuGestorInscripciones();
+					
 					//Listar inscripciones parciales
 					if(opcion == 1) {
 						ArrayList<InscripcionParcial> lista = inscripciones.getListaInscripcionParcial();
@@ -653,30 +472,20 @@ public class Programa {
 						ArrayList<Asistente> asists = asistentes.getListaAsistente();
 						InscripcionParcial nuevo = new InscripcionParcial();
 						String aux = null;
-						try {
-							do {
-								System.out.println("Introduce el id del participante: ");
-								aux = teclado.readLine();
-							}while(!isNumber(aux));
-							nuevo.setIdParticipante(Integer.parseInt(aux));
-						} catch (NumberFormatException | IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						do {
+							System.out.println("Introduce el id del participante: ");
+							aux = teclado.readLine();
+						}while(!isNumber(aux));
+						
+						nuevo.setIdParticipante(Integer.parseInt(aux));
 						
 						aux = null;
-						try {
-							do {
-								System.out.println("Introduce el id del campamento: ");
-								aux = teclado.readLine();
-							}while(!isNumber(aux));							
-							nuevo.setIdCampamento(Integer.parseInt(aux));
-						} catch (NumberFormatException | IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						do {
+							System.out.println("Introduce el id del campamento: ");
+							aux = teclado.readLine();
+						}while(!isNumber(aux));		
+						
+						nuevo.setIdCampamento(Integer.parseInt(aux));
 						
 						ArrayList<Campamento> camps=campamentos.getListaCampamentos();
 						Campamento campamento = null;
@@ -692,13 +501,8 @@ public class Programa {
 							nuevo.setPrecio(-1);
 							
 							boolean status = false;
-							try {
-								status = inscripciones.realizarRegistro(nuevo,fecha,asists);
-							} catch (Exception e) {
-								e.printStackTrace();
-								guardar();
-								System.exit(0);
-							}
+							status = inscripciones.realizarRegistro(nuevo,fecha,asists);
+							
 							inscripciones.asignarPrecio(nuevo.getIdCampamento(), nuevo.getIdParticipante(), camps);
 							if(status==true){
 								System.out.println("Registro realizado correctamente. El asistente necesitará una atención especial.");
@@ -714,30 +518,18 @@ public class Programa {
 						ArrayList<Asistente> asists=asistentes.getListaAsistente();
 						InscripcionCompleta nuevo=new InscripcionCompleta();
 						String aux = null;
-						try {
-							do {
-								System.out.println("Introduce el id del participante: ");
-								aux = teclado.readLine();
-							}while(!isNumber(aux));		
-							nuevo.setIdParticipante(Integer.parseInt(aux));
-						} catch (NumberFormatException | IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						do {
+							System.out.println("Introduce el id del participante: ");
+							aux = teclado.readLine();
+						}while(!isNumber(aux));		
+						nuevo.setIdParticipante(Integer.parseInt(aux));
 						
 						aux = null;
-						try {
-							do {
-								System.out.println("Introduce el id del campamento: ");
-								aux = teclado.readLine();
-							}while(!isNumber(aux));	
-							nuevo.setIdCampamento(Integer.parseInt(aux));
-						} catch (NumberFormatException | IOException e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
+						do {
+							System.out.println("Introduce el id del campamento: ");
+							aux = teclado.readLine();
+						}while(!isNumber(aux));	
+						nuevo.setIdCampamento(Integer.parseInt(aux));
 						
 						ArrayList<Campamento> camps=campamentos.getListaCampamentos();
 						Campamento campamento = null;
@@ -753,13 +545,8 @@ public class Programa {
 							nuevo.setPrecio(-1);
 							
 							boolean status = false;
-							try {
-								status = inscripciones.realizarRegistro(nuevo,fecha,asists);
-							} catch (Exception e) {
-								e.printStackTrace();
-								guardar();
-								System.exit(0);
-							}
+							status = inscripciones.realizarRegistro(nuevo,fecha,asists);
+							
 							inscripciones.asignarPrecio(nuevo.getIdCampamento(), nuevo.getIdParticipante(), camps);
 							if(status==true){
 								System.out.println("Registro realizado correctamente. El asistente necesitará una atención especial.");
@@ -771,14 +558,8 @@ public class Programa {
 					}
 					//Listar campamentos disponibles.
 					else if(opcion == 5) {
+						System.out.println(inscripciones.obtenerCampamentosDisponibles(campamentos.getListaCampamentos()));
 						
-						try {
-							System.out.println(inscripciones.obtenerCampamentosDisponibles(campamentos.getListaCampamentos()));
-						} catch (Exception e) {
-							e.printStackTrace();
-							guardar();
-							System.exit(0);
-						}
 					}
 					//Volver al menú principal
 					else if(opcion == 6) 
@@ -788,19 +569,15 @@ public class Programa {
 						System.out.println("Opción incorrecta.");
 				}while(opcion != 6);
 			}
-			//Guardar progreso
-			else if(opcion == 4) 
-				guardar();
 			//Salir del sistema
-			else if(opcion == 5) {
-				guardar();
+			else if(opcion == 4) {
 				System.out.println("Saliendo del sistema.................");
 			}
 			//Error
 			else {
 				System.out.println("Opción incorrecta.");
 			}
-		}while(opcion != 5);
+		}while(opcion != 4);
 	}
 	
 	/**
@@ -808,7 +585,7 @@ public class Programa {
 	 * @return int
 	 * @throws IOException
 	 */
-	private static int menuPrincipal() throws IOException {
+	private static int menuPrincipal(){
 		String aux = null;
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		do {
@@ -816,11 +593,14 @@ public class Programa {
 			System.out.println("1. Gestión de Asistentes.");
 			System.out.println("2. Gestión de Campamentos.");
 			System.out.println("3. Gestión de Inscripciones.");
-			System.out.println("4. Guardar Cambios.");
-			System.out.println("5. Salir.");
+			System.out.println("4. Salir.");
 			System.out.println("----------------------------------");
 			System.out.print("Seleccione una opción: ");
-			aux = teclado.readLine();
+			try {
+				aux = teclado.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}while(!isNumber(aux));
         int opcion = Integer.parseInt(aux);
         System.out.println("----------------------------------");
@@ -830,9 +610,8 @@ public class Programa {
 	/**
 	 * Función que muestra el menú de gestíon de asistentes y devuelve la opción elegida por el usuario.
 	 * @return
-	 * @throws IOException
 	 */
-	private static int menuGestorAsistentes() throws IOException {
+	private static int menuGestorAsistentes(){
 		String aux = null;
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		do {
@@ -843,7 +622,11 @@ public class Programa {
 			System.out.println("4. Atrás.");
 			System.out.println("----------------------------------");
 			System.out.print("Seleccione una opción: ");
-			aux = teclado.readLine();
+			try {
+				aux = teclado.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}while(!isNumber(aux));
         int opcion = Integer.parseInt(aux);
         System.out.println("----------------------------------");
@@ -853,9 +636,8 @@ public class Programa {
 	/**
 	 * Función que muestra el menú de gestíon de campamentos y devuelve la opción elegida por el usuario.
 	 * @return
-	 * @throws IOException
 	 */
-	private static int menuGestorCampamentos() throws IOException {
+	private static int menuGestorCampamentos(){
 		String aux = null;
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		do {
@@ -873,7 +655,11 @@ public class Programa {
 			System.out.println("11. Atrás.");
 			System.out.println("----------------------------------");
 			System.out.print("Seleccione una opción: ");
-			aux = teclado.readLine();
+			try {
+				aux = teclado.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}while(!isNumber(aux));
         int opcion = Integer.parseInt(aux);
         System.out.println("----------------------------------");
@@ -883,9 +669,8 @@ public class Programa {
 	/**
 	 * Función que muestra el menú de gestíon de inscripciones y devuelve la opción elegida por el usuario.
 	 * @return
-	 * @throws IOException
 	 */
-	private static int menuGestorInscripciones() throws IOException {
+	private static int menuGestorInscripciones(){
 		String aux = null;
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		do {
@@ -898,7 +683,11 @@ public class Programa {
 			System.out.println("6. Atrás.");
 			System.out.println("----------------------------------");
 			System.out.print("Seleccione una opción: ");
-			aux = teclado.readLine();			
+			try {
+				aux = teclado.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}			
 		}while(!isNumber(aux));
         int opcion = Integer.parseInt(aux);
         System.out.println("----------------------------------");
@@ -928,37 +717,7 @@ public class Programa {
 		else 
 			return false;
 	}
-	
-	/**
-	 * Función que guarda los datos en los ficheros correspondientes.
-	 */
-	private static void guardar() {
-		Properties p = new Properties();
-		BufferedReader reader;
-		try {
-			reader = new BufferedReader(new FileReader(new File(dir_)));
-			p.load(reader);
-			GestorDatos datos = GestorDatos.getInstance();
-			
-			GestorAsistentes asistentes = GestorAsistentes.getInstance();
-			datos.setAsistentes(p.getProperty("asistentes"), asistentes.getListaAsistente());
-			GestorCampamentos campamentos = GestorCampamentos.getInstance();
-			datos.setActividades(p.getProperty("actividades"), campamentos.getListaActividades());
-			datos.setCampamentos(p.getProperty("campamentos"), campamentos.getListaCampamentos());
-			datos.setMonitores(p.getProperty("monitores"), campamentos.getListaMonitores());
-			GestorInscripciones inscripciones = GestorInscripciones.getInstance();
-			datos.setInscripcionesCompletas(p.getProperty("inscripcionesCompletas"), inscripciones.getListaInscripcionCompleta());
-			datos.setInscripcionesParciales(p.getProperty("inscripcionesParciales"), inscripciones.getListaInscripcionParcial());
-			reader.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
+		
 	/**
 	 * Función que comprueba si una cadena es un número.
 	 * @param s Cadena a comprobar
