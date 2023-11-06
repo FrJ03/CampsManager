@@ -24,6 +24,19 @@ public class InscripcionParcial extends Inscripcion{
 	public InscripcionParcial(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio) {
 		super(idParticipante, idCampamento, fechaInscripcion, precio);
 	}
+		/**
+	 * Construye un objeto de la clase InscripcionCompleta con la información dada.
+	 * @param idParticipante Identificador del participante.
+	 * @param idCampamento Identificador del campamento.
+	 * @param fechaInscripcion Fecha de la realización de la inscripción.
+	 * @param precio Precio de la inscripción.
+	 * @param tipo Tipo de la inscripción.
+	 * @param temporalidad Temporalidad de la inscripción.
+	 */
+	public InscripcionCompleta(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio, String tipo, String temporalidad) {
+		super(idParticipante, idCampamento, fechaInscripcion, precio, tipo, temporalidad);
+	}
+	
 	
 	/**
 	 * Método para la creación de un registro en el campamento de forma temprana.
