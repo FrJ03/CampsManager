@@ -135,7 +135,7 @@ public class InscripcionCompletaDAO implements InterfaceDAO<InscripcionCompleta>
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readAllInscripcionCompleta");
+			String query = p.getProperty("readAllInscripcion");
 			
 			Connection c = con.getConnection();
 			
