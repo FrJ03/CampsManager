@@ -83,7 +83,7 @@ public class Programa {
 					}
 					//Modificar asistente
 					else if(opcion == 3) {
-						int idAntiguo = -1;
+						int id = -1;
 						String aux = null;		
 						
 						do {
@@ -91,17 +91,7 @@ public class Programa {
 							aux = teclado.readLine();
 						}while(!isNumber(aux));
 						
-						idAntiguo = Integer.parseInt(aux);
-						
-						aux = null;
-						int idNuevo = -1;
-						
-						do {
-							System.out.print("Inserte el nuevo id: ");
-							aux = teclado.readLine();
-						}while(!isNumber(aux));
-						
-						idNuevo = Integer.parseInt(aux);
+						id = Integer.parseInt(aux);
 						
 						System.out.print("Inserte el nuevo nombre: ");
 						String nombre = null;
@@ -133,7 +123,7 @@ public class Programa {
 								
 						}while(!aux.equalsIgnoreCase("s") && !aux.equalsIgnoreCase("n"));
 						
-						asistentes.modificarAsistente(idAntiguo, idNuevo, nombre, apellidos, fecha, especial);
+						asistentes.modificarAsistente(id, nombre, apellidos, fecha, especial);
 					}
 					//Volver al menú principal
 					else if(opcion == 4) 
