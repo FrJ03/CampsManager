@@ -120,4 +120,39 @@ public class InscripcionCompletaDAO implements InterfaceDAO<InscripcionCompleta>
 		// TODO Auto-generated method stub
 		return false;
 	}
+	/**
+	 * Añade todos las inscripciones de la base de datos a un lista.
+	 * @return ArrayList<InscripcionCompleta>
+	 */
+	public ArrayList<InscripcionCompleta>readAll(){
+
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		ArrayList<InscripcionCompleta> list = new ArrayList<InscripcionCompleta>();
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readAllInscripcionCompleta");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+	
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				
+                list.add( new InscripcionCompleta(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4), rs.getString(5), rs.getString(6)));
+            } 
+			
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return list;
+	}
+}
 }
