@@ -166,7 +166,7 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readAllInscripcionParcial");
+			String query = p.getProperty("readAllInscripcion");
 			
 			Connection c = con.getConnection();
 			
