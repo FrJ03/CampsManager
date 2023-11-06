@@ -2,6 +2,7 @@ package data.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import business.InscripcionCompleta;
@@ -66,6 +67,7 @@ public class InscripcionCompletaDAO implements InterfaceDAO<InscripcionCompleta>
 			ps.setDate(3,java.sql.Date.valueOf(object.getFechaInscripcion()));
 			ps.setFloat(4,object.getPrecio());
 			ps.setString(5,"Completa");
+			ps.setString(6,object.getTemporalidad());
 			
 			status = ps.executeUpdate();	
 			if (status == 1) {
@@ -106,7 +108,7 @@ public class InscripcionCompletaDAO implements InterfaceDAO<InscripcionCompleta>
 			
 			if (rs.next()) {
 				if(rs.getString(5)=="Completa") {
-					object	= new InscripcionCompleta(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4));
+					object	= new InscripcionCompleta(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4), rs.getString(5), rs.getString(6));
 				}
             } 
 			
@@ -115,10 +117,40 @@ public class InscripcionCompletaDAO implements InterfaceDAO<InscripcionCompleta>
 		
 		return object;
 	}
+	/**
+	 * Elimina una Inscripción de la base de datos.
+	 * @param object InscripcionCompleta el cual se va a eliminar de la base de datos.
+	 * @return boolean
+	 */
 	@Override
 	public boolean delete(InscripcionCompleta object) {
-		// TODO Auto-generated method stub
-		return false;
+		int rs =0;
+		boolean status = false;
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("deleteInscripcion");
+			
+			Connection c=con.getConnection();
+			PreparedStatement preparedStatement = c.prepareStatement(query);
+	        preparedStatement.setInt(1, object.getIdParticipante());
+	        preparedStatement.setInt(2, object.getIdCampamento());
+	
+			rs = preparedStatement.executeUpdate(); 
+			
+			if(rs == 1) {
+				status = true;
+			}
+			
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return status;
 	}
 	/**
 	 * Añade todos las inscripciones de la base de datos a un lista.
@@ -154,5 +186,4 @@ public class InscripcionCompletaDAO implements InterfaceDAO<InscripcionCompleta>
 		
 		return list;
 	}
-}
 }
