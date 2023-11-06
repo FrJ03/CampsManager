@@ -25,9 +25,13 @@ public abstract class Inscripcion {
 	 */
 	private float precio_;
 	/**
-	 * Identificador de que tipo de Inscripcion es.
+	 * Identificador de que tipo de Inscripcion(Completa o Parcial).
 	 */
 	private String tipo_;
+	/**
+	 * Identificador de que temporalidad de Inscripcion.
+	 */
+	private String temporalidad_;
 	
 	/**
 	 * Construye un objeto de la clase inscripción sin información.
@@ -46,6 +50,7 @@ public abstract class Inscripcion {
 		this.fechaInscripcion_ = fechaInscripcion;
 		this.precio_ = precio;
 		this.tipo_= "";
+		this.temporalidad_="";
 	}
 	/**
 	 * Construye un objeto de la clase inscripción con los datos dados pero con tipo.
@@ -54,12 +59,13 @@ public abstract class Inscripcion {
 	 * @param fechaInscripcion Fecha de la realización de la inscripción.
 	 * @param precio Precio de la inscripción.
 	 */
-	public Inscripcion(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio, String tipo) {
+	public Inscripcion(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio, String tipo, String temporalidad) {
 		this.idParticipante_ = idParticipante;
 		this.idCampamento_ = idCampamento;
 		this.fechaInscripcion_ = fechaInscripcion;
 		this.precio_ = precio;
 		this.tipo_= tipo;
+		this.temporalidad_=temporalidad;
 	}
 	/**
 	 * Método que devuelve el identificador del participante.
@@ -90,6 +96,12 @@ public abstract class Inscripcion {
 	 */
 	public String getTipo() {
 		return this.tipo_;
+	}
+	/**
+	 * Método que devuelve la temporalidad de la inscripción.
+	 */
+	public String getTemporalidad() {
+		return this.temporalidad_;
 	}
 	/**
 	 * Método para la modificación del identificador del participante.
@@ -125,6 +137,13 @@ public abstract class Inscripcion {
 	 */
 	public void setTipo(String tipo) {
 		this.tipo_ = tipo;
+	}
+	/**
+	 * Método para la modificación de temporalidad.
+	 * @param temporalidad Temporalidad de la actividad.
+	 */
+	public void setTemporalidad(String temporalidad) {
+		this.temporalidad_ = temporalidad;
 	}
 	/**
 	 * Método para la creación de un registro en el campamento de forma temprana. Será definido por sus descendientes.
