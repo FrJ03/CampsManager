@@ -548,7 +548,7 @@ public class Programa {
 					}
 					//Listar campamentos disponibles.
 					else if(opcion == 5) {
-						System.out.println(inscripciones.obtenerCampamentosDisponibles(campamentos.getListaCampamentos()));
+						System.out.println(inscripciones.obtenerCampamentosDisponibles();
 						
 					}
 					//Volver al menú principal
