@@ -2,10 +2,10 @@ package data.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import business.InscripcionParcial;
-import business.Campamento;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -67,6 +67,7 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 			ps.setDate(3,java.sql.Date.valueOf(object.getFechaInscripcion()));
 			ps.setFloat(4,object.getPrecio());
 			ps.setString(5,"Parcial");
+			ps.setString(6,object.getTemporalidad());
 			
 			status = ps.executeUpdate();	
 			if (status == 1) {
@@ -107,7 +108,7 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 			
 			if (rs.next()) {
 				if(rs.getString(5)=="Parcial") {
-					object	= new InscripcionParcial(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4));
+					object	= new InscripcionParcial(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4), rs.getString(5), rs.getString(6));
 				}
             } 
 			con.deleteConnection(c);
@@ -151,6 +152,7 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 		
 		return status;
 	}
+	
 	/**
 	 * Añade todos las inscripciones de la base de datos a un lista.
 	 * @return ArrayList<InscripcionParcial>
@@ -185,5 +187,4 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 		
 		return list;
 	}
-}
 }
