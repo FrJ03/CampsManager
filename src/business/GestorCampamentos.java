@@ -3,6 +3,13 @@ package business;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import data.dao.ActividadDAO;
+import data.dao.ActividadMonitorDAO;
+import data.dao.CampamentoActividadDAO;
+import data.dao.CampamentoDAO;
+import data.dao.MonitorDAO;
+
+
 /**
  * Clase que implementa el patrón Singleton para poder ser utilizada en la creación de Campamentos.
  * @author Enrique de los Reyes Montilla
@@ -28,9 +35,9 @@ public class GestorCampamentos {
 		 * Constructor privado que crea una lista de campamentos, monitores y actividades vacia.
 		 */
 		private GestorCampamentos() {
-			this.listaActividades_ = new ArrayList<Actividad>();
-			this.listaCampamentos_ = new ArrayList<Campamento>();
-			this.listaMonitores_ = new ArrayList<Monitor>();
+			this.listaActividades_ = null;
+			this.listaCampamentos_ = null;
+			this.listaMonitores_ = null;
 		};
 		/**
 		 * Metodo que sirve de acceso a la instancia.
@@ -47,6 +54,11 @@ public class GestorCampamentos {
 		 * @return ArrayList<Campamento>.
 		 */
 		public ArrayList<Campamento> getListaCampamentos() {
+			if(listaCampamentos_ == null){
+				CampamentoDAO db;
+				db = CampamentoDAO.getInstance();
+				listaCampamentos_ = db.readAll();
+			}
 			return listaCampamentos_;
 		}
 		/**
@@ -54,6 +66,11 @@ public class GestorCampamentos {
 		 * @return ArrayList<Monitor>.
 		 */
 		public ArrayList<Monitor> getListaMonitores() {
+			if(listaMonitores_ == null){
+				MonitorDAO db;
+				db = MonitorDAO.getInstance();
+				listaMonitores_ = db.readAll();
+			}
 			return listaMonitores_;
 		}
 		/**
@@ -61,6 +78,11 @@ public class GestorCampamentos {
 		 * @return ArrayList<Actividad>.
 		 */
 		public ArrayList<Actividad> getListaActividades() {
+			if(listaActividades_ == null){
+				ActividadDAO db;
+				db = ActividadDAO.getInstance();
+				listaActividades_ = db.readAll();
+			}
 			return listaActividades_;
 		}
 		/**
@@ -69,7 +91,7 @@ public class GestorCampamentos {
 		 * @return void.
 		 */
 		public void setListaActividades(ArrayList<Actividad> listaActividades){
-			this.listaActividades_=listaActividades;
+			this.listaActividades_ = listaActividades;
 		}
 		/**
 		 * Método que establece la lista de monitores del gestor.
@@ -77,7 +99,7 @@ public class GestorCampamentos {
 		 * @return void.
 		 */
 		public void setListaMonitores(ArrayList<Monitor> listaMonitores){
-			this.listaMonitores_=listaMonitores;
+			this.listaMonitores_ = listaMonitores;
 		}
 		/**
 		 * Método que establece la lista de campamentos del gestor.
@@ -85,7 +107,7 @@ public class GestorCampamentos {
 		 * @return void.
 		 */
 		public void setListaCampamentos(ArrayList<Campamento> listaCampamentos){
-			this.listaCampamentos_=listaCampamentos;
+			this.listaCampamentos_ = listaCampamentos;
 		}
 		/**
 		 * Metodo que añade a la lista de monitores un nuevo monitor pasado como argumento.
@@ -93,12 +115,9 @@ public class GestorCampamentos {
 		 * @return void.
 		 */
 		public void crearMonitor(Monitor monitor) {	
-			if(this.listaMonitores_.size() > 0)
-				monitor.setId(this.listaMonitores_.get(this.listaMonitores_.size() - 1).getId() + 1);
-			else
-				monitor.setId(1);
-			this.listaMonitores_.add(monitor);
-			Collections.sort(this.listaMonitores_);
+			listaMonitores_ = null;
+			MonitorDAO db = MonitorDAO.getInstance();
+			db.create(monitor);
 		}
 		/**
 		 * Metodo que añade a la lista de actividades una nueva actividad pasada como argumento.
@@ -106,24 +125,18 @@ public class GestorCampamentos {
 		 * @return void.
 		 */
 		public void crearActividad(Actividad actividad) {
-			if(this.listaActividades_.size() > 0)
-				actividad.setId(this.listaActividades_.get(this.listaActividades_.size() - 1).getId() + 1);
-			else
-				actividad.setId(1);
-			this.listaActividades_.add(actividad);	
-			Collections.sort(this.listaActividades_);
+			listaActividades_ = null;
+			ActividadDAO db = ActividadDAO.getInstance();
+			db.create(actividad);
 		}
 		/**
 		 * Metodo que crea Campamnetos mediante valores introducidos por el usuario.
 		 * @return void
 		 */
 		public void crearCampamento(Campamento campamento) {
-			if(this.listaCampamentos_.size() > 0)
-				campamento.setId(this.listaCampamentos_.get(this.listaCampamentos_.size() - 1).getId() + 1);
-			else
-				campamento.setId(1);
-	        this.listaCampamentos_.add(campamento);
-	        Collections.sort(this.listaCampamentos_);
+			listaCampamentos_ = null;
+			CampamentoDAO db = CampamentoDAO.getInstance();
+			db.create(campamento);
 		}
 		/**
 		 * Metodo para asociar una actividad a un monitor.
@@ -181,7 +194,6 @@ public class GestorCampamentos {
 				}
 				
 			}
-			
 			return aux;
 		}
 		/**
@@ -204,23 +216,13 @@ public class GestorCampamentos {
 							if(mon.getId() == monitor.getId()) {
 								return false;
 							}
-							
 						}
-						
 					}
-					
 					if(monitor.getEspecial()) {
 						aux = cam.asociarMonitorEspecial(monitor);
 					}
-					
 				}
-				
 			}
-			
 			return aux;
 		}
-		
-	
-		
-		
 }
