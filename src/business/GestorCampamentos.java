@@ -130,7 +130,7 @@ public class GestorCampamentos {
 			db.create(actividad);
 		}
 		/**
-		 * Metodo que crea Campamnetos mediante valores introducidos por el usuario.
+		 * Metodo que crea Campamentos mediante valores introducidos por el usuario.
 		 * @return void
 		 */
 		public void crearCampamento(Campamento campamento) {
@@ -144,27 +144,21 @@ public class GestorCampamentos {
 		 * @param Actividad Actividad a la cual se va a asociar un monitor.
 		 * @return Void.
 		 */
-		public void asociarMonitorActividad( Actividad actividad, Monitor monitor) {
-			for(Actividad act : this.listaActividades_) {				
-				if(act.getId() == actividad.getId()) {
-					act.asociarMonitor(monitor);
-				}
-			}
+		public void asociarMonitorActividad(Actividad actividad, Monitor monitor) {
+			ActividadMonitorDAO db = ActividadMonitorDAO.getInstance();
+			ActividadMonitorDTO am = ActividadMonitorDTO(actividad.getId(), monitor.getId());
+			db.create(am);
 		}
 		/**
-		 * Metodo para asociar una actividad a un campmento.
+		 * Metodo para asociar una actividad a un campamento.
 		 * @param idCampamento Id del campamento al que se va a asociar una actividad.
 		 * @param actividad Actividad que se va a asociar al campamento.
 		 * @return Boolean.
 		 */
 		public boolean asociarActividadCampamento(int idCampamento, Actividad actividad) {
-			boolean aux = false;
-			for(Campamento cam : this.listaCampamentos_) {
-				if(cam.getId() == idCampamento) {
-					aux = cam.asociarActividad(actividad);
-				}
-			}
-			return aux;
+			CampamentoActividadDAO db = CampamentoActividadDAO.getInstance();
+			CampamentoActividadDTO ca = CampamentoActividadDTO(actividad.getId(), idCampamento);
+			return db.create(ca);
 		}
 		/**
 		 * Metodo para asociar un monitor a un campmento.
@@ -173,28 +167,13 @@ public class GestorCampamentos {
 		 * @return Boolean.
 		 */
 		public boolean asociarMonitorCampamento(int idCampamento, Monitor monitor) {
-			boolean aux = false;
-			for(Campamento cam : this.listaCampamentos_) {
-				
-				if(cam.getId() == idCampamento) {
-					
-					for(Actividad act : cam.getListaActividad()) {
-						
-						for(Monitor mon : act.getListaMonitores()) {
-							
-							if(mon.getId() == monitor.getId()) {
-								cam.asociarMonitor(monitor);
-								aux = true;
-							}
-							
-						}
-						
-					}
-					
+			CampamentoDAO db = CampamentoDAO.getInstance();
+			for(Campamento cam : this.listaCampamentos_){
+				if(cam.getId() == idCampamento){
+					cam.setResponsable(monitor);
 				}
-				
 			}
-			return aux;
+			return db.update(new Campamento(idCampamento);
 		}
 		/**
 		 * Metodo para asociar un monitor especial a un campmento.
@@ -203,26 +182,12 @@ public class GestorCampamentos {
 		 * @return Boolean.
 		 */
 		public boolean asociarMonitorEspCampamento(int idCampamento, Monitor monitor) {
-			boolean aux = false;
-			
-			for(Campamento cam : this.listaCampamentos_) {
-				
-				if(cam.getId() == idCampamento) {
-					
-					for(Actividad act : cam.getListaActividad()) {
-						
-						for(Monitor mon : act.getListaMonitores()) {
-							
-							if(mon.getId() == monitor.getId()) {
-								return false;
-							}
-						}
-					}
-					if(monitor.getEspecial()) {
-						aux = cam.asociarMonitorEspecial(monitor);
-					}
+			CampamentoDAO db = CampamentoDAO.getInstance();
+			for(Campamento cam : this.listaCampamentos_){
+				if(cam.getId() == idCampamento){
+					cam.setResponsableEspecial(monitor);
 				}
 			}
-			return aux;
+			return db.update(new Campamento(idCampamento);
 		}
 }
