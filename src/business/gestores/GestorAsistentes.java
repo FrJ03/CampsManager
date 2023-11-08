@@ -3,7 +3,7 @@ package business.gestores;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import data.dao.AsistenteDAO;
-
+import business.asistente.*;
 /**
  * Clase que gestiona la información de los asistentes al campamento
  * @author Manuel García Obrero

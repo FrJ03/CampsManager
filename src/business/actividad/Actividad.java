@@ -2,6 +2,7 @@ package business.actividad;
 
 import java.util.ArrayList;
 import java.io.Serializable;
+import business.monitor.*;
 
 /**
  * Clase que representa una actividad que se encuentra en un campamento.

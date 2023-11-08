@@ -3,6 +3,8 @@ package business.campamento;
 import java.util.ArrayList;
 import java.io.Serializable;
 import java.time.LocalDate;
+import business.monitor.*;
+import business.actividad.*;
 
 /**
  * Clase que representa  la organización de un conjunto de actividades durante un periodo de tiempo limitado

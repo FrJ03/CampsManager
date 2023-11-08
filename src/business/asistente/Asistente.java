@@ -1,6 +1,7 @@
 package business.asistente;
 
 import java.time.LocalDate;
+import business.persona.*;
 
 /**
  * Clase que representa a un asistente al campamento

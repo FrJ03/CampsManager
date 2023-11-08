@@ -2,7 +2,7 @@ package business.inscripciones;
 
 import java.time.LocalDate;
 import java.time.Period;
-
+import business.registros.*;
 /**
  * Clase que representa una inscripción en las actividades matinales del campamento. Se trata de una clase concreta del patrón de diseño Abstract Factory.
  * @author Francisco José Mellado Ortiz
@@ -33,7 +33,7 @@ public class InscripcionParcial extends Inscripcion{
 	 * @param tipo Tipo de la inscripción.
 	 * @param temporalidad Temporalidad de la inscripción.
 	 */
-	public InscripcionCompleta(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio, String tipo, String temporalidad) {
+	public InscripcionParcial(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio, String tipo, String temporalidad) {
 		super(idParticipante, idCampamento, fechaInscripcion, precio, tipo, temporalidad);
 	}
 	

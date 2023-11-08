@@ -2,6 +2,7 @@ package business.inscripciones;
 
 import java.time.LocalDate;
 import java.time.Period;
+import business.registros.*;
 
 /**
  * Clase que representa una inscripción en todas las actividades del campamento (mañana y tarde). Se trata de una clase concreta del patrón de diseño Abstract Factory.
