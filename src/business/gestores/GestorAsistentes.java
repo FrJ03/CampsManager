@@ -14,9 +14,6 @@ public class GestorAsistentes {
 	 * Variable privada Singleton.
 	 */
 	private static GestorAsistentes instance_ = null;
-	/**
-	 * Lista de asistentes disponibles.
-	 */
 
 	/**
 	 * Constructor privado que crea una lista de asistente vacia.
