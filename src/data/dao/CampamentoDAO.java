@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.Properties;
 import business.campamento.*;
 import business.monitor.*;
@@ -107,6 +107,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
+		Campamento cam = new Campamento();
 		
 		try{
 			
@@ -154,18 +155,14 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 				}
 				
 				object.setListaActividad(actividades);
+				cam = object;
             } 
 			else {
 				con.deleteConnection(c);
-			}
-			
-			
-			
-			
-			
+			}	
 		} catch(Exception e) { System.out.println(e); }
 		
-		return object;
+		return cam;
 	}
 	/**
 	 * Elimina un Campaemnto de la base de datos.
@@ -317,10 +314,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 				res.setId(e);
 				object.setResponsableEspecial(daoMonitor.read(res));
 				
-				Period periodo = object.getInicioCampamento().until(LocalDate.now());
-
-				// Obtener el número de días de la diferencia
-				int diferenciaDias = periodo.getDays();
+				long diferenciaDias = ChronoUnit.DAYS.between(LocalDate.now(), object.getInicioCampamento());
 				
 				if(count(object) < object.getAsistentesMax() && diferenciaDias > 2 && LocalDate.now().isBefore(object.getInicioCampamento())) {
 					
@@ -383,6 +377,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 			
 		} catch(Exception e) { System.out.println(e); }
 		
+		
 		return count;
 	}
 	/**
@@ -394,7 +389,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		Campamento object = new Campamento();
+		Campamento object = null ;
 		
 		try{
 			
@@ -412,6 +407,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 			
 			if (rs.next()) {
 				
+				object = new Campamento() ;
 				Actividad aux = new Actividad();
 				object	= new Campamento(rs.getInt(1), rs.getDate(4).toLocalDate(), rs.getDate(5).toLocalDate(), Nivel.valueOf(rs.getString(6)), rs.getInt(7) );
 				int r = rs.getInt(2);
@@ -426,12 +422,9 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 				res.setId(e);
 				object.setResponsableEspecial(daoMonitor.read(res));
 				
-				Period periodo = object.getInicioCampamento().until(LocalDate.now());
-
-				// Obtener el número de días de la diferencia
-				int diferenciaDias = periodo.getDays();
+				long diferenciaDias = ChronoUnit.DAYS.between(LocalDate.now(), object.getInicioCampamento());
 				
-				if(count(object) < object.getAsistentesMax() && diferenciaDias > 2 && LocalDate.now().isBefore(object.getInicioCampamento())) {
+				if(count(object) < object.getAsistentesMax() && diferenciaDias > 2 ) {
 					
 					CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
 					
@@ -450,7 +443,11 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 					}
 					object.setListaActividad(actividades);
 				}
+				else {
 					
+					object = null;
+					
+				}
             } 
 			else {
 				con.deleteConnection(c);

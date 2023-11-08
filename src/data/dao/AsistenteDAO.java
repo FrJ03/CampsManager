@@ -8,7 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Properties;
+
+import javax.management.modelmbean.ModelMBeanAttributeInfo;
+
 import business.asistente.*;
+import business.monitor.Monitor;
 import data.common.Connector;
 
 /**
@@ -86,6 +90,7 @@ public class AsistenteDAO implements InterfaceDAO<Asistente>{
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
+		Asistente as = null;
 		
 		try{
 			
@@ -104,13 +109,13 @@ public class AsistenteDAO implements InterfaceDAO<Asistente>{
 			if (rs.next()) {
 				
 				object = new Asistente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(5).toLocalDate(), rs.getBoolean(4));
-                
+                as = object;
             } 
 			
 			con.deleteConnection(c);
 		} catch(Exception e) { System.out.println(e); }
 		
-		return object;
+		return as;
 
 	}
 	/**

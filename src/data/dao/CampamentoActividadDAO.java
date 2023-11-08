@@ -87,6 +87,7 @@ public class CampamentoActividadDAO implements InterfaceDAO<CampamentoActividadD
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
+		CampamentoActividadDTO cam = null;
 		
 		try{
 			
@@ -108,10 +109,12 @@ public class CampamentoActividadDAO implements InterfaceDAO<CampamentoActividadD
 			object	= new CampamentoActividadDTO(rs.getInt(1), rs.getInt(2));
             } 
 			
+			cam = object;
+			
 			con.deleteConnection(c);
 		} catch(Exception e) { System.out.println(e); }
 		
-		return object;
+		return cam;
 	}
 	
 	/**

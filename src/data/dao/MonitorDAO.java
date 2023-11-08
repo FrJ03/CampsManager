@@ -85,7 +85,7 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		
+		Monitor mon = null;
 		
 		try{
 			
@@ -103,14 +103,15 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 			
 			if (rs.next()) {
 				
-			object	= new Monitor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4));
-                
+				object	= new Monitor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4));
+	            mon = object;    
+			
             } 
 			
 			con.deleteConnection(c);
 		} catch(Exception e) { System.out.println(e); }
 		
-		return object;
+		return mon;
 		
 	}
 	/**
