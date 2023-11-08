@@ -163,7 +163,7 @@ public class GestorCampamentos {
 			return db.create(ca);
 		}
 		/**
-		 * Metodo para asociar un monitor a un campmento.
+		 * Metodo para asociar un monitor a un campamento.
 		 * @param idCampamento Id del campamento al que se va a asociar un monitor.
 		 * @param monitor Monitor que se va a asociar al campamento.
 		 * @return Boolean.
@@ -171,28 +171,25 @@ public class GestorCampamentos {
 		public boolean asociarMonitorCampamento(int idCampamento, Monitor monitor) {
 			CampamentoDAO db;
 			db = CampamentoDAO.getInstance();
-			
-			for(Campamento cam : this.listaCampamentos_){
-				if(cam.getId() == idCampamento){
-					cam.setResponsable(monitor);
-				}
-			}
-			
-			return db.update(new Campamento(idCampamento);
+			Campamento aux = new Campamento();
+			aux.setId(idCampamento);
+			Campamento camp = db.read(aux);
+			camp.setResponsable(monitor);
+			return db.update(new Campamento(camp.getId(), camp.getResponsable(), camp.getResponsableEspecial(), camp.getInicioCampamento(), camp.getFinCampamento(), camp.getNivel(), camp.getAsistentesMax()));
 		}
 		/**
-		 * Metodo para asociar un monitor especial a un campmento.
+		 * Metodo para asociar un monitor especial a un campamento.
 		 * @param idCampamento Id del campamento al que se va a asociar un monitor.
 		 * @param monitor Monitor que se va a asociar al campamento.
 		 * @return Boolean.
 		 */
 		public boolean asociarMonitorEspCampamento(int idCampamento, Monitor monitor) {
-			CampamentoDAO db = CampamentoDAO.getInstance();
-			for(Campamento cam : this.listaCampamentos_){
-				if(cam.getId() == idCampamento){
-					cam.setResponsableEspecial(monitor);
-				}
-			}
-			return db.update(new Campamento(idCampamento);
+			CampamentoDAO db;
+			db = CampamentoDAO.getInstance();
+			Campamento aux = new Campamento();
+			aux.setId(idCampamento);
+			Campamento camp = db.read(aux);
+			camp.setResponsableEspecial(monitor);
+			return db.update(new Campamento(camp.getId(), camp.getResponsable(), camp.getResponsableEspecial(), camp.getInicioCampamento(), camp.getFinCampamento(), camp.getNivel(), camp.getAsistentesMax()));
 		}
 }
