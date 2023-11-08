@@ -17,14 +17,11 @@ public class GestorAsistentes {
 	/**
 	 * Lista de asistentes disponibles.
 	 */
-	private ArrayList<Asistente> listaAsistente_;
 
 	/**
 	 * Constructor privado que crea una lista de asistente vacia.
 	 */
-	private GestorAsistentes() {
-		this.listaAsistente_ = null;
-	};
+	private GestorAsistentes() {};
 	/**
 	 * Metodo que sirve de acceso a la instancia.
 	 * @return Instancia de la clase GestorAsistentes.
@@ -40,20 +37,8 @@ public class GestorAsistentes {
 	 * @return ArrayList<Asistente>.
 	 */
 	public ArrayList<Asistente> getListaAsistente() {
-		if(listaAsistente_ == null) {
-			AsistenteDAO db;
-			db = AsistenteDAO.getInstance();
-			listaAsistente_ = db.readAll();
-		}
-		return listaAsistente_;
-	}
-	/**
-	 * Método que establece la lista de asistente del gestor.
-	 * @param listaAsistentes
-	 * @return void.
-	 */
-	public void setListaAsistentes(ArrayList<Asistente> listaAsistentes){
-		this.listaAsistente_ = listaAsistentes;
+		AsistenteDAO db = AsistenteDAO.getInstance();
+		return db.readAll();
 	}
 	/**
 	 * Metodo que añade a la lista de asistente un nuevo asistente pasado como argumento, comprobando si no estaba registrado. Si estaba registrado devuelve false y si no lo estaba true
@@ -61,7 +46,6 @@ public class GestorAsistentes {
 	 * @return boolean(false error, true no error).
 	 */
 	public boolean darAltaAsistente(Asistente asistente) {	
-		listaAsistente_ = null;
 		AsistenteDAO db = AsistenteDAO.getInstance();
 		return db.create(asistente);
 	}
@@ -75,7 +59,6 @@ public class GestorAsistentes {
 	 * @return void.
 	 */
 	public boolean modificarAsistente(int id, String nombre, String apellidos, LocalDate fechaNacimiento, boolean especial){
-		listaAsistente_ = null;
 		AsistenteDAO db = AsistenteDAO.getInstance();
 		return db.update(new Asistente(id, nombre, apellidos, fechaNacimiento, especial));
 	}
@@ -84,15 +67,12 @@ public class GestorAsistentes {
 	 * @return String String con la información de los participantes registrados o, en caso de que no haya asistentes registrados, la cadena vacía.
 	 */
 	public String listaAsistencia(){
-		if(listaAsistente_ == null) {
-			AsistenteDAO db;
-			db = AsistenteDAO.getInstance();
-			listaAsistente_ = db.readAll();
-		}		
+		AsistenteDAO db = AsistenteDAO.getInstance();
+		ArrayList<Asistente> listaAsistente = db.readAll();	
 		String infoAsistentes = "";
 		
-		if(listaAsistente_.size() > 0) {
-			for(Asistente asis : listaAsistente_ ) {
+		if(listaAsistente.size() > 0) {
+			for(Asistente asis : listaAsistente ) {
 				infoAsistentes = asis.toString();
 			}
 		}
