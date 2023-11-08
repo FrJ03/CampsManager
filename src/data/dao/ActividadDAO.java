@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import data.common.Connector;
 
 /**
  * Clase ActividadDAO que realiza las consultas relacionadas con las actividad.

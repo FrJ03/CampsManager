@@ -9,6 +9,7 @@ import business.inscripciones.InscripcionCompleta;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import data.common.Connector;
 
 /**
  * Clase InscripcionCompletaDAO que realiza las consultas relacionadas con las inscripciones.

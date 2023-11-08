@@ -1,4 +1,5 @@
 package data.dao;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -8,6 +9,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Properties;
 import business.asistente.*;
+import data.common.Connector;
+
 /**
  * DAO que permite gestionar los accesos a la base de datos relacionados con asistentes.
  * @author Enrique de los Reyes Montilla

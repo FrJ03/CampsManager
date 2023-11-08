@@ -8,6 +8,7 @@ import business.inscripciones.InscripcionParcial;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import data.common.Connector;
 
 /**
  * Clase InscripcionParcialDAO que realiza las consultas relacionadas con las inscripciones.

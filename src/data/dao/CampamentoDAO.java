@@ -14,7 +14,8 @@ import business.campamento.*;
 import business.monitor.*;
 import business.actividad.*;
 import business.dto.*;
-	
+import data.common.Connector;
+
 /**
  * Clase CampamentoDAO que realiza las consultas relacionada con la tabla Campamento.
  * @author Enrique de los Reyes Montilla

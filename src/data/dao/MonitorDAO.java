@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import data.common.Connector;
 
 /**
  * Clase MonitorDAO que realiza las consultas relacionadas con los monitores.

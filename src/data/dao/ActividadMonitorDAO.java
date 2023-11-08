@@ -8,7 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import business.dto.ActividadMonitorDTO;
-
+import data.common.Connector;
 
 /**
  * Clase ActividadMonitorDAO que realiza las consultas relacionada con la tabla Actividad-Monitor.
