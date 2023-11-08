@@ -1,4 +1,4 @@
-package business;
+package business.inscripciones;
 
 import java.time.LocalDate;
 

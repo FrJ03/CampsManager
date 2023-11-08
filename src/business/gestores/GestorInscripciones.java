@@ -1,10 +1,11 @@
-package business;
+package business.gestores;
 
 import java.util.ArrayList;
 
 import data.dao.CampamentoDAO;
 import data.dao.InscripcionCompletaDAO;
 import data.dao.InscripcionParcialDAO;
+import business.inscripciones;
 
 import java.time.Period;
 import java.time.LocalDate;
@@ -19,14 +20,6 @@ public class GestorInscripciones {
 	 */
 	private static GestorInscripciones instance_= null;
 	/**
-	 * Variable privada que representa una lista de inscripciones parciales..
-	 */
-	private ArrayList<InscripcionParcial> listaInscripcionParcial_;
-	/**
-	 * Variable privada representa una lista de inscripciones completas.
-	 */
-	private ArrayList<InscripcionCompleta> listaInscripcionCompleta_;
-	/**
 	 * Metodo que sirve de acceso a la instancia.
 	 * @return Instancia de la clase GestorCampamentos.
 	 */
@@ -36,47 +29,22 @@ public class GestorInscripciones {
 		}
 		return instance_;
 	}
-	private GestorInscripciones() {
-		this.listaInscripcionCompleta_ = null;
-		this.listaInscripcionParcial_ = null;
-	}
+	private GestorInscripciones() {}
 	/**
 	 * Método que devuelve la lista de InscripcionesParciales del gestor.
 	 * @return ArrayList<InscripcionParcial>.
 	 */
 	public ArrayList<InscripcionParcial> getListaInscripcionParcial() {
-		if(listaInscripcionParcial_ == null) {
-			InscripcionParcialDAO db = InscripcionParcialDAO.getInstance();
-			listaInscripcionParcial_ = db.readAll();
-		}
-		return listaInscripcionParcial_;
-	}
-	/**
-	 * Método que establece la lista de inscripcionesParciales del gestor como aquella lista pasada como argumento.
-	 * @param ArrayList<InscripcionParcial> listaInscripcionParcial
-	 * @return void.
-	 */
-	public void setListaInscripcionParcial(ArrayList<InscripcionParcial> listaInscripcionParcial) {
-		this.listaInscripcionParcial_ = listaInscripcionParcial;
+		InscripcionParcialDAO db = InscripcionParcialDAO.getInstance();
+		return db.readAll();
 	}
 	/**
 	 * Método que devuelve la lista de campamentos del gestor.
 	 * @return ArrayList<InscripcionCompleta>.
 	 */
 	public ArrayList<InscripcionCompleta> getListaInscripcionCompleta() {
-		if(listaInscripcionCompleta_ == null) {
 			InscripcionCompletaDAO db = InscripcionCompletaDAO.getInstance();
-			listaInscripcionCompleta_ = db.readAll();
-		}
-		return listaInscripcionCompleta_;
-	}
-	/**
-	 * Método que establece la lista de inscripcionesCompletas del gestor como aquella lista pasada como argumento.
-	 * @param ArrayList<InscripcionCompleta> listaInscripcionCompleta
-	 * @return void.
-	 */
-	public void setListaInscripcionCompleta(ArrayList<InscripcionCompleta> listaInscripcionCompleta) {
-		this.listaInscripcionCompleta_ = listaInscripcionCompleta;
+		return db.readAll();
 	}
 	/**
 	 * Método que añade una inscripción a la lista de inscripciones completas.
@@ -85,8 +53,7 @@ public class GestorInscripciones {
 	 * @param listaAsistentes Lista de asistentes registrados.
 	 * @return boolean Devuelve tre si se ha realizado correctamente la inserción
 	 */
-	public boolean realizarRegistro(InscripcionCompleta inscripcion, LocalDate fechaInicioCamp,  ArrayList<Asistente> listaAsistentes){		
-		this.listaInscripcionCompleta_ = null;
+	public boolean realizarRegistro(InscripcionCompleta inscripcion, LocalDate fechaInicioCamp,  ArrayList<Asistente> listaAsistentes){	
 		// Calcular la diferencia entre las dos fechas
 		inscripcion.setFechaInscripcion(LocalDate.now());
 		Period periodo = inscripcion.getFechaInscripcion().until(fechaInicioCamp);
@@ -108,10 +75,8 @@ public class GestorInscripciones {
 	 * @param fechaInicioCamp fecha de inicio del campamento.
 	 * @param listaAsistentes Lista de asistentes registrados.
 	 * @return boolean.
-	 * @throws Exception 
 	 */
-	public boolean realizarRegistro(InscripcionParcial inscripcion, LocalDate fechaInicioCamp, ArrayList<Asistente> listaAsistentes) throws Exception {
-		listaInscripcionParcial_ = null;	
+	public boolean realizarRegistro(InscripcionParcial inscripcion, LocalDate fechaInicioCamp, ArrayList<Asistente> listaAsistentes){
 		// Calcular la diferencia entre las dos fechas
 		inscripcion.setFechaInscripcion(LocalDate.now());
         Period periodo = inscripcion.getFechaInscripcion().until(fechaInicioCamp);

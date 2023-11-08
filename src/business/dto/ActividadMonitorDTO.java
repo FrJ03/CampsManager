@@ -1,4 +1,4 @@
-package data.dao;
+package business.dto;
 
 /**
  * DTO utilizado para hacer uso de los métodos del DAO ActividadMonitor.

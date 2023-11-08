@@ -1,4 +1,4 @@
-package business;
+package business.registros;
 
 import java.time.LocalDate;
 import java.time.Period;

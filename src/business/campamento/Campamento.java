@@ -1,4 +1,4 @@
-package business;
+package business.campamento;
 
 import java.util.ArrayList;
 import java.io.Serializable;
