@@ -86,6 +86,7 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 		BufferedReader reader = null;
 		Connector con = new Connector();
 		
+		
 		try{
 			
 			Properties p = new Properties();	
