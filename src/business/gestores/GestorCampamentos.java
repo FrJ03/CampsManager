@@ -20,25 +20,9 @@ public class GestorCampamentos {
 		 */
 		private static GestorCampamentos instance_ = null;
 		/**
-		 * Lista de campamentos disponibles.
-		 */
-		private ArrayList<Campamento> listaCampamentos_;
-		/**
-		 * Lista de monitores disponibles.
-		 */
-		private ArrayList<Monitor> listaMonitores_;
-		/**
-		 * Lista de actividades disponibles.
-		 */
-		private ArrayList<Actividad> listaActividades_;
-		/**
 		 * Constructor privado que crea una lista de campamentos, monitores y actividades vacia.
 		 */
-		private GestorCampamentos() {
-			this.listaActividades_ = null;
-			this.listaCampamentos_ = null;
-			this.listaMonitores_ = null;
-		};
+		private GestorCampamentos() {}
 		/**
 		 * Metodo que sirve de acceso a la instancia.
 		 * @return Instancia de la clase GestorCampamentos.
@@ -54,60 +38,24 @@ public class GestorCampamentos {
 		 * @return ArrayList<Campamento>.
 		 */
 		public ArrayList<Campamento> getListaCampamentos() {
-			if(listaCampamentos_ == null){
-				CampamentoDAO db;
-				db = CampamentoDAO.getInstance();
-				listaCampamentos_ = db.readAll();
-			}
-			return listaCampamentos_;
+			CampamentoDAO db = CampamentoDAO.getInstance();
+			return db.readAll();
 		}
 		/**
 		 * MÃ©todo que devuelve la lista de monitores del gestor.
 		 * @return ArrayList<Monitor>.
 		 */
 		public ArrayList<Monitor> getListaMonitores() {
-			if(listaMonitores_ == null){
-				MonitorDAO db;
-				db = MonitorDAO.getInstance();
-				listaMonitores_ = db.readAll();
-			}
-			return listaMonitores_;
+			MonitorDAO db = MonitorDAO.getInstance();
+			return db.readAll();
 		}
 		/**
 		 * MÃ©todo que devuelve la lista de actividades del gestor.
 		 * @return ArrayList<Actividad>.
 		 */
 		public ArrayList<Actividad> getListaActividades() {
-			if(listaActividades_ == null){
-				ActividadDAO db;
-				db = ActividadDAO.getInstance();
-				listaActividades_ = db.readAll();
-			}
-			return listaActividades_;
-		}
-		/**
-		 * MÃ©todo que establece la lista de actividades del gestor.
-		 * @param listaActividades
-		 * @return void.
-		 */
-		public void setListaActividades(ArrayList<Actividad> listaActividades){
-			this.listaActividades_ = listaActividades;
-		}
-		/**
-		 * MÃ©todo que establece la lista de monitores del gestor.
-		 * @param listaMonitores
-		 * @return void.
-		 */
-		public void setListaMonitores(ArrayList<Monitor> listaMonitores){
-			this.listaMonitores_ = listaMonitores;
-		}
-		/**
-		 * MÃ©todo que establece la lista de campamentos del gestor.
-		 * @param listaCampamento
-		 * @return void.
-		 */
-		public void setListaCampamentos(ArrayList<Campamento> listaCampamentos){
-			this.listaCampamentos_ = listaCampamentos;
+			ActividadDAO db = ActividadDAO.getInstance();
+			return db.readAll();
 		}
 		/**
 		 * Metodo que aÃ±ade a la lista de monitores un nuevo monitor pasado como argumento.
