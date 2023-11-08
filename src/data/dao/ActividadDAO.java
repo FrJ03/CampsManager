@@ -1,13 +1,10 @@
 package data.dao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
-
-import business.Actividad;
-import business.Nivel;
-import business.Turno;
-
+import business.actividad.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

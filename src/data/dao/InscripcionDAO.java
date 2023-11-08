@@ -3,11 +3,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
-
-import business.InscripcionParcial;
-import business.Inscripcion;
-import business.InscripcionCompleta;
-
+import business.inscripciones.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

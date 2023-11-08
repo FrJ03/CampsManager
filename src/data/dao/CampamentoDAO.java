@@ -10,11 +10,10 @@ import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Properties;
-
-import business.Campamento;
-import business.Monitor;
-import business.Actividad;
-import business.Nivel;
+import business.campamento.*;
+import business.monitor.*;
+import business.actividad.*;
+import business.dto.*;
 	
 /**
  * Clase CampamentoDAO que realiza las consultas relacionada con la tabla Campamento.

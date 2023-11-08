@@ -4,11 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Properties;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-
+import business.dto.CampamentoActividadDTO;
 
 /**
  * Clase CampamentoActividadDAO que realiza las consultas relacionada con la tabla Campamento-Actividad.

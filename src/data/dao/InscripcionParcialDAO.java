@@ -4,9 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Properties;
-
-import business.InscripcionParcial;
-
+import business.inscripciones.InscripcionParcial;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

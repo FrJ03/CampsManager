@@ -7,8 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Properties;
-
-import business.Asistente;
+import business.asistente.*;
 /**
  * DAO que permite gestionar los accesos a la base de datos relacionados con asistentes.
  * @author Enrique de los Reyes Montilla
