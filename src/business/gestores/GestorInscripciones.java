@@ -2,14 +2,18 @@ package business.gestores;
 
 import java.util.ArrayList;
 
-
+import data.dao.AsistenteDAO;
 import data.dao.CampamentoDAO;
 import data.dao.InscripcionCompletaDAO;
+import data.dao.InscripcionDAO;
 import data.dao.InscripcionParcialDAO;
 import business.inscripciones.*;
-
+import business.actividad.*;
+import business.asistente.*;
+import business.campamento.*;
 import java.time.Period;
 import java.time.LocalDate;
+
 /**
  * Clase que implementa el patrón Singleton para poder ser utilizada en la validación de Inscripciones.
  * @author Enrique de los Reyes Montilla
@@ -48,39 +52,67 @@ public class GestorInscripciones {
 		return db.readAll();
 	}
 	/**
-	 * Método que añade una inscripción a la lista de inscripciones completas.
-	 * @param InscripcionCompleta inscripcion.
-	 * @param fechaInicioCamp fecha de inicio del campamento.
-	 * @param listaAsistentes Lista de asistentes registrados.
-	 * @return boolean Devuelve tre si se ha realizado correctamente la inserción
+	 * Método que añade una inscripción a la lista de inscripciones parciales.
+	 * @param idC Identificador del campamento.
+	 * @param idA Identificador del asistente.
+	 * @return boolean.
 	 */
-	public boolean realizarRegistro(InscripcionCompleta inscripcion, LocalDate fechaInicioCamp,  ArrayList<Asistente> listaAsistentes){	
-		// Calcular la diferencia entre las dos fechas
+	public boolean realizarRegistroCompleto(int idC, int idA){
+		//Compruebo que el campamento y asistente exista y que no esté el usuario ya escrito
+		CampamentoDAO dbC = CampamentoDAO.getInstance();
+		AsistenteDAO dbA = AsistenteDAO.getInstance();
+		InscripcionDAO dbI = InscripcionDAO.getInstance();
+		Campamento campamento;
+		if((campamento = dbC.readDisponibles(idC)) == null || dbA.read(idA) == null || dbI.read(idC, idA) != null)
+			return false;
+		//Calculo el precio
+		float precio = calcularPrecioCompleto(campamento.getListaActividad().size());
+		//Establezco la información a la inscripcion
+		InscripcionCompleta inscripcion = new InscripcionCompleta();
+		inscripcion.setIdCampamento(idC);
+		inscripcion.setIdParticipante(idA);
+		inscripcion.setPrecio(precio);
+		inscripcion.setTipo("Completa");
 		inscripcion.setFechaInscripcion(LocalDate.now());
-		Period periodo = inscripcion.getFechaInscripcion().until(fechaInicioCamp);
+		// Calcular la diferencia entre la fecha del campamento y la de inscripcion
+        Period periodo = inscripcion.getFechaInscripcion().until(campamento.getInicioCampamento());
 
-		// Obtener el número de días de la diferencia
-		int diferenciaDias = periodo.getDays();
-		        
-		InscripcionCompletaDAO db = InscripcionCompletaDAO.getInstance();
+        // Obtener el número de días de la diferencia
+        int diferenciaDias = periodo.getDays();
+        
+        InscripcionCompletaDAO db = InscripcionCompletaDAO.getInstance();
 		if(diferenciaDias >= 15 )
 			return db.createTemprano(inscripcion);
 		else if(diferenciaDias >= 2)
 			return db.createTardio(inscripcion);
-		else 
+		else
 			return false;
 	}
 	/**
 	 * Método que añade una inscripción a la lista de inscripciones parciales.
-	* @param InscripcionCompleta inscripcion.
-	 * @param fechaInicioCamp fecha de inicio del campamento.
-	 * @param listaAsistentes Lista de asistentes registrados.
+	 * @param idC Identificador del campamento.
+	 * @param idA Identificador del asistente.
 	 * @return boolean.
 	 */
-	public boolean realizarRegistro(InscripcionParcial inscripcion, LocalDate fechaInicioCamp, ArrayList<Asistente> listaAsistentes){
-		// Calcular la diferencia entre las dos fechas
+	public boolean realizarRegistroParcial(int idC, int idA){
+		//Compruebo que el campamento y asistente exista y que no esté el usuario ya escrito
+		CampamentoDAO dbC = CampamentoDAO.getInstance();
+		AsistenteDAO dbA = AsistenteDAO.getInstance();
+		InscripcionDAO dbI = InscripcionDAO.getInstance();
+		Campamento campamento;
+		if((campamento = dbC.read(idC)) == null || dbA.read(idA) == null || dbI.read(idC, idA) != null)
+			return false;
+		//Calculo el precio
+		float precio = calcularPrecioParcial(campamento.getListaActividad().size());
+		//Establezco la información a la inscripcion
+		InscripcionParcial inscripcion = new InscripcionParcial();
+		inscripcion.setIdCampamento(idC);
+		inscripcion.setIdParticipante(idA);
+		inscripcion.setPrecio(precio);
+		inscripcion.setTipo("Parcial");
 		inscripcion.setFechaInscripcion(LocalDate.now());
-        Period periodo = inscripcion.getFechaInscripcion().until(fechaInicioCamp);
+		// Calcular la diferencia entre la fecha del campamento y la de inscripcion
+        Period periodo = inscripcion.getFechaInscripcion().until(campamento.getInicioCampamento());
 
         // Obtener el número de días de la diferencia
         int diferenciaDias = periodo.getDays();
@@ -95,76 +127,21 @@ public class GestorInscripciones {
 	}
 	/**
 	 * Método que calcula el precio de la inscripción y lo devuelve como un int. Si el resultado es -1,  no existe el campamento al que está inscrito
-	 * @param inscripcion InscripcionCompleta.
-	 * @param ListaCampamentos
+	 * @param nActividades Número de actividades del campamento
 	 * @return precio. 
 	 */
 	
-	private float calcularPrecio(InscripcionCompleta inscripcion, ArrayList<Campamento> ListaCampamentos) {
-		int precio=300;//Precio base sin actividades
-		for(int aux=0;aux<ListaCampamentos.size();aux++) {
-			if(ListaCampamentos.get(aux).getId()== inscripcion.getIdCampamento()) {
-				ArrayList<Actividad> Listaactividades =ListaCampamentos.get(aux).getListaActividad();
-				if(Listaactividades.size()==0) {
-					return precio;
-				}
-				else {
-					return Listaactividades.size()*20 + precio;
-				}
-			}
-		}	
-		return -1;//Error campamento no encontrado
+	private float calcularPrecioCompleto(int nActividades) {
+		return 300 + 20 * nActividades;
 	}
 	/**
 	 * Método que calcula el precio de la inscripción y lo devuelve como un int. Si el resultado es -1,  no existe el campamento al que está inscrito
-	 * @param inscripcion InscripcionParcial.
-	 * @param ListaCampamentos
+	 * @param nActividades Número de actividades del campamento
 	 * @return precio. 
 	 */
 	
-	private float calcularPrecio(InscripcionParcial inscripcion, ArrayList<Campamento> ListaCampamentos) {
-		float precio=100;//Precio base sin actividades
-		for(int aux=0;aux<ListaCampamentos.size();aux++) {
-			if(ListaCampamentos.get(aux).getId() == inscripcion.getIdCampamento()) {
-				ArrayList<Actividad> Listaactividades =ListaCampamentos.get(aux).getListaActividad();
-				if(Listaactividades.size()==0) {
-					return precio;
-				}
-				else {
-					return Listaactividades.size()*20 + precio;
-				}
-			}
-		}	
-		return -1;//Error campamento no encontrado
-	}
-	/**
-	 * Método que establece el precio a una incripción pasado su id. Si se incorpora correctamente devuelve 0 y si el id no existe, se devulve un -1
-	 * @param idcampamento
-	 * @param idpersona
-	 * @param ListaCampamentos
-	 * @return precio. 
-	 */
-	public int asignarPrecio(int idcampamento, int idpersona, ArrayList<Campamento> listaCampamentos) {
-		//Miramos si esa id de inscripción pertenece a la listaInscripcionParcial_ o listaInscripcionCompleta_
-		for(InscripcionParcial ins : this.listaInscripcionParcial_) {
-			if(ins.getIdParticipante() == idpersona && ins.getIdCampamento() == idcampamento) {
-				float precio = calcularPrecio(ins ,listaCampamentos);
-				if(precio!=-1) {
-					ins.setPrecio(precio);
-					return 0;//Incorporado correctamente
-				}
-			}
-		}
-		for(InscripcionCompleta ins : this.listaInscripcionCompleta_) {
-			if(ins.getIdParticipante() == idpersona && ins.getIdCampamento() == idcampamento) {
-				float precio = calcularPrecio(ins ,listaCampamentos);
-				if(precio!=-1) {
-					ins.setPrecio(precio);
-					return 0;//Incorporado correctamente
-				}
-			}
-		}
-		return -1;//Error id no encontrado
+	private float calcularPrecioParcial(int nActividades) {
+		return 100 + 20 * nActividades;
 	}
 	/**
 	 * Método que devuelve una lista con todos los campamentos disponibles.
