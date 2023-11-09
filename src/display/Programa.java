@@ -51,8 +51,28 @@ public class Programa {
 						}
 					}
 					//Dar de alta un asistente
-					else if(opcion == 2) {						
-						if(asistentes.darAltaAsistente(getAsistente()))
+					else if(opcion == 2) {			
+						Asistente asistente = new Asistente();
+						
+						System.out.print("Assistant firstname: ");
+						try {
+							asistente.setNombre(teclado.readLine());
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						
+						System.out.print("Assistant lastname: ");
+						try {
+							asistente.setApellidos(teclado.readLine());
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						
+						asistente.setFechaNacimiento(getFechaNacimiento());
+						
+						asistente.setEspecial(getSpecialNeeds());
+						
+						if(asistentes.darAltaAsistente(asistente))
 							System.out.println("Succesfull");
 						else
 							System.out.println("Error adding a new assistant");
@@ -650,34 +670,6 @@ public class Programa {
 	 */
 	private static boolean isDateFormat(String date) {
 		return date.length() == 10 && isNumber(date.substring(0, 4)) && date.charAt(4) == '/' && isNumber(date.substring(5, 7)) && date.charAt(7) == '/' && isNumber(date.substring(8, 10));
-	}
-	/**
-	 * Función que pide por pantalla los datos de un asistente
-	 * @return Asistente
-	 */
-	private static Asistente getAsistente() {
-		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-		Asistente asistente = new Asistente();
-		
-		System.out.print("Assistant firstname: ");
-		try {
-			asistente.setNombre(teclado.readLine());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		System.out.print("Assistant lastname: ");
-		try {
-			asistente.setApellidos(teclado.readLine());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		asistente.setFechaNacimiento(getFechaNacimiento());
-		
-		asistente.setEspecial(getSpecialNeeds());
-		
-		return asistente;
 	}
 	/**
 	 * Función que pide por pantalla una fecha de nacimiento y comprueba su validez
