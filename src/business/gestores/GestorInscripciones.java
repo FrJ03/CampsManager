@@ -63,7 +63,7 @@ public class GestorInscripciones {
 		AsistenteDAO dbA = AsistenteDAO.getInstance();
 		InscripcionDAO dbI = InscripcionDAO.getInstance();
 		Campamento campamento;
-		if((campamento = dbC.readDisponibles(idC)) == null || dbA.read(idA) == null || dbI.read(idC, idA) != null)
+		if((campamento = dbC.readAvailable(idC)) == null || dbA.read(idA) == null || dbI.read(idC, idA) != null)
 			return false;
 		//Calculo el precio
 		float precio = calcularPrecioCompleto(campamento.getListaActividad().size());
@@ -100,7 +100,7 @@ public class GestorInscripciones {
 		AsistenteDAO dbA = AsistenteDAO.getInstance();
 		InscripcionDAO dbI = InscripcionDAO.getInstance();
 		Campamento campamento;
-		if((campamento = dbC.read(idC)) == null || dbA.read(idA) == null || dbI.read(idC, idA) != null)
+		if((campamento = dbC.readAvailable(idC)) == null || dbA.read(idA) == null || dbI.read(idC, idA) != null)
 			return false;
 		//Calculo el precio
 		float precio = calcularPrecioParcial(campamento.getListaActividad().size());
