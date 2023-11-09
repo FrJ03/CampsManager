@@ -9,9 +9,12 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.time.LocalDate;
-import business.*;
 import business.asistente.Asistente;
 import business.gestores.*;
+import business.actividad.*;
+import business.campamento.*;
+import business.monitor.*;
+import business.inscripciones.*;
 
 /**
  * Clase que representa el programa principal.
@@ -23,9 +26,9 @@ public class Programa {
 	 */
 	public static void main(String args[]){
 		int opcion = 0;
-		GestorAsistentes asistentes = null;
-		GestorCampamentos campamentos = null;
-		GestorInscripciones inscripciones = null;
+		GestorAsistentes asistentes = GestorAsistentes.getInstance();
+		GestorCampamentos campamentos = GestorCampamentos.getInstance();
+		GestorInscripciones inscripciones = GestorInscripciones.getInstance();
 		
 		//Buffer para leer datos por teclado
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
@@ -49,36 +52,7 @@ public class Programa {
 					}
 					//Dar de alta un asistente
 					else if(opcion == 2) {
-						Asistente nuevo = new Asistente();
-						
-						System.out.print("Assistant firstname: ");
-						nuevo.setNombre(teclado.readLine());
-						
-						System.out.print("Assistant lastname: ");
-						nuevo.setApellidos(teclado.readLine());
-											
-						String aux = null;
-						
-						do {
-							System.out.print("Birth date (yyyy/mm/dd): ");
-							aux = teclado.readLine();							
-						}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
-						
-						LocalDate fecha = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
-						nuevo.setFechaNacimiento(fecha);
-						
-						aux = null;
-						do {
-							System.out.print("¿Special Attention? (Y/N): ");
-							aux = teclado.readLine();
-								
-							if(aux.equalsIgnoreCase("y"))
-								nuevo.setEspecial(true);
-							else if(aux.equalsIgnoreCase("n"))
-								nuevo.setEspecial(false);
-								
-						}while(!aux.equalsIgnoreCase("y") && !aux.equalsIgnoreCase("n"));
-						
+						Asistente nuevo = getAsistente();						
 						asistentes.darAltaAsistente(nuevo);
 					}
 					//Modificar asistente
@@ -723,5 +697,57 @@ public class Programa {
 	 */
 	private static boolean isDateFormat(String date) {
 		return date.length() == 10 && isNumber(date.substring(0, 4)) && date.charAt(4) == '/' && isNumber(date.substring(5, 7)) && date.charAt(7) == '/' && isNumber(date.substring(8, 10));
+	}
+	/**
+	 * Función que pide por pantalla los datos de un asistente
+	 * @return Asistente
+	 */
+	private static Asistente getAsistente() {
+		String aux = null;
+		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+		Asistente asistente = new Asistente();
+		
+		System.out.print("Assistant firstname: ");
+		try {
+			asistente.setNombre(teclado.readLine());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.print("Assistant lastname: ");
+		try {
+			asistente.setApellidos(teclado.readLine());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		do {
+			System.out.print("Birth date (yyyy/mm/dd): ");
+			try {
+				aux = teclado.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}							
+		}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
+		
+		LocalDate fecha = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
+		asistente.setFechaNacimiento(fecha);
+		
+		aux = null;
+		do {
+			System.out.print("¿Special Attention? (Y/N): ");
+			try {
+				aux = teclado.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+				
+			if(aux.equalsIgnoreCase("y"))
+				asistente.setEspecial(true);
+			else if(aux.equalsIgnoreCase("n"))
+				asistente.setEspecial(false);
+				
+		}while(!aux.equalsIgnoreCase("y") && !aux.equalsIgnoreCase("n"));
+		return asistente;
 	}
 }
