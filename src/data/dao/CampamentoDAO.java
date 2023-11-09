@@ -385,7 +385,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	 * @param id Id del campamento que va a ser leido de la base de datos.
 	 * @return Campamento
 	 */
-	public Campamento readAvailable(int id) {
+	public Campamento readAvaliable(int id) {
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
@@ -524,5 +524,82 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 		
 		return object;
 	}
+	/**
+	 * Actualiza el monitor responsable de un campamento de la base de datos.
+	 * @param idCam Id del campamento que se va a actualizar en la base de datos.
+	 * @param idMonitor Id del monitor que se va a declarar como responsable del campamento.
+	 * @return boolean
+	 */
+	public boolean updateResponsable(int idCam, int idMonitor) {
+		
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		boolean status = false;
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("updateResponsable");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+	
+			ps.setInt(1, idMonitor);
+            ps.setInt(2, idCam);
+            
+			int rs = ps.executeUpdate();
+			
+			if(rs == 1) {
+				status = true;
+			}
+			
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return status;
 
+	}
+	/**
+	 * Actualiza el monitor especial de un campamento de la base de datos.
+	 * @param idCam Id del campamento que se va a actualizar en la base de datos.
+	 * @param idMonitor Id del monitor que se va a declarar como responsable especial del campamento.
+	 * @return boolean
+	 */
+	public boolean updateEspeial(int idCam, int idMonitor) {
+		
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		boolean status = false;
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("updateEspecial");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+	
+			ps.setInt(1, idMonitor);
+            ps.setInt(2, idCam);
+            
+			int rs = ps.executeUpdate();
+			
+			if(rs == 1) {
+				status = true;
+			}
+			
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return status;
+
+	}
 }
