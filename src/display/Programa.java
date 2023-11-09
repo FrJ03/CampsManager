@@ -421,95 +421,61 @@ public class Programa {
 					//Crear una inscripción parcial
 					else if(opcion == 3) {
 						ArrayList<Asistente> asists = asistentes.getListaAsistente();
-						InscripcionParcial nuevo = new InscripcionParcial();
 						String aux = null;
+						int idAssistant, idCamp;
 						do {
-							System.out.println("Introduce el id del participante: ");
+							System.out.println("Assistant ID: ");
 							aux = teclado.readLine();
 						}while(!isNumber(aux));
 						
-						nuevo.setIdParticipante(Integer.parseInt(aux));
+						idAssistant = Integer.parseInt(aux);
 						
 						aux = null;
 						do {
-							System.out.println("Introduce el id del campamento: ");
+							System.out.println("Camp ID: ");
 							aux = teclado.readLine();
 						}while(!isNumber(aux));		
 						
-						nuevo.setIdCampamento(Integer.parseInt(aux));
+						idCamp = Integer.parseInt(aux);
 						
-						ArrayList<Campamento> camps=campamentos.getListaCampamentos();
-						Campamento campamento = null;
-						for(Campamento c : camps)
-							if(c.getId() == nuevo.getIdCampamento())
-								campamento = c;
-								
-						if(campamento==null){
-							System.out.println("El campamento no existe.");
+						if(inscripciones.realizarRegistroParcial(idCamp, idAssistant)){
+							System.out.println("Successfull.");
 						}
 						else{
-							LocalDate fecha = campamento.getInicioCampamento();
-							nuevo.setPrecio(-1);
-							
-							boolean status = false;
-							status = inscripciones.realizarRegistro(nuevo,fecha,asists);
-							
-							inscripciones.asignarPrecio(nuevo.getIdCampamento(), nuevo.getIdParticipante(), camps);
-							if(status==true){
-								System.out.println("Registro realizado correctamente. El asistente necesitará una atención especial.");
-							}
-							else{
-								System.out.println("Registro realizado correctamente.");
-							}
+							System.out.println("Error while registering.");
 						}
+						
 					}
 					//Realiza una inscripción completa
 					else if(opcion == 4) {
-						
-						ArrayList<Asistente> asists=asistentes.getListaAsistente();
-						InscripcionCompleta nuevo=new InscripcionCompleta();
+						ArrayList<Asistente> asists = asistentes.getListaAsistente();
 						String aux = null;
+						int idAssistant, idCamp;
 						do {
-							System.out.println("Introduce el id del participante: ");
+							System.out.println("Assistant ID: ");
 							aux = teclado.readLine();
-						}while(!isNumber(aux));		
-						nuevo.setIdParticipante(Integer.parseInt(aux));
+						}while(!isNumber(aux));
+						
+						idAssistant = Integer.parseInt(aux);
 						
 						aux = null;
 						do {
-							System.out.println("Introduce el id del campamento: ");
+							System.out.println("Camp ID: ");
 							aux = teclado.readLine();
-						}while(!isNumber(aux));	
-						nuevo.setIdCampamento(Integer.parseInt(aux));
+						}while(!isNumber(aux));		
 						
-						ArrayList<Campamento> camps=campamentos.getListaCampamentos();
-						Campamento campamento = null;
-						for(Campamento c : camps)
-							if(c.getId() == nuevo.getIdCampamento())
-								campamento = c;
-								
-						if(campamento==null){
-							System.out.println("El campamento no existe.");
+						idCamp = Integer.parseInt(aux);
+						
+						if(inscripciones.realizarRegistroCompleto(idCamp, idAssistant)){
+							System.out.println("Successfull.");
 						}
 						else{
-							LocalDate fecha=campamento.getInicioCampamento();
-							nuevo.setPrecio(-1);
-							
-							boolean status = false;
-							status = inscripciones.realizarRegistro(nuevo,fecha,asists);
-							
-							inscripciones.asignarPrecio(nuevo.getIdCampamento(), nuevo.getIdParticipante(), camps);
-							if(status==true){
-								System.out.println("Registro realizado correctamente. El asistente necesitará una atención especial.");
-							}
-							else{
-								System.out.println("Registro realizado correctamente.");
-							}
+							System.out.println("Error while registering.");
 						}
 					}
 					//Listar campamentos disponibles.
 					else if(opcion == 5) {
-						System.out.println(inscripciones.obtenerCampamentosDisponibles();
+						System.out.println(inscripciones.obtenerCampamentosDisponibles());
 						
 					}
 					//Volver al menú principal
@@ -690,7 +656,6 @@ public class Programa {
 	 * @return Asistente
 	 */
 	private static Asistente getAsistente() {
-		String aux = null;
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		Asistente asistente = new Asistente();
 		
