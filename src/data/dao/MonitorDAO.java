@@ -185,5 +185,42 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 		
 		return list;
 	}
-
+	/**
+	 * Lee un monitor de la base de datos.
+	 * @param Id id del monitor que se va a leer de la base de datos.
+	 * @return Monitor
+	 */
+	public Monitor read(int id) {
+		
+		
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		Monitor mon = null;
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readMonitor");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+			ps.setInt(1, id);
+	
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				
+				mon	= new Monitor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4));    
+			
+            } 
+			
+			con.deleteConnection(c);
+		} catch(Exception e) { System.out.println(e); }
+		
+		return mon;
+		
+	}
 }

@@ -99,7 +99,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	}
 	/**
 	 * Lee un Campamento de la base de datos.
-	 * @param id Id del campamento que va a ser leido de la base de datos.
+	 * @param object Campamaneto con ell Id del campamento que va a ser leido de la base de datos.
 	 * @return Campamento
 	 */
 	@Override
@@ -107,7 +107,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		Campamento cam = new Campamento();
+		Campamento cam = null;
 		
 		try{
 			
@@ -458,4 +458,71 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 		
 		return object;
 	}
+	/**
+	 * Lee un Campamento de la base de datos.
+	 * @param id Id del campamento que va a ser leido de la base de datos.
+	 * @return Campamento
+	 */
+	public Campamento read(int id) {
+		
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		Campamento object = null ;
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readCampamento");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+			ps.setInt(1, id);
+	
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				object	= new Campamento(rs.getInt(1), rs.getDate(4).toLocalDate(), rs.getDate(5).toLocalDate(), Nivel.valueOf(rs.getString(6)), rs.getInt(7) );
+				int r = rs.getInt(2);
+				int e = rs.getInt(3);
+				
+				con.deleteConnection(c);
+				
+				MonitorDAO daoMonitor = MonitorDAO.getInstance();
+				Monitor res = new Monitor();
+				res.setId(r);
+				object.setResponsable(daoMonitor.read(res));
+				res.setId(e);
+				object.setResponsableEspecial(daoMonitor.read(res));
+				
+				CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
+				
+				ArrayList <Actividad> actividades = new ArrayList<Actividad>();
+				Actividad aux = new Actividad();
+				
+				CampamentoActividadDTO dto = new CampamentoActividadDTO(0, object.getId());
+				ArrayList <CampamentoActividadDTO> list = dao.readAllActividades(dto);
+				
+				ActividadDAO actDao = ActividadDAO.getInstance();
+				
+				for (CampamentoActividadDTO i : list) {
+					
+					aux.setId(i.getActId());
+					actividades.add(actDao.read(aux));
+					
+				}
+				
+				object.setListaActividad(actividades);
+				
+            } 
+			else {
+				con.deleteConnection(c);
+			}	
+		} catch(Exception e) { System.out.println(e); }
+		
+		return object;
+	}
+
 }

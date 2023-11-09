@@ -229,4 +229,43 @@ public class AsistenteDAO implements InterfaceDAO<Asistente>{
 		
 		return status;
 	}
+	
+	/**
+	 * Lee un asistente de la base de datos.
+	 * @param id Id que se va a leer de la base de datos.
+	 * @return Monitor
+	 */
+	public Asistente read(int id) {
+		
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		Asistente as = null;
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readAsistente");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+			ps.setInt(1, id);
+	
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				
+				as = new Asistente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(5).toLocalDate(), rs.getBoolean(4));
+                
+            } 
+			
+			con.deleteConnection(c);
+		} catch(Exception e) { System.out.println(e); }
+		
+		return as;
+
+	}
+	
 }

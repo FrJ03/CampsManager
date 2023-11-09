@@ -189,5 +189,43 @@ public class CampamentoActividadDAO implements InterfaceDAO<CampamentoActividadD
 		
 		return list;
 	}
+	/**
+	 * Lee un CampamentoActividad de la base de datos.
+	 * @param idAct Id de la actividad que esta asociado a un campamento.
+	 * @param IdCam Id del campamento que esta asociado a varias actividades
+	 * @return CampamentoActividadDTO
+	 */
+	public CampamentoActividadDTO read(int idAct, int idCam) {
+		
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		CampamentoActividadDTO cam = null;
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readCampamentoActividad");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+			ps.setInt(1, idAct);
+			ps.setInt(2, idCam);
+	
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				
+			cam	= new CampamentoActividadDTO(rs.getInt(1), rs.getInt(2));
+            } 
+			
+			con.deleteConnection(c);
+		} catch(Exception e) { System.out.println(e); }
+		
+		return cam;
+	}
+	
 }
 
