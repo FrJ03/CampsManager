@@ -64,7 +64,7 @@ public class Programa {
 							e.printStackTrace();
 						}
 						
-						asistente.setFechaNacimiento(getFechaNacimiento());
+						asistente.setFechaNacimiento(getFecha("Birth date (yyyy/mm/dd): "));
 						
 						asistente.setEspecial(getSpecialNeeds());
 						
@@ -105,7 +105,7 @@ public class Programa {
 							e.printStackTrace();
 						}
 						
-						LocalDate fecha = getFechaNacimiento();
+						LocalDate fecha = getFecha("Birth date (yyyy/mm/dd): ");
 						
 						Boolean especial = getSpecialNeeds();
 						
@@ -145,50 +145,13 @@ public class Programa {
 						LocalDate fechaInicio;
 						String aux = null;
 						do {
-							do {
-								System.out.print("Inserte la fecha de inicio (yyyy/mm/dd): ");
-								try {
-									aux = teclado.readLine();
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-							}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
+							fechaInicio = getFecha("Start Date (yyyy/mm/dd): ");
 							
-							fechaInicio = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
-							
-							aux = null;
-							do {
-								System.out.print("Inserte la fecha de finalización (yyyy/mm/dd): ");
-								try {
-									aux = teclado.readLine();
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-							}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));;			
-							
-							fechaFin = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
+							fechaFin = getFecha("End Date (yyyy/mm/dd): ");
 						}while(fechaFin.compareTo(fechaInicio) <= 0);
 						
-						aux = null;
-						Nivel nivel = null;
-						do {
-							System.out.print("Indique para quién va dirigido (I (Infantil) / J (Juvenil) / A (Adolescente)): ");
-							try {
-								aux = teclado.readLine();
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-							
-							if(aux.equalsIgnoreCase("i"))
-								nivel = Nivel.Infantil;
-							else if(aux.equalsIgnoreCase("j"))
-								nivel = Nivel.Juvenil;
-							else if(aux.equalsIgnoreCase("a"))
-								nivel = Nivel.Adolescente;
-								
-						}while(!aux.equalsIgnoreCase("i") && !aux.equalsIgnoreCase("j") && !aux.equalsIgnoreCase("a"));
+						Nivel nivel = getNivel();
 						
-						aux = null;
 						int max = 0;
 						do {
 							do {
@@ -217,24 +180,7 @@ public class Programa {
 						}
 						
 						String aux = null;
-						Nivel nivel = null;
-						do {
-							System.out.print("Indique para quién va dirigido (I (Infantil) / J (Juvenil) / A (Adolescente)): ");
-							try {
-								aux = teclado.readLine();
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-					
-							if(aux.equalsIgnoreCase("i"))
-								nivel = Nivel.Infantil;
-							else if(aux.equalsIgnoreCase("j"))
-								nivel = Nivel.Juvenil;
-							else if(aux.equalsIgnoreCase("a"))
-								nivel = Nivel.Adolescente;
-								
-						}while(!aux.equalsIgnoreCase("i") && !aux.equalsIgnoreCase("j") && !aux.equalsIgnoreCase("a"));
-						
+						Nivel nivel = getNivel();
 						aux = null;
 						int maxP = 0;
 						do {
@@ -752,14 +698,15 @@ public class Programa {
 		return date.length() == 10 && isNumber(date.substring(0, 4)) && date.charAt(4) == '/' && isNumber(date.substring(5, 7)) && date.charAt(7) == '/' && isNumber(date.substring(8, 10));
 	}
 	/**
-	 * Función que pide por pantalla una fecha de nacimiento y comprueba su validez
+	 * Función que pide por pantalla una fecha y comprueba su validez
+	 * @param Message Mensaje que imprime por pantalla
 	 * @return LocalDate
 	 */
-	private static LocalDate getFechaNacimiento() {
+	private static LocalDate getFecha(String message) {
 		String aux = null;
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		do {
-			System.out.print("Birth date (yyyy/mm/dd): ");
+			System.out.print(message);
 			try {
 				aux = teclado.readLine();
 			} catch (IOException e) {
@@ -794,5 +741,31 @@ public class Programa {
 				
 		}while(!aux.equalsIgnoreCase("y") && !aux.equalsIgnoreCase("n"));
 		return especial;
+	}
+	/**
+	 * Pide por pantalla el nivel de un campamento  o una actividad y realiza la comprobación de errores
+	 * @return Nivel
+	 */
+	private static Nivel getNivel() {
+		String aux = null;
+		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+		Nivel nivel = null;
+		do {
+			System.out.print("Choose the Target Public (I (Infantile) / J (Juvenile) / A (Adolescent)): ");
+			try {
+				aux = teclado.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	
+			if(aux.equalsIgnoreCase("i"))
+				nivel = Nivel.Infantil;
+			else if(aux.equalsIgnoreCase("j"))
+				nivel = Nivel.Juvenil;
+			else if(aux.equalsIgnoreCase("a"))
+				nivel = Nivel.Adolescente;
+				
+		}while(!aux.equalsIgnoreCase("i") && !aux.equalsIgnoreCase("j") && !aux.equalsIgnoreCase("a"));
+		return nivel;
 	}
 }
