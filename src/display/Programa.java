@@ -155,7 +155,7 @@ public class Programa {
 						int max = 0;
 						do {
 							do {
-								System.out.print("Inserte el número máximo de participantes: ");
+								System.out.print("Max Number of Assistant: ");
 								try {
 									aux = teclado.readLine();
 								} catch (IOException e) {
@@ -171,7 +171,7 @@ public class Programa {
 					//Crear actividad
 					else if(opcion == 5) {
 						
-						System.out.print("Inserte el nombre de la actividad: ");
+						System.out.print("Activity Name: ");
 						String nombre = null;
 						try {
 							nombre = teclado.readLine();
@@ -185,7 +185,7 @@ public class Programa {
 						int maxP = 0;
 						do {
 							do {
-								System.out.print("Inserte el número máximo de participantes: ");
+								System.out.print("Max Number of Participants: ");
 								try {
 									aux = teclado.readLine();
 								} catch (IOException e) {
@@ -200,7 +200,7 @@ public class Programa {
 						int maxM = 0;
 						do {
 							do {
-								System.out.print("Inserte el número máximo de monitores: ");
+								System.out.print("Max Number of Monitor: ");
 								try {
 									aux = teclado.readLine();
 								} catch (IOException e) {
@@ -212,55 +212,28 @@ public class Programa {
 						}while(maxM < 1);
 						
 						aux = null;
-						Turno turno = null;
-						do {
-							System.out.print("¿La actividad se realizará por la mañana (M) o por la tarde (T)?: ");
-							try {
-								aux = teclado.readLine();
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-							
-							if(aux.equalsIgnoreCase("t"))
-								turno = Turno.Tarde;
-							else if(aux.equalsIgnoreCase("m"))
-								turno = Turno.Mañana;
-						}while (!aux.equalsIgnoreCase("t") && !aux.equalsIgnoreCase("m"));
+						Turno turno = getTurno();
 						
 						campamentos.crearActividad(new Actividad(-1, nombre, nivel, maxP, maxM, turno));
 					}
 					//Crear monitor
 					else if(opcion == 6) {
 						Monitor nuevo = new Monitor();
-						System.out.print("Inserte el nombre del monitor: ");
+						System.out.print("Monitor Firstname: ");
 						try {
 							nuevo.setNombre(teclado.readLine());
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						
-						System.out.print("Inserte los apellidos del monitor: ");
+						System.out.print("Monitor Lastname: ");
 						try {
 							nuevo.setApellidos(teclado.readLine());
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						
-						String aux = null;
-						do {
-							System.out.print("¿Puede dirigir actividades con asistentes que necesiten atención especial? (S/N): ");
-							try {
-								aux = teclado.readLine();
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-							
-							if(aux.equalsIgnoreCase("s"))
-								nuevo.setEspecial(true);
-							else if(aux.equalsIgnoreCase("n"))
-								nuevo.setEspecial(false);
-								
-						}while(!aux.equalsIgnoreCase("s") && !aux.equalsIgnoreCase("n"));
+						nuevo.setEspecial(getSpecial());
 						
 						campamentos.crearMonitor(nuevo);
 					}
@@ -743,7 +716,31 @@ public class Programa {
 		return especial;
 	}
 	/**
-	 * Pide por pantalla el nivel de un campamento  o una actividad y realiza la comprobación de errores
+	 * Consulta por pantalla si un monitor puede encargarse de grupos con necesidades especiales y se realiza la comprobación de errores
+	 * @return Boolean true si puede encargarse de grupos con necesidades especiales, false en caso contrario
+	 */
+	private static Boolean getSpecial() {
+		String aux = null;
+		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+		boolean especial = false;
+		do {
+			System.out.print("¿Special Attention? (Y/N): ");
+			try {
+				aux = teclado.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			if(aux.equalsIgnoreCase("y"))
+				especial = true;
+			else if(aux.equalsIgnoreCase("n"))
+				especial = false;
+				
+		}while(!aux.equalsIgnoreCase("y") && !aux.equalsIgnoreCase("n"));
+		return especial;
+	}
+	/**
+	 * Pide por pantalla el nivel de un campamento o una actividad y realiza la comprobación de errores
 	 * @return Nivel
 	 */
 	private static Nivel getNivel() {
@@ -767,5 +764,29 @@ public class Programa {
 				
 		}while(!aux.equalsIgnoreCase("i") && !aux.equalsIgnoreCase("j") && !aux.equalsIgnoreCase("a"));
 		return nivel;
+	}
+	/**
+	 * Pide por pantalla el turno de un campamento o una actividad y realiza la comprobación de errores
+	 * @return Turno
+	 */
+	private static Turno getTurno() {
+		String aux = null;
+		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+		Turno turno = null;
+		do {
+			System.out.print("Activity Schedule (Morning, M/Afternoon, A): ");
+			try {
+				aux = teclado.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			if(aux.equalsIgnoreCase("a"))
+				turno = Turno.Tarde;
+			else if(aux.equalsIgnoreCase("m"))
+				turno = Turno.Mañana;
+		}while (!aux.equalsIgnoreCase("a") && !aux.equalsIgnoreCase("m"));
+		
+		return turno;
 	}
 }
