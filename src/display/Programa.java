@@ -51,9 +51,11 @@ public class Programa {
 						}
 					}
 					//Dar de alta un asistente
-					else if(opcion == 2) {
-						Asistente nuevo = getAsistente();						
-						asistentes.darAltaAsistente(nuevo);
+					else if(opcion == 2) {						
+						if(asistentes.darAltaAsistente(getAsistente()))
+							System.out.println("Succesfull");
+						else
+							System.out.println("Error adding a new assistant");
 					}
 					//Modificar asistente
 					else if(opcion == 3) {
@@ -61,50 +63,35 @@ public class Programa {
 						String aux = null;		
 						
 						do {
-							System.out.print("Inserte el id del asistente a modificar: ");
+							System.out.print("Assistant ID: ");
 							aux = teclado.readLine();
 						}while(!isNumber(aux));
 						
 						id = Integer.parseInt(aux);
 						
-						System.out.print("Inserte el nuevo nombre: ");
+						System.out.print("New Assistant Firstname: ");
 						String nombre = null;
 						nombre = teclado.readLine();
 						
-						System.out.print("Inserte los nuevos apellidos: ");
+						System.out.print("New Assistant Lastname: ");
 						String apellidos = null;
 						apellidos = teclado.readLine();
 						
+						LocalDate fecha = getFechaNacimiento();
 						
-						aux = null;
-						do {
-							System.out.print("Inserte la fecha de nacimiento (yyyy/mm/dd): ");
-							aux = teclado.readLine();
-						}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
+						Boolean especial = getSpecialNeeds();
 						
-						LocalDate fecha = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
-						
-						aux= null;
-						boolean especial = false;
-						do {
-							System.out.print("¿Necesita atención especial? (S/N): ");
-							aux = teclado.readLine();
-							
-							if(aux.equalsIgnoreCase("s"))
-								especial = true;
-							else if(aux.equalsIgnoreCase("n"))
-								especial = false;
-								
-						}while(!aux.equalsIgnoreCase("s") && !aux.equalsIgnoreCase("n"));
-						
-						asistentes.modificarAsistente(id, nombre, apellidos, fecha, especial);
+						if(asistentes.modificarAsistente(id, nombre, apellidos, fecha, especial))
+							System.out.println("Succesfull.");
+						else
+							System.out.println("Error modifying the assistant.");
 					}
 					//Volver al menú principal
 					else if(opcion == 4) 
-						System.out.println("Volviendo al menú principal..............");
+						System.out.println("Returning to the Main Menu..............");
 					//Error
 					else
-						System.out.println("Opción incorrecta.");
+						System.out.println("Wrong option.");
 				}while(opcion != 4);
 			}
 			//Gestor de campamentos
@@ -408,10 +395,10 @@ public class Programa {
 					}
 					//Volver al menú principal
 					else if(opcion == 11) 
-						System.out.println("Volviendo al menú principal..............");
+						System.out.println("Returning to the Main Menu..............");
 					//Error
 					else
-						System.out.println("Opción incorrecta.");
+						System.out.println("Wrong Option.");
 				}while(opcion != 11);
 			}
 			//Gestor de inscripciones
@@ -527,19 +514,19 @@ public class Programa {
 					}
 					//Volver al menú principal
 					else if(opcion == 6) 
-						System.out.println("Volviendo al menú principal..............");
+						System.out.println("Returning to the Main Menu..............");
 					//Error
 					else
-						System.out.println("Opción incorrecta.");
+						System.out.println("Wrong Option.");
 				}while(opcion != 6);
 			}
 			//Salir del sistema
 			else if(opcion == 4) {
-				System.out.println("Saliendo del sistema.................");
+				System.out.println("Closing System.................");
 			}
 			//Error
 			else {
-				System.out.println("Opción incorrecta.");
+				System.out.println("Wrong Option.");
 			}
 		}while(opcion != 4);
 	}
@@ -554,12 +541,12 @@ public class Programa {
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		do {
 			System.out.println("----------------------------------");
-			System.out.println("1. Gestión de Asistentes.");
-			System.out.println("2. Gestión de Campamentos.");
-			System.out.println("3. Gestión de Inscripciones.");
-			System.out.println("4. Salir.");
+			System.out.println("1. Assistant Management.");
+			System.out.println("2. Camps Management.");
+			System.out.println("3. Registrations Management.");
+			System.out.println("4. Exit.");
 			System.out.println("----------------------------------");
-			System.out.print("Seleccione una opción: ");
+			System.out.print("Choose an Option: ");
 			try {
 				aux = teclado.readLine();
 			} catch (IOException e) {
@@ -580,12 +567,12 @@ public class Programa {
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		do {
 			System.out.println("----------------------------------");
-			System.out.println("1. Lista de asistentes.");
-			System.out.println("2. Dar de alta asistente.");
-			System.out.println("3. Modificar asistente.");
-			System.out.println("4. Atrás.");
+			System.out.println("1. List Assistants.");
+			System.out.println("2. New Assistant.");
+			System.out.println("3. Modify Assistant.");
+			System.out.println("4. Back.");
 			System.out.println("----------------------------------");
-			System.out.print("Seleccione una opción: ");
+			System.out.print("Choose an Option: ");
 			try {
 				aux = teclado.readLine();
 			} catch (IOException e) {
@@ -606,19 +593,19 @@ public class Programa {
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		do {
 			System.out.println("----------------------------------");
-			System.out.println("1. Lista de campamentos.");
-			System.out.println("2. Lista de actividades.");
-			System.out.println("3. Lista de monitores.");
-			System.out.println("4. Crear campamento.");
-			System.out.println("5. Crear actividad.");
-			System.out.println("6. Crear monitor.");
-			System.out.println("7. Asociar monitor a una actividad.");
-			System.out.println("8. Asociar actividad a un campamento.");
-			System.out.println("9. Asociar monitor a un campamento.");
-			System.out.println("10. Asociar monitor especial a un campamento.");
-			System.out.println("11. Atrás.");
+			System.out.println("1. List Camps.");
+			System.out.println("2. List Activities.");
+			System.out.println("3. List Monitors.");
+			System.out.println("4. New Camp.");
+			System.out.println("5. New Activity.");
+			System.out.println("6. New Monitor.");
+			System.out.println("7. Add a Monitor to an Activity.");
+			System.out.println("8. Add a Activity to a Camp.");
+			System.out.println("9. Add a Monitor in Charge to a Camp.");
+			System.out.println("10. Add a Special Monitor to a Camp.");
+			System.out.println("11. Back.");
 			System.out.println("----------------------------------");
-			System.out.print("Seleccione una opción: ");
+			System.out.print("Choose an Option: ");
 			try {
 				aux = teclado.readLine();
 			} catch (IOException e) {
@@ -639,14 +626,14 @@ public class Programa {
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		do {
 			System.out.println("----------------------------------");
-			System.out.println("1. Lista de inscripciones parciales.");
-			System.out.println("2. Lista de inscripciones completas.");
-			System.out.println("3. Realizar registro parcial.");
-			System.out.println("4. Realizar registro completo.");
-			System.out.println("5. Listar campamentos disponibles.");
-			System.out.println("6. Atrás.");
+			System.out.println("1. List Partial Registrations.");
+			System.out.println("2. List Complete Registrations.");
+			System.out.println("3. New Partial Registration.");
+			System.out.println("4. New Complete Registration.");
+			System.out.println("5. List Availabel Camps.");
+			System.out.println("6. Back.");
 			System.out.println("----------------------------------");
-			System.out.print("Seleccione una opción: ");
+			System.out.print("Choose an Option: ");
 			try {
 				aux = teclado.readLine();
 			} catch (IOException e) {
@@ -721,6 +708,19 @@ public class Programa {
 			e.printStackTrace();
 		}
 		
+		asistente.setFechaNacimiento(getFechaNacimiento());
+		
+		asistente.setEspecial(getSpecialNeeds());
+		
+		return asistente;
+	}
+	/**
+	 * Función que pide por pantalla una fecha de nacimiento y comprueba su validez
+	 * @return LocalDate
+	 */
+	private static LocalDate getFechaNacimiento() {
+		String aux = null;
+		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		do {
 			System.out.print("Birth date (yyyy/mm/dd): ");
 			try {
@@ -731,9 +731,17 @@ public class Programa {
 		}while(!isDateFormat(aux) || !dateValid(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10))));							
 		
 		LocalDate fecha = LocalDate.of(Integer.parseInt(aux.substring(0, 4)), Integer.parseInt(aux.substring(5, 7)), Integer.parseInt(aux.substring(8, 10)));
-		asistente.setFechaNacimiento(fecha);
 		
-		aux = null;
+		return fecha;
+	}
+	/**
+	 * Consulta por pantalla si un asistente necesita atención especial y comprueba lo introducido
+	 * @return Boolean true si necesita atención especial, false en caso contrario
+	 */
+	private static Boolean getSpecialNeeds() {
+		String aux = null;
+		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+		boolean especial = false;
 		do {
 			System.out.print("¿Special Attention? (Y/N): ");
 			try {
@@ -741,13 +749,13 @@ public class Programa {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-				
+			
 			if(aux.equalsIgnoreCase("y"))
-				asistente.setEspecial(true);
+				especial = true;
 			else if(aux.equalsIgnoreCase("n"))
-				asistente.setEspecial(false);
+				especial = false;
 				
 		}while(!aux.equalsIgnoreCase("y") && !aux.equalsIgnoreCase("n"));
-		return asistente;
+		return especial;
 	}
 }
