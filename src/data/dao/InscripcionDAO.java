@@ -87,6 +87,7 @@ public class InscripcionDAO implements InterfaceDAO<Inscripcion>{
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
+		Inscripcion ins = null;
 		
 		try{
 			
@@ -106,9 +107,11 @@ public class InscripcionDAO implements InterfaceDAO<Inscripcion>{
 			if (rs.next()) {
 				if(rs.getString(5)=="Completa") {
 					object	= new InscripcionCompleta(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4));
+					ins = object;
 				}
 				else {
 					object	= new InscripcionParcial(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4));
+					ins = object;
 				}
                 
             } 
@@ -116,7 +119,7 @@ public class InscripcionDAO implements InterfaceDAO<Inscripcion>{
 			con.deleteConnection(c);
 		} catch(Exception e) { System.out.println(e); }
 		
-		return object;
+		return ins;
 	}
 	
 	/**
