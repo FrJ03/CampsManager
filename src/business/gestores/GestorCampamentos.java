@@ -1,7 +1,6 @@
 package business.gestores;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import data.dao.ActividadDAO;
 import data.dao.ActividadMonitorDAO;

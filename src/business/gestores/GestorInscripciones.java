@@ -117,7 +117,7 @@ public class GestorInscripciones {
         // Obtener el número de días de la diferencia
         int diferenciaDias = periodo.getDays();
         
-        InscripcionCompletaDAO db = InscripcionCompletaDAO.getInstance();
+        InscripcionParcialDAO db = InscripcionParcialDAO.getInstance();
 		if(diferenciaDias >= 15 )
 			return db.createTemprano(inscripcion);
 		else if(diferenciaDias >= 2)
