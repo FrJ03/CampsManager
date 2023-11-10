@@ -285,7 +285,7 @@ public class Programa {
 						int idCampamento = -1;
 						String aux = null;
 						do {
-							System.out.println("Inserte el id del campamento que quiera asociar: ");
+							System.out.println("Camp ID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -298,7 +298,7 @@ public class Programa {
 						int idActividad = -1;
 						aux = null;
 						do {
-							System.out.println("Inserte el id de la actividad que quiera asociar: ");
+							System.out.println("Activity ID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -307,26 +307,18 @@ public class Programa {
 						}while(!isNumber(aux));
 						
 						idActividad = Integer.parseInt(aux);
-						
-						ArrayList<Actividad> acts=campamentos.getListaActividades();
-						Actividad actividad = null;
-						for (Actividad a : acts)
-							if(a.getId() == idActividad)
-								actividad = a;
-						
-						if(actividad==null){
-							System.out.println("No existe una actividad con ese id.");
-						}
-						else{
-							campamentos.asociarActividadCampamento(idCampamento,actividad);
-						}
+					
+						if(campamentos.asociarActividadCampamento(idCampamento,idActividad))
+							System.out.println("Succesfull.");
+						else
+							System.out.println("Error adding the activity.");
 					}
-					//Asociar un monitor NO especial a un campamento
+					//Asociar un monitor responsable a un campamento
 					else if(opcion == 9) {
 						int idCampamento = -1;
 						String aux = null;
 						do {
-							System.out.println("Inserte el id del campamento que quiera asociar: ");
+							System.out.println("Camp ID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -339,7 +331,7 @@ public class Programa {
 						aux = null;
 						int idMonitor = -1;
 						do {
-							System.out.println("Inserte el id del monitor que quiera asociar: ");
+							System.out.println("Monitor in charge ID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -359,7 +351,7 @@ public class Programa {
 						String aux = null;
 						int idCampamento = -1;
 						do {
-							System.out.println("Inserte el id del campamento que quiera asociar: ");
+							System.out.println("CampID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -372,7 +364,7 @@ public class Programa {
 						aux = null;
 						int idMonitor = -1;
 						do {
-							System.out.println("Inserte el id del monitor que quiera asociar: ");
+							System.out.println("Monitor in chargeID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {

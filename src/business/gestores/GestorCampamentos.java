@@ -108,9 +108,9 @@ public class GestorCampamentos {
 		 * @param actividad Actividad que se va a asociar al campamento.
 		 * @return Boolean.
 		 */
-		public boolean asociarActividadCampamento(int idCampamento, Actividad actividad) {
+		public boolean asociarActividadCampamento(int idCampamento, int idActividad) {
 			CampamentoActividadDAO db = CampamentoActividadDAO.getInstance();
-			CampamentoActividadDTO ca = new CampamentoActividadDTO(actividad.getId(), idCampamento);
+			CampamentoActividadDTO ca = new CampamentoActividadDTO(idActividad, idCampamento);
 			return db.create(ca);
 		}
 		/**
