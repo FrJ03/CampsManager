@@ -3,7 +3,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
-import java.util.zip.ZipInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -85,6 +84,7 @@ public class ActividadMonitorDAO implements InterfaceDAO<ActividadMonitorDTO>{
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
+		ActividadMonitorDTO ac = null;
 		
 		try{
 			
@@ -104,12 +104,13 @@ public class ActividadMonitorDAO implements InterfaceDAO<ActividadMonitorDTO>{
 			if (rs.next()) {
 				
 			object	= new ActividadMonitorDTO(rs.getInt(1), rs.getInt(2));
+			ac = object;
             } 
 			
 			con.deleteConnection(c);
 		} catch(Exception e) { System.out.println(e); }
 		
-		return object;
+		return ac;
 	}
 	
 	/**
