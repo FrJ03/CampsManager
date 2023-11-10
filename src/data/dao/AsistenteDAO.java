@@ -8,11 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Properties;
-
-import javax.management.modelmbean.ModelMBeanAttributeInfo;
-
 import business.asistente.*;
-import business.monitor.Monitor;
 import data.common.Connector;
 
 /**
