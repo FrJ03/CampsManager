@@ -97,7 +97,7 @@ public class GestorCampamentos {
 			ActividadDAO dbA = ActividadDAO.getInstance();
 			MonitorDAO dbM = MonitorDAO.getInstance();
 			ActividadMonitorDTO am = new ActividadMonitorDTO(idA, idM);
-			if(dbA.read(idA) == null && dbM.read(idM))
+			if(dbA.read(idA) == null || dbM.read(idM) == null)
 				return false;
 			else
 				return dbAM.create(am);
