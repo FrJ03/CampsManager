@@ -165,6 +165,7 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
+		InscripcionParcial ins = null;
 		
 		try{
 			
@@ -184,15 +185,13 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 			if (rs.next()) {
 				if(rs.getString(5)=="Parcial") {
 					object	= new InscripcionParcial(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4), rs.getString(5), rs.getString(6));
+					ins = object;
 				}
             } 
-			else {
-				return object=null;
-				}
 			con.deleteConnection(c);
 		} catch(Exception e) { System.out.println(e); }
 		
-		return object;
+		return ins;
 	}
 	/**
 	 * Lee una InscripcionCompleta de la base de datos, dado el id del campamento y el id del participante.
@@ -225,11 +224,7 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 				if(rs.getString(5)=="Completa") {
 					object	= new InscripcionParcial(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4), rs.getString(5), rs.getString(6));
 				}
-            } 
-			else {
-				return object=null;
-				}
-			
+            } 			
 			con.deleteConnection(c);
 		} catch(Exception e) { System.out.println(e); }
 		
