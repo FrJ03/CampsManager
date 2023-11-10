@@ -79,7 +79,82 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 		
 		return res;
 	}
-	
+	/**
+	 * Añade una nueva InscripcionParcial a la base de datos donde la temporalidad es Temprano.
+	 * @param object InscripcionParcial el cual va a ser añadido a la base de datos.
+	 * @return boolean
+	 */
+	public boolean createTemprano(InscripcionParcial object) {
+		BufferedReader reader = null;
+		int status = 0;
+		boolean res = false;
+		Connector con = new Connector();
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String create = p.getProperty("createInscripcion");
+			
+			System.out.println(create);
+			Connection c=con.getConnection();
+			PreparedStatement ps=c.prepareStatement(create);
+			
+			ps.setInt(1,object.getIdParticipante());
+			ps.setInt(2,object.getIdCampamento());
+			ps.setDate(3,java.sql.Date.valueOf(object.getFechaInscripcion()));
+			ps.setFloat(4,object.getPrecio());
+			ps.setString(5,"Completa");
+			ps.setString(6,"Temprano");
+			
+			status = ps.executeUpdate();	
+			if (status == 1) {
+				res = true;
+			}
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return res;
+	}
+	/**
+	 * Añade una nueva InscripcionParcial a la base de datos donde la temporalidad es Tardio.
+	 * @param object InscripcionParcial el cual va a ser añadido a la base de datos.
+	 * @return boolean
+	 */
+	public boolean createTardio(InscripcionParcial object) {
+		BufferedReader reader = null;
+		int status = 0;
+		boolean res = false;
+		Connector con = new Connector();
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String create = p.getProperty("createInscripcion");
+			
+			System.out.println(create);
+			Connection c=con.getConnection();
+			PreparedStatement ps=c.prepareStatement(create);
+			
+			ps.setInt(1,object.getIdParticipante());
+			ps.setInt(2,object.getIdCampamento());
+			ps.setDate(3,java.sql.Date.valueOf(object.getFechaInscripcion()));
+			ps.setFloat(4,object.getPrecio());
+			ps.setString(5,"Completa");
+			ps.setString(6,"Tardio");
+			
+			status = ps.executeUpdate();	
+			if (status == 1) {
+				res = true;
+			}
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return res;
+	}
 	/**
 	 * Lee una InscripcionParcial de la base de datos.
 	 * @param InscripcionParcial IncripcionParcial con el IdParticipante y IdCampamento que se va a leer de la base de datos.
