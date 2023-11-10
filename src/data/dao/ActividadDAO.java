@@ -86,10 +86,11 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 	 * @return Actividad
 	 */
 	@Override
-	public Actividad read(Actividad object) {
+		public Actividad read(Actividad object) {
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
+		Actividad ac = null;
 		
 		try{
 			
@@ -107,13 +108,14 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 			
 			if (rs.next()) {
 				
-			object	= new Actividad(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4)));
-            } 
+				object	= new Actividad(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4)));
+				ac = object;
+			} 
 			
 			con.deleteConnection(c);
 		} catch(Exception e) { System.out.println(e); }
 		
-		return object;
+		return ac;
 	}
 	
 	/**
