@@ -117,7 +117,41 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 		
 		return ac;
 	}
+	/**
+	 * Lee un id pasado y te devuelve la actividad de ese id.
+	 * @param id Actividad que se va a leer de la base de datos.
+	 * @return Actividad 
+	 */
+		public Actividad read(int id) {
+		
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		Actividad object = null;
+		
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readActividad");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+			ps.setInt(1, id);
 	
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				object	= new Actividad(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4)));
+            } 
+			
+			con.deleteConnection(c);
+		} catch(Exception e) { System.out.println(e); }
+		
+		return object;
+	}
 	/**
 	 * Elimina una actividad de la base de datos.
 	 * @param object Actividad el cual se va a eliminar de la base de datos.

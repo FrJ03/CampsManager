@@ -76,7 +76,42 @@ public class InscripcionDAO implements InterfaceDAO<Inscripcion>{
 		
 		return res;
 	}
+	/**
+	 * Lee una Inscripcion de la base de datos, dado el id del campamento y el id del participante.
+	 * @param idCampamento y idParticipante que son los que se van a leer de la base de datos.
+	 * @return Incripcion
+	 */
+	public Inscripcion read(int idCampamento, int idParticipante) {
+			
+			BufferedReader reader = null;
+			Connector con = new Connector();
+			Inscripcion object = null;
+			
+			
+			try{
+				
+				Properties p = new Properties();	
+				reader = new BufferedReader(new FileReader(new File(dir_)));
+				p.load(reader);
+				String query = p.getProperty("readInscripcion");
+				
+				Connection c = con.getConnection();
+				
+				PreparedStatement ps=c.prepareStatement(query);
+				ps.setInt(1, idParticipante);
+				ps.setInt(2, idCampamento);
+		
+				ResultSet rs = ps.executeQuery();
+				
+				if (rs.next()) {
+					object	= new InscripcionCompleta(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4), rs.getString(5), rs.getString(6));
+	            } 
 	
+				con.deleteConnection(c);
+			} catch(Exception e) { System.out.println(e); }
+			
+			return object;
+	}
 	/**
 	 * Lee una Inscripcion de la base de datos.
 	 * @param Inscripcion Incripcion con el IdParticipante y IdCampamento que se va a leer de la base de datos.
