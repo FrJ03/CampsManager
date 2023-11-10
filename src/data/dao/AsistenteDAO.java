@@ -23,7 +23,7 @@ public class AsistenteDAO implements InterfaceDAO<Asistente>{
 	/*
 	 * *Representa la dirección al fichero properties.
 	 */
-	private static String dir_ = "rutas.txt";
+	private static String dir_ = "sql.properties";
 	/**
 	 * Metodo que sirve de acceso a la instancia.
 	 * @return Instancia de la clase AsistenteDAO.
