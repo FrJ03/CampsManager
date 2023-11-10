@@ -81,6 +81,47 @@ public class InscripcionCompletaDAO implements InterfaceDAO<InscripcionCompleta>
 	}
 	
 	/**
+	 * Lee una InscripcionCompleta de la base de datos, dado el id del campamento y el id del participante.
+	 * @param idCampamento y idParticipante que son los que se van a leer de la base de datos.
+	 * @return IncripcionCompleta 
+	 */
+	public InscripcionCompleta read(int idCampamento, int idParticipante) {
+		
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		InscripcionCompleta object = new InscripcionCompleta();
+		
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readInscripcion");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+			ps.setInt(1, idParticipante);
+			ps.setInt(2, idCampamento);
+	
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				if(rs.getString(5)=="Completa") {
+					object	= new InscripcionCompleta(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4), rs.getString(5), rs.getString(6));
+				}
+            } 
+			else {
+				return object=null;
+				}
+			
+			con.deleteConnection(c);
+		} catch(Exception e) { System.out.println(e); }
+		
+		return object;
+	}	
+	/**
 	 * Lee una InscripcionCompleta de la base de datos.
 	 * @param InscripcionCompleta IncripcionCompleta con el IdParticipante y IdCampamento que se va a leer de la base de datos.
 	 * @return IncripcionCompleta 
@@ -111,6 +152,9 @@ public class InscripcionCompletaDAO implements InterfaceDAO<InscripcionCompleta>
 					object	= new InscripcionCompleta(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4), rs.getString(5), rs.getString(6));
 				}
             } 
+			else {
+				return object=null;
+				}
 			
 			con.deleteConnection(c);
 		} catch(Exception e) { System.out.println(e); }
