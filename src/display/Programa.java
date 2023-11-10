@@ -166,7 +166,10 @@ public class Programa {
 							max = Integer.parseInt(aux);
 						}while(max < 1);
 						
-						campamentos.crearCampamento(new Campamento(-1, fechaInicio, fechaFin, nivel, max));
+						if(campamentos.crearCampamento(new Campamento(-1, fechaInicio, fechaFin, nivel, max)))
+							System.out.println("Succesfull.");
+						else
+							System.out.println("Error creating the camp.");
 					}
 					//Crear actividad
 					else if(opcion == 5) {
@@ -214,7 +217,10 @@ public class Programa {
 						aux = null;
 						Turno turno = getTurno();
 						
-						campamentos.crearActividad(new Actividad(-1, nombre, nivel, maxP, maxM, turno));
+						if(campamentos.crearActividad(new Actividad(-1, nombre, nivel, maxP, maxM, turno)))
+							System.out.println("Succesfull.");
+						else
+							System.out.println("Error creating the activity.");
 					}
 					//Crear monitor
 					else if(opcion == 6) {
@@ -235,7 +241,10 @@ public class Programa {
 						
 						nuevo.setEspecial(getSpecial());
 						
-						campamentos.crearMonitor(nuevo);
+						if(campamentos.crearMonitor(nuevo))
+							System.out.println("Succesfull.");
+						else
+							System.out.println("Error creating the monitor.");
 					}
 					//Asociar un monitor a una actividad
 					else if(opcion == 7) {
@@ -244,7 +253,7 @@ public class Programa {
 						String aux = null;
 						
 						do {
-							System.out.println("Inserte el id del monitor que quiera asociar a la actividad: ");
+							System.out.println("Monitor ID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -252,44 +261,24 @@ public class Programa {
 							}
 						}while(!isNumber(aux));
 							
-							idMonitor = Integer.parseInt(aux);
+						idMonitor = Integer.parseInt(aux);
 						
-						ArrayList<Monitor> monitores = campamentos.getListaMonitores();
-						Monitor monitor = null;
-						for(Monitor m : monitores)
-							if(m.getId() == idMonitor)
-								monitor = m;
+						aux = null;
+						int idActividad = -1;
+						do {
+							System.out.println("Activity ID: ");
+							try {
+								aux = teclado.readLine();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}while(!isNumber(aux));
 						
-						if(monitor == null){
-							System.out.println("No existe un monitor con ese id.");
-						}
-						else{
-							aux = null;
-							int idActividad = -1;
-							do {
-								System.out.println("Inserte el identificador de la actividad que quiera asociar al monitor: ");
-								try {
-									aux = teclado.readLine();
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-							}while(!isNumber(aux));
-							
-							idActividad = Integer.parseInt(aux);
-							
-							ArrayList<Actividad> acts=campamentos.getListaActividades();
-							Actividad actividad = null;
-							for (Actividad a : acts)
-								if(a.getId() == idActividad)
-									actividad = a;
-							
-							if(actividad==null){
-								System.out.println("No existe una actividad con ese id.");
-							}
-							else{
-								campamentos.asociarMonitorActividad(actividad,monitor);
-							}
-						}
+						idActividad = Integer.parseInt(aux);
+						if(campamentos.asociarMonitorActividad(idActividad, idMonitor))
+							System.out.println("Succesfull.");
+						else
+							System.out.println("Error adding the monitor.");
 					}
 					//Asociar actividad a un campamento
 					else if(opcion == 8) {

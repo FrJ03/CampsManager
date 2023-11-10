@@ -385,7 +385,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	 * @param id Id del campamento que va a ser leido de la base de datos.
 	 * @return Campamento
 	 */
-	public Campamento readAvaliable(int id) {
+	public Campamento readAvailable(int id) {
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();

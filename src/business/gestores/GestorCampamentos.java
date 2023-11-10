@@ -65,26 +65,26 @@ public class GestorCampamentos {
 		 * @param monitor Monitor que se va a aÃ±adir a la lista de monitores.
 		 * @return void.
 		 */
-		public void crearMonitor(Monitor monitor) {	
+		public Boolean crearMonitor(Monitor monitor) {	
 			MonitorDAO db = MonitorDAO.getInstance();
-			db.create(monitor);
+			return db.create(monitor);
 		}
 		/**
 		 * Metodo que aÃ±ade a la lista de actividades una nueva actividad pasada como argumento.
 		 * @param actividad Actividad que se va a aÃ±adir a la lista de actividades.
 		 * @return void.
 		 */
-		public void crearActividad(Actividad actividad) {
+		public Boolean crearActividad(Actividad actividad) {
 			ActividadDAO db = ActividadDAO.getInstance();
-			db.create(actividad);
+			return db.create(actividad);
 		}
 		/**
 		 * Metodo que crea Campamentos mediante valores introducidos por el usuario.
 		 * @return void
 		 */
-		public void crearCampamento(Campamento campamento) {
+		public Boolean crearCampamento(Campamento campamento) {
 			CampamentoDAO db = CampamentoDAO.getInstance();
-			db.create(campamento);
+			return db.create(campamento);
 		}
 		/**
 		 * Metodo para asociar una actividad a un monitor.
@@ -92,10 +92,15 @@ public class GestorCampamentos {
 		 * @param Actividad Actividad a la cual se va a asociar un monitor.
 		 * @return Void.
 		 */
-		public void asociarMonitorActividad(Actividad actividad, Monitor monitor) {
-			ActividadMonitorDAO db = ActividadMonitorDAO.getInstance();
-			ActividadMonitorDTO am = new ActividadMonitorDTO(actividad.getId(), monitor.getId());
-			db.create(am);
+		public Boolean asociarMonitorActividad(int idA, int idM) {
+			ActividadMonitorDAO dbAM = ActividadMonitorDAO.getInstance();
+			ActividadDAO dbA = ActividadDAO.getInstance();
+			MonitorDAO dbM = MonitorDAO.getInstance();
+			ActividadMonitorDTO am = new ActividadMonitorDTO(idA, idM);
+			if(dbA.read(idA) == null && dbM.read(idM))
+				return false;
+			else
+				return dbAM.create(am);
 		}
 		/**
 		 * Metodo para asociar una actividad a un campamento.
