@@ -79,7 +79,82 @@ public class InscripcionCompletaDAO implements InterfaceDAO<InscripcionCompleta>
 		
 		return res;
 	}
-	
+	/**
+	 * Añade una nueva inscripcionCompleta a la base de datos donde la temporalidad es Temprano.
+	 * @param object InscripcionCompleta el cual va a ser añadido a la base de datos.
+	 * @return boolean
+	 */
+	public boolean createTemprano(InscripcionCompleta object) {
+		BufferedReader reader = null;
+		int status = 0;
+		boolean res = false;
+		Connector con = new Connector();
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String create = p.getProperty("createInscripcion");
+			
+			System.out.println(create);
+			Connection c=con.getConnection();
+			PreparedStatement ps=c.prepareStatement(create);
+			
+			ps.setInt(1,object.getIdParticipante());
+			ps.setInt(2,object.getIdCampamento());
+			ps.setDate(3,java.sql.Date.valueOf(object.getFechaInscripcion()));
+			ps.setFloat(4,object.getPrecio());
+			ps.setString(5,"Completa");
+			ps.setString(6,"Temprano");
+			
+			status = ps.executeUpdate();	
+			if (status == 1) {
+				res = true;
+			}
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return res;
+	}
+	/**
+	 * Añade una nueva inscripcionCompleta a la base de datos donde la temporalidad es Tardio.
+	 * @param object InscripcionCompleta el cual va a ser añadido a la base de datos.
+	 * @return boolean
+	 */
+	public boolean createTardio(InscripcionCompleta object) {
+		BufferedReader reader = null;
+		int status = 0;
+		boolean res = false;
+		Connector con = new Connector();
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String create = p.getProperty("createInscripcion");
+			
+			System.out.println(create);
+			Connection c=con.getConnection();
+			PreparedStatement ps=c.prepareStatement(create);
+			
+			ps.setInt(1,object.getIdParticipante());
+			ps.setInt(2,object.getIdCampamento());
+			ps.setDate(3,java.sql.Date.valueOf(object.getFechaInscripcion()));
+			ps.setFloat(4,object.getPrecio());
+			ps.setString(5,"Completa");
+			ps.setString(6,"Tardio");
+			
+			status = ps.executeUpdate();	
+			if (status == 1) {
+				res = true;
+			}
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return res;
+	}
 	/**
 	 * Lee una InscripcionCompleta de la base de datos, dado el id del campamento y el id del participante.
 	 * @param idCampamento y idParticipante que son los que se van a leer de la base de datos.
