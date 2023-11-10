@@ -121,7 +121,7 @@ public class GestorCampamentos {
 			if(dbC.read(idCampamento) == null || dbM.read(idMonitor) == null)
 				return false;
 			else
-				return dbC.modificarResponsable(idCampamento, idMonitor);
+				return dbC.updateResponsable(idCampamento, idMonitor);
 		}
 		/**
 		 * Metodo para asociar un monitor especial a un campamento.

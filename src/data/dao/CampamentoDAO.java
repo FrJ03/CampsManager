@@ -569,7 +569,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	 * @param idMonitor Id del monitor que se va a declarar como responsable especial del campamento.
 	 * @return boolean
 	 */
-	public boolean updateEspeial(int idCam, int idMonitor) {
+	public boolean updateEspecial(int idCam, int idMonitor) {
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
