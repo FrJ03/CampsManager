@@ -134,7 +134,8 @@ public class Programa {
 					if(opcion2 == 1) {
 						ArrayList<Campamento> l = campamentos.getListaCampamentos();
 						if(l.size() > 0)
-							System.out.println(l);
+							for(Campamento campamento : l)
+								System.out.println(campamento.toString());
 						else
 							System.out.println("No registered Camps");
 					}
@@ -142,7 +143,8 @@ public class Programa {
 					else if(opcion2 == 2) {
 						ArrayList<Actividad> l = campamentos.getListaActividades();
 						if(l.size() > 0)
-							System.out.println(l);
+							for(Actividad actividad : l)
+								System.out.println(actividad.toString());
 						else
 							System.out.println("No registered Activities");
 					}
@@ -150,7 +152,8 @@ public class Programa {
 					else if(opcion2 == 3) {
 						ArrayList<Monitor> l = campamentos.getListaMonitores();
 						if(l.size() > 0)
-							System.out.println(l);
+							for(Monitor monitor : l)
+								System.out.println(monitor.toString());
 						else
 							System.out.println("No registered Monitors");
 					}
@@ -634,7 +637,7 @@ public class Programa {
 			System.out.println("2. List Complete Registrations.");
 			System.out.println("3. New Partial Registration.");
 			System.out.println("4. New Complete Registration.");
-			System.out.println("5. List Availabel Camps.");
+			System.out.println("5. List Available Camps.");
 			System.out.println("6. Back.");
 			System.out.println("----------------------------------");
 			System.out.print("Choose an Option: ");

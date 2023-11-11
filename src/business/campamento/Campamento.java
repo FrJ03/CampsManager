@@ -205,9 +205,9 @@ import business.actividad.*;
       * listaActividad_
 	  * */
 	public String toString(){
-		String aux = "Información del Campamento\n\tId:" + this.id_ + "\n\tFecha de Inicio:" + this.iniciocampamento_ + 
-				"\n\tFin del campamento:" + this.fincampamento_ + "\n\tNivel Academico:"+ this.nivel_ + "\n\tNumero maximo de asistentes:" + this.asistentesMax_ + "\n\tMonitor Responsable: \n\t\tID: " +
-				responsable_.getId() + "\n\t\tNombre: "+responsable_.getNombreCompleto() + "\n\tMonitor especial: ";
+		String aux = "Información del Campamento\n\tId: " + this.id_ + "\n\tFecha de Inicio: " + this.iniciocampamento_ + 
+				"\n\tFin del campamento: " + this.fincampamento_ + "\n\tNivel Academico: "+ this.nivel_ + "\n\tNumero maximo de asistentes: " + this.asistentesMax_ + "\n\tMonitor Responsable: \n\t\tID: " +
+				responsable_.getId() + "\n\t\tNombre: "+responsable_.getNombreCompleto() + "\n\tMonitor Especial: ";
 		if(responsableEspecial_ == null)
 			aux += "Empty";
 		else
