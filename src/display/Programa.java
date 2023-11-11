@@ -35,19 +35,21 @@ public class Programa {
 						
 			//Gestor de Asistentes
 			if(opcion == 1) {	
-				
+				int opcion2;
 				//Bucle del menu de asistentes
 				do {
-					opcion = menuGestorAsistentes();
+					opcion2 = menuGestorAsistentes();
 					//Listar asistentes
-					if(opcion == 1) {
+					if(opcion2 == 1) {
 						ArrayList<Asistente> listaAsistentes = asistentes.getListaAsistente();
-						for(Asistente asistente : listaAsistentes) {
-							System.out.println(asistente.toString());
-						}
+						if(listaAsistentes.size() > 0)
+							for(Asistente asistente : listaAsistentes)
+								System.out.println(asistente.toString());
+						else
+							System.out.println("No registered assistants");
 					}
 					//Dar de alta un asistente
-					else if(opcion == 2) {			
+					else if(opcion2 == 2) {			
 						Asistente asistente = new Asistente();
 						
 						System.out.print("Assistant firstname: ");
@@ -74,7 +76,7 @@ public class Programa {
 							System.out.println("Error adding a new assistant");
 					}
 					//Modificar asistente
-					else if(opcion == 3) {
+					else if(opcion2 == 3) {
 						int id = -1;
 						String aux = null;		
 						
@@ -115,32 +117,45 @@ public class Programa {
 							System.out.println("Error modifying the assistant.");
 					}
 					//Volver al menú principal
-					else if(opcion == 4) 
+					else if(opcion2 == 4) 
 						System.out.println("Returning to the Main Menu..............");
 					//Error
 					else
 						System.out.println("Wrong option.");
-				}while(opcion != 4);
+				}while(opcion2 != 4);
 			}
 			//Gestor de campamentos
 			else if(opcion == 2) {
+				int opcion2;
 				do {
-					opcion = menuGestorCampamentos();
+					opcion2 = menuGestorCampamentos();
 					
 					//Listar campamentos
-					if(opcion == 1) {
-						System.out.println(campamentos.getListaCampamentos());
+					if(opcion2 == 1) {
+						ArrayList<Campamento> l = campamentos.getListaCampamentos();
+						if(l.size() > 0)
+							System.out.println(l);
+						else
+							System.out.println("No registered Camps");
 					}
 					//Listar actividades
-					else if(opcion == 2) {
-						System.out.println(campamentos.getListaActividades());
+					else if(opcion2 == 2) {
+						ArrayList<Actividad> l = campamentos.getListaActividades();
+						if(l.size() > 0)
+							System.out.println(l);
+						else
+							System.out.println("No registered Activities");
 					}
 					//Listar monitores
-					else if(opcion == 3) {
-						System.out.println(campamentos.getListaMonitores());
+					else if(opcion2 == 3) {
+						ArrayList<Monitor> l = campamentos.getListaMonitores();
+						if(l.size() > 0)
+							System.out.println(l);
+						else
+							System.out.println("No registered Monitors");
 					}
 					//Crear campamento
-					else if(opcion == 4) {
+					else if(opcion2 == 4) {
 						LocalDate fechaFin;
 						LocalDate fechaInicio;
 						String aux = null;
@@ -172,7 +187,7 @@ public class Programa {
 							System.out.println("Error creating the camp.");
 					}
 					//Crear actividad
-					else if(opcion == 5) {
+					else if(opcion2 == 5) {
 						
 						System.out.print("Activity Name: ");
 						String nombre = null;
@@ -223,7 +238,7 @@ public class Programa {
 							System.out.println("Error creating the activity.");
 					}
 					//Crear monitor
-					else if(opcion == 6) {
+					else if(opcion2 == 6) {
 						Monitor nuevo = new Monitor();
 						System.out.print("Monitor Firstname: ");
 						try {
@@ -247,7 +262,7 @@ public class Programa {
 							System.out.println("Error creating the monitor.");
 					}
 					//Asociar un monitor a una actividad
-					else if(opcion == 7) {
+					else if(opcion2 == 7) {
 						
 						int idMonitor = -1;
 						String aux = null;
@@ -281,7 +296,7 @@ public class Programa {
 							System.out.println("Error adding the monitor.");
 					}
 					//Asociar actividad a un campamento
-					else if(opcion == 8) {
+					else if(opcion2 == 8) {
 						int idCampamento = -1;
 						String aux = null;
 						do {
@@ -314,7 +329,7 @@ public class Programa {
 							System.out.println("Error adding the activity.");
 					}
 					//Asociar un monitor responsable a un campamento
-					else if(opcion == 9) {
+					else if(opcion2 == 9) {
 						int idCampamento = -1;
 						String aux = null;
 						do {
@@ -347,7 +362,7 @@ public class Programa {
 							System.out.println("Error adding the monitor.");
 					}
 					//Asignar un monitor especial a un campamento
-					else if(opcion == 10) {
+					else if(opcion2 == 10) {
 						String aux = null;
 						int idCampamento = -1;
 						do {
@@ -380,32 +395,39 @@ public class Programa {
 							System.out.println("Error adding the monitor.");
 					}
 					//Volver al menú principal
-					else if(opcion == 11) 
+					else if(opcion2 == 11) 
 						System.out.println("Returning to the Main Menu..............");
 					//Error
 					else
 						System.out.println("Wrong Option.");
-				}while(opcion != 11);
+				}while(opcion2 != 11);
 			}
 			//Gestor de inscripciones
 			else if(opcion == 3) {
+				int opcion2;
 				do {
-					opcion = menuGestorInscripciones();
+					opcion2 = menuGestorInscripciones();
 					
 					//Listar inscripciones parciales
-					if(opcion == 1) {
+					if(opcion2 == 1) {
 						ArrayList<InscripcionParcial> lista = inscripciones.getListaInscripcionParcial();
-						for (InscripcionParcial inscripcion : lista)
-							System.out.println(inscripcion.toString());
+						if(lista.size() > 0)
+							for (InscripcionParcial inscripcion : lista)
+								System.out.println(inscripcion.toString());
+						else
+							System.out.println("No registered Parcial Registrations");
 					}
 					//Listar inscripciones completas
-					else if(opcion == 2) {
+					else if(opcion2 == 2) {
 						ArrayList<InscripcionCompleta> lista = inscripciones.getListaInscripcionCompleta();
-						for (InscripcionCompleta inscripcion : lista)
-							System.out.println(inscripcion.toString());
+						if(lista.size() > 0)
+							for (InscripcionCompleta inscripcion : lista)
+								System.out.println(inscripcion.toString());
+						else
+							System.out.println("No registered Complete Registrations");
 					}
 					//Crear una inscripción parcial
-					else if(opcion == 3) {
+					else if(opcion2 == 3) {
 						String aux = null;
 						int idAssistant, idCamp;
 						do {
@@ -440,7 +462,7 @@ public class Programa {
 						
 					}
 					//Realiza una inscripción completa
-					else if(opcion == 4) {
+					else if(opcion2 == 4) {
 						String aux = null;
 						int idAssistant, idCamp;
 						do {
@@ -474,17 +496,21 @@ public class Programa {
 						}
 					}
 					//Listar campamentos disponibles.
-					else if(opcion == 5) {
-						System.out.println(inscripciones.obtenerCampamentosDisponibles());
+					else if(opcion2 == 5) {
+						String l = inscripciones.obtenerCampamentosDisponibles();
+						if(!l.equalsIgnoreCase(""))
+							System.out.println(l);
+						else
+							System.out.println("No camps available");
 						
 					}
 					//Volver al menú principal
-					else if(opcion == 6) 
+					else if(opcion2 == 6) 
 						System.out.println("Returning to the Main Menu..............");
 					//Error
 					else
 						System.out.println("Wrong Option.");
-				}while(opcion != 6);
+				}while(opcion2 != 6);
 			}
 			//Salir del sistema
 			else if(opcion == 4) {
