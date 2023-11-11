@@ -75,7 +75,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
             	 ps.setInt(2, object.getResponsableEspecial().getId());
              }
              else {
-            	 ps.setInt(3, -1);
+            	 ps.setInt(2, -1);
              }
              
 			
