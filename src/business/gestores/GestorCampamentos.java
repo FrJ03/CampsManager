@@ -1,5 +1,6 @@
 package business.gestores;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import data.dao.ActividadDAO;
@@ -82,7 +83,13 @@ public class GestorCampamentos {
 		 * Metodo que crea Campamentos mediante valores introducidos por el usuario.
 		 * @return void
 		 */
-		public Boolean crearCampamento(Campamento campamento) {
+		public Boolean crearCampamento(LocalDate start, LocalDate end, Nivel level, int maxP, int idM) {
+			MonitorDAO dbM = MonitorDAO.getInstance();
+			Monitor m = dbM.read(idM);
+			if(m == null)
+				return false;
+			Campamento campamento = new Campamento(-1, start, end, level, maxP);
+			campamento.setResponsable(m);
 			CampamentoDAO db = CampamentoDAO.getInstance();
 			return db.create(campamento);
 		}
