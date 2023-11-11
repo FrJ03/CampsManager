@@ -102,7 +102,7 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 			ps.setInt(2,object.getIdCampamento());
 			ps.setDate(3,java.sql.Date.valueOf(object.getFechaInscripcion()));
 			ps.setFloat(4,object.getPrecio());
-			ps.setString(5,"Completa");
+			ps.setString(5,"Parcial");
 			ps.setString(6,"Temprano");
 			
 			status = ps.executeUpdate();	
@@ -140,7 +140,7 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 			ps.setInt(2,object.getIdCampamento());
 			ps.setDate(3,java.sql.Date.valueOf(object.getFechaInscripcion()));
 			ps.setFloat(4,object.getPrecio());
-			ps.setString(5,"Completa");
+			ps.setString(5,"Parcial");
 			ps.setString(6,"Tardio");
 			
 			status = ps.executeUpdate();	
@@ -170,7 +170,7 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readInscripcion");
+			String query = p.getProperty("readInscripcionParcial");
 			
 			Connection c = con.getConnection();
 			
@@ -208,7 +208,7 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readInscripcion");
+			String query = p.getProperty("readInscripcionParcial");
 			
 			Connection c = con.getConnection();
 			
@@ -280,7 +280,7 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readAllInscripcion");
+			String query = p.getProperty("readAllInscripcionParcial");
 			
 			Connection c = con.getConnection();
 			

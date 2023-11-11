@@ -170,7 +170,7 @@ public class InscripcionCompletaDAO implements InterfaceDAO<InscripcionCompleta>
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readInscripcion");
+			String query = p.getProperty("readInscripcionCompleta");
 			
 			Connection c = con.getConnection();
 			
@@ -208,7 +208,7 @@ public class InscripcionCompletaDAO implements InterfaceDAO<InscripcionCompleta>
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readInscripcion");
+			String query = p.getProperty("readInscripcionCompleta");
 			
 			Connection c = con.getConnection();
 			
@@ -280,7 +280,7 @@ public class InscripcionCompletaDAO implements InterfaceDAO<InscripcionCompleta>
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readAllInscripcion");
+			String query = p.getProperty("readAllInscripcionCompleta");
 			
 			Connection c = con.getConnection();
 			
