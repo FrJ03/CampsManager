@@ -61,12 +61,11 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 			Connection c=con.getConnection();
 			PreparedStatement ps=c.prepareStatement(create);
 			
-			ps.setInt(1,object.getId());
-			ps.setString(2,object.getName());
-			ps.setString(3,object.getNivel().name());
-			ps.setString(4,object.getTurno().name());
-			ps.setInt(5,object.getParticipantesMax());
-			ps.setInt(6,object.getMonitoresMax());
+			ps.setString(1,object.getName());
+			ps.setString(2,object.getNivel().name());
+			ps.setString(3,object.getTurno().name());
+			ps.setInt(4,object.getParticipantesMax());
+			ps.setInt(5,object.getMonitoresMax());
 			
 			status = ps.executeUpdate();	
 			if (status == 1) {

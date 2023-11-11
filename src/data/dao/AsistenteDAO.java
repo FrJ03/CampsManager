@@ -59,11 +59,10 @@ public class AsistenteDAO implements InterfaceDAO<Asistente>{
 			Connection c=con.getConnection();
 			PreparedStatement ps=c.prepareStatement(create);
 			
-			ps.setInt(1,object.getId());
-			ps.setString(2,object.getNombre());
-			ps.setString(3,object.getApellidos());
-			ps.setBoolean(4,object.getEspecial());
-			ps.setDate(5, java.sql.Date.valueOf(object.get_fechaNacimiento()));
+			ps.setString(1,object.getNombre());
+			ps.setString(2,object.getApellidos());
+			ps.setBoolean(3,object.getEspecial());
+			ps.setDate(4, java.sql.Date.valueOf(object.get_fechaNacimiento()));
 			
 			status = ps.executeUpdate();	
 			if (status == 1) {
