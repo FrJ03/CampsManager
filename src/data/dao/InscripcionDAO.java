@@ -56,7 +56,6 @@ public class InscripcionDAO implements InterfaceDAO<Inscripcion>{
 			p.load(reader);
 			String create = p.getProperty("createInscripcion");
 			
-			System.out.println(create);
 			Connection c=con.getConnection();
 			PreparedStatement ps=c.prepareStatement(create);
 			

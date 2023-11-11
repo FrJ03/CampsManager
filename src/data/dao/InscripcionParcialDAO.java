@@ -58,7 +58,6 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 			p.load(reader);
 			String create = p.getProperty("createInscripcion");
 			
-			System.out.println(create);
 			Connection c=con.getConnection();
 			PreparedStatement ps=c.prepareStatement(create);
 			
@@ -96,7 +95,6 @@ public class InscripcionParcialDAO implements InterfaceDAO<InscripcionParcial>{
 			p.load(reader);
 			String create = p.getProperty("createInscripcion");
 			
-			System.out.println(create);
 			Connection c=con.getConnection();
 			PreparedStatement ps=c.prepareStatement(create);
 			

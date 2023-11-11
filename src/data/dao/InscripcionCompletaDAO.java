@@ -96,7 +96,6 @@ public class InscripcionCompletaDAO implements InterfaceDAO<InscripcionCompleta>
 			p.load(reader);
 			String create = p.getProperty("createInscripcion");
 			
-			System.out.println(create);
 			Connection c=con.getConnection();
 			PreparedStatement ps=c.prepareStatement(create);
 			
@@ -134,7 +133,6 @@ public class InscripcionCompletaDAO implements InterfaceDAO<InscripcionCompleta>
 			p.load(reader);
 			String create = p.getProperty("createInscripcion");
 			
-			System.out.println(create);
 			Connection c=con.getConnection();
 			PreparedStatement ps=c.prepareStatement(create);
 			
