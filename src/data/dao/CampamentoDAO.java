@@ -290,11 +290,13 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readCampamento");
+			String query = p.getProperty("readAllCampamentosAvailable");
 			
 			Connection c = con.getConnection();
 			
 			PreparedStatement ps=c.prepareStatement(query);
+			
+			ps.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
 			
 			ResultSet rs = ps.executeQuery();
 			
@@ -315,28 +317,25 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 				object.setResponsableEspecial(daoMonitor.read(res));
 				
 				long diferenciaDias = ChronoUnit.DAYS.between(LocalDate.now(), object.getInicioCampamento());
+					
+				CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
 				
-				if(count(object) < object.getAsistentesMax() && diferenciaDias > 2 && LocalDate.now().isBefore(object.getInicioCampamento())) {
+				ArrayList <Actividad> actividades = new ArrayList<Actividad>();
+				
+				CampamentoActividadDTO dto = new CampamentoActividadDTO(0, object.getId());
+				ArrayList <CampamentoActividadDTO> list = dao.readAllActividades(dto);
+				
+				ActividadDAO actDao = ActividadDAO.getInstance();
+				
+				for (CampamentoActividadDTO i : list) {
 					
-					CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
+					aux.setId(i.getActId());
+					actividades.add(actDao.read(aux));
 					
-					ArrayList <Actividad> actividades = new ArrayList<Actividad>();
-					
-					CampamentoActividadDTO dto = new CampamentoActividadDTO(0, object.getId());
-					ArrayList <CampamentoActividadDTO> list = dao.readAllActividades(dto);
-					
-					ActividadDAO actDao = ActividadDAO.getInstance();
-					
-					for (CampamentoActividadDTO i : list) {
-						
-						aux.setId(i.getActId());
-						actividades.add(actDao.read(aux));
-						
-					}
-					
-					object.setListaActividad(actividades);
-					campamentos.add(object);
 				}
+				
+				object.setListaActividad(actividades);
+				campamentos.add(object);
             } 
 				con.deleteConnection(c);
 				
@@ -396,13 +395,13 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readCampamento");
+			String query = p.getProperty("readCampamentoAvailable");
 			
 			Connection c = con.getConnection();
 			
 			PreparedStatement ps=c.prepareStatement(query);
 			ps.setInt(1, id);
-	
+			ps.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
 			ResultSet rs = ps.executeQuery();
 			
 			if (rs.next()) {
@@ -421,34 +420,25 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 				object.setResponsable(daoMonitor.read(res));
 				res.setId(e);
 				object.setResponsableEspecial(daoMonitor.read(res));
+					
+				CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
 				
-				long diferenciaDias = ChronoUnit.DAYS.between(LocalDate.now(), object.getInicioCampamento());
+				ArrayList <Actividad> actividades = new ArrayList<Actividad>();
 				
-				if(count(object) < object.getAsistentesMax() && diferenciaDias > 2 ) {
+				CampamentoActividadDTO dto = new CampamentoActividadDTO(0, object.getId());
+				ArrayList <CampamentoActividadDTO> list = dao.readAllActividades(dto);
+				
+				ActividadDAO actDao = ActividadDAO.getInstance();
+				
+				for (CampamentoActividadDTO i : list) {
 					
-					CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
-					
-					ArrayList <Actividad> actividades = new ArrayList<Actividad>();
-					
-					CampamentoActividadDTO dto = new CampamentoActividadDTO(0, object.getId());
-					ArrayList <CampamentoActividadDTO> list = dao.readAllActividades(dto);
-					
-					ActividadDAO actDao = ActividadDAO.getInstance();
-					
-					for (CampamentoActividadDTO i : list) {
-						
-						aux.setId(i.getActId());
-						actividades.add(actDao.read(aux));
-						
-					}
-					object.setListaActividad(actividades);
-				}
-				else {
-					
-					object = null;
+					aux.setId(i.getActId());
+					actividades.add(actDao.read(aux));
 					
 				}
-            } 
+				object.setListaActividad(actividades);
+			}
+            
 			else {
 				con.deleteConnection(c);
 			}
