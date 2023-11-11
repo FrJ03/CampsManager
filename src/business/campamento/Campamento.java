@@ -206,12 +206,12 @@ import business.actividad.*;
 	  * */
 	public String toString(){
 		String aux = "Información del Campamento\n\tId:" + this.id_ + "\n\tFecha de Inicio:" + this.iniciocampamento_ + 
-				"\n\tFin del campamento:" + this.fincampamento_ + "\n\tNivel Academico:"+ this.nivel_ + "\n\tNumero maximo de asistentes:" + this.asistentesMax_ + "\n\tMonitor Responsable:"+
-				this.getResponsable().getNombreCompleto() + "\n\tMonitor especial: ";
+				"\n\tFin del campamento:" + this.fincampamento_ + "\n\tNivel Academico:"+ this.nivel_ + "\n\tNumero maximo de asistentes:" + this.asistentesMax_ + "\n\tMonitor Responsable: \n\t\tID: " +
+				responsable_.getId() + "\n\t\tNombre: "+responsable_.getNombreCompleto() + "\n\tMonitor especial: ";
 		if(responsableEspecial_ == null)
 			aux += "Empty";
 		else
-			aux += this.getResponsableEspecial().getNombreCompleto();
+			aux += "\n\t\tID: " + responsableEspecial_.getId() + "\n\t\tNombre: " + this.getResponsableEspecial().getNombreCompleto();
 		aux += "\n\tLista de Actividades:";
 		for(Actividad act : this.listaActividad_) {
 			aux += "\n\t\tId: " + act.getId() + "\n\t\tNombre: " + act.getName() + "\n";
