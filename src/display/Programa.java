@@ -183,7 +183,7 @@ public class Programa {
 						
 						int idMonitor;
 						do {
-							System.out.println("Monitor in Charge ID: ");
+							System.out.print("Monitor in Charge ID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -280,7 +280,7 @@ public class Programa {
 						String aux = null;
 						
 						do {
-							System.out.println("Monitor ID: ");
+							System.out.print("Monitor ID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -293,7 +293,7 @@ public class Programa {
 						aux = null;
 						int idActividad = -1;
 						do {
-							System.out.println("Activity ID: ");
+							System.out.print("Activity ID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -312,7 +312,7 @@ public class Programa {
 						int idCampamento = -1;
 						String aux = null;
 						do {
-							System.out.println("Camp ID: ");
+							System.out.print("Camp ID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -325,7 +325,7 @@ public class Programa {
 						int idActividad = -1;
 						aux = null;
 						do {
-							System.out.println("Activity ID: ");
+							System.out.print("Activity ID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -345,7 +345,7 @@ public class Programa {
 						int idCampamento = -1;
 						String aux = null;
 						do {
-							System.out.println("Camp ID: ");
+							System.out.print("Camp ID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -358,7 +358,7 @@ public class Programa {
 						aux = null;
 						int idMonitor = -1;
 						do {
-							System.out.println("Monitor in charge ID: ");
+							System.out.print("Monitor in charge ID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -378,7 +378,7 @@ public class Programa {
 						String aux = null;
 						int idCampamento = -1;
 						do {
-							System.out.println("CampID: ");
+							System.out.print("CampID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -391,7 +391,7 @@ public class Programa {
 						aux = null;
 						int idMonitor = -1;
 						do {
-							System.out.println("Monitor in chargeID: ");
+							System.out.print("Monitor in chargeID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -443,7 +443,7 @@ public class Programa {
 						String aux = null;
 						int idAssistant, idCamp;
 						do {
-							System.out.println("Assistant ID: ");
+							System.out.print("Assistant ID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -455,7 +455,7 @@ public class Programa {
 						
 						aux = null;
 						do {
-							System.out.println("Camp ID: ");
+							System.out.print("Camp ID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -478,7 +478,7 @@ public class Programa {
 						String aux = null;
 						int idAssistant, idCamp;
 						do {
-							System.out.println("Assistant ID: ");
+							System.out.print("Assistant ID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
@@ -490,7 +490,7 @@ public class Programa {
 						
 						aux = null;
 						do {
-							System.out.println("Camp ID: ");
+							System.out.print("Camp ID: ");
 							try {
 								aux = teclado.readLine();
 							} catch (IOException e) {
