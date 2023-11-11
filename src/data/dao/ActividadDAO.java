@@ -58,7 +58,6 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 			p.load(reader);
 			String create = p.getProperty("createActividad");
 			
-			System.out.println(create);
 			Connection c=con.getConnection();
 			PreparedStatement ps=c.prepareStatement(create);
 			

@@ -154,7 +154,7 @@ public class AsistenteDAO implements InterfaceDAO<Asistente>{
 	 * Añade todos los asistentes de la base de datos a un lista.
 	 * @return Array<Monitor>
 	 */
-	public ArrayList<Asistente>readAll(){
+	public ArrayList<Asistente> readAll(){
 
 		BufferedReader reader = null;
 		Connector con = new Connector();
