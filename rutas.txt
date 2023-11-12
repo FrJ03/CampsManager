@@ -1,6 +1,0 @@
-actividades=data/actividades.txt
-asistentes=data/asistentes.txt
-campamentos=data/campamentos.txt
-inscripcionesCompletas=data/inscripcionesCompletas.txt
-inscripcionesParciales=data/inscripcionesParciales.txt
-monitores=data/monitores.txt
