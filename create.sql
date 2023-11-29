@@ -1,10 +1,19 @@
+DROP TABLE IF EXISTS customer;
+CREATE TABLE IF NOT EXISTS customer(
+	id INTEGER PRIMARY KEY AUTO_INCREMENT,
+	username VARCHAR(64) NOT NULL UNIQUE,
+	password VARCHAR(32) NOT NULL,
+	rol VARCHAR(8) CHECK (rol='Admin' || rol='Client')
+);
 DROP TABLE IF EXISTS asistente;
 CREATE TABLE IF NOT EXISTS asistente (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    idCustomer INTEGER,
     nombre TINYTEXT,
     apellidos TINYTEXT,
     especial BOOL,
     fechaNacimiento DATE
+    CONSTRAINT FK_asistente_customer FOREIGN KEY (idCustomer) REFERENCES customer(id)
 );
 DROP TABLE IF EXISTS monitor;
 CREATE TABLE IF NOT EXISTS monitor(
