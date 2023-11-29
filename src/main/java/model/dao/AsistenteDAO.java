@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import model.common.Connector;
-import view.beans.assistant.*;
+import controller.dto.assistant.*;
 
 /**
  * DAO que permite gestionar los accesos a la base de datos relacionados con asistentes.
  * @author Enrique de los Reyes Montilla
  */
-public class AsistenteDAO implements InterfaceDAO<Asistente>{
+public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 	/**
 	 * Variable privada Singleton.
 	 */
@@ -45,7 +45,7 @@ public class AsistenteDAO implements InterfaceDAO<Asistente>{
 	 * @return boolean
 	 */
 	@Override
-	public boolean create(Asistente object) {
+	public boolean create(AssistantDTO object) {
 		BufferedReader reader = null;
 		int status = 0;
 		boolean res = false;
@@ -82,11 +82,11 @@ public class AsistenteDAO implements InterfaceDAO<Asistente>{
 	 * @return Monitor
 	 */
 	@Override
-	public Asistente read(Asistente object) {
+	public AssistantDTO read(AssistantDTO object) {
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		Asistente as = null;
+		AssistantDTO as = null;
 		
 		try{
 			
@@ -104,7 +104,7 @@ public class AsistenteDAO implements InterfaceDAO<Asistente>{
 			
 			if (rs.next()) {
 				
-				object = new Asistente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(5).toLocalDate(), rs.getBoolean(4));
+				object = new AssistantDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(5).toLocalDate(), rs.getBoolean(4));
                 as = object;
             } 
 			
@@ -120,7 +120,7 @@ public class AsistenteDAO implements InterfaceDAO<Asistente>{
 	 * @return boolean
 	 */
 	@Override
-	public boolean delete(Asistente object) {
+	public boolean delete(AssistantDTO object) {
 		
 		int rs =0;
 		boolean status = false;
@@ -154,11 +154,11 @@ public class AsistenteDAO implements InterfaceDAO<Asistente>{
 	 * Añade todos los asistentes de la base de datos a un lista.
 	 * @return Array<Monitor>
 	 */
-	public ArrayList<Asistente> readAll(){
+	public ArrayList<AssistantDTO> readAll(){
 
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		ArrayList<Asistente> list = new ArrayList<Asistente>();
+		ArrayList<AssistantDTO> list = new ArrayList<AssistantDTO>();
 		
 		try{
 			
@@ -175,7 +175,7 @@ public class AsistenteDAO implements InterfaceDAO<Asistente>{
 			
 			while (rs.next()) {
 				
-                list.add( new Asistente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(5).toLocalDate(), rs.getBoolean(4)));
+                list.add( new AssistantDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(5).toLocalDate(), rs.getBoolean(4)));
                 
             } 
 			
@@ -190,7 +190,7 @@ public class AsistenteDAO implements InterfaceDAO<Asistente>{
 	 * @param object Asistente el cual va a ser actualizado.
 	 * @return boolean
 	 */
-	public boolean update(Asistente object){
+	public boolean update(AssistantDTO object){
 
 		BufferedReader reader = null;
 		Connector con = new Connector();
@@ -231,11 +231,11 @@ public class AsistenteDAO implements InterfaceDAO<Asistente>{
 	 * @param id Id que se va a leer de la base de datos.
 	 * @return Monitor
 	 */
-	public Asistente read(int id) {
+	public AssistantDTO read(int id) {
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		Asistente as = null;
+		AssistantDTO as = null;
 		
 		try{
 			
@@ -253,7 +253,7 @@ public class AsistenteDAO implements InterfaceDAO<Asistente>{
 			
 			if (rs.next()) {
 				
-				as = new Asistente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(5).toLocalDate(), rs.getBoolean(4));
+				as = new AssistantDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(5).toLocalDate(), rs.getBoolean(4));
                 
             } 
 			
