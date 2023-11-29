@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import model.dao.AsistenteDAO;
-import view.beans.assistant.*;
+import controller.dto.assistant.*;
 /**
  * Clase que gestiona la información de los asistentes al campamento
  * @author Manuel García Obrero
