@@ -12,16 +12,15 @@ import java.time.temporal.ChronoUnit;
 import java.util.Properties;
 
 import model.common.Connector;
-import view.beans.*;
-import view.beans.activity.*;
-import view.beans.camp.*;
-import view.beans.monitor.*;
+import controller.dto.activity.*;
+import controller.dto.camp.*;
+import controller.dto.monitor.*;
 
 /**
  * Clase CampamentoDAO que realiza las consultas relacionada con la tabla Campamento.
  * @author Enrique de los Reyes Montilla
  */
-public class CampamentoDAO implements InterfaceDAO<Campamento>{
+public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 	/**
 	 * Variable privada Singleton.
 	 */
@@ -50,7 +49,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	 * @return boolean
 	 */
 	@Override
-	public boolean create(Campamento object) {
+	public boolean create(CampDTO object) {
 		
 		BufferedReader reader = null;
 		int status = 0;
@@ -85,14 +84,6 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 				res = true;
 			}
 			con.deleteConnection(c);
-			CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
-			
-			for ( Actividad i : object.getListaActividad()) {
-				
-				CampamentoActividadDTO aux = new CampamentoActividadDTO(i.getId(), object.getId());
-				res = dao.create(aux);
-				
-			}
 			
 		} catch(Exception e) { System.out.println(e); }
 		
@@ -104,11 +95,11 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	 * @return Campamento
 	 */
 	@Override
-	public Campamento read(Campamento object) {
+	public CampDTO read(CampDTO object) {
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		Campamento cam = null;
+		CampDTO cam = null;
 		
 		try{
 			
@@ -125,37 +116,19 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 			ResultSet rs = ps.executeQuery();
 			
 			if (rs.next()) {
-				object	= new Campamento(rs.getInt(1), rs.getDate(4).toLocalDate(), rs.getDate(5).toLocalDate(), Nivel.valueOf(rs.getString(6)), rs.getInt(7) );
+				object	= new CampDTO(rs.getInt(1), rs.getDate(4).toLocalDate(), rs.getDate(5).toLocalDate(), Nivel.valueOf(rs.getString(6)), rs.getInt(7) );
 				int r = rs.getInt(2);
 				int e = rs.getInt(3);
 				
 				con.deleteConnection(c);
 				
 				MonitorDAO daoMonitor = MonitorDAO.getInstance();
-				Monitor res = new Monitor();
+				MonitorDTO res = new MonitorDTO();
 				res.setId(r);
 				object.setResponsable(daoMonitor.read(res));
 				res.setId(e);
 				object.setResponsableEspecial(daoMonitor.read(res));
 				
-				CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
-				
-				ArrayList <Actividad> actividades = new ArrayList<Actividad>();
-				Actividad aux = new Actividad();
-				
-				CampamentoActividadDTO dto = new CampamentoActividadDTO(0, object.getId());
-				ArrayList <CampamentoActividadDTO> list = dao.readAllActividades(dto);
-				
-				ActividadDAO actDao = ActividadDAO.getInstance();
-				
-				for (CampamentoActividadDTO i : list) {
-					
-					aux.setId(i.getActId());
-					actividades.add(actDao.read(aux));
-					
-				}
-				
-				object.setListaActividad(actividades);
 				cam = object;
             } 
 			else {
@@ -171,7 +144,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	 * @return boolean
 	 */
 	@Override
-	public boolean delete(Campamento object) {
+	public boolean delete(CampDTO object) {
 		int rs =0;
 		boolean status = false;
 		BufferedReader reader = null;
@@ -195,17 +168,6 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 			
 			con.deleteConnection(c);
 			
-			CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
-			
-			for ( Actividad i : object.getListaActividad()) {
-				
-				CampamentoActividadDTO aux = new CampamentoActividadDTO(i.getId(), object.getId());
-				status = dao.delete(aux);
-				
-			}
-			
-			con.deleteConnection(c);
-			
 		} catch(Exception e) { System.out.println(e); }
 		
 		return status;
@@ -214,12 +176,12 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	 * Añade todos los campamnetos de la base de datos a un lista.
 	 * @return ArrayList<Campamento>
 	 */
-	public ArrayList<Campamento> readAll(){
+	public ArrayList<CampDTO> readAll(){
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		ArrayList<Campamento> campamentos = new ArrayList<Campamento>();
-		Campamento object = new Campamento();
+		ArrayList<CampDTO> campamentos = new ArrayList<CampDTO>();
+		CampDTO object = new CampDTO();
 		
 		try{
 			
@@ -235,38 +197,18 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				Actividad aux = new Actividad();
-				
-				aux.setId(rs.getInt(2));
-				object = new Campamento(rs.getInt(1), rs.getDate(4).toLocalDate(), rs.getDate(5).toLocalDate(), Nivel.valueOf(rs.getString(6)), rs.getInt(7) );
+				object = new CampDTO(rs.getInt(1), rs.getDate(4).toLocalDate(), rs.getDate(5).toLocalDate(), Nivel.valueOf(rs.getString(6)), rs.getInt(7) );
 				int r = rs.getInt(2);
 				int e = rs.getInt(3);
 				
 				
 				MonitorDAO daoMonitor = MonitorDAO.getInstance();
-				Monitor res = new Monitor();
+				MonitorDTO res = new MonitorDTO();
 				res.setId(r);
 				object.setResponsable(daoMonitor.read(res));
 				res.setId(e);
 				object.setResponsableEspecial(daoMonitor.read(res));
 				
-				CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
-				
-				ArrayList <Actividad> actividades = new ArrayList<Actividad>();
-				
-				CampamentoActividadDTO dto = new CampamentoActividadDTO(0, object.getId());
-				ArrayList <CampamentoActividadDTO> list = dao.readAllActividades(dto);
-				
-				ActividadDAO actDao = ActividadDAO.getInstance();
-				
-				for (CampamentoActividadDTO i : list) {
-					
-					aux.setId(i.getActId());
-					actividades.add(actDao.read(aux));
-					
-				}
-				
-				object.setListaActividad(actividades);
 				campamentos.add(object);
             } 
 				con.deleteConnection(c);
@@ -279,12 +221,12 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	 * Añade todos los campamentos disponibles de la base de datos a un lista.
 	 * @return ArrayList<Campamento>
 	 */
-	public ArrayList<Campamento> readAllAvailable(){
+	public ArrayList<CampDTO> readAllAvailable(){
 
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		ArrayList<Campamento> campamentos = new ArrayList<Campamento>();
-		Campamento object = new Campamento();
+		ArrayList<CampDTO> campamentos = new ArrayList<CampDTO>();
+		CampDTO object = new CampDTO();
 		
 		try{
 			
@@ -302,40 +244,20 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				Actividad aux = new Actividad();
-				
-				aux.setId(rs.getInt(2));
-				object = new Campamento(rs.getInt(1), rs.getDate(4).toLocalDate(), rs.getDate(5).toLocalDate(), Nivel.valueOf(rs.getString(6)), rs.getInt(7) );
+				object = new CampDTO(rs.getInt(1), rs.getDate(4).toLocalDate(), rs.getDate(5).toLocalDate(), Nivel.valueOf(rs.getString(6)), rs.getInt(7) );
 				int r = rs.getInt(2);
 				int e = rs.getInt(3);
 				
 				
 				MonitorDAO daoMonitor = MonitorDAO.getInstance();
-				Monitor res = new Monitor();
+				MonitorDTO res = new MonitorDTO();
 				res.setId(r);
 				object.setResponsable(daoMonitor.read(res));
 				res.setId(e);
 				object.setResponsableEspecial(daoMonitor.read(res));
 				
 				long diferenciaDias = ChronoUnit.DAYS.between(LocalDate.now(), object.getInicioCampamento());
-					
-				CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
-				
-				ArrayList <Actividad> actividades = new ArrayList<Actividad>();
-				
-				CampamentoActividadDTO dto = new CampamentoActividadDTO(0, object.getId());
-				ArrayList <CampamentoActividadDTO> list = dao.readAllActividades(dto);
-				
-				ActividadDAO actDao = ActividadDAO.getInstance();
-				
-				for (CampamentoActividadDTO i : list) {
-					
-					aux.setId(i.getActId());
-					actividades.add(actDao.read(aux));
-					
-				}
-				
-				object.setListaActividad(actividades);
+
 				campamentos.add(object);
             } 
 				con.deleteConnection(c);
@@ -350,7 +272,7 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	 * @param object Campamento con el id que se utilizará para la consulta.
 	 * @return int
 	 */
-	public int count(Campamento object) {
+	public int count(CampDTO object) {
 		ResultSet rs ;
 		BufferedReader reader = null;
 		Connector con = new Connector();
@@ -385,11 +307,11 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	 * @param id Id del campamento que va a ser leido de la base de datos.
 	 * @return Campamento
 	 */
-	public Campamento readAvailable(int id) {
+	public CampDTO readAvailable(int id) {
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		Campamento object = null ;
+		CampDTO object = null ;
 		
 		try{
 			
@@ -407,37 +329,19 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 			
 			if (rs.next()) {
 				
-				object = new Campamento() ;
-				Actividad aux = new Actividad();
-				object	= new Campamento(rs.getInt(1), rs.getDate(4).toLocalDate(), rs.getDate(5).toLocalDate(), Nivel.valueOf(rs.getString(6)), rs.getInt(7) );
+				object = new CampDTO() ;
+				object	= new CampDTO(rs.getInt(1), rs.getDate(4).toLocalDate(), rs.getDate(5).toLocalDate(), Nivel.valueOf(rs.getString(6)), rs.getInt(7) );
 				int r = rs.getInt(2);
 				int e = rs.getInt(3);
 				
 				con.deleteConnection(c);
 				
 				MonitorDAO daoMonitor = MonitorDAO.getInstance();
-				Monitor res = new Monitor();
+				MonitorDTO res = new MonitorDTO();
 				res.setId(r);
 				object.setResponsable(daoMonitor.read(res));
 				res.setId(e);
 				object.setResponsableEspecial(daoMonitor.read(res));
-					
-				CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
-				
-				ArrayList <Actividad> actividades = new ArrayList<Actividad>();
-				
-				CampamentoActividadDTO dto = new CampamentoActividadDTO(0, object.getId());
-				ArrayList <CampamentoActividadDTO> list = dao.readAllActividades(dto);
-				
-				ActividadDAO actDao = ActividadDAO.getInstance();
-				
-				for (CampamentoActividadDTO i : list) {
-					
-					aux.setId(i.getActId());
-					actividades.add(actDao.read(aux));
-					
-				}
-				object.setListaActividad(actividades);
 			}
             
 			else {
@@ -454,11 +358,11 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 	 * @param id Id del campamento que va a ser leido de la base de datos.
 	 * @return Campamento
 	 */
-	public Campamento read(int id) {
+	public CampDTO read(int id) {
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		Campamento object = null ;
+		CampDTO object = null ;
 		
 		try{
 			
@@ -475,38 +379,18 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 			ResultSet rs = ps.executeQuery();
 			
 			if (rs.next()) {
-				object	= new Campamento(rs.getInt(1), rs.getDate(4).toLocalDate(), rs.getDate(5).toLocalDate(), Nivel.valueOf(rs.getString(6)), rs.getInt(7) );
+				object	= new CampDTO(rs.getInt(1), rs.getDate(4).toLocalDate(), rs.getDate(5).toLocalDate(), Nivel.valueOf(rs.getString(6)), rs.getInt(7) );
 				int r = rs.getInt(2);
 				int e = rs.getInt(3);
 				
 				con.deleteConnection(c);
 				
 				MonitorDAO daoMonitor = MonitorDAO.getInstance();
-				Monitor res = new Monitor();
+				MonitorDTO res = new MonitorDTO();
 				res.setId(r);
 				object.setResponsable(daoMonitor.read(res));
 				res.setId(e);
 				object.setResponsableEspecial(daoMonitor.read(res));
-				
-				CampamentoActividadDAO dao = CampamentoActividadDAO.getInstance();
-				
-				ArrayList <Actividad> actividades = new ArrayList<Actividad>();
-				Actividad aux = new Actividad();
-				
-				CampamentoActividadDTO dto = new CampamentoActividadDTO(0, object.getId());
-				ArrayList <CampamentoActividadDTO> list = dao.readAllActividades(dto);
-				
-				ActividadDAO actDao = ActividadDAO.getInstance();
-				
-				for (CampamentoActividadDTO i : list) {
-					
-					aux.setId(i.getActId());
-					actividades.add(actDao.read(aux));
-					
-				}
-				
-				object.setListaActividad(actividades);
-				
             } 
 			else {
 				con.deleteConnection(c);
@@ -592,20 +476,5 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 		
 		return status;
 
-	}
-	@Override
-	public boolean create(CampBean object) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public CampBean read(CampBean object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public boolean delete(CampBean object) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }
