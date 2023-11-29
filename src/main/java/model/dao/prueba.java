@@ -12,10 +12,10 @@ public class prueba {
 	public static void main(String[] args) {
 		CampamentoDAO c = CampamentoDAO.getInstance();
 		MonitorDAO a = MonitorDAO.getInstance();
-		MonitorBean mon = new MonitorBean(1, "Pepe", "Mellado", false);
+		Monitor mon = new Monitor(1, "Pepe", "Mellado", false);
 		LocalDate date =  LocalDate.parse("2025-11-15");
 
-		CampBean cam = new CampBean(1, date, date, Nivel.Adolescente, 3);
+		Campamento cam = new Campamento(1, date, date, Nivel.Adolescente, 3);
 		cam.setResponsable(mon);
 		cam.setResponsable(mon);
 		a.create(mon);

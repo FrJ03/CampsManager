@@ -3,17 +3,14 @@ package model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Properties;
 
 import model.common.Connector;
 import view.beans.activity.*;
-import view.beans.monitor.MonitorBean;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -21,7 +18,7 @@ import java.util.ArrayList;
  * @author Manuel García Obrero
  */
 
-public class ActividadDAO implements InterfaceDAO<ActivityBean> {
+public class ActividadDAO implements InterfaceDAO<Actividad> {
 	/**
 	 * Variable privada Singleton.
 	 */
@@ -51,7 +48,7 @@ public class ActividadDAO implements InterfaceDAO<ActivityBean> {
 	 * @return boolean
 	 */
 	@Override
-	public boolean create(ActivityBean object) {
+	public boolean create(Actividad object) {
 		BufferedReader reader = null;
 		int status = 0;
 		boolean res = false;
@@ -85,15 +82,15 @@ public class ActividadDAO implements InterfaceDAO<ActivityBean> {
 	
 	/**
 	 * Lee una Actividad de la base de datos.
-	 * @param ActivityBean Actividad con el id que se va a leer de la base de datos.
+	 * @param Actividad Actividad con el id que se va a leer de la base de datos.
 	 * @return Actividad
 	 */
 	@Override
-		public ActivityBean read(ActivityBean object) {
+		public Actividad read(Actividad object) {
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		ActivityBean ac = null;
+		Actividad ac = null;
 		
 		try{
 			
@@ -111,7 +108,7 @@ public class ActividadDAO implements InterfaceDAO<ActivityBean> {
 			
 			if (rs.next()) {
 				
-				object	= new ActivityBean(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4)));
+				object	= new Actividad(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4)));
 				ac = object;
 			} 
 			
@@ -125,11 +122,11 @@ public class ActividadDAO implements InterfaceDAO<ActivityBean> {
 	 * @param id Actividad que se va a leer de la base de datos.
 	 * @return Actividad 
 	 */
-		public ActivityBean read(int id) {
+		public Actividad read(int id) {
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		ActivityBean object = null;
+		Actividad object = null;
 		
 		
 		try{
@@ -147,7 +144,7 @@ public class ActividadDAO implements InterfaceDAO<ActivityBean> {
 			ResultSet rs = ps.executeQuery();
 			
 			if (rs.next()) {
-				object	= new ActivityBean(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4)));
+				object	= new Actividad(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4)));
             } 
 			
 			con.deleteConnection(c);
@@ -161,7 +158,7 @@ public class ActividadDAO implements InterfaceDAO<ActivityBean> {
 	 * @return boolean
 	 */
 	@Override
-	public boolean delete(ActivityBean object) {
+	public boolean delete(Actividad object) {
 		int rs =0;
 		boolean status = false;
 		BufferedReader reader = null;
@@ -194,10 +191,10 @@ public class ActividadDAO implements InterfaceDAO<ActivityBean> {
 	 * Añade todos las Actividades de la base de datos a un lista.
 	 * @return Array<Actividad>
 	 */
-	public ArrayList<ActivityBean>readAll(){
+	public ArrayList<Actividad>readAll(){
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		ArrayList<ActivityBean> list = new ArrayList<ActivityBean>();
+		ArrayList<Actividad> list = new ArrayList<Actividad>();
 		
 		try{
 			
@@ -214,7 +211,7 @@ public class ActividadDAO implements InterfaceDAO<ActivityBean> {
 			
 			while (rs.next()) {
 				
-                list.add( new ActivityBean(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4))));
+                list.add( new Actividad(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4))));
                 
             } 
 			
@@ -223,38 +220,6 @@ public class ActividadDAO implements InterfaceDAO<ActivityBean> {
 		} catch(Exception e) { System.out.println(e); }
 		
 		return list;
-	}
-	public ArrayList<MonitorBean> readMonitorsActivity(int activity) {
-		
-		ArrayList<MonitorBean> monitors = new ArrayList<MonitorBean>();
-		BufferedReader reader = null;
-		Connector con = new Connector();
-			
-		try {
-			Properties p = new Properties();
-			reader = new BufferedReader(new FileReader(new File(dir_)));
-			p.load(reader);
-			String query = p.getProperty("readMonitorActividad");
-			
-			Connection c = con.getConnection();
-			
-			PreparedStatement ps = c.prepareStatement(query);
-			
-			ps.setInt(1, activity);
-			ResultSet rs = ps.executeQuery();
-			
-			while (rs.next()) {
-				monitors.add( new MonitorBean(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
-	        }
-			
-			con.deleteConnection(c);
-			
-		} catch (IOException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return monitors;
 	}
 }
 

@@ -1,52 +1,54 @@
 package model.dao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Properties;
-
-import model.common.Connector;
-import view.beans.monitor.*;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
+
+import model.common.Connector;
+import view.beans.CampamentoActividadDTO;
 
 /**
- * Clase MonitorDAO que realiza las consultas relacionadas con los monitores.
+ * Clase CampamentoActividadDAO que realiza las consultas relacionada con la tabla Campamento-Actividad.
+ * @author Manuel García Obrero
  * @author Enrique de los Reyes Montilla
  */
-public class MonitorDAO implements InterfaceDAO<Monitor> {
+
+public class CampamentoActividadDAO implements InterfaceDAO<CampamentoActividadDTO>{
 	/**
 	 * Variable privada Singleton.
 	 */
-	private static MonitorDAO instance_= null;
+	private static CampamentoActividadDAO instance_= null;
 	/*
 	 * *Representa la dirección al fichero properties.
 	 */
 	private static String dir_ = "sql.properties";
 	/**
 	 * Metodo que sirve de acceso a la instancia.
-	 * @return Instancia de la clase MonitorDAO.
+	 * @return Instancia de la clase CampamentoActividadDTO.
 	 */
-	public static MonitorDAO getInstance() {
+	public static CampamentoActividadDAO getInstance() {
 		if(instance_ == null) {
-			instance_ = new MonitorDAO();
+			instance_ = new CampamentoActividadDAO();
 		}
 		return instance_;
 	}
 	/**
-	 * COnstructor vacío de la clase MonitorDAO.
+	 * Constructor vacío de la clase CampamentoActividadDAO.
 	 */
-	private MonitorDAO() {}
+	private CampamentoActividadDAO() {}
+	
 	/**
-	 * Añade un nuevo monitor a la base de datos.
-	 * @param object Monitor el cual va a ser añadido a la base de datos.
+	 * Añade una nuevo CampamentoActividad a la base de datos.
+	 * @param object CampamentoActividadDTO el cual va a ser añadido a la base de datos.
 	 * @return boolean
 	 */
 	@Override
-	public boolean create(Monitor object) {
-		
+	public boolean create(CampamentoActividadDTO object) {
 		BufferedReader reader = null;
 		int status = 0;
 		boolean res = false;
@@ -56,14 +58,14 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String create = p.getProperty("createMonitor");
+			String create = p.getProperty("createCampamentoActividad");
 			
+			System.out.println(create);
 			Connection c=con.getConnection();
 			PreparedStatement ps=c.prepareStatement(create);
 			
-			ps.setString(1,object.getNombre());
-			ps.setString(2,object.getApellidos());
-			ps.setBoolean(3,object.getEspecial());
+			ps.setInt(1,object.getActId());
+			ps.setInt(2,object.getCampId());
 			
 			status = ps.executeUpdate();	
 			if (status == 1) {
@@ -75,54 +77,54 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 		
 		return res;
 	}
+	
 	/**
-	 * Lee un monitor de la base de datos.
-	 * @param Monitor Monitor con el id que se va a leer de la base de datos.
-	 * @return Monitor
+	 * Lee un CampamentoActividad de la base de datos.
+	 * @param CampamentoActividadDTO CampamentoActividadDTO con el idCampamento y idActividad que se va a leer de la base de datos.
+	 * @return CampamentoActividadDTO
 	 */
 	@Override
-	public Monitor read(Monitor object) {
-		
+	public CampamentoActividadDTO read(CampamentoActividadDTO object) {
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		Monitor mon = null;
+		CampamentoActividadDTO cam = null;
 		
 		try{
 			
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readMonitor");
+			String query = p.getProperty("readCampamentoActividad");
 			
 			Connection c = con.getConnection();
 			
 			PreparedStatement ps=c.prepareStatement(query);
-			ps.setInt(1, object.getId());
+			ps.setInt(1, object.getActId());
+			ps.setInt(2, object.getCampId());
 	
 			ResultSet rs = ps.executeQuery();
 			
 			if (rs.next()) {
 				
-				object	= new Monitor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4));
-	            mon = object;    
-			
+			object	= new CampamentoActividadDTO(rs.getInt(1), rs.getInt(2));
             } 
+			
+			cam = object;
 			
 			con.deleteConnection(c);
 		} catch(Exception e) { System.out.println(e); }
 		
-		return mon;
-		
+		return cam;
 	}
+	
 	/**
-	 * Elimina un monitor de la base de datos.
-	 * @param object Monitor el cual se va a eliminar de la base de datos.
+	 * Elimina un CampamentoActividad de la base de datos.
+	 * @param object CampamentoActividadDTO el cual se va a eliminar de la base de datos.
 	 * @return boolean
 	 */
 	@Override
-	public boolean delete(Monitor object) {
-		
+	public boolean delete(CampamentoActividadDTO object) {
 		int rs =0;
 		boolean status = false;
 		BufferedReader reader = null;
@@ -132,11 +134,12 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("deleteMonitor");
+			String query = p.getProperty("deleteCampamentoActividad");
 			
 			Connection c=con.getConnection();
 			PreparedStatement preparedStatement = c.prepareStatement(query);
-	        preparedStatement.setInt(1, object.getId());
+			preparedStatement.setInt(1, object.getActId());
+			preparedStatement.setInt(2, object.getCampId());
 	
 			rs = preparedStatement.executeUpdate(); 
 			
@@ -149,35 +152,36 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 		} catch(Exception e) { System.out.println(e); }
 		
 		return status;
-		
 	}
 	/**
-	 * Añade todos los monitores de la base de datos a un lista.
-	 * @return Array<Monitor>
+	 * Obtiene la lista de actividades relacionada con un campamento de la base de datos.
+	 * @param object CampamentoActividadDTO el cual se va a leer de la base de datos.
+	 * @return  ArrayList<ActividadMonitorDTO>
 	 */
-	public ArrayList<Monitor>readAll(){
-
+	public  ArrayList<CampamentoActividadDTO> readAllActividades(CampamentoActividadDTO object) {
+		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		ArrayList<Monitor> list = new ArrayList<Monitor>();
+		ArrayList <CampamentoActividadDTO> list = new ArrayList<CampamentoActividadDTO>();
 		
 		try{
 			
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readAllMonitor");
+			String query = p.getProperty("readAllActividadesCampamento");
 			
 			Connection c = con.getConnection();
 			
 			PreparedStatement ps=c.prepareStatement(query);
+			ps.setInt(1, object.getCampId());
 	
 			ResultSet rs = ps.executeQuery();
+			CampamentoActividadDTO dao = new CampamentoActividadDTO(0, object.getCampId());
 			
 			while (rs.next()) {
-				
-                list.add( new Monitor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
-                
+				dao.setActId(rs.getInt(1));
+				list.add(dao);
             } 
 			
 			con.deleteConnection(c);
@@ -187,41 +191,42 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 		return list;
 	}
 	/**
-	 * Lee un monitor de la base de datos.
-	 * @param Id id del monitor que se va a leer de la base de datos.
-	 * @return Monitor
+	 * Lee un CampamentoActividad de la base de datos.
+	 * @param idAct Id de la actividad que esta asociado a un campamento.
+	 * @param IdCam Id del campamento que esta asociado a varias actividades
+	 * @return CampamentoActividadDTO
 	 */
-	public Monitor read(int id) {
-		
+	public CampamentoActividadDTO read(int idAct, int idCam) {
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		Monitor mon = null;
+		CampamentoActividadDTO cam = null;
 		
 		try{
 			
 			Properties p = new Properties();	
 			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
-			String query = p.getProperty("readMonitor");
+			String query = p.getProperty("readCampamentoActividad");
 			
 			Connection c = con.getConnection();
 			
 			PreparedStatement ps=c.prepareStatement(query);
-			ps.setInt(1, id);
+			ps.setInt(1, idAct);
+			ps.setInt(2, idCam);
 	
 			ResultSet rs = ps.executeQuery();
 			
 			if (rs.next()) {
 				
-				mon	= new Monitor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4));    
-			
+			cam	= new CampamentoActividadDTO(rs.getInt(1), rs.getInt(2));
             } 
 			
 			con.deleteConnection(c);
 		} catch(Exception e) { System.out.println(e); }
 		
-		return mon;
-		
+		return cam;
 	}
+	
 }
+
