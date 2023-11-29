@@ -2,7 +2,7 @@ package controller.dto.assistant;
 
 import java.time.LocalDate;
 import java.io.Serializable;
-import view.beans.person.Person;
+import controller.dto.person.Person;
 
 /**
  * Clase que representa a un asistente al campamento
