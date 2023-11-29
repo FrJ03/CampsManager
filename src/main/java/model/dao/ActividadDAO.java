@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.Properties;
 
 import model.common.Connector;
-import view.beans.activity.*;
+import controller.dto.activity.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * @author Manuel García Obrero
  */
 
-public class ActividadDAO implements InterfaceDAO<Actividad> {
+public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 	/**
 	 * Variable privada Singleton.
 	 */
@@ -48,7 +48,7 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 	 * @return boolean
 	 */
 	@Override
-	public boolean create(Actividad object) {
+	public boolean create(ActivityDTO object) {
 		BufferedReader reader = null;
 		int status = 0;
 		boolean res = false;
@@ -86,11 +86,11 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 	 * @return Actividad
 	 */
 	@Override
-		public Actividad read(Actividad object) {
+		public ActivityDTO read(ActivityDTO object) {
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		Actividad ac = null;
+		ActivityDTO ac = null;
 		
 		try{
 			
@@ -108,7 +108,7 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 			
 			if (rs.next()) {
 				
-				object	= new Actividad(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4)));
+				object	= new ActivityDTO(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4)));
 				ac = object;
 			} 
 			
@@ -122,11 +122,11 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 	 * @param id Actividad que se va a leer de la base de datos.
 	 * @return Actividad 
 	 */
-		public Actividad read(int id) {
+		public ActivityDTO read(int id) {
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		Actividad object = null;
+		ActivityDTO object = null;
 		
 		
 		try{
@@ -144,7 +144,7 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 			ResultSet rs = ps.executeQuery();
 			
 			if (rs.next()) {
-				object	= new Actividad(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4)));
+				object	= new ActivityDTO(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4)));
             } 
 			
 			con.deleteConnection(c);
@@ -158,7 +158,7 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 	 * @return boolean
 	 */
 	@Override
-	public boolean delete(Actividad object) {
+	public boolean delete(ActivityDTO object) {
 		int rs =0;
 		boolean status = false;
 		BufferedReader reader = null;
@@ -191,10 +191,10 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 	 * Añade todos las Actividades de la base de datos a un lista.
 	 * @return Array<Actividad>
 	 */
-	public ArrayList<Actividad>readAll(){
+	public ArrayList<ActivityDTO>readAll(){
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		ArrayList<Actividad> list = new ArrayList<Actividad>();
+		ArrayList<ActivityDTO> list = new ArrayList<ActivityDTO>();
 		
 		try{
 			
@@ -211,7 +211,7 @@ public class ActividadDAO implements InterfaceDAO<Actividad> {
 			
 			while (rs.next()) {
 				
-                list.add( new Actividad(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4))));
+                list.add( new ActivityDTO(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4))));
                 
             } 
 			
