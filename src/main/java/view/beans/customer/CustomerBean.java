@@ -18,9 +18,9 @@ public class CustomerBean implements Serializable {
 	 */
 	private String password_;
 	/**
-	 * Customer rol (Admin/Client/None)
+	 * Customer String (Admin/Client/None)
 	 */
-	private Rol rol_;
+	private String rol_;
 	
 	/**
 	 *	Initialize the customer
@@ -28,7 +28,7 @@ public class CustomerBean implements Serializable {
 	public CustomerBean() {
 		emailUser_ = "";
 		password_ = "";
-		rol_ = Rol.None;
+		rol_ = "";
 	}
 	/**
 	 *	Initialize the customer
@@ -36,15 +36,15 @@ public class CustomerBean implements Serializable {
 	public CustomerBean(String login, String password) {
 		emailUser_ = login;
 		password_ = password;
-		rol_ = Rol.None;
+		rol_ = "";
 	}
 	/**
 	 *	Initialize the customer
 	 */
-	public CustomerBean(String login, String password, Rol rol) {
+	public CustomerBean(String login, String password, String String) {
 		emailUser_ = login;
 		password_ = password;
-		rol_ = rol;
+		rol_ = "";
 	}
 	/**
 	 * Method that returns the customer emailUser
@@ -61,23 +61,11 @@ public class CustomerBean implements Serializable {
 		return password_;
 	}
 	/**
-	 * Method that returns the customer rol
-	 * @return Rol
+	 * Method that returns the customer String
+	 * @return String
 	 */
-	public Rol getRol() {
+	public String getRol() {
 		return rol_;
-	}
-	/**
-	 * Method that returns the customer rol
-	 * @return String ("Admin"/"Client"/"None")
-	 */
-	public String getRolName() {
-		if(rol_ == Rol.Admin)
-			return "Admin";
-		else if(rol_ == Rol.Client)
-			return "Client";
-		else
-			return "None";
 	}
 	/**
 	 * Method that modify the customer emailUser
@@ -94,31 +82,11 @@ public class CustomerBean implements Serializable {
 		password_ = password;
 	}
 	/**
-	 * Method that modify the customer rol
-	 * @param emailUser New Rol
+	 * Method that modify the customer String
+	 * @param emailUser New String
 	 */
-	public void setRol(Rol rol) {
-		rol_ = rol;
+	public void setRol(String String) {
+		rol_ = String;
 	}
-	/**
-	 * Method that modify the customer rol
-	 * @param rol New Rol (Must be "Admin", "Client" or "None")
-	 * @return boolean True if the rol value has been modified, false otherwise
-	 */
-	public boolean setRol(String rol) {
-		if(rol.equalsIgnoreCase("admin")) {
-			rol_ = Rol.Admin;
-			return true;
-		}
-		else if(rol.equalsIgnoreCase("client")) {
-			rol_ = Rol.Client;
-			return true;
-		}
-		else if(rol.equalsIgnoreCase("none")) {
-			rol_ = Rol.None;
-			return true;
-		}
-		else
-			return false;
-	}
+
 }

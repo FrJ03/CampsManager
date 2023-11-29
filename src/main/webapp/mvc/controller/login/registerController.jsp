@@ -24,12 +24,12 @@ if (customerBean == null || customerBean.getEmailUser().equals("")) {
 		//Se accede a bases de datos para obtener el usuario
 	
 		mensajeNextPage="Furula";
-		CustomerDTO user = new CustomerDTO(emailUser, usernameUser, passwordUser, Rol.Client, nameUser, surNameUser);
+		User user = new User(emailUser, usernameUser, passwordUser, Rol.Client, nameUser, surNameUser);
 		
 		//Se realizan todas las comprobaciones necesarias del dominio
 		//Aquí sólo comprobamos que exista el usuario
 		if (user != null && user.getEmail().equalsIgnoreCase(emailUser)) {
-	// Usuario válido
+			// Usuario válido		
 %>
 <jsp:setProperty property="emailUser" value="<%=emailUser%>" name="customerBean"/>
 <%

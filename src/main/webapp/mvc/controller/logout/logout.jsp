@@ -3,5 +3,7 @@
 <jsp:useBean  id="customerBean" scope="session" class="view.beans.customer.CustomerBean"></jsp:useBean>
 
 	<jsp:setProperty property="emailUser" value="" name="customerBean"/>
+	<jsp:setProperty property="password" value="" name="customerBean"/>
+	<jsp:setProperty property="rol" value="" name="customerBean"/>
 
 <jsp:include page="../../../index.jsp"></jsp:include>
