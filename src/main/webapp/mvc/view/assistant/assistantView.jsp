@@ -35,10 +35,10 @@
 
         <ul>
             // LINKAR EL JSP DE OPERACIONES DE ASISTENTE
-            <li><a href=""></a>Realizar Operaciones disponibles</li>
-            <li><a href="../../controller/logout/logout.jsp"></a>Desconectar</li>
+            <li><a href=""></a>What you can do</li>
+            <li><a href="../../controller/logout/logout.jsp"></a>Logout</li>
             // LINKAR MODIFICAR DATOS
-            <li><a href=""></a>Modificar datos</li>
+            <li><a href=""></a>Modify user info</li>
         </ul>
 //Mensaje de bienvenida
 Welcome assistant <jsp:getProperty name="customerBean" property="emailUser_"/><br>
