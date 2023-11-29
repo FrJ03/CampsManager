@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.Properties;
 
 import model.common.Connector;
@@ -255,8 +254,6 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 				object.setResponsable(daoMonitor.read(res));
 				res.setId(e);
 				object.setResponsableEspecial(daoMonitor.read(res));
-				
-				long diferenciaDias = ChronoUnit.DAYS.between(LocalDate.now(), object.getInicioCampamento());
 
 				campamentos.add(object);
             } 
