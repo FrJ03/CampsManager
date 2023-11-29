@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.util.Properties;
 
 import model.common.Connector;
-import view.beans.monitor.*;
+import controller.dto.monitor.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Clase MonitorDAO que realiza las consultas relacionadas con los monitores.
  * @author Enrique de los Reyes Montilla
  */
-public class MonitorDAO implements InterfaceDAO<Monitor> {
+public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 	/**
 	 * Variable privada Singleton.
 	 */
@@ -45,7 +45,7 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 	 * @return boolean
 	 */
 	@Override
-	public boolean create(Monitor object) {
+	public boolean create(MonitorDTO object) {
 		
 		BufferedReader reader = null;
 		int status = 0;
@@ -81,12 +81,12 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 	 * @return Monitor
 	 */
 	@Override
-	public Monitor read(Monitor object) {
+	public MonitorDTO read(MonitorDTO object) {
 		
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		Monitor mon = null;
+		MonitorDTO mon = null;
 		
 		try{
 			
@@ -104,7 +104,7 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 			
 			if (rs.next()) {
 				
-				object	= new Monitor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4));
+				object	= new MonitorDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4));
 	            mon = object;    
 			
             } 
@@ -121,7 +121,7 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 	 * @return boolean
 	 */
 	@Override
-	public boolean delete(Monitor object) {
+	public boolean delete(MonitorDTO object) {
 		
 		int rs =0;
 		boolean status = false;
@@ -155,11 +155,11 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 	 * Añade todos los monitores de la base de datos a un lista.
 	 * @return Array<Monitor>
 	 */
-	public ArrayList<Monitor>readAll(){
+	public ArrayList<MonitorDTO>readAll(){
 
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		ArrayList<Monitor> list = new ArrayList<Monitor>();
+		ArrayList<MonitorDTO> list = new ArrayList<MonitorDTO>();
 		
 		try{
 			
@@ -176,7 +176,7 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 			
 			while (rs.next()) {
 				
-                list.add( new Monitor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
+                list.add( new MonitorDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
                 
             } 
 			
@@ -191,12 +191,12 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 	 * @param Id id del monitor que se va a leer de la base de datos.
 	 * @return Monitor
 	 */
-	public Monitor read(int id) {
+	public MonitorDTO read(int id) {
 		
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		Monitor mon = null;
+		MonitorDTO mon = null;
 		
 		try{
 			
@@ -214,7 +214,7 @@ public class MonitorDAO implements InterfaceDAO<Monitor> {
 			
 			if (rs.next()) {
 				
-				mon	= new Monitor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4));    
+				mon	= new MonitorDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4));    
 			
             } 
 			
