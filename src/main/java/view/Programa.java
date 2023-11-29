@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 
 import controller.gestores.*;
-import view.beans.activity.*;
-import view.beans.assistant.AssistantBean;
-import view.beans.camp.*;
-import view.beans.monitor.*;
-import view.beans.registration.*;
+import controller.dto.activity.*;
+import controller.dto.assistant.AssistantDTO;
+import controller.dto.camp.*;
+import controller.dto.monitor.*;
+import controller.dto.registration.*;
 
 /**
  * Clase que representa el programa principal.
@@ -133,9 +133,9 @@ public class Programa {
 					
 					//Listar campamentos
 					if(opcion2 == 1) {
-						ArrayList<CampBean> l = campamentos.getListaCampamentos();
+						ArrayList<CampDTO> l = campamentos.getListaCampamentos();
 						if(l.size() > 0)
-							for(CampBean campamento : l)
+							for(CampDTO campamento : l)
 								System.out.println(campamento.toString());
 						else
 							System.out.println("No registered Camps");
@@ -151,9 +151,9 @@ public class Programa {
 					}
 					//Listar monitores
 					else if(opcion2 == 3) {
-						ArrayList<MonitorBean> l = campamentos.getListaMonitores();
+						ArrayList<MonitorDTO> l = campamentos.getListaMonitores();
 						if(l.size() > 0)
-							for(MonitorBean monitor : l)
+							for(MonitorDTO monitor : l)
 								System.out.println(monitor.toString());
 						else
 							System.out.println("No registered Monitors");
@@ -255,7 +255,7 @@ public class Programa {
 					}
 					//Crear monitor
 					else if(opcion2 == 6) {
-						MonitorBean nuevo = new MonitorBean();
+						MonitorDTO nuevo = new MonitorDTO();
 						System.out.print("Monitor Firstname: ");
 						try {
 							nuevo.setNombre(teclado.readLine());
@@ -426,18 +426,18 @@ public class Programa {
 					
 					//Listar inscripciones parciales
 					if(opcion2 == 1) {
-						ArrayList<InscripcionParcial> lista = inscripciones.getListaInscripcionParcial();
+						ArrayList<RegistrationDTO> lista = inscripciones.getListaInscripcionParcial();
 						if(lista.size() > 0)
-							for (InscripcionParcial inscripcion : lista)
+							for (RegistrationDTO inscripcion : lista)
 								System.out.println(inscripcion.toString());
 						else
 							System.out.println("No registered Parcial Registrations");
 					}
 					//Listar inscripciones completas
 					else if(opcion2 == 2) {
-						ArrayList<InscripcionCompleta> lista = inscripciones.getListaInscripcionCompleta();
+						ArrayList<RegistrationDTO> lista = inscripciones.getListaInscripcionCompleta();
 						if(lista.size() > 0)
-							for (InscripcionCompleta inscripcion : lista)
+							for (RegistrationDTO inscripcion : lista)
 								System.out.println(inscripcion.toString());
 						else
 							System.out.println("No registered Complete Registrations");
