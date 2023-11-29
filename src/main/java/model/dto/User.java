@@ -1,18 +1,14 @@
-package view.beans.customer;
-
-import java.io.Serializable;
+package model.dto;
 
 /**
  * Class that means a customer in the web application
  * @author Francisco José Mellado Ortiz
  */
-public class CustomerBean implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
+public class User {
 	/**
-	 * Customer emailUser
+	 * Customer username
 	 */
-	private String emailUser_;
+	private String username_;
 	/**
 	 * Customer password
 	 */
@@ -21,37 +17,54 @@ public class CustomerBean implements Serializable {
 	 * Customer rol (Admin/Client/None)
 	 */
 	private Rol rol_;
-	
+	/**
+	* Name and surname of the user
+	**/
+	  private String name_;
+	  private String surname_;
+	  /**
+	   * Customer email
+	   */
+	  private String email_;
 	/**
 	 *	Initialize the customer
 	 */
-	public CustomerBean() {
-		emailUser_ = "";
+	public User() {
+		email_ = "";
+		username_ = "";
 		password_ = "";
 		rol_ = Rol.None;
+		name_="";
+		setSurname("");
 	}
 	/**
 	 *	Initialize the customer
 	 */
-	public CustomerBean(String login, String password) {
-		emailUser_ = login;
+	public User(String email, String password) {
+		email_=email;
+		username_ = "";
 		password_ = password;
 		rol_ = Rol.None;
+		name_="";
+		setSurname("");
 	}
 	/**
 	 *	Initialize the customer
 	 */
-	public CustomerBean(String login, String password, Rol rol) {
-		emailUser_ = login;
+	public User(String email, String password,String login, Rol rol, String name, String surname) {
+		email_=email;
+		username_ = login;
 		password_ = password;
 		rol_ = rol;
+		name_=name;
+		surname_=surname;
 	}
 	/**
-	 * Method that returns the customer emailUser
+	 * Method that returns the customer username
 	 * @return String
 	 */
-	public String getEmailUser() {
-		return emailUser_;
+	public String getUsername() {
+		return username_;
 	}
 	/**
 	 * Method that returns the customer password
@@ -80,11 +93,32 @@ public class CustomerBean implements Serializable {
 			return "None";
 	}
 	/**
-	 * Method that modify the customer emailUser
-	 * @param emailUser New emailUser
+	 * Method that returns the customer name
+	 * @return String 
 	 */
-	public void setEmailUser(String emailUser) {
-		emailUser_ = emailUser;
+	public String getName() {
+		return name_;
+	}
+	/**
+	 * Method that returns the customer name
+	 * @return String surname
+	 */
+	public String getSurname() {
+		return surname_;
+	}
+	/**
+	 * Method that returns the customer mail
+	 * @return String mail
+	 */
+	public String getEmail() {
+		return email_;
+	}
+	/**
+	 * Method that modify the customer username
+	 * @param username New username
+	 */
+	public void setUsername(String username) {
+		username_ = username;
 	}
 	/**
 	 * Method that modify the customer password
@@ -95,7 +129,7 @@ public class CustomerBean implements Serializable {
 	}
 	/**
 	 * Method that modify the customer rol
-	 * @param emailUser New Rol
+	 * @param username New Rol
 	 */
 	public void setRol(Rol rol) {
 		rol_ = rol;
@@ -121,4 +155,21 @@ public class CustomerBean implements Serializable {
 		else
 			return false;
 	}
+	/**
+	 * Method that modify the customer name
+	 * @param String New name
+	 */
+	public void setName(String name) {
+		this.name_ = name;
+	}
+	/**
+	 * Method that modify the customer surname
+	 * @param String New surname
+	 */
+	public void setSurname(String surname) {
+		this.surname_ = surname;
+	}
+	/**
+	 * @return the mail_
+	 */
 }

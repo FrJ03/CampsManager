@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import ="business.user.User,business.user.Rol" %>
+<%@ page import ="model.dto.*" %>
 <jsp:useBean  id="customerBean" scope="session" class="view.beans.customer.CustomerBean"></jsp:useBean>
 <%
 /* Posibles flujos:
@@ -14,7 +14,7 @@ String nextPage = "../../../index.jsp";
 String mensajeNextPage = "";
 //Caso 2
 if (customerBean == null || customerBean.getEmailUser().equals("")) {
-	String nameUser = request.getParameter("password");
+	String passwordUser = request.getParameter("password");
 	String emailUser = request.getParameter("email");
 	//Caso 2.a: Hay parámetros -> procede de la VISTA
 	if (emailUser != null) {
