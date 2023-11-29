@@ -4,11 +4,9 @@ import java.util.ArrayList;
 
 import model.dao.AsistenteDAO;
 import model.dao.CampamentoDAO;
-import model.dao.InscripcionCompletaDAO;
 import model.dao.InscripcionDAO;
-import model.dao.InscripcionParcialDAO;
-import view.beans.camp.*;
-import view.beans.registration.*;
+import controller.dto.camp.*;
+import controller.dto.registration.*;
 
 import java.time.Period;
 import java.time.LocalDate;
@@ -38,17 +36,17 @@ public class GestorInscripciones {
 	 * Método que devuelve la lista de InscripcionesParciales del gestor.
 	 * @return ArrayList<InscripcionParcial>.
 	 */
-	public ArrayList<InscripcionParcial> getListaInscripcionParcial() {
-		InscripcionParcialDAO db = InscripcionParcialDAO.getInstance();
-		return db.readAll();
+	public ArrayList<RegistrationDTO> getListaInscripcionParcial() {
+		InscripcionDAO db = InscripcionDAO.getInstance();
+		return db.readAllPartial();
 	}
 	/**
 	 * Método que devuelve la lista de campamentos del gestor.
 	 * @return ArrayList<InscripcionCompleta>.
 	 */
-	public ArrayList<InscripcionCompleta> getListaInscripcionCompleta() {
-			InscripcionCompletaDAO db = InscripcionCompletaDAO.getInstance();
-		return db.readAll();
+	public ArrayList<RegistrationDTO> getListaInscripcionCompleta() {
+			InscripcionDAO db = InscripcionDAO.getInstance();
+		return db.readAllComplete();
 	}
 	/**
 	 * Método que añade una inscripción a la lista de inscripciones parciales.
@@ -61,13 +59,13 @@ public class GestorInscripciones {
 		CampamentoDAO dbC = CampamentoDAO.getInstance();
 		AsistenteDAO dbA = AsistenteDAO.getInstance();
 		InscripcionDAO dbI = InscripcionDAO.getInstance();
-		CampBean campamento;
+		CampDTO campamento;
 		if((campamento = dbC.readAvailable(idC)) == null || dbA.read(idA) == null || dbI.read(idC, idA) != null)
 			return false;
 		//Calculo el precio
 		float precio = calcularPrecioCompleto(dbC.readActivitiesCamp(idC).size());
 		//Establezco la información a la inscripcion
-		InscripcionCompleta inscripcion = new InscripcionCompleta();
+		RegistrationDTO inscripcion = new RegistrationDTO();
 		inscripcion.setIdCampamento(idC);
 		inscripcion.setIdParticipante(idA);
 		inscripcion.setPrecio(precio);
@@ -79,13 +77,14 @@ public class GestorInscripciones {
         // Obtener el número de días de la diferencia
         int diferenciaDias = periodo.getDays();
         
-        InscripcionCompletaDAO db = InscripcionCompletaDAO.getInstance();
 		if(diferenciaDias >= 15 )
-			return db.createTemprano(inscripcion);
+			inscripcion.setTemporalidad("temprano");
 		else if(diferenciaDias >= 2)
-			return db.createTardio(inscripcion);
+			inscripcion.setTemporalidad("tardio");
 		else
 			return false;
+		
+		return dbI.create(inscripcion);
 	}
 	/**
 	 * Método que añade una inscripción a la lista de inscripciones parciales.
@@ -98,13 +97,13 @@ public class GestorInscripciones {
 		CampamentoDAO dbC = CampamentoDAO.getInstance();
 		AsistenteDAO dbA = AsistenteDAO.getInstance();
 		InscripcionDAO dbI = InscripcionDAO.getInstance();
-		CampBean campamento;
+		CampDTO campamento;
 		if((campamento = dbC.readAvailable(idC)) == null || dbA.read(idA) == null || dbI.read(idC, idA) != null)
 			return false;
 		//Calculo el precio
 		float precio = calcularPrecioParcial(dbC.readActivitiesCamp(idC).size());
 		//Establezco la información a la inscripcion
-		InscripcionParcial inscripcion = new InscripcionParcial();
+		RegistrationDTO inscripcion = new RegistrationDTO();
 		inscripcion.setIdCampamento(idC);
 		inscripcion.setIdParticipante(idA);
 		inscripcion.setPrecio(precio);
@@ -116,13 +115,14 @@ public class GestorInscripciones {
         // Obtener el número de días de la diferencia
         int diferenciaDias = periodo.getDays();
         
-        InscripcionParcialDAO db = InscripcionParcialDAO.getInstance();
-		if(diferenciaDias >= 15 )
-			return db.createTemprano(inscripcion);
+        if(diferenciaDias >= 15 )
+			inscripcion.setTemporalidad("temprano");
 		else if(diferenciaDias >= 2)
-			return db.createTardio(inscripcion);
+			inscripcion.setTemporalidad("tardio");
 		else
 			return false;
+		
+		return dbI.create(inscripcion);
 	}
 	/**
 	 * Método que calcula el precio de la inscripción y lo devuelve como un int. Si el resultado es -1,  no existe el campamento al que está inscrito
@@ -150,12 +150,12 @@ public class GestorInscripciones {
 	 */
 	public String obtenerCampamentosDisponibles(){
 		CampamentoDAO db = CampamentoDAO.getInstance();
-		ArrayList<CampBean> disponibles = db.readAllAvailable();
+		ArrayList<CampDTO> disponibles = db.readAllAvailable();
 		
 		String listaAux = "";
 		
 		if(disponibles.size() > 0) 		
-			for(CampBean cam : disponibles) 
+			for(CampDTO cam : disponibles) 
 				listaAux += cam.toString();
 		
 		return listaAux;

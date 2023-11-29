@@ -2,10 +2,11 @@ package model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import model.common.Connector;
-import view.beans.registration.*;
+import controller.dto.registration.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,7 +17,7 @@ import java.io.FileReader;
  * @author Manuel García Obrero
  */
 
-public class InscripcionDAO implements InterfaceDAO<Inscripcion>{ 
+public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{ 
 	/**
 	 * Variable privada Singleton.
 	 */
@@ -46,7 +47,7 @@ public class InscripcionDAO implements InterfaceDAO<Inscripcion>{
 	 * @return boolean
 	 */
 	@Override
-	public boolean create(Inscripcion object) {
+	public boolean create(RegistrationDTO object) {
 		BufferedReader reader = null;
 		int status = 0;
 		boolean res = false;
@@ -65,7 +66,8 @@ public class InscripcionDAO implements InterfaceDAO<Inscripcion>{
 			ps.setInt(2,object.getIdCampamento());
 			ps.setDate(3,java.sql.Date.valueOf(object.getFechaInscripcion()));
 			ps.setFloat(4,object.getPrecio());
-			ps.setString(5,object.getTipo());
+			ps.setString(5,object.getTipoName());
+			ps.setString(6, object.getTemporalidadName());
 			
 			status = ps.executeUpdate();	
 			if (status == 1) {
@@ -82,11 +84,11 @@ public class InscripcionDAO implements InterfaceDAO<Inscripcion>{
 	 * @param idCampamento y idParticipante que son los que se van a leer de la base de datos.
 	 * @return Incripcion
 	 */
-	public Inscripcion read(int idCampamento, int idParticipante) {
+	public RegistrationDTO read(int idCampamento, int idParticipante) {
 			
 			BufferedReader reader = null;
 			Connector con = new Connector();
-			Inscripcion object = null;
+			RegistrationDTO object = null;
 			
 			
 			try{
@@ -105,7 +107,7 @@ public class InscripcionDAO implements InterfaceDAO<Inscripcion>{
 				ResultSet rs = ps.executeQuery();
 				
 				if (rs.next()) {
-					object	= new InscripcionCompleta(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4), rs.getString(5), rs.getString(6));
+					object	= new RegistrationDTO(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4), rs.getString(5), rs.getString(6));
 	            } 
 	
 				con.deleteConnection(c);
@@ -119,11 +121,11 @@ public class InscripcionDAO implements InterfaceDAO<Inscripcion>{
 	 * @return IncripcionCompleta o InscripcionParcial, depende del tipo que sea la Inscripcion
 	 */
 	@Override
-	public Inscripcion read(Inscripcion object) {
+	public RegistrationDTO read(RegistrationDTO object) {
 		
 		BufferedReader reader = null;
 		Connector con = new Connector();
-		Inscripcion ins = null;
+		RegistrationDTO ins = null;
 		
 		try{
 			
@@ -141,15 +143,8 @@ public class InscripcionDAO implements InterfaceDAO<Inscripcion>{
 			ResultSet rs = ps.executeQuery();
 			
 			if (rs.next()) {
-				if(rs.getString(5)=="Completa") {
-					object	= new InscripcionCompleta(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4));
-					ins = object;
-				}
-				else {
-					object	= new InscripcionParcial(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4));
-					ins = object;
-				}
-                
+				object	= new RegistrationDTO(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4), rs.getString(5), rs.getString(6));
+				ins = object;
             } 
 			
 			con.deleteConnection(c);
@@ -164,7 +159,7 @@ public class InscripcionDAO implements InterfaceDAO<Inscripcion>{
 	 * @return boolean
 	 */
 	@Override
-	public boolean delete(Inscripcion object) {
+	public boolean delete(RegistrationDTO object) {
 		int rs =0;
 		boolean status = false;
 		BufferedReader reader = null;
@@ -193,5 +188,95 @@ public class InscripcionDAO implements InterfaceDAO<Inscripcion>{
 		
 		return status;
 
+	}
+	public ArrayList<RegistrationDTO>readAll(){
+
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		ArrayList<RegistrationDTO> list = new ArrayList<RegistrationDTO>();
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readAllInscripcion");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+	
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				
+                list.add( new RegistrationDTO(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4), rs.getString(5), rs.getString(6)));
+            } 
+			
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return list;
+	}
+	public ArrayList<RegistrationDTO>readAllComplete(){
+
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		ArrayList<RegistrationDTO> list = new ArrayList<RegistrationDTO>();
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readAllInscripcionCompleta");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+	
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				
+                list.add( new RegistrationDTO(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4), rs.getString(5), rs.getString(6)));
+            } 
+			
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return list;
+	}
+	public ArrayList<RegistrationDTO>readAllPartial(){
+
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		ArrayList<RegistrationDTO> list = new ArrayList<RegistrationDTO>();
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readAllInscripcionParcial");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+	
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				
+                list.add( new RegistrationDTO(rs.getInt(1), rs.getInt(2), rs.getDate(3).toLocalDate(), rs.getFloat(4), rs.getString(5), rs.getString(6)));
+            } 
+			
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return list;
 	}
 }

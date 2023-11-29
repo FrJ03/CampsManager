@@ -68,6 +68,21 @@ public class RegistrationDTO {
 		this.temporalidad_=temporalidad;
 	}
 	/**
+	 * Construye un objeto de la clase inscripción con los datos dados pero con tipo.
+	 * @param idParticipante Identificador del participante.
+	 * @param idCampamento Identificador del campamento.
+	 * @param fechaInscripcion Fecha de la realización de la inscripción.
+	 * @param precio Precio de la inscripción.
+	 */
+	public RegistrationDTO(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio, String tipo, String temporalidad) {
+		this.idParticipante_ = idParticipante;
+		this.idCampamento_ = idCampamento;
+		this.fechaInscripcion_ = fechaInscripcion;
+		this.precio_ = precio;
+		this.setTipo(tipo);
+		this.setTemporalidad(temporalidad);
+	}
+	/**
 	 * Método que devuelve el identificador del participante.
 	 */
 	public int getIdParticipante() {
