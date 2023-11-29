@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import model.common.Connector;
 import controller.dto.activity.*;
+import controller.dto.monitor.MonitorDTO;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -221,5 +222,65 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 		
 		return list;
 	}
+
+	public ArrayList<MonitorDTO> readMonitorsActivity(int idActivity){
+		ArrayList<MonitorDTO> monitors = new ArrayList<MonitorDTO>();
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readMonitorActividad");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+	
+			ps.setInt(1, idActivity);
+            
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				monitors.add( new MonitorDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4)));
+			}
+			
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		return monitors;
+	}
+	public boolean addActivity(int idActivity, int idMonitor) {
+		BufferedReader reader = null;
+		int status = 0;
+		boolean res = false;
+		Connector con = new Connector();
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String create = p.getProperty("createActividadMonitor");
+			
+			System.out.println(create);
+			Connection c=con.getConnection();
+			PreparedStatement ps=c.prepareStatement(create);
+			
+			ps.setInt(1, idActivity);
+			ps.setInt(2, idMonitor);
+			
+			status = ps.executeUpdate();	
+			if (status == 1) {
+				res = true;
+			}
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return res;
+	}
+	
 }
 

@@ -4,14 +4,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import model.dao.ActividadDAO;
-import model.dao.ActividadMonitorDAO;
-import model.dao.CampamentoActividadDAO;
 import model.dao.CampamentoDAO;
 import model.dao.MonitorDAO;
-import view.beans.*;
-import view.beans.activity.*;
-import view.beans.camp.*;
-import view.beans.monitor.*;
+import controller.dto.activity.*;
+import controller.dto.camp.*;
+import controller.dto.monitor.*;
 
 
 /**
@@ -41,7 +38,7 @@ public class GestorCampamentos {
 		 * MÃ©todo que devuelve la lista de campamentos del gestor.
 		 * @return ArrayList<Campamento>.
 		 */
-		public ArrayList<CampBean> getListaCampamentos() {
+		public ArrayList<CampDTO> getListaCampamentos() {
 			CampamentoDAO db = CampamentoDAO.getInstance();
 			return db.readAll();
 		}
@@ -49,7 +46,7 @@ public class GestorCampamentos {
 		 * MÃ©todo que devuelve la lista de monitores del gestor.
 		 * @return ArrayList<Monitor>.
 		 */
-		public ArrayList<MonitorBean> getListaMonitores() {
+		public ArrayList<MonitorDTO> getListaMonitores() {
 			MonitorDAO db = MonitorDAO.getInstance();
 			return db.readAll();
 		}
@@ -75,7 +72,7 @@ public class GestorCampamentos {
 		 * @param idA Identificador de la actividad
 		 * @return
 		 */
-		public ArrayList<MonitorBean> getListaMonitores(int idA) {
+		public ArrayList<MonitorDTO> getListaMonitores(int idA) {
 			ActividadDAO db = ActividadDAO.getInstance();
 			return db.readMonitorsActivity(idA);
 		}
@@ -84,7 +81,7 @@ public class GestorCampamentos {
 		 * @param monitor Monitor que se va a aÃ±adir a la lista de monitores.
 		 * @return void.
 		 */
-		public Boolean crearMonitor(MonitorBean monitor) {	
+		public Boolean crearMonitor(MonitorDTO monitor) {	
 			MonitorDAO db = MonitorDAO.getInstance();
 			return db.create(monitor);
 		}
@@ -103,10 +100,10 @@ public class GestorCampamentos {
 		 */
 		public Boolean crearCampamento(LocalDate start, LocalDate end, Nivel level, int maxP, int idM) {
 			MonitorDAO dbM = MonitorDAO.getInstance();
-			MonitorBean m = dbM.read(idM);
+			MonitorDTO m = dbM.read(idM);
 			if(m == null)
 				return false;
-			CampBean campamento = new CampBean(-1, start, end, level, maxP);
+			CampDTO campamento = new CampDTO(-1, start, end, level, maxP);
 			campamento.setResponsable(m);
 			CampamentoDAO db = CampamentoDAO.getInstance();
 			return db.create(campamento);
@@ -118,14 +115,13 @@ public class GestorCampamentos {
 		 * @return Void.
 		 */
 		public Boolean asociarMonitorActividad(int idA, int idM) {
-			ActividadMonitorDAO dbAM = ActividadMonitorDAO.getInstance();
 			ActividadDAO dbA = ActividadDAO.getInstance();
 			MonitorDAO dbM = MonitorDAO.getInstance();
-			ActividadMonitorDTO am = new ActividadMonitorDTO(idA, idM);
+			
 			if(dbA.read(idA) == null || dbM.read(idM) == null)
 				return false;
 			else
-				return dbAM.create(am);
+				return dbA.addActivity(idA, idM);
 		}
 		/**
 		 * Metodo para asociar una actividad a un campamento.
@@ -134,9 +130,12 @@ public class GestorCampamentos {
 		 * @return Boolean.
 		 */
 		public boolean asociarActividadCampamento(int idCampamento, int idActividad) {
-			CampamentoActividadDAO db = CampamentoActividadDAO.getInstance();
-			CampamentoActividadDTO ca = new CampamentoActividadDTO(idActividad, idCampamento);
-			return db.create(ca);
+			CampamentoDAO dbC = CampamentoDAO.getInstance();
+			ActividadDAO dbA = ActividadDAO.getInstance();
+			if(dbA.read(idActividad) == null || dbC.read(idCampamento) == null)
+				return false;
+			else
+				return dbC.addActivity(idCampamento, idActividad);
 		}
 		/**
 		 * Metodo para asociar un monitor a un campamento.
@@ -161,7 +160,7 @@ public class GestorCampamentos {
 		public boolean asociarMonitorEspecial(int idCampamento, int idMonitor) {
 			CampamentoDAO dbC = CampamentoDAO.getInstance();
 			MonitorDAO dbM = MonitorDAO.getInstance();
-			MonitorBean monitor;
+			MonitorDTO monitor;
 			if(dbC.read(idCampamento) == null || (monitor = dbM.read(idMonitor)) == null || !monitor.getEspecial())
 				return false;
 			else

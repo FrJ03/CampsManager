@@ -474,4 +474,62 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		return status;
 
 	}
+	public ArrayList<ActivityDTO> readActivitiesCamp(int idCamp){
+		ArrayList<ActivityDTO> activities = new ArrayList<ActivityDTO>();
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readActividadCampamento");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+	
+			ps.setInt(1, idCamp);
+            
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				activities.add( new ActivityDTO(rs.getInt(1), rs.getString(2), Nivel.valueOf(rs.getString(3)), rs.getInt(5), rs.getInt(6), Turno.valueOf(rs.getString(4))));
+			}
+			
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		return activities;
+	}
+	public boolean addActivity(int idCamp, int idActivity) {
+		BufferedReader reader = null;
+		int status = 0;
+		boolean res = false;
+		Connector con = new Connector();
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String create = p.getProperty("createCampamentoActividad");
+			
+			System.out.println(create);
+			Connection c=con.getConnection();
+			PreparedStatement ps=c.prepareStatement(create);
+			
+			ps.setInt(1,idActivity);
+			ps.setInt(2,idCamp);
+			
+			status = ps.executeUpdate();	
+			if (status == 1) {
+				res = true;
+			}
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return res;
+	}
 }
