@@ -2,8 +2,8 @@ package controller.dto.camp;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import view.beans.activity.Nivel;
-import view.beans.monitor.*;
+import controller.dto.activity.Nivel;
+import controller.dto.monitor.MonitorDTO;
 
 /**
  * Clase que representa  la organización de un conjunto de actividades durante un periodo de tiempo limitado
@@ -21,11 +21,11 @@ import view.beans.monitor.*;
 	/**
 	  * Representa el monitor responsable del campamento
 	  * */
-	private MonitorBean responsable_;
+	private MonitorDTO responsable_;
 	/**
 	  * Representa eñ monitor especial del campamento
 	  * */
-	private MonitorBean responsableEspecial_;
+	private MonitorDTO responsableEspecial_;
 	/**
 	  * Representa la fecha del inicio del campamento
 	  * */
@@ -145,7 +145,7 @@ import view.beans.monitor.*;
 	  * Observador de la varible responsable_
 	  * @return responsable_.
 	  * */
-	public MonitorBean getResponsable() {
+	public MonitorDTO getResponsable() {
 		return responsable_;
 	}
 	/**
@@ -153,14 +153,14 @@ import view.beans.monitor.*;
 	  * @param responsable.
 	  * @return void.
 	  * */
-	public void setResponsable(MonitorBean responsable) {
+	public void setResponsable(MonitorDTO responsable) {
 		this.responsable_ = responsable;
 	}
 	/**
 	  * Observador de la varible responsableEspecial
 	  * @return responsableEspecial.
 	  * */
-	public MonitorBean getResponsableEspecial() {
+	public MonitorDTO getResponsableEspecial() {
 		return responsableEspecial_;
 	}
 	/**
@@ -168,7 +168,7 @@ import view.beans.monitor.*;
 	  * @param responsableEspecial_.
 	  * @return void.
 	  * */
-	public void setResponsableEspecial(MonitorBean responsableEspecial_) {
+	public void setResponsableEspecial(MonitorDTO responsableEspecial_) {
 		this.responsableEspecial_ = responsableEspecial_;
 	}
 	/**
