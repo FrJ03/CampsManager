@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import ="model.dto.*" %>
+<%@ page import ="controller.dto.*" %>
 <jsp:useBean  id="customerBean" scope="session" class="view.beans.customer.CustomerBean"></jsp:useBean>
 <%
 /* Posibles flujos:
@@ -21,12 +21,12 @@ if (customerBean == null || customerBean.getEmailUser().equals("")) {
 		//Se accede a bases de datos para obtener el usuario
 	
 		mensajeNextPage="Furula";
-		User user = new User("pepito@gmail.com", "pepito", "pepito", Rol.Client, "Pepe", "Flores");
+		CustomerDTO user = new CustomerDTO("pepito@gmail.com", "pepito", "pepito", Rol.Client, "Pepe", "Flores");
 		
 		//Se realizan todas las comprobaciones necesarias del dominio
 		//Aquí sólo comprobamos que exista el usuario
 		if (user != null && user.getEmail().equalsIgnoreCase("pepito@gmail.com")) {
-			// Usuario válido		
+	// Usuario válido
 %>
 <jsp:setProperty property="emailUser" value="<%=emailUser%>" name="customerBean"/>
 <%

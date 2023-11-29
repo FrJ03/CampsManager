@@ -1,4 +1,4 @@
-package view.beans.activity;
+package controller.dto.activity;
 
 import java.io.Serializable;
 
@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Clase que representa una actividad que se encuentra en un campamento.
  * @author Enrique de los Reyes Montilla
  */
-public class ActivityBean implements Serializable, Comparable<ActivityBean>{
+public class ActivityDTO implements Serializable, Comparable<ActivityDTO>{
 	/** Metodo para indicar la versión de la clase a serializar
 	 */
 	private static final long serialVersionUID = 1L;
@@ -38,12 +38,12 @@ public class ActivityBean implements Serializable, Comparable<ActivityBean>{
 	  * Construye un objeto vacio.
 	  * @return void
 	  * */
-	public ActivityBean() {};
+	public ActivityDTO() {};
 	/**
 	  * COnstruye un objeto con todos sus datos, a excepción de la lista de monitores que se inicializa vacía.
 	  * @return void
 	  * */
-	public ActivityBean(int id, String name, Nivel nivel, int participantesMax, 
+	public ActivityDTO(int id, String name, Nivel nivel, int participantesMax, 
 			int monitoresMax, Turno turno) {
 		this.id_ = id;
 		this.name_=name;
@@ -151,7 +151,7 @@ public class ActivityBean implements Serializable, Comparable<ActivityBean>{
 		return aux;
 	}
 	@Override
-    public int compareTo(ActivityBean a) {
+    public int compareTo(ActivityDTO a) {
 		if(a.getId() > this.getId())
 			return -1;
 		else if(a.getId() > this.getId()) 

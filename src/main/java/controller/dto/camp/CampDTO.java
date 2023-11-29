@@ -1,4 +1,4 @@
-package view.beans.camp;
+package controller.dto.camp;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -9,7 +9,7 @@ import view.beans.monitor.*;
  * Clase que representa  la organización de un conjunto de actividades durante un periodo de tiempo limitado
  * @author Manuel García Obrero
  */
- public class CampBean implements Comparable<CampBean>, Serializable{
+ public class CampDTO implements Comparable<CampDTO>, Serializable{
      
 	/**Método que indica la versión de la clase que se va a serializar.
 	 */
@@ -47,7 +47,7 @@ import view.beans.monitor.*;
 	/**
 	  * Construye un objeto vacio
 	  * */
-	public CampBean() {};
+	public CampDTO() {};
 	/**
 	  * Construye un objeto con todos sus datos, a excepción de todas las listas que se inicializan vacías
 	  * @param id Representa el identificador del campamento
@@ -56,7 +56,7 @@ import view.beans.monitor.*;
 	  * @param nivel Representa el nivel educativo del campamento
 	  * @param asistentesMax Representa el numero máximo de asistentes
 	  * */
-	public CampBean(int id, LocalDate iniciocampamento, LocalDate fincampamento, Nivel nivel, int asistentesMax) {
+	public CampDTO(int id, LocalDate iniciocampamento, LocalDate fincampamento, Nivel nivel, int asistentesMax) {
 
 		this.id_=id;
 		this.iniciocampamento_=iniciocampamento;
@@ -195,7 +195,7 @@ import view.beans.monitor.*;
 		return aux;
 	}
 	@Override
-    public int compareTo(CampBean c) {
+    public int compareTo(CampDTO c) {
 		if(c.getId() > this.getId())
 			return -1;
 		else if(c.getId() > this.getId()) 

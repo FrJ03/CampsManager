@@ -34,16 +34,16 @@ public class GestorAsistentes {
 	 * Método que devuelve la lista de asistentes del gestor.
 	 * @return ArrayList<Asistente>.
 	 */
-	public ArrayList<AssistantBean> getListaAsistente() {
+	public ArrayList<AssistantDTO> getListaAsistente() {
 		AsistenteDAO db = AsistenteDAO.getInstance();
 		return db.readAll();
 	}
 	/**
 	 * Metodo que añade a la lista de asistente un nuevo asistente pasado como argumento, comprobando si no estaba registrado. Si estaba registrado devuelve false y si no lo estaba true
-	 * @param AssistantBean asistente que se va a añadir a la lista de asistente.
+	 * @param AssistantDTO asistente que se va a añadir a la lista de asistente.
 	 * @return boolean(false error, true no error).
 	 */
-	public boolean darAltaAsistente(AssistantBean asistente) {	
+	public boolean darAltaAsistente(AssistantDTO asistente) {	
 		AsistenteDAO db = AsistenteDAO.getInstance();
 		return db.create(asistente);
 	}
@@ -58,7 +58,7 @@ public class GestorAsistentes {
 	 */
 	public boolean modificarAsistente(int id, String nombre, String apellidos, LocalDate fechaNacimiento, boolean especial){
 		AsistenteDAO db = AsistenteDAO.getInstance();
-		return db.update(new AssistantBean(id, nombre, apellidos, fechaNacimiento, especial));
+		return db.update(new AssistantDTO(id, nombre, apellidos, fechaNacimiento, especial));
 	}
 	/**
 	 * Metodo que lista a los asistentes actualmente registrados.
@@ -66,11 +66,11 @@ public class GestorAsistentes {
 	 */
 	public String listaAsistencia(){
 		AsistenteDAO db = AsistenteDAO.getInstance();
-		ArrayList<AssistantBean> listaAsistente = db.readAll();	
+		ArrayList<AssistantDTO> listaAsistente = db.readAll();	
 		String infoAsistentes = "";
 		
 		if(listaAsistente.size() > 0) {
-			for(AssistantBean asis : listaAsistente ) {
+			for(AssistantDTO asis : listaAsistente ) {
 				infoAsistentes = asis.toString();
 			}
 		}

@@ -1,4 +1,4 @@
-package view.beans.person;
+package controller.dto.person;
 
 import java.io.Serializable;
 

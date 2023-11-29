@@ -57,7 +57,7 @@ public class GestorCampamentos {
 		 * MÃ©todo que devuelve la lista de actividades del gestor.
 		 * @return ArrayList<Actividad>.
 		 */
-		public ArrayList<ActivityBean> getListaActividades() {
+		public ArrayList<ActivityDTO> getListaActividades() {
 			ActividadDAO db = ActividadDAO.getInstance();
 			return db.readAll();
 		}
@@ -66,7 +66,7 @@ public class GestorCampamentos {
 		 * @param idC Identificador del campamento
 		 * @return ArrayList<Actividad>.
 		 */
-		public ArrayList<ActivityBean> getListaActividades(int idC) {
+		public ArrayList<ActivityDTO> getListaActividades(int idC) {
 			CampamentoDAO db = CampamentoDAO.getInstance();
 			return db.readActivitiesCamp(idC);
 		}
@@ -93,7 +93,7 @@ public class GestorCampamentos {
 		 * @param actividad Actividad que se va a aÃ±adir a la lista de actividades.
 		 * @return void.
 		 */
-		public Boolean crearActividad(ActivityBean actividad) {
+		public Boolean crearActividad(ActivityDTO actividad) {
 			ActividadDAO db = ActividadDAO.getInstance();
 			return db.create(actividad);
 		}
@@ -113,8 +113,8 @@ public class GestorCampamentos {
 		}
 		/**
 		 * Metodo para asociar una actividad a un monitor.
-		 * @param MonitorBean Monitor que se va a asociar a una actividad.
-		 * @param ActivityBean Actividad a la cual se va a asociar un monitor.
+		 * @param MonitorDTO Monitor que se va a asociar a una actividad.
+		 * @param ActivityDTO Actividad a la cual se va a asociar un monitor.
 		 * @return Void.
 		 */
 		public Boolean asociarMonitorActividad(int idA, int idM) {

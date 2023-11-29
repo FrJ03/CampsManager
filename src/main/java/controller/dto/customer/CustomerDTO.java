@@ -1,10 +1,10 @@
-package model.dto;
+package controller.dto.customer;
 
 /**
  * Class that means a customer in the web application
  * @author Francisco José Mellado Ortiz
  */
-public class User {
+public class CustomerDTO {
 	/**
 	 * Customer username
 	 */
@@ -29,7 +29,7 @@ public class User {
 	/**
 	 *	Initialize the customer
 	 */
-	public User() {
+	public CustomerDTO() {
 		email_ = "";
 		username_ = "";
 		password_ = "";
@@ -40,7 +40,7 @@ public class User {
 	/**
 	 *	Initialize the customer
 	 */
-	public User(String email, String password) {
+	public CustomerDTO(String email, String password) {
 		email_=email;
 		username_ = "";
 		password_ = password;
@@ -51,7 +51,7 @@ public class User {
 	/**
 	 *	Initialize the customer
 	 */
-	public User(String email, String password,String login, Rol rol, String name, String surname) {
+	public CustomerDTO(String email, String password,String login, Rol rol, String name, String surname) {
 		email_=email;
 		username_ = login;
 		password_ = password;

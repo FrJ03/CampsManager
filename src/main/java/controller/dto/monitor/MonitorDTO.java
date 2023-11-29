@@ -1,4 +1,4 @@
-package view.beans.monitor;
+package controller.dto.monitor;
 
 import view.beans.person.*;
 import java.io.Serializable;
@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**Esta  clase  representa  a  una  persona  que  se  encarga  de  dirigir  las  actividades  que  suceden  en  el  campamento
  * @author Francisco José Mellado Ortiz
  */
-public class MonitorBean extends Person implements Serializable, Comparable<MonitorBean>{
+public class MonitorDTO extends Person implements Serializable, Comparable<MonitorDTO>{
 	
 /**Representa si el educador esta cualificado para monitorizar actividades donde participen asistentes con necesidades especiales
  */
@@ -18,7 +18,7 @@ private static final long serialVersionUID = 1L;
 /**
  * Construye un objeto de la clase monitor vacío.
  */
-public MonitorBean() {}
+public MonitorDTO() {}
 /**
  * Construye un objeto de la clase monitor con la información facilitada.
  * @param id Identificador del monitor.
@@ -26,7 +26,7 @@ public MonitorBean() {}
  * @param apellidos Apellidos del monitor
  * @param especial Representa si el monitor puede realizar actividades para asistentes con necesidades especiales (true) o no (false)
  */
-public MonitorBean(int id, String nombre, String apellidos, boolean especial){
+public MonitorDTO(int id, String nombre, String apellidos, boolean especial){
 	super(id, nombre, apellidos);
   this.especial_=especial;
 }
@@ -64,7 +64,7 @@ public String toString() {
 	 return ret;
 }
 @Override
-public int compareTo(MonitorBean m) {
+public int compareTo(MonitorDTO m) {
 	if(m.getId() > this.getId())
 		return -1;
 	else if(m.getId() > this.getId()) 

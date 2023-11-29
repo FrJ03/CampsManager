@@ -593,4 +593,19 @@ public class CampamentoDAO implements InterfaceDAO<Campamento>{
 		return status;
 
 	}
+	@Override
+	public boolean create(CampBean object) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public CampBean read(CampBean object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public boolean delete(CampBean object) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

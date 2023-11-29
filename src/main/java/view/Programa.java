@@ -42,16 +42,16 @@ public class Programa {
 					opcion2 = menuGestorAsistentes();
 					//Listar asistentes
 					if(opcion2 == 1) {
-						ArrayList<AssistantBean> listaAsistentes = asistentes.getListaAsistente();
+						ArrayList<AssistantDTO> listaAsistentes = asistentes.getListaAsistente();
 						if(listaAsistentes.size() > 0)
-							for(AssistantBean asistente : listaAsistentes)
+							for(AssistantDTO asistente : listaAsistentes)
 								System.out.println(asistente.toString());
 						else
 							System.out.println("No registered assistants");
 					}
 					//Dar de alta un asistente
 					else if(opcion2 == 2) {			
-						AssistantBean asistente = new AssistantBean();
+						AssistantDTO asistente = new AssistantDTO();
 						
 						System.out.print("Assistant firstname: ");
 						try {
@@ -142,9 +142,9 @@ public class Programa {
 					}
 					//Listar actividades
 					else if(opcion2 == 2) {
-						ArrayList<ActivityBean> l = campamentos.getListaActividades();
+						ArrayList<ActivityDTO> l = campamentos.getListaActividades();
 						if(l.size() > 0)
-							for(ActivityBean actividad : l)
+							for(ActivityDTO actividad : l)
 								System.out.println(actividad.toString());
 						else
 							System.out.println("No registered Activities");
@@ -248,7 +248,7 @@ public class Programa {
 						aux = null;
 						Turno turno = getTurno();
 						
-						if(campamentos.crearActividad(new ActivityBean(-1, nombre, nivel, maxP, maxM, turno)))
+						if(campamentos.crearActividad(new ActivityDTO(-1, nombre, nivel, maxP, maxM, turno)))
 							System.out.println("Succesfull.");
 						else
 							System.out.println("Error creating the activity.");

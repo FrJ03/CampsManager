@@ -1,4 +1,4 @@
-package view.beans.assistant;
+package controller.dto.assistant;
 
 import java.time.LocalDate;
 import java.io.Serializable;
@@ -8,7 +8,7 @@ import view.beans.person.Person;
  * Clase que representa a un asistente al campamento
  * @author Francisco José Mellado Ortiz
  */
- public class AssistantBean extends Person implements Serializable, Comparable<AssistantBean>{
+ public class AssistantDTO extends Person implements Serializable, Comparable<AssistantDTO>{
 	 /**
 	  * Representa si el asistente necesita atención especial
 	  * */
@@ -20,7 +20,7 @@ import view.beans.person.Person;
 
      /**
       * Construye un objeto vacio*/
-     public AssistantBean(){
+     public AssistantDTO(){
 
      }
      /**Método que indica la versión de la clase que se va a serializar.
@@ -34,7 +34,7 @@ import view.beans.person.Person;
       * @param fechaNacimiento Representa la fecha de nacimiento del asistente.
       * @param especial Indica si en asistente pertenece a un grupo especial (true) o no (false).
       * */
-     public AssistantBean(int id, String nombre, String apellidos, LocalDate fechaNacimiento,boolean especial){
+     public AssistantDTO(int id, String nombre, String apellidos, LocalDate fechaNacimiento,boolean especial){
     	 super(id, nombre, apellidos);
         this.fechaNacimiento_ = fechaNacimiento;
         this.especial_ = especial;
@@ -88,7 +88,7 @@ import view.beans.person.Person;
     	 return ret;
      }
      @Override
-     public int compareTo(AssistantBean a) {
+     public int compareTo(AssistantDTO a) {
 		if(a.getId() > this.getId())
 			return -1;
 		else if(a.getId() > this.getId()) 
