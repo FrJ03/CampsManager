@@ -1,6 +1,6 @@
 package controller.dto.monitor;
 
-import view.beans.person.*;
+import controller.dto.person.Person;
 import java.io.Serializable;
 
 /**Esta  clase  representa  a  una  persona  que  se  encarga  de  dirigir  las  actividades  que  suceden  en  el  campamento
