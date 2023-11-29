@@ -36,7 +36,7 @@ public class RegistrationDTO {
 	/**
 	 * Construye un objeto de la clase inscripción sin información.
 	 */
-	public Inscripcion(){}
+	public RegistrationDTO(){}
 	/**
 	 * Construye un objeto de la clase inscripción con los datos dados.
 	 * @param idParticipante Identificador del participante.
@@ -44,7 +44,7 @@ public class RegistrationDTO {
 	 * @param fechaInscripcion Fecha de la realización de la inscripción.
 	 * @param precio Precio de la inscripción.
 	 */
-	public Inscripcion(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio) {
+	public RegistrationDTO(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio) {
 		this.idParticipante_ = idParticipante;
 		this.idCampamento_ = idCampamento;
 		this.fechaInscripcion_ = fechaInscripcion;
@@ -59,7 +59,7 @@ public class RegistrationDTO {
 	 * @param fechaInscripcion Fecha de la realización de la inscripción.
 	 * @param precio Precio de la inscripción.
 	 */
-	public Inscripcion(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio, Tipo tipo, Temporalidad temporalidad) {
+	public RegistrationDTO(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio, Tipo tipo, Temporalidad temporalidad) {
 		this.idParticipante_ = idParticipante;
 		this.idCampamento_ = idCampamento;
 		this.fechaInscripcion_ = fechaInscripcion;
@@ -198,21 +198,40 @@ public class RegistrationDTO {
 	 * @param fechaInicio Fecha de inicio del campamento.
 	 * @throws Exception Error: " + fechaInicio +" es mayor que " + fechaInscripcion + "."
 	 */
-	public RegistroTemprano crearRegistroTemprano(LocalDate fechaInicio) {
+	/*public RegistroTemprano crearRegistroTemprano(LocalDate fechaInicio) {
 		
-	}
+	}*/
 	/**
 	 * Método para la creación de un registro en el campamento de forma tardía. Será definido por sus descendientes.
 	 * @param fechaInicio Fecha de inicio del campamento.
 	 * @throws Exception Error: " + fechaInicio +" es menor que " + fechaInscripcion + ".".
 	 */
-	public RegistroTardio crearRegistroTardio(LocalDate fechaInicio) {
+	/*public boolean crearRegistroTardio(LocalDate fechaInicio) {
+		LocalDate fechaInscripcion = LocalDate.now();
+		//RegistroTemprano r = new RegistroTemprano();
 		
-	}
+		Period periodo = fechaInscripcion.until(fechaInicio);
+		if(periodo.getDays() >= 15)
+			//r.registro(fechaInscripcion, fechaInicio);
+			return true;
+		else
+			//throw new Exception("Error: Faltan menos de 15 dias para el inicio del campamento.");
+			return false;
+	}*/
 	/**
 	 * Método que devuelve la información de la inscripción en una cadena. Será definido por sus descendientes.
 	 */
 	public String toString() {
+		String aux = "";
+		if(tipo_ == Tipo.Completa)
+			aux = "Full Registration:\n\tAssistant: ";
+		else if(tipo_ == Tipo.Parcial)
+			aux = "Partial Registration:\n\tAssistant: ";
+		else
+			aux = "Registration:\n\tAssistant: ";
 		
+		aux += this.getIdParticipante() + "\n\tCamp: " + this.getIdCampamento() + "\n\tRegistration Date: " + this.getFechaInscripcion().toString() + "\n\tPrice: " + this.getPrecio() + "\n";
+		
+		return aux;
 	}
 }
