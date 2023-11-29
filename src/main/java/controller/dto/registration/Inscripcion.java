@@ -1,4 +1,4 @@
-package view.beans.registration;
+package controller.dto.registration;
 
 import java.time.LocalDate;
 
@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * @author Francisco José Mellado Ortiz
  * @author Manuel Garcia Obrero
  */
-public abstract class Inscripcion {
+public class RegistrationDTO {
 	/**
 	 * Identificador del participante que se desea inscribir.
 	 */
@@ -27,11 +27,11 @@ public abstract class Inscripcion {
 	/**
 	 * Identificador de que tipo de Inscripcion(Completa o Parcial).
 	 */
-	private String tipo_;
+	private Tipo tipo_;
 	/**
 	 * Identificador de que temporalidad de Inscripcion.
 	 */
-	private String temporalidad_;
+	private Temporalidad temporalidad_;
 	
 	/**
 	 * Construye un objeto de la clase inscripción sin información.
@@ -49,8 +49,8 @@ public abstract class Inscripcion {
 		this.idCampamento_ = idCampamento;
 		this.fechaInscripcion_ = fechaInscripcion;
 		this.precio_ = precio;
-		this.tipo_= "";
-		this.temporalidad_="";
+		this.tipo_= Tipo.None;
+		this.temporalidad_= Temporalidad.None;
 	}
 	/**
 	 * Construye un objeto de la clase inscripción con los datos dados pero con tipo.
@@ -59,7 +59,7 @@ public abstract class Inscripcion {
 	 * @param fechaInscripcion Fecha de la realización de la inscripción.
 	 * @param precio Precio de la inscripción.
 	 */
-	public Inscripcion(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio, String tipo, String temporalidad) {
+	public Inscripcion(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio, Tipo tipo, Temporalidad temporalidad) {
 		this.idParticipante_ = idParticipante;
 		this.idCampamento_ = idCampamento;
 		this.fechaInscripcion_ = fechaInscripcion;
@@ -94,14 +94,28 @@ public abstract class Inscripcion {
 	/**
 	 * Método que devuelve el tipo de la inscripción.
 	 */
-	public String getTipo() {
+	public Tipo getTipo() {
 		return this.tipo_;
+	}
+	/**
+	 * Method that returns the registration type
+	 * @return
+	 */
+	public String getTipoName() {
+		return this.tipo_.toString();
 	}
 	/**
 	 * Método que devuelve la temporalidad de la inscripción.
 	 */
-	public String getTemporalidad() {
+	public Temporalidad getTemporalidad() {
 		return this.temporalidad_;
+	}
+	/**
+	 * Method that returns the registration timing
+	 * @return
+	 */
+	public String getTemporalidadName() {
+		return this.temporalidad_.toString();
 	}
 	/**
 	 * Método para la modificación del identificador del participante.
@@ -135,30 +149,70 @@ public abstract class Inscripcion {
 	 * Método para la modificación de tipo.
 	 * @param tipo Tipo de la actividad.
 	 */
-	public void setTipo(String tipo) {
+	public void setTipo(Tipo tipo) {
 		this.tipo_ = tipo;
+	}
+	/**
+	 * Merhod that modify the registration type
+	 * @param tipo New registration type
+	 * @return
+	 */
+	public boolean setTipo(String tipo) {
+		if(tipo.equalsIgnoreCase("completa")) {
+			tipo_ = Tipo.Completa;
+			return true;
+		}
+		else if(tipo.contentEquals("parcial")) {
+			tipo_ = Tipo.Parcial;
+			return true;
+		}
+		else
+			return false;
 	}
 	/**
 	 * Método para la modificación de temporalidad.
 	 * @param temporalidad Temporalidad de la actividad.
 	 */
-	public void setTemporalidad(String temporalidad) {
+	public void setTemporalidad(Temporalidad temporalidad) {
 		this.temporalidad_ = temporalidad;
+	}
+	/**
+	 * Merhod that modify the registration type
+	 * @param tipo New registration type
+	 * @return
+	 */
+	public boolean setTemporalidad(String temporalidad) {
+		if(temporalidad.equalsIgnoreCase("temprano")) {
+			temporalidad_ = Temporalidad.Temprano;
+			return true;
+		}
+		else if(temporalidad.contentEquals("tardio")) {
+			temporalidad_ = Temporalidad.Tardio;
+			return true;
+		}
+		else
+			return false;
 	}
 	/**
 	 * Método para la creación de un registro en el campamento de forma temprana. Será definido por sus descendientes.
 	 * @param fechaInicio Fecha de inicio del campamento.
 	 * @throws Exception Error: " + fechaInicio +" es mayor que " + fechaInscripcion + "."
 	 */
-	public abstract RegistroTemprano crearRegistroTemprano(LocalDate fechaInicio) throws Exception;
+	public RegistroTemprano crearRegistroTemprano(LocalDate fechaInicio) {
+		
+	}
 	/**
 	 * Método para la creación de un registro en el campamento de forma tardía. Será definido por sus descendientes.
 	 * @param fechaInicio Fecha de inicio del campamento.
 	 * @throws Exception Error: " + fechaInicio +" es menor que " + fechaInscripcion + ".".
 	 */
-	public abstract RegistroTardio crearRegistroTardio(LocalDate fechaInicio)throws Exception;
+	public RegistroTardio crearRegistroTardio(LocalDate fechaInicio) {
+		
+	}
 	/**
 	 * Método que devuelve la información de la inscripción en una cadena. Será definido por sus descendientes.
 	 */
-	public abstract String toString();
+	public String toString() {
+		
+	}
 }
