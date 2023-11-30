@@ -1,7 +1,6 @@
 package controller.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,6 +44,7 @@ public class SearchCampament extends HttpServlet {
 	        } else {
 	        	// El cliente existe y tiene el rol de cliente
 	        	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/assistant/searchCampament.jsp");
+	        	request.setAttribute("message", "");
 	            dispatcher.forward(request, response);
 	        }
 	        
@@ -55,19 +55,24 @@ public class SearchCampament extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html"); 
-		PrintWriter writer = response.getWriter();
-		writer.println("<!DOCTYPE html>");
-        writer.println("<html lang=\"es\">");
-        writer.println("<head>");
-        writer.println("<meta charset=\"UTF-8\">");
-        writer.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
-        writer.println("<title>Página de Saludo</title>");
-        writer.println("</head>");
-        writer.println("<body>");
-        writer.println("<h1>Hola</h1>");
-        writer.println("</body>");
-        writer.println("</html>");
+		HttpSession session = request.getSession(true);
+		CustomerBean customer = (CustomerBean) session.getAttribute("customerBean");
+		if (customer == null || !customer.getRol().equals("Client")) {
+	            // Redirect to an error page if the user doesn't have the required role
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/include/errors/errorRol.jsp");
+	            dispatcher.forward(request, response);
+	    }
+	        // Get the form parameters
+	        String educationalLevel = request.getParameter("educationalLevel");
+	        String availableSeatsStr = request.getParameter("availableSeats");
+	    if ((educationalLevel == null && availableSeatsStr == "") ) {
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/assistant/searchCampament.jsp");
+        	request.setAttribute("message", "The value of the request is invalid");
+            dispatcher.forward(request, response);
+	    }
+	    
+	    if(educationalLevel != null) {
+	    }
        
 	}
 

@@ -19,7 +19,7 @@
 %>
 <p>What do you want to do?</p>
 <p><a href="/Proyecto-Programacion-Web/mvc/controller/login/login.jsp">Log in</a></p>
-<p><a href="/Proyecto-Programacion-Web/mvc/controller/register/registerController.jsp">Register</a></p>
+<p><a href="/Proyecto-Programacion-Web/mvc/controller/login/registerController.jsp">Register</a></p>
 <% } else { %>
 	<p>Welcome <jsp:getProperty property="emailUser" name="customerBean"/>!! </p>
 	<p><a href="/Proyecto-Programacion-Web/mvc/controller/logout/logout.jsp">Log out</a></p>
