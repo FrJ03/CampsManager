@@ -132,10 +132,18 @@ public class GestorCampamentos {
 		public boolean asociarActividadCampamento(int idCampamento, int idActividad) {
 			CampamentoDAO dbC = CampamentoDAO.getInstance();
 			ActividadDAO dbA = ActividadDAO.getInstance();
-			if(dbA.read(idActividad) == null || dbC.read(idCampamento) == null)
+			CampDTO cdto = dbC.read(idCampamento);
+			ActivityDTO adto = dbA.read(idActividad);
+			
+			if(cdto == null || adto == null)
 				return false;
-			else
-				return dbC.addActivity(idCampamento, idActividad);
+			else {
+				if(cdto.getNivel() == adto.getNivel()) 
+					return dbC.addActivity(idCampamento, idActividad);
+				else
+					return dbC.addActivity(idCampamento, idActividad);
+			}
+			
 		}
 		/**
 		 * Metodo para asociar un monitor a un campamento.

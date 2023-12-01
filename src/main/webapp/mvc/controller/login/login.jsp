@@ -16,7 +16,7 @@ String mensajeNextPage = "";
 if (customerBean == null || customerBean.getEmailUser().equals("")) {
 	String passwordUser = request.getParameter("password");
 	String emailUser = request.getParameter("email");
-	String a = "Client";
+	String a = "Admin";
 	//Caso 2.a: Hay parámetros -> procede de la VISTA
 	if (emailUser != null) {
 		//Se accede a bases de datos para obtener el usuario

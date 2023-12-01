@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSession;
 import controller.dto.activity.Nivel;
 import controller.dto.camp.CampDTO;
 import controller.dto.monitor.MonitorDTO;
+import controller.gestores.GestorAsistentes;
+import controller.gestores.GestorCampamentos;
 import view.beans.customer.CustomerBean;
 
 /**
@@ -48,7 +50,7 @@ public class AssociateActivitytoCamp extends HttpServlet {
 	            dispatcher.forward(request, response);
 	        } else {
 	        	// El cliente existe y tiene el rol de cliente
-	        	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/admin/associateActivitytoCamp.jsp");
+	        	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/admin/associateActivitytoCampForm.jsp");
 	        	request.setAttribute("message", "");
 	            dispatcher.forward(request, response);
 	        }
@@ -70,57 +72,21 @@ public class AssociateActivitytoCamp extends HttpServlet {
 	        // Get the form parameters
 	        String camp = request.getParameter("camp");
 	        String activity = request.getParameter("activity");
-	    if ((camp == null && activity == "") ) {
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/assistant/searchCampamentForm.jsp");
-        	request.setAttribute("message", "Error, the activity/camp doesn't exist. (Remember the lv should be equal)");
+	    if ((camp == "" || activity == "") ) {
+        	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/admin/associateActivitytoCampForm.jsp");
+        	request.setAttribute("message", "Error, the activity/camp doesn't exist.");
             dispatcher.forward(request, response);
 	    }
 	    
-	    if(educationalLevel != null) {
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("/include/templates/campTemplate.jsp");
-            dispatcher.include(request, response);
-	    	CampDTO camp = new CampDTO();
-	    	camp.setId(1);
-	        camp.setInicioCampamento(LocalDate.of(2023, 1, 1));
-	        camp.setFinCampamento(LocalDate.of(2023, 1, 10));
-	        camp.setNivel(Nivel.Adolescente);
-	        camp.setAsistentesMax(50);
-
-	        // Create and set a MonitorDTO for the responsible
-	        MonitorDTO responsible = new MonitorDTO();
-	        responsible.setId(101);
-	        responsible.setNombre("John Doe");
-	        camp.setResponsable(responsible);
-
-	        // Create and set a MonitorDTO for the special responsible
-	        MonitorDTO specialResponsible = new MonitorDTO();
-	        specialResponsible.setId(102);
-	        specialResponsible.setNombre("Jane Doe");
-	        camp.setResponsableEspecial(specialResponsible);
-	        response.setContentType("text/html");
-	        PrintWriter out = response.getWriter();
-	        out.println("<ul>\n");
-	        out.println("<li><strong>Id:</strong> "+camp.getId()+"</li>\n");
-	        out.println("<li><strong>Start Date:</strong> " + camp.getInicioCampamento() +"</li>\n");
-	        out.println("<li><strong>End Date:</strong> "+camp.getFinCampamento() + "</li>\n");
-	        out.println("<li><strong>Academic Level:</strong> " + camp.getNivel() + "</li>\n");
-	        out.println("<li><strong>Maximum Number of Attendees:</strong>  " +camp.getAsistentesMax() + "</li>\n");
-	        out.println("<li><strong>Responsible Monitor:</strong> "+camp.getResponsable()+"</li>\n");
-
-	        // Monitor Especial information
-	        out.println("<li><strong>Monitor Especial:</strong> ");
-	        if (camp.getResponsableEspecial() != null) {
-	            out.println(camp.getResponsableEspecial());
-	        } else {
-	            out.println("Empty");
-	        }
-	        out.println("</li>\n");
-
-	        out.println("</ul>");
-	        dispatcher = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
-            dispatcher.include(request, response);
-	    }
-       
+//	    if(!GestorCampamentos.getInstance().asociarActividadCampamento(Integer.parseInt(camp), Integer.parseInt(activity))) {
+//    	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/admin/associateActivitytoCampForm.jsp");
+//        	request.setAttribute("message", "The activity and camp level should be equal)");
+//            dispatcher.forward(request, response);
+//	    }
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/admin/associateActivitytoCampForm.jsp");
+	    request.setAttribute("message", "The activity <strong>"+activity+"</strong> was added to the camp <strong>"+camp+"</strong> succesfully.");
+        dispatcher.forward(request, response);
+	
 	}
 
 }
