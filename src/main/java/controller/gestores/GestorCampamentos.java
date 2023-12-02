@@ -95,6 +95,39 @@ public class GestorCampamentos {
 			return db.create(actividad);
 		}
 		/**
+		 * Method that create a new activity
+		 * @param name New activity name
+		 * @param level New activity level
+		 * @param maxAssistants New activity max assistant number
+		 * @param maxMonitors New activity max monitor number
+		 * @param turn New activity turn
+		 * @return Boolean
+		 */
+		public Boolean crearActividad(String name, String level, int maxAssistants, int maxMonitors, String turn) {
+			Nivel l;
+			Turno t;
+			if(maxAssistants < 1 || maxMonitors < 1)
+				return false;
+			if(level.equalsIgnoreCase("infantil"))
+				l = Nivel.Infantil;
+			else if(level.equalsIgnoreCase("juvenil"))
+				l = Nivel.Juvenil;
+			else if(level.equalsIgnoreCase("adolescente"))
+				l = Nivel.Adolescente;
+			else
+				return false;
+			
+			if(turn.equalsIgnoreCase("mañana"))
+				t = Turno.Mañana;
+			else if(turn.equalsIgnoreCase("tarde"))
+				t = Turno.Tarde;
+			else
+				return false;
+			ActivityDTO activity = new ActivityDTO(0, name, l, maxAssistants, maxMonitors, t);
+			ActividadDAO db = ActividadDAO.getInstance();
+			return db.create(activity);
+		}
+		/**
 		 * Metodo que crea Campamentos mediante valores introducidos por el usuario.
 		 * @return void
 		 */
