@@ -1,7 +1,6 @@
 package controller.servlets;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -13,10 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.dto.activity.ActivityDTO;
-import controller.dto.activity.Nivel;
 import controller.dto.camp.CampDTO;
-import controller.dto.monitor.MonitorDTO;
-import controller.gestores.GestorAsistentes;
 import controller.gestores.GestorCampamentos;
 import view.beans.customer.CustomerBean;
 
@@ -43,46 +39,9 @@ public class AssociateActivitytoCamp extends HttpServlet {
 	        } else {
 	  
 	        	// El cliente existe y tiene el rol de admin
-	        	RequestDispatcher dispatcher;
 	        	String message ="";
-	    	    dispatcher = setAttributes(message, request);
-	            dispatcher.include(request, response);
-	            dispatcher = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
-	            dispatcher.include(request, response);
-	        	//GestorCampamentos gc = GestorCampamentos.getInstance();
-	        	ArrayList<ActivityDTO> list = new ArrayList<ActivityDTO>();
-	        	ActivityDTO a = new ActivityDTO();
-	        	a.setId(1);
-	        	a.setMonitoresMax(5);
-	        	a.setName("Baloncesto");
-	        	a.setNivel(Nivel.Adolescente);
-	        	list.add(a);
-	        	list.add(a);
-	        	//gc.getListaActividades();
-	        	String turno = "true";
-	        	for(ActivityDTO aux : list) {
-	        		dispatcher = activityView(aux, turno, request);
-	        		dispatcher.include(request, response);
-	        		turno = "false";
-	        	}
-	        	//gc.getListaCampamentos();
-	        	ArrayList<CampDTO> listc = new ArrayList<CampDTO>();
-	        	CampDTO camp = new CampDTO();
-		    	camp.setId(1);
-		        camp.setInicioCampamento(LocalDate.of(2023, 1, 1));
-		        camp.setFinCampamento(LocalDate.of(2023, 1, 10));
-		        camp.setNivel(Nivel.Adolescente);
-		        camp.setAsistentesMax(50);
-		        listc.add(camp);
-		        listc.add(camp);
-		        turno = "true";		
-
-	    		
-	        	for(CampDTO aux : listc) {
-	        		dispatcher = campView(aux, turno, request);
-	        		dispatcher.include(request, response);
-	        		turno = "false";
-	        	}
+	        	setAttributes(message, request, response);
+	            
 	        	
 	        }
 	        
@@ -105,30 +64,50 @@ public class AssociateActivitytoCamp extends HttpServlet {
 	        String activity = request.getParameter("Activity");
 	    if ((camp == "" || activity == "") ) {
         	String message ="Error, the activity/camp doesn't exist.";
-    	    RequestDispatcher dispatcher = setAttributes(message, request);
-            dispatcher.forward(request, response);
+        	setAttributes(message, request, response);
            
 	    }
 	    
-//	    if(!GestorCampamentos.getInstance().asociarActividadCampamento(Integer.parseInt(camp), Integer.parseInt(activity))) {
-//    	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/admin/associateActivitytoCampForm.jsp");
-//        	request.setAttribute("message", "The activity and camp level should be equal)");
-//            dispatcher.forward(request, response);
-//	    }
-	    String message ="The activity <strong>"+activity+"</strong> was added to the camp <strong>"+camp+"</strong> succesfully.";
-	    RequestDispatcher dispatcher = setAttributes(message, request);
-        dispatcher.forward(request, response);
+	    if(!GestorCampamentos.getInstance().asociarActividadCampamento(Integer.parseInt(camp), Integer.parseInt(activity))) {
+	    	
+        	String message ="";
+    	    setAttributes(message, request, response);
+            
+	    }
+	    else {
+	    	String message ="The activity <strong>"+activity+"</strong> was added to the camp <strong>"+camp+"</strong> succesfully.";
+		    setAttributes(message, request, response);
+	    }
+	    
 	
 	}
 
-	private RequestDispatcher setAttributes(String message, HttpServletRequest request) {
+	private void setAttributes(String message, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/include/templates/associateTemplate.jsp");
 	    request.setAttribute("message", message);
 	    request.setAttribute("atribute1", "Campament");
     	request.setAttribute("atribute2", "Activity");
     	request.setAttribute("path", "/Proyecto-Programacion-Web/AssociateActivitytoCamp");
     	request.setAttribute("h2", "Asociate an activity to a campament");
-    	return dispatcher;
+    	dispatcher.include(request, response);
+        dispatcher = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
+        dispatcher.include(request, response);
+        
+    	GestorCampamentos gc = GestorCampamentos.getInstance();
+    	ArrayList<ActivityDTO> list = gc.getListaActividades();
+    	String turno = "true";
+    	for(ActivityDTO aux : list) {
+    		dispatcher = activityView(aux, turno, request);
+    		dispatcher.include(request, response);
+    		turno = "false";
+    	}
+    	
+    	ArrayList<CampDTO> listc = gc.getListaCampamentos();
+    	for(CampDTO aux : listc) {
+    		dispatcher = campView(aux, turno, request);
+    		dispatcher.include(request, response);
+    		turno = "false";
+    	}
 	}
 	
 	private RequestDispatcher activityView(ActivityDTO act,String turno, HttpServletRequest request) {
