@@ -1,6 +1,7 @@
 package controller.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import controller.dto.activity.ActivityDTO;
+import controller.dto.activity.Nivel;
+import controller.dto.monitor.MonitorDTO;
 import view.beans.customer.CustomerBean;
 
 /**
@@ -34,9 +38,30 @@ public class AssociateMonitortoActivity extends HttpServlet {
             dispatcher.forward(request, response);
         } else {
         	// El cliente existe y tiene el rol de cliente
+        	RequestDispatcher dispatcher;
         	String message ="";
-    	    RequestDispatcher dispatcher = setAttributes(message, request);
-            dispatcher.forward(request, response);
+    	    dispatcher = setAttributes(message, request);
+            dispatcher.include(request, response);
+        	//GestorCampamentos gc = GestorCampamentos.getInstance();
+        	ArrayList<ActivityDTO> list = new ArrayList<ActivityDTO>();
+        	ActivityDTO a = new ActivityDTO();
+        	a.setId(1);
+        	a.setMonitoresMax(5);
+        	a.setName("Baloncesto");
+        	a.setNivel(Nivel.Adolescente);
+        	list.add(a);
+        	//gc.getListaActividades();
+        	for(ActivityDTO aux : list) {
+        		dispatcher = activityView(aux, request);
+        		dispatcher.include(request, response);
+        	}
+        	ArrayList<MonitorDTO> listm = new ArrayList<MonitorDTO>();
+        	MonitorDTO m = new MonitorDTO(1, "Antonio", "Lopez Lucena", true);
+        	listm.add(m);
+        	for(MonitorDTO aux : listm) {
+        		dispatcher = monitorView(aux, request);
+        		dispatcher.include(request, response);
+        	}
         }
 	}
 
@@ -55,7 +80,7 @@ public class AssociateMonitortoActivity extends HttpServlet {
 	        String activity = request.getParameter("Activity");
 	        String monitor = request.getParameter("Monitor");
 	    if ((monitor == "" || activity == "") ) {
-        	String message ="Error, the activity/camp doesn't exist.";
+        	String message ="Error, the activity/monitor doesn't exist.";
     	    RequestDispatcher dispatcher = setAttributes(message, request);
             dispatcher.forward(request, response);
            
@@ -77,6 +102,26 @@ public class AssociateMonitortoActivity extends HttpServlet {
     	request.setAttribute("atribute2", "Monitor");
     	request.setAttribute("path", "/Proyecto-Programacion-Web/AssociateMonitortoActivity");
     	request.setAttribute("h2", "Asociate a monitor to an activity");
+    	return dispatcher;
+	}
+	
+	private RequestDispatcher activityView(ActivityDTO act, HttpServletRequest request) {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/include/templates/activityTemplate.jsp");
+		String aux = String.valueOf(act.getId());
+	    request.setAttribute("idAct", aux);
+	    request.setAttribute("nameAct", act.getName());
+    	request.setAttribute("nivelAct", act.getNivel().toString());
+    	request.setAttribute("monitoresMax", act.getMonitoresMax());
+    	return dispatcher;
+	}
+	
+	private RequestDispatcher monitorView(MonitorDTO mon, HttpServletRequest request) {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/include/templates/monitorTemplate.jsp");
+		String aux = String.valueOf(mon.getId());
+	    request.setAttribute("idMon", aux);
+	    request.setAttribute("nameMon", mon.getNombre());
+    	request.setAttribute("surnameMon", mon.getApellidos());
+    	request.setAttribute("especialMon", String.valueOf(mon.getEspecial()));
     	return dispatcher;
 	}
 }

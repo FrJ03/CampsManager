@@ -29,7 +29,7 @@
 	} else {
 	%>
 	<%= messageNextPage %><br/><br/>
-<form method="post" action="../../controller/register/registerController.jsp">
+<form method="post" action="/Proyecto-Programacion-Web/mvc/controller/login/registerController.jsp">
 	<label for="username">Username: </label>
 	<input type="text" name="username" ><br/>
 	<label for="email">Email: </label>

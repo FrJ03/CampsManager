@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import ="business.user.User,business.user.Rol" %>
+<%@ page import ="controller.dto.customer.*" %>
 <jsp:useBean  id="customerBean" scope="session" class="view.beans.customer.CustomerBean"></jsp:useBean>
 <!DOCTYPE html>
 <html>
@@ -24,7 +24,7 @@ if (customerBean == null || customerBean.getEmailUser().equals("")) {
 		//Se accede a bases de datos para obtener el usuario
 	
 		mensajeNextPage="Furula";
-		User user = new User(emailUser, usernameUser, passwordUser, Rol.Client, nameUser, surNameUser);
+		CustomerDTO user = new CustomerDTO(emailUser, usernameUser, passwordUser, Rol.Client, nameUser, surNameUser);
 		
 		//Se realizan todas las comprobaciones necesarias del dominio
 		//Aquí sólo comprobamos que exista el usuario
