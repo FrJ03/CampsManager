@@ -1,7 +1,6 @@
 package controller.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -42,10 +41,13 @@ public class AssociateActivitytoCamp extends HttpServlet {
 	        	RequestDispatcher dispatcher = request.getRequestDispatcher("/include/errors/errorRol.jsp");
 	            dispatcher.forward(request, response);
 	        } else {
+	  
 	        	// El cliente existe y tiene el rol de admin
 	        	RequestDispatcher dispatcher;
 	        	String message ="";
 	    	    dispatcher = setAttributes(message, request);
+	            dispatcher.include(request, response);
+	            dispatcher = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
 	            dispatcher.include(request, response);
 	        	//GestorCampamentos gc = GestorCampamentos.getInstance();
 	        	ArrayList<ActivityDTO> list = new ArrayList<ActivityDTO>();
@@ -55,10 +57,13 @@ public class AssociateActivitytoCamp extends HttpServlet {
 	        	a.setName("Baloncesto");
 	        	a.setNivel(Nivel.Adolescente);
 	        	list.add(a);
+	        	list.add(a);
 	        	//gc.getListaActividades();
+	        	String turno = "true";
 	        	for(ActivityDTO aux : list) {
-	        		dispatcher = activityView(aux, request);
+	        		dispatcher = activityView(aux, turno, request);
 	        		dispatcher.include(request, response);
+	        		turno = "false";
 	        	}
 	        	//gc.getListaCampamentos();
 	        	ArrayList<CampDTO> listc = new ArrayList<CampDTO>();
@@ -69,9 +74,14 @@ public class AssociateActivitytoCamp extends HttpServlet {
 		        camp.setNivel(Nivel.Adolescente);
 		        camp.setAsistentesMax(50);
 		        listc.add(camp);
+		        listc.add(camp);
+		        turno = "true";		
+
+	    		
 	        	for(CampDTO aux : listc) {
-	        		dispatcher = campView(aux, request);
+	        		dispatcher = campView(aux, turno, request);
 	        		dispatcher.include(request, response);
+	        		turno = "false";
 	        	}
 	        	
 	        }
@@ -121,20 +131,22 @@ public class AssociateActivitytoCamp extends HttpServlet {
     	return dispatcher;
 	}
 	
-	private RequestDispatcher activityView(ActivityDTO act, HttpServletRequest request) {
+	private RequestDispatcher activityView(ActivityDTO act,String turno, HttpServletRequest request) {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/include/templates/activityTemplate.jsp");
 		String aux = String.valueOf(act.getId());
 	    request.setAttribute("idAct", aux);
 	    request.setAttribute("nameAct", act.getName());
     	request.setAttribute("nivelAct", act.getNivel().toString());
     	request.setAttribute("monitoresMax", act.getMonitoresMax());
+    	request.setAttribute("turnoAct", turno);
     	return dispatcher;
 	}
-	private RequestDispatcher campView(CampDTO act, HttpServletRequest request) {
+	private RequestDispatcher campView(CampDTO act, String turno, HttpServletRequest request) {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/include/templates/campTemplate.jsp");
 		String aux = String.valueOf(act.getId());
 	    request.setAttribute("idCamp", aux);
 	    request.setAttribute("nivelCamp", act.getNivel().toString());
+	    request.setAttribute("turnoCamp", turno);
     	return dispatcher;
 	}
 }

@@ -16,8 +16,9 @@
 	String nivel = (String)request.getAttribute("nivelAct");
 %>
     <div >
-    
-        <h1>Activity Details</h1>
+        <%if(turno=="true") {%>
+        	<h1>Activity Details</h1>
+   		<%} %>
         <div >
             <strong>ID:</strong> <%=id %>
         </div>
@@ -43,5 +44,6 @@
         </div>
          <%} %>
     </div>
+    <br>
 </body>
 </html>

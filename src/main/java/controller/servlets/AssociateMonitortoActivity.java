@@ -38,9 +38,12 @@ public class AssociateMonitortoActivity extends HttpServlet {
             dispatcher.forward(request, response);
         } else {
         	// El cliente existe y tiene el rol de cliente
+        	String turno = "true";
         	RequestDispatcher dispatcher;
         	String message ="";
     	    dispatcher = setAttributes(message, request);
+            dispatcher.include(request, response);
+            dispatcher = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
             dispatcher.include(request, response);
         	//GestorCampamentos gc = GestorCampamentos.getInstance();
         	ArrayList<ActivityDTO> list = new ArrayList<ActivityDTO>();
@@ -50,17 +53,22 @@ public class AssociateMonitortoActivity extends HttpServlet {
         	a.setName("Baloncesto");
         	a.setNivel(Nivel.Adolescente);
         	list.add(a);
+        	list.add(a);
         	//gc.getListaActividades();
         	for(ActivityDTO aux : list) {
-        		dispatcher = activityView(aux, request);
+        		dispatcher = activityView(aux, turno, request);
         		dispatcher.include(request, response);
+        		turno = "false";
         	}
         	ArrayList<MonitorDTO> listm = new ArrayList<MonitorDTO>();
         	MonitorDTO m = new MonitorDTO(1, "Antonio", "Lopez Lucena", true);
         	listm.add(m);
+        	listm.add(m);
+        	turno = "true";
         	for(MonitorDTO aux : listm) {
-        		dispatcher = monitorView(aux, request);
+        		dispatcher = monitorView(aux, turno, request);
         		dispatcher.include(request, response);
+        		turno = "false";
         	}
         }
 	}
@@ -105,23 +113,25 @@ public class AssociateMonitortoActivity extends HttpServlet {
     	return dispatcher;
 	}
 	
-	private RequestDispatcher activityView(ActivityDTO act, HttpServletRequest request) {
+	private RequestDispatcher activityView(ActivityDTO act, String turno, HttpServletRequest request) {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/include/templates/activityTemplate.jsp");
 		String aux = String.valueOf(act.getId());
 	    request.setAttribute("idAct", aux);
 	    request.setAttribute("nameAct", act.getName());
     	request.setAttribute("nivelAct", act.getNivel().toString());
     	request.setAttribute("monitoresMax", act.getMonitoresMax());
+    	request.setAttribute("turnoAct", turno);
     	return dispatcher;
 	}
 	
-	private RequestDispatcher monitorView(MonitorDTO mon, HttpServletRequest request) {
+	private RequestDispatcher monitorView(MonitorDTO mon,String turno, HttpServletRequest request) {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/include/templates/monitorTemplate.jsp");
 		String aux = String.valueOf(mon.getId());
 	    request.setAttribute("idMon", aux);
 	    request.setAttribute("nameMon", mon.getNombre());
     	request.setAttribute("surnameMon", mon.getApellidos());
     	request.setAttribute("especialMon", String.valueOf(mon.getEspecial()));
+    	request.setAttribute("turnoMon", turno);
     	return dispatcher;
 	}
 }

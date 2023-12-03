@@ -15,10 +15,12 @@
 	String fechaIni = (String)request.getAttribute("fechaIniMaxCamp");
 	String fechaFinal = (String)request.getAttribute("fechaFinalCamp");
 	String asistMax = (String)request.getAttribute("asistMaxCamp");
+	String turno = (String)request.getAttribute("turnoCamp");
 %>
     <div >
-    
+    <%if(turno=="true") {%>
         <h1>Camp Details</h1>
+    <%} %>
         <div >
             <strong>ID:</strong> <%=id %>
         </div>
@@ -48,5 +50,6 @@
         </div>
         <%} %>
     </div>
+    <br>
 </body>
 </html>

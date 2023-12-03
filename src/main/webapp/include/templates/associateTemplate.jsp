@@ -33,7 +33,6 @@
 	<input type="number" name="<%=atribute2%>" min=1><br/>
 	<input type="Submit" value="Submit">
 </form>
-<jsp:include page="/include/templates/returnToIndex.jsp"></jsp:include>
 </body>
 </body>
 </html>

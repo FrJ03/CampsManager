@@ -8,14 +8,17 @@
 <title>Monitor View</title>
 </head>
 <body>
-<%  String id = (String)request.getAttribute("idAct"); 
+<%  String id = (String)request.getAttribute("idMon"); 
 	String name = (String)request.getAttribute("nameMon");
 	String apellidos = (String)request.getAttribute("surnameMon");
 	String especial = (String)request.getAttribute("especialMon");
+	String turno = (String)request.getAttribute("turnoMon");
+	
 %>
     <div >
-    
-        <h1>Monitor Details</h1>
+        <%if(turno=="true") {%>
+        	<h1>Monitor Details</h1>
+   		<%} %>
         <div >
             <strong>ID:</strong> <%=id %>
         </div>
@@ -34,5 +37,6 @@
         
          <%} %>
     </div>
+    <br>
 </body>
 </html>
