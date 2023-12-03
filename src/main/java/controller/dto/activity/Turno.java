@@ -4,6 +4,6 @@ package controller.dto.activity;
  * @author Enrique de los Reyes Montilla
  */
 public enum Turno {
-	Mañana,
-	Tarde
+	Morning,
+	Afternoon
 }

@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS actividad(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     nombre TINYTEXT,
     nivel VARCHAR(11) CHECK(nivel='Adolescente' || nivel='Juvenil' || nivel='Infantil'),
-    turno VARCHAR(6) CHECK(turno='Mañana' || turno='Tarde'),
+    turno VARCHAR(6) CHECK(turno='Morning' || turno='Afternoon'),
     maxParticipantes INTEGER CHECK(maxParticipantes > 0),
     maxMonitores INTEGER CHECK(maxMonitores > 0)
 );

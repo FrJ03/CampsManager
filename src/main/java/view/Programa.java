@@ -805,9 +805,9 @@ public class Programa {
 			}
 			
 			if(aux.equalsIgnoreCase("a"))
-				turno = Turno.Tarde;
+				turno = Turno.Afternoon;
 			else if(aux.equalsIgnoreCase("m"))
-				turno = Turno.Mañana;
+				turno = Turno.Morning;
 		}while (!aux.equalsIgnoreCase("a") && !aux.equalsIgnoreCase("m"));
 		
 		return turno;
