@@ -6,10 +6,6 @@ package controller.dto.customer;
  */
 public class CustomerDTO {
 	/**
-	 * Customer username
-	 */
-	private String username_;
-	/**
 	 * Customer password
 	 */
 	private String password_;
@@ -17,11 +13,6 @@ public class CustomerDTO {
 	 * Customer rol (Admin/Client/None)
 	 */
 	private Rol rol_;
-	/**
-	* Name and surname of the user
-	**/
-	  private String name_;
-	  private String surname_;
 	  /**
 	   * Customer email
 	   */
@@ -31,40 +22,24 @@ public class CustomerDTO {
 	 */
 	public CustomerDTO() {
 		email_ = "";
-		username_ = "";
 		password_ = "";
 		rol_ = Rol.None;
-		name_="";
-		setSurname("");
 	}
 	/**
 	 *	Initialize the customer
 	 */
 	public CustomerDTO(String email, String password) {
 		email_=email;
-		username_ = "";
 		password_ = password;
 		rol_ = Rol.None;
-		name_="";
-		setSurname("");
 	}
 	/**
 	 *	Initialize the customer
 	 */
-	public CustomerDTO(String email, String password,String login, Rol rol, String name, String surname) {
+	public CustomerDTO(String email, String password, Rol rol) {
 		email_=email;
-		username_ = login;
 		password_ = password;
 		rol_ = rol;
-		name_=name;
-		surname_=surname;
-	}
-	/**
-	 * Method that returns the customer username
-	 * @return String
-	 */
-	public String getUsername() {
-		return username_;
 	}
 	/**
 	 * Method that returns the customer password
@@ -93,32 +68,11 @@ public class CustomerDTO {
 			return "None";
 	}
 	/**
-	 * Method that returns the customer name
-	 * @return String 
-	 */
-	public String getName() {
-		return name_;
-	}
-	/**
-	 * Method that returns the customer name
-	 * @return String surname
-	 */
-	public String getSurname() {
-		return surname_;
-	}
-	/**
 	 * Method that returns the customer mail
 	 * @return String mail
 	 */
 	public String getEmail() {
 		return email_;
-	}
-	/**
-	 * Method that modify the customer username
-	 * @param username New username
-	 */
-	public void setUsername(String username) {
-		username_ = username;
 	}
 	/**
 	 * Method that modify the customer password
@@ -155,21 +109,4 @@ public class CustomerDTO {
 		else
 			return false;
 	}
-	/**
-	 * Method that modify the customer name
-	 * @param String New name
-	 */
-	public void setName(String name) {
-		this.name_ = name;
-	}
-	/**
-	 * Method that modify the customer surname
-	 * @param String New surname
-	 */
-	public void setSurname(String surname) {
-		this.surname_ = surname;
-	}
-	/**
-	 * @return the mail_
-	 */
 }

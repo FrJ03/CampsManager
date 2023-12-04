@@ -16,28 +16,24 @@
 		a) Hay parámetros en el request  -> procede del controlador /con mensaje 
 		b) No hay parámetros en el request -> procede del controlador /sin mensaje
 	*/
-	String nextPage = "../../controller/login/login.jsp";
+	String nextPage = "../../controller/login/changeData.jsp";
 	String messageNextPage = request.getParameter("message");
 	if (messageNextPage == null) messageNextPage = "";
 
-	if (customerBean != null && !customerBean.getEmailUser().equals("")) {
+	if (customerBean == null && customerBean.getEmailUser().equals("")) {
 		//No debería estar aquí -> flujo salta a index.jsp
-		nextPage = "../../controller/register/register.jsp";
+		nextPage = "../../controller/login/changeData.jsp";
 		%>
 		<jsp:include page="<%=nextPage%>"></jsp:include>
 	<% 
 	} else {
 	%>
 	<%= messageNextPage %><br/><br/>
-<form method="post" action="/Proyecto-Programacion-Web/mvc/controller/login/registerController.jsp">
-	<label for="email">Email: </label>
-	<input type="text" name="email"><br/>
+<form method="post" action="/Proyecto-Programacion-Web/mvc/controller/login/changeData.jsp">
 	<label for="name">Name: </label>
 	<input type="text" name="name" ><br/>
 	<label for="surname">Surname: </label>
 	<input type="text" name="surname"><br/>
-	<label for="rol">Rol: </label>
-	<input type="text" name="rol"><br/>
 	<label for="password">Password: </label>
 	<input type="text" name="password" >	
 	<br/>

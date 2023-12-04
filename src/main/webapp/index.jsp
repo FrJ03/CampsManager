@@ -22,7 +22,9 @@
 <p><a href="/Proyecto-Programacion-Web/mvc/controller/login/registerController.jsp">Register</a></p>
 <% } else { %>
 	<p>Welcome <jsp:getProperty property="emailUser" name="customerBean"/>!! </p>
+	<p><a href="/Proyecto-Programacion-Web/mvc/controller/login/changeData.jsp">Change data</a></p>
 	<p><a href="/Proyecto-Programacion-Web/mvc/controller/logout/logout.jsp">Log out</a></p>
+	
 <% } %>
 </body>
 </html>
