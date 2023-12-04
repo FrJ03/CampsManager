@@ -1,4 +1,4 @@
-package controller.gestores;
+	package controller.gestores;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,12 +35,28 @@ public class GestorCampamentos {
 			return instance_;
 		}
 		/**
-		 * MÃ©todo que devuelve la lista de campamentos del gestor.
+		 * Método que devuelve la lista de campamentos del gestor.
 		 * @return ArrayList<Campamento>.
 		 */
 		public ArrayList<CampDTO> getListaCampamentos() {
 			CampamentoDAO db = CampamentoDAO.getInstance();
 			return db.readAll();
+		}
+		/**
+		 * Método que devuelve la lista de campamentos del gestor que tenga un numero de plazas disponible.
+		 * @return ArrayList<Campamento>.
+		 */
+		public ArrayList<CampDTO> getListaCampamentos(int seats) {
+			CampamentoDAO db = CampamentoDAO.getInstance();
+			return db.readAllAvailableSeats(seats);
+		}
+		/**
+		 * MÃ©todo que devuelve la lista de campamentos del gestor que tenga un numero de plazas disponible.
+		 * @return ArrayList<Campamento>.
+		 */
+		public ArrayList<CampDTO> getListaCampamentos(Nivel love) {
+			CampamentoDAO db = CampamentoDAO.getInstance();
+			return db.readAllAvailableLevel(love);
 		}
 		/**
 		 * MÃ©todo que devuelve la lista de monitores del gestor.

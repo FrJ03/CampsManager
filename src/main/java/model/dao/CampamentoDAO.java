@@ -265,6 +265,104 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		
 	}
 	/**
+	 * Añade todos los campamentos disponibles que tengan más de un numero de plazas disponibles de la base de datos a un lista.
+	 * @return ArrayList<Campamento>
+	 */
+	public ArrayList<CampDTO> readAllAvailableSeats(int seats){
+
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		ArrayList<CampDTO> campamentos = new ArrayList<CampDTO>();
+		CampDTO object = new CampDTO();
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readAllCampamentoAvailableSeats");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+			
+			ps.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
+			ps.setInt(2, seats);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				object = new CampDTO(rs.getInt(1), rs.getDate(4).toLocalDate(), rs.getDate(5).toLocalDate(), Nivel.valueOf(rs.getString(6)), rs.getInt(7) );
+				int r = rs.getInt(2);
+				int e = rs.getInt(3);
+				
+				
+				MonitorDAO daoMonitor = MonitorDAO.getInstance();
+				MonitorDTO res = new MonitorDTO();
+				res.setId(r);
+				object.setResponsable(daoMonitor.read(res));
+				res.setId(e);
+				object.setResponsableEspecial(daoMonitor.read(res));
+
+				campamentos.add(object);
+            } 
+				con.deleteConnection(c);
+				
+		} catch(Exception e) { System.out.println(e); }
+		
+		return campamentos;
+		
+	}
+	/**
+	 * Añade todos los campamentos disponibles que tengan mas de un numero de plazas disponibles de la base de datos a un lista.
+	 * @return ArrayList<Campamento>
+	 */
+	public ArrayList<CampDTO> readAllAvailableLevel(Nivel love){
+
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		ArrayList<CampDTO> campamentos = new ArrayList<CampDTO>();
+		CampDTO object = new CampDTO();
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readAllCampamentoAvailableLevel");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+			
+			ps.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
+			ps.setString(2, love.toString());
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				object = new CampDTO(rs.getInt(1), rs.getDate(4).toLocalDate(), rs.getDate(5).toLocalDate(), Nivel.valueOf(rs.getString(6)), rs.getInt(7) );
+				int r = rs.getInt(2);
+				int e = rs.getInt(3);
+				
+				
+				MonitorDAO daoMonitor = MonitorDAO.getInstance();
+				MonitorDTO res = new MonitorDTO();
+				res.setId(r);
+				object.setResponsable(daoMonitor.read(res));
+				res.setId(e);
+				object.setResponsableEspecial(daoMonitor.read(res));
+
+				campamentos.add(object);
+            } 
+				con.deleteConnection(c);
+				
+		} catch(Exception e) { System.out.println(e); }
+		
+		return campamentos;
+		
+	}
+	/**
 	 * Cuenta el numero de Inscripciones de la base de datos que tienen un determinado idCapamento.
 	 * @param object Campamento con el id que se utilizará para la consulta.
 	 * @return int
