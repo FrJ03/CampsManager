@@ -60,10 +60,11 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 			Connection c=con.getConnection();
 			PreparedStatement ps=c.prepareStatement(create);
 			
-			ps.setString(1,object.getNombre());
-			ps.setString(2,object.getApellidos());
-			ps.setBoolean(3,object.getEspecial());
-			ps.setDate(4, java.sql.Date.valueOf(object.get_fechaNacimiento()));
+			ps.setString(1,object.getEmail());
+			ps.setString(2,object.getNombre());
+			ps.setString(3,object.getApellidos());
+			ps.setBoolean(4,object.getEspecial());
+			ps.setDate(5, java.sql.Date.valueOf(object.get_fechaNacimiento()));
 			
 			status = ps.executeUpdate();	
 			if (status == 1) {
@@ -104,7 +105,7 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 			
 			if (rs.next()) {
 				
-				object = new AssistantDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(5).toLocalDate(), rs.getBoolean(4));
+				object = new AssistantDTO(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(6).toLocalDate(), rs.getBoolean(5));
                 as = object;
             } 
 			
@@ -175,7 +176,7 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 			
 			while (rs.next()) {
 				
-                list.add( new AssistantDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(5).toLocalDate(), rs.getBoolean(4)));
+                list.add(  new AssistantDTO(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(6).toLocalDate(), rs.getBoolean(5)));
                 
             } 
 			
@@ -253,7 +254,7 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 			
 			if (rs.next()) {
 				
-				as = new AssistantDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(5).toLocalDate(), rs.getBoolean(4));
+				as =  new AssistantDTO(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(6).toLocalDate(), rs.getBoolean(5));
                 
             } 
 			
@@ -263,5 +264,41 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 		return as;
 
 	}
+	/**
+	 * Lee un asistente de la base de datos.
+	 * @param email Email del asistente que se va a leer de la base de datos.
+	 * @return Monitor
+	 */
+	public AssistantDTO read(String email) {
+		
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		AssistantDTO as = null;
+		
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("readAsistenteEmail");
+			
+			Connection c = con.getConnection();
+			
+			PreparedStatement ps=c.prepareStatement(query);
+			ps.setString(1, email);
 	
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				
+				as =  new AssistantDTO(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(6).toLocalDate(), rs.getBoolean(5));
+                
+            } 
+			
+			con.deleteConnection(c);
+		} catch(Exception e) { System.out.println(e); }
+		
+		return as;
+
+	}
 }

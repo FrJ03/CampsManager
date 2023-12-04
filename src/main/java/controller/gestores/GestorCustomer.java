@@ -1,0 +1,47 @@
+package controller.gestores;
+
+import controller.dto.customer.CustomerDTO;
+import controller.dto.customer.Rol;
+import model.dao.CustomerDAO;
+
+public class GestorCustomer {
+	/**
+	 * Variable privada Singleton.
+	 */
+	private static GestorCustomer instance_ = null;
+
+	/**
+	 * Constructor privado que crea una lista de customer vacia.
+	 */
+	private GestorCustomer() {};
+	/**
+	 * Metodo que sirve de acceso a la instancia.
+	 * @return Instancia de la clase GestorCustomer.
+	 */
+	public static GestorCustomer getInstance() {
+		if(instance_ == null ) {
+			instance_ = new GestorCustomer();
+		}
+		return instance_;
+	}
+	/**
+	 * Metodo que añade a la lista de customer un nuevo customer pasado como argumento, comprobando si no estaba registrado. Si estaba registrado devuelve false y si no lo estaba true
+	 * @param CustomerDTO customer que se va a añadir a la lista de customer.
+	 * @return boolean(false error, true no error).
+	 */
+	public boolean darAltacustomer(CustomerDTO customer) {	
+		CustomerDAO db = CustomerDAO.getInstance();
+		return db.create(customer);
+	}
+	/**
+	 * Metodo Modificar toda la información de un customer identificado por su id.
+	 * @param email Identificador único del customer que se desea modificar.
+  	 * @param password Password del customer.
+  	 * @param rol Rol del customer.
+	 * @return void.
+	 */
+	public boolean modificarcustomer(String email, String password,Rol rol ){
+		CustomerDAO db = CustomerDAO.getInstance();
+		return db.update(new CustomerDTO(email, password, rol));
+	}
+}

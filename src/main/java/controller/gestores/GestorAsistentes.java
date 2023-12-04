@@ -50,15 +50,16 @@ public class GestorAsistentes {
 	/**
 	 * Metodo Modificar toda la información de un asistente identificado por su id.
 	 * @param id Identificador único del asistente que se desea modificar.
+	 * @param email Email del asistente.
   	 * @param nombre Nombre del asistente.
   	 * @param apellidos Apellidos del asistente.
   	 * @param fechaNacimiento Representa la fecha de nacimiento del asistente.
   	 * @param especial Indica si en asistente pertenece a un grupo especial (true) o no (false).
 	 * @return void.
 	 */
-	public boolean modificarAsistente(int id, String nombre, String apellidos, LocalDate fechaNacimiento, boolean especial){
+	public boolean modificarAsistente(int id, String email, String nombre, String apellidos, LocalDate fechaNacimiento, boolean especial){
 		AsistenteDAO db = AsistenteDAO.getInstance();
-		return db.update(new AssistantDTO(id, nombre, apellidos, fechaNacimiento, especial));
+		return db.update(new AssistantDTO(id, email, nombre, apellidos, fechaNacimiento, especial));
 	}
 	/**
 	 * Metodo que lista a los asistentes actualmente registrados.

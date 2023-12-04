@@ -14,6 +14,10 @@ import controller.dto.person.Person;
 	  * */
      private boolean especial_;
      /**
+	  * Representa el email del asistente
+	  * */
+     private String email_;
+     /**
       * Fecha de nacimiento del asistente
       * */
      private LocalDate fechaNacimiento_;
@@ -33,11 +37,13 @@ import controller.dto.person.Person;
       * @param apellidos Apellidos del asistente.
       * @param fechaNacimiento Representa la fecha de nacimiento del asistente.
       * @param especial Indica si en asistente pertenece a un grupo especial (true) o no (false).
+      * @param email Email del asistente
       * */
-     public AssistantDTO(int id, String nombre, String apellidos, LocalDate fechaNacimiento,boolean especial){
+     public AssistantDTO(int id, String email, String nombre, String apellidos, LocalDate fechaNacimiento,boolean especial){
     	 super(id, nombre, apellidos);
         this.fechaNacimiento_ = fechaNacimiento;
         this.especial_ = especial;
+        this.email_ = email;
      }
      /**
       * Devuelve la fecha de nacimiento del asistente.
@@ -51,6 +57,13 @@ import controller.dto.person.Person;
       * */
      public boolean getEspecial() {
     	 return especial_;
+     }
+     /**
+      * Devuelve el email del asistente.
+      * @return string Email del asistente.
+      * */
+     public String getEmail() {
+    	 return email_;
      }
      /**
       * Establece una nueva fecha de nacimiento del asistente.
@@ -67,6 +80,13 @@ import controller.dto.person.Person;
     	 this.especial_ = especial;
      }
      /**
+      * Modifica el email del asitente.
+      * @param String Nuevo email del asistente.
+      */
+     public void setEmail(String email) {
+    	 this.email_ = email;
+     }
+     /**
       * Función que devuelve una cadena de caracteres con información del asistente.
       * @return La estrucutra es la siguiente:
       * Id: (id)\n
@@ -77,7 +97,8 @@ import controller.dto.person.Person;
      public String toString() {
     	 String ret ="Id: " + this.getId()+ 
     			 	"\nNombre Completo: " + this.getNombreCompleto()+ 
-    			 	"\nFecha de Nacimiento: " + this.fechaNacimiento_.toString() + 
+    			 	"\nFecha de Nacimiento: " + this.fechaNacimiento_.toString() +
+    			 	"\nEmail del asistente: " + this.email_ +
     			 	"\nGrupo Especial: ";
     	 if(this.especial_) {
     		 ret += "Si\n";
