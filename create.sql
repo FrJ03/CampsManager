@@ -7,12 +7,12 @@ CREATE TABLE IF NOT EXISTS customer(
 DROP TABLE IF EXISTS asistente;
 CREATE TABLE IF NOT EXISTS asistente (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    idCustomer INTEGER,
+    emailCustomer VARCHAR(64),
     nombre TINYTEXT,
     apellidos TINYTEXT,
     especial BOOL,
-    fechaNacimiento DATE
-    CONSTRAINT FK_asistente_customer FOREIGN KEY (idCustomer) REFERENCES customer(id)
+    fechaNacimiento DATE,
+    CONSTRAINT FK_asistente_customer FOREIGN KEY (emailCustomer) REFERENCES customer(email)
 );
 DROP TABLE IF EXISTS monitor;
 CREATE TABLE IF NOT EXISTS monitor(
