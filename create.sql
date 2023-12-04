@@ -1,7 +1,6 @@
 DROP TABLE IF EXISTS customer;
 CREATE TABLE IF NOT EXISTS customer(
-	id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	username VARCHAR(64) NOT NULL UNIQUE,
+	email VARCHAR(64) PRIMARY KEY,
 	password VARCHAR(32) NOT NULL,
 	rol VARCHAR(8) CHECK (rol='Admin' || rol='Client')
 );
