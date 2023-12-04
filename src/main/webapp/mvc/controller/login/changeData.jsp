@@ -24,7 +24,7 @@ if (customerBean != null || !customerBean.getEmailUser().equals("")) {
 		//Se accede a bases de datos para crear el usuario
 	
 		mensajeNextPage="Furula";
-		CustomerDTO user = new CustomerDTO("", "Pepe", passwordUser, Rol.Client, nameUser, surNameUser);
+		CustomerDTO user = new CustomerDTO("pepito@gmail.com", "pepito", Rol.Client);
 		
 		//Se realizan todas las comprobaciones necesarias del dominio
 		//Aquí sólo comprobamos que exista el usuario

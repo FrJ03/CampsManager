@@ -16,13 +16,13 @@ String mensajeNextPage = "";
 if (customerBean == null || customerBean.getEmailUser().equals("")) {
 	String passwordUser = request.getParameter("password");
 	String emailUser = request.getParameter("email");
-	String a = "Admin";
+	String a = "Client";
 	//Caso 2.a: Hay parámetros -> procede de la VISTA
 	if (emailUser != null) {
 		//Se accede a bases de datos para obtener el usuario
 	
 		mensajeNextPage="Furula";
-		CustomerDTO user = new CustomerDTO("pepito@gmail.com", "pepito", "pepito", Rol.Client, "Pepe", "Flores");
+		CustomerDTO user = new CustomerDTO("pepito@gmail.com", "pepito", Rol.Client);
 		
 		//Se realizan todas las comprobaciones necesarias del dominio
 		//Aquí sólo comprobamos que exista el usuario
