@@ -118,9 +118,9 @@ public class GestorCampamentos {
 				return false;
 			
 			if(turn.equalsIgnoreCase("mañana"))
-				t = Turno.Mañana;
+				t = Turno.Morning;
 			else if(turn.equalsIgnoreCase("tarde"))
-				t = Turno.Tarde;
+				t = Turno.Afternoon;
 			else
 				return false;
 			ActivityDTO activity = new ActivityDTO(0, name, l, maxAssistants, maxMonitors, t);
