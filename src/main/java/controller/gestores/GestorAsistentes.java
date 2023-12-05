@@ -1,12 +1,11 @@
 package controller.gestores;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import model.dao.AsistenteDAO;
-import model.dao.CustomerDAO;
 import controller.dto.assistant.*;
-import controller.dto.customer.CustomerDTO;
 /**
  * Clase que gestiona la información de los asistentes al campamento
  * @author Manuel García Obrero
@@ -43,11 +42,11 @@ public class GestorAsistentes {
 	/**
 	 * Metodo que devuelve un asistente de la base de datos
 	 * @param email Email del asistente que va a ser leido.
-	 * @return CustomerDTO
+	 * @return AssistantDTO
 	 */
-	public CustomerDTO readCustomer(String email) {	
-		CustomerDAO db = CustomerDAO.getInstance();
-		return db.read(email);
+	public AssistantDTO leerAsistente(String email) {	
+		AsistenteDAO da = AsistenteDAO.getInstance();
+		return da.read(email);
 	}
 	/**
 	 * Metodo que añade a la lista de asistente un nuevo asistente pasado como argumento, comprobando si no estaba registrado. Si estaba registrado devuelve false y si no lo estaba true
@@ -66,11 +65,40 @@ public class GestorAsistentes {
   	 * @param apellidos Apellidos del asistente.
   	 * @param fechaNacimiento Representa la fecha de nacimiento del asistente.
   	 * @param especial Indica si en asistente pertenece a un grupo especial (true) o no (false).
-	 * @return void.
+	 * @return boolean.
 	 */
-	public boolean modificarAsistente(int id, String email, String nombre, String apellidos, LocalDate fechaNacimiento, boolean especial){
+	public boolean modificarAsistente(int id, String email, String nombre, String apellidos, String fechaNacimiento, String especial){
 		AsistenteDAO db = AsistenteDAO.getInstance();
-		return db.update(new AssistantDTO(id, email, nombre, apellidos, fechaNacimiento, especial));
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+        LocalDate fechaTrans = LocalDate.parse(fechaNacimiento, formatter);
+        
+		return db.update(new AssistantDTO(id, email, nombre, apellidos, fechaTrans, Boolean.parseBoolean(especial)));
+	}
+	/**
+	 * Metodo para dar de alta un asistente.
+	 * @param email Email del asistente.
+  	 * @param nombre Nombre del asistente.
+  	 * @param apellidos Apellidos del asistente.
+  	 * @param fechaNacimiento Representa la fecha de nacimiento del asistente.
+  	 * @param especial Indica si en asistente pertenece a un grupo especial (true) o no (false).
+	 * @return boolean.
+	 */
+	public boolean darAltaAsistente(String email, String nombre, String apellidos, String fechaNacimiento, String especial){
+		AsistenteDAO db = AsistenteDAO.getInstance();
+		AssistantDTO aux = new AssistantDTO();
+		
+		aux.setEmail(email);
+		aux.setNombre(nombre);
+		aux.setApellidos(apellidos);
+		
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+        LocalDate fechaTrans = LocalDate.parse(fechaNacimiento, formatter);
+        
+		aux.setFechaNacimiento(fechaTrans);
+		aux.setEspecial(Boolean.parseBoolean(especial));
+		
+		return db.create(aux);
 	}
 	/**
 	 * Metodo que lista a los asistentes actualmente registrados.

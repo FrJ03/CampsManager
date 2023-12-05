@@ -1,12 +1,14 @@
 package controller.gestores;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import controller.dto.admin.AdminDTO;
-import controller.dto.customer.CustomerDTO;
 import model.dao.AdminDAO;
-import model.dao.CustomerDAO;
-
-
+/**
+ * Clase que gestiona la información de los admin al campamento
+ * @author Enrique de los Reyes Montilla
+ */
 public class GestorAdmin {
 	/**
 	 * Variable privada Singleton.
@@ -39,11 +41,36 @@ public class GestorAdmin {
 	/**
 	 * Metodo que devuelve un admin de la base de datos
 	 * @param email Email del admin que va a ser leido.
-	 * @return CustomerDTO
+	 * @return AdminDTO
 	 */
-	public CustomerDTO readCustomer(String email) {	
-		CustomerDAO db = CustomerDAO.getInstance();
+	public AdminDTO leerAdmin(String email) {	
+		AdminDAO db = AdminDAO.getInstance();
 		return db.read(email);
+	}
+	/**
+	 * Metodo para dar de alta un admin.
+	 * @param email Email del admin.
+  	 * @param nombre Nombre del admin.
+  	 * @param apellidos Apellidos del admin.
+  	 * @param fechaNacimiento Representa la fecha de nacimiento del admin.
+  	 * @param especial Indica si en admin pertenece a un grupo especial (true) o no (false).
+	 * @return void.
+	 */
+	public boolean darAltaAdmin(String email, String nombre, String apellidos, String fechaNacimiento, String especial){
+		AdminDAO db = AdminDAO.getInstance();
+		AdminDTO aux = new AdminDTO();
+		
+		aux.setEmail(email);
+		aux.setNombre(nombre);
+		aux.setApellidos(apellidos);
+		
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+        LocalDate fechaTrans = LocalDate.parse(fechaNacimiento, formatter);
+        
+		aux.setFechaNacimiento(fechaTrans);
+		aux.setEspecial(Boolean.parseBoolean(especial));
+		
+		return db.create(aux);
 	}
 	/**
 	 * Metodo Modificar toda la información de un Admin identificado por su id.
@@ -55,8 +82,12 @@ public class GestorAdmin {
   	 * @param especial Indica si en Admin pertenece a un grupo especial (true) o no (false).
 	 * @return void.
 	 */
-	public boolean modificarAdmin(int id, String email, String nombre, String apellidos, LocalDate fechaNacimiento, boolean especial){
+	public boolean modificarAdmin(int id, String email, String nombre, String apellidos, String fechaNacimiento, String especial){
 		AdminDAO db = AdminDAO.getInstance();
-		return db.update(new AdminDTO(id, email, nombre, apellidos, fechaNacimiento, especial));
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+        LocalDate fechaTrans = LocalDate.parse(fechaNacimiento, formatter);
+        
+		return db.update(new AdminDTO(id, email, nombre, apellidos, fechaTrans, Boolean.parseBoolean(especial)));
 	}
 }

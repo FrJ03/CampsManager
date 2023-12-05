@@ -1,3 +1,4 @@
+<%@page import="controller.gestores.GestorCustomer"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import ="controller.dto.customer.*" %>
@@ -16,27 +17,27 @@ String mensajeNextPage = "";
 if (customerBean == null || customerBean.getEmailUser().equals("")) {
 	String passwordUser = request.getParameter("password");
 	String emailUser = request.getParameter("email");
-	String a = "Client";
+
 	//Caso 2.a: Hay parámetros -> procede de la VISTA
 	if (emailUser != null) {
-		//Se accede a bases de datos para obtener el usuario
-	
-		mensajeNextPage="Furula";
-		CustomerDTO user = new CustomerDTO("pepito@gmail.com", "pepito", Rol.Client);
 		
+		CustomerDTO user = new CustomerDTO();
+		GestorCustomer gc = GestorCustomer.getInstance();
+		user = gc.readCustomer(emailUser);
 		//Se realizan todas las comprobaciones necesarias del dominio
+		
 		//Aquí sólo comprobamos que exista el usuario
-		if (user != null && user.getEmail().equalsIgnoreCase("pepito@gmail.com")) {
+		if (user != null && user.getPassword().equalsIgnoreCase(passwordUser)) {
 			// Usuario válido		
 %>
 <jsp:setProperty property="emailUser" value="<%=emailUser%>" name="customerBean"/>
-<jsp:setProperty property="rol" value="<%=a%>" name="customerBean"/>
+<jsp:setProperty property="rol" value="<%=user.getRolName()%>" name="customerBean"/>
 <jsp:setProperty property="password" value="<%=passwordUser%>" name="customerBean"/>
 <%
 		} else {
 			// Usuario no válido
 			nextPage = "../../view/login/loginView.jsp";
-			mensajeNextPage = "The user is not valid/doesn't exsist";
+			mensajeNextPage = "The user/password is not valid";
 
 		}
 	//Caso 2.b -> se debe ir a la vista por primera vez

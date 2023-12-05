@@ -3,7 +3,10 @@ package controller.gestores;
 import controller.dto.customer.CustomerDTO;
 import controller.dto.customer.Rol;
 import model.dao.CustomerDAO;
-
+/**
+ * Clase que gestiona la información de los customer al campamento
+ * @author Enrique de los Reyes Montilla
+ */
 public class GestorCustomer {
 	/**
 	 * Variable privada Singleton.
@@ -29,7 +32,7 @@ public class GestorCustomer {
 	 * @param CustomerDTO customer que se va a añadir a la lista de customer.
 	 * @return boolean(false error, true no error).
 	 */
-	public boolean darAltacustomer(CustomerDTO customer) {	
+	public boolean darAltaCustomer(CustomerDTO customer) {	
 		CustomerDAO db = CustomerDAO.getInstance();
 		return db.create(customer);
 	}
@@ -49,8 +52,8 @@ public class GestorCustomer {
   	 * @param rol Rol del customer.
 	 * @return void.
 	 */
-	public boolean modificarcustomer(String email, String password,Rol rol ){
+	public boolean modificarCustomer(String email, String password,String rol ){
 		CustomerDAO db = CustomerDAO.getInstance();
-		return db.update(new CustomerDTO(email, password, rol));
+		return db.update(new CustomerDTO(email, password, Rol.valueOf(rol)));
 	}
 }

@@ -10,7 +10,10 @@ import java.util.Properties;
 
 import controller.dto.admin.AdminDTO;
 import model.common.Connector;
-
+/**
+ * DAO que permite gestionar los accesos a la base de datos relacionados con un admin.
+ * @author Enrique de los Reyes Montilla
+ */
 public class AdminDAO implements InterfaceDAO<AdminDTO>{
 	/**
 	 * Variable privada Singleton.

@@ -11,7 +11,10 @@ import java.util.Properties;
 import controller.dto.customer.CustomerDTO;
 import controller.dto.customer.Rol;
 import model.common.Connector;
-
+/**
+ * DAO que permite gestionar los accesos a la base de datos relacionados con customers.
+ * @author Enrique de los Reyes Montilla
+ */
 public class CustomerDAO implements InterfaceDAO<CustomerDTO> {
 	/**
 	 * Variable privada Singleton.
