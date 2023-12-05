@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import model.dao.AsistenteDAO;
+import model.dao.CustomerDAO;
 import controller.dto.assistant.*;
+import controller.dto.customer.CustomerDTO;
 /**
  * Clase que gestiona la información de los asistentes al campamento
  * @author Manuel García Obrero
@@ -37,6 +39,15 @@ public class GestorAsistentes {
 	public ArrayList<AssistantDTO> getListaAsistente() {
 		AsistenteDAO db = AsistenteDAO.getInstance();
 		return db.readAll();
+	}
+	/**
+	 * Metodo que devuelve un asistente de la base de datos
+	 * @param email Email del asistente que va a ser leido.
+	 * @return CustomerDTO
+	 */
+	public CustomerDTO readCustomer(String email) {	
+		CustomerDAO db = CustomerDAO.getInstance();
+		return db.read(email);
 	}
 	/**
 	 * Metodo que añade a la lista de asistente un nuevo asistente pasado como argumento, comprobando si no estaba registrado. Si estaba registrado devuelve false y si no lo estaba true

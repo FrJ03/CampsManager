@@ -34,6 +34,15 @@ public class GestorCustomer {
 		return db.create(customer);
 	}
 	/**
+	 * Metodo que devuelve un Customer de la base de datos
+	 * @param email Email del customer que va a ser leido.
+	 * @return CustomerDTO
+	 */
+	public CustomerDTO readCustomer(String email) {	
+		CustomerDAO db = CustomerDAO.getInstance();
+		return db.read(email);
+	}
+	/**
 	 * Metodo Modificar toda la información de un customer identificado por su id.
 	 * @param email Identificador único del customer que se desea modificar.
   	 * @param password Password del customer.
