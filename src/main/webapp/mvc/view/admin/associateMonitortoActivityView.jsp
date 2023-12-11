@@ -23,8 +23,15 @@
     <h2>Associate monitor to an activity</h2>
 	<%= messageNextPage %><br/><br/>
     <form action="/Proyecto-Programacion-Web/AssociateMonitortoActivity" method="post">
-        <!-- FORM -->
-        <button type="submit">Search</button>
+        <label for="mon">Monitor: </label>
+	<input type="text" name="mon"><br/>
+	<label for="activity">Activity: </label>
+	<input type="text" name="activity" ><br/>
+	<input type="submit" value="Submit">
     </form>
+
+<!-- VOLVER A INDEX -->
+<jsp:include page="/include/templates/returnToIndex.jsp"></jsp:include>
+
 </body>
 </html>
