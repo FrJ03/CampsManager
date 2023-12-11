@@ -38,15 +38,15 @@
             <li><a href="../register/changeDataView.jsp"></a>Modify user info</li>
         </ul>
 
-        <!-- PONER DIVS DE CSS  para que quede bonito -->
+        <!-- PONER divs DEL CSS para que quede bonito -->
         			<br><br>
-              <p>Admin Operations:</p>
-              <br>
-        			<button type="button" class="small-button" onclick="window.location.href='./CreateActivityView.jsp'">Create Activity</button><br> !!
+                    <p>Admin Operations:</p>
+                    <br>
+        			<button type="button" class="small-button" onclick="window.location.href='./createActivityView.jsp'">Create Activity</button><br>
         			<br><br>
-        			<button type="button" class="small-button" onclick="window.location.href='./CreateCamp.jsp'">Create Camp</button><br> !!
+        			<button type="button" class="small-button" onclick="window.location.href='./createCampView.jsp'">Create Camp</button><br>
         			<br><br>
-        			<button type="button" class="small-button" onclick="window.location.href='./modificarPistaView.jsp'">Create Monitor</button><br> !!
+        			<button type="button" class="small-button" onclick="window.location.href='./createMonitorView.jsp'">Create Monitor</button><br>
         			<br><br>
         			<button type="button" class="small-button" onclick="window.location.href='./associateActivitytoCampForm.jsp'">Associate Activity to Camp</button><br>
         			<br><br>
@@ -54,6 +54,5 @@
         			<br><br>
         			<button type="button" class="small-button" onclick="window.location.href='./associateMonitortoCampView.jsp'">Associate Monitor to Camp</button><br>
         			<br><br>
-
     </body>
 </html>
