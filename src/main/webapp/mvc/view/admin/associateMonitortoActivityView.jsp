@@ -20,17 +20,10 @@
 		<% 
 			}
 		%>
-    <h2>Associate special monitor to an activity</h2>
+    <h2>Associate monitor to an activity</h2>
 	<%= messageNextPage %><br/><br/>
     <form action="/Proyecto-Programacion-Web/AssociateMonitortoActivity" method="post">
-        <label for="special">:</label>
-        <input type="number" name="availableSeats" id="availableSeats" min="1">
-        <button type="submit">Search</button>
-    </form>
-	 <h2>Associate supervisor monitor to an activity</h2>
-    <form action="/Proyecto-Programacion-Web/AssociateMonitortoActivity" method="post">
-        <label for="availableSeats">Search by Available Seats:</label>
-        <input type="number" name="availableSeats" id="availableSeats" min="1">
+        <!-- FORM -->
         <button type="submit">Search</button>
     </form>
 </body>
