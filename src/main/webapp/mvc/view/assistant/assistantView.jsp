@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-    // PONER CSS
     <link rel="stylesheet" href="../../css/style.css">
         <meta charset="UTF-8">
         <title>Welcome, assistant!</title>
@@ -34,11 +33,9 @@
         %>
 
         <ul>
-            // LINKAR EL JSP DE OPERACIONES DE ASISTENTE
-            <li><a href=""></a>What you can do</li>
+            <li><a href="./assistantOperationsView.jsp"></a>What you can do</li>
             <li><a href="../../controller/logout/logout.jsp"></a>Logout</li>
-            // LINKAR MODIFICAR DATOS
-            <li><a href=""></a>Modify user info</li>
+            <li><a href="../register/changeDataView.jsp"></a>Modify user info</li>
         </ul>
 //Mensaje de bienvenida
 Welcome assistant <jsp:getProperty name="customerBean" property="emailUser_"/><br>
