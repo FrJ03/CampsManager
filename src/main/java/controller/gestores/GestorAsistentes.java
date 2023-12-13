@@ -75,6 +75,11 @@ public class GestorAsistentes {
         
 		return db.update(new AssistantDTO(id, email, nombre, apellidos, fechaTrans, Boolean.parseBoolean(especial)));
 	}
+	public boolean modificarAsistente(int id, String email, String nombre, String apellidos, LocalDate fechaNacimiento, boolean especial){
+		AsistenteDAO db = AsistenteDAO.getInstance();
+        
+		return db.update(new AssistantDTO(id, email, nombre, apellidos, fechaNacimiento, especial));
+	}
 	/**
 	 * Metodo para dar de alta un asistente.
 	 * @param email Email del asistente.

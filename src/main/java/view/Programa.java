@@ -92,6 +92,14 @@ public class Programa {
 						
 						id = Integer.parseInt(aux);
 						
+						System.out.print("New Assistant email: ");
+						String email = null;
+						try {
+							email = teclado.readLine();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						
 						System.out.print("New Assistant Firstname: ");
 						String nombre = null;
 						try {
@@ -112,7 +120,7 @@ public class Programa {
 						
 						Boolean especial = getSpecialNeeds();
 						
-						if(asistentes.modificarAsistente(id, nombre, apellidos, fecha, especial))
+						if(asistentes.modificarAsistente(id, email, nombre, apellidos, fecha, especial))
 							System.out.println("Succesfull.");
 						else
 							System.out.println("Error modifying the assistant.");
