@@ -1,4 +1,4 @@
-	package controller.gestores;
+package controller.gestores;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -133,9 +133,9 @@ public class GestorCampamentos {
 			else
 				return false;
 			
-			if(turn.equalsIgnoreCase("mañana"))
+			if(turn.equalsIgnoreCase("morning"))
 				t = Turno.Morning;
-			else if(turn.equalsIgnoreCase("tarde"))
+			else if(turn.equalsIgnoreCase("afternoon"))
 				t = Turno.Afternoon;
 			else
 				return false;
@@ -153,6 +153,30 @@ public class GestorCampamentos {
 			if(m == null)
 				return false;
 			CampDTO campamento = new CampDTO(-1, start, end, level, maxP);
+			campamento.setResponsable(m);
+			CampamentoDAO db = CampamentoDAO.getInstance();
+			return db.create(campamento);
+		}
+		public Boolean crearCampamento(String start, String end, String level, int maxP, int idM) {
+			if(!isDate(start) || !isDate(end))
+				return false;
+			LocalDate s = LocalDate.of(Integer.parseInt(start.substring(0, 4)), Integer.parseInt(start.substring(5, 7)), Integer.parseInt(start.substring(8, 10)));
+			LocalDate e = LocalDate.of(Integer.parseInt(end.substring(0, 4)), Integer.parseInt(end.substring(5, 7)), Integer.parseInt(end.substring(8, 10)));
+			Nivel l;
+			if(level.equalsIgnoreCase("infantil"))
+				l = Nivel.Infantil;
+			else if(level.equalsIgnoreCase("juvenil"))
+				l = Nivel.Juvenil;
+			else if(level.equalsIgnoreCase("adolescente"))
+				l = Nivel.Adolescente;
+			else
+				return false;
+			
+			MonitorDAO dbM = MonitorDAO.getInstance();
+			MonitorDTO m = dbM.read(idM);
+			if(m == null)
+				return false;
+			CampDTO campamento = new CampDTO(-1, s, e, l, maxP);
 			campamento.setResponsable(m);
 			CampamentoDAO db = CampamentoDAO.getInstance();
 			return db.create(campamento);
@@ -222,5 +246,30 @@ public class GestorCampamentos {
 				return false;
 			else
 				return dbC.updateEspecial(idCampamento, idMonitor);
+		}
+		private boolean isDate(String date) {
+			return isDateFormat(date) && dateValid(Integer.parseInt(date.substring(0, 4)), Integer.parseInt(date.substring(5, 7)), Integer.parseInt(date.substring(8, 10)));
+		}
+		private boolean isDateFormat(String date) {
+			return date.length() == 10 && isInteger(date.substring(0, 4)) && date.charAt(4) == '/' && isInteger(date.substring(5, 7)) && date.charAt(7) == '/' && isInteger(date.substring(8, 10));
+		}
+		private boolean dateValid(int year, int month, int day) {
+			if((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && day <= 31 && day > 0)
+				return true;
+			else if((month == 4 || month == 6 || month == 9 || month == 11) && day <= 30 && day > 0)
+				return true;
+			else if(month == 2) {
+				if((year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) && day <= 29 && day > 0)
+					return true;
+				else if(!(year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) && day <= 28 && day > 0)
+					return true;
+				else 
+					return false;
+			}
+			else 
+				return false;
+		}
+		private boolean isInteger(String number) {
+			return number != null && number.matches("[0-9]+");
 		}
 }
