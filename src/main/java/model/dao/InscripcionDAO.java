@@ -189,6 +189,42 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 		return status;
 
 	}
+	/**
+	 * Delete a registration
+	 * @param idCamp Camp identifier
+	 * @param idAssistant Assistant identifier
+	 * @return boolean True if the registration has been deleted, false otherwise
+	 */
+	public boolean delete(int idCamp, int idAssistant) {
+		int rs =0;
+		boolean status = false;
+		BufferedReader reader = null;
+		Connector con = new Connector();
+		try{
+			
+			Properties p = new Properties();	
+			reader = new BufferedReader(new FileReader(new File(dir_)));
+			p.load(reader);
+			String query = p.getProperty("deleteInscripcion");
+			
+			Connection c=con.getConnection();
+			PreparedStatement preparedStatement = c.prepareStatement(query);
+	        preparedStatement.setInt(1, idAssistant);
+	        preparedStatement.setInt(2, idCamp);
+	
+			rs = preparedStatement.executeUpdate(); 
+			
+			if(rs == 1) {
+				status = true;
+			}
+			
+			con.deleteConnection(c);
+			
+		} catch(Exception e) { System.out.println(e); }
+		
+		return status;
+
+	}
 	public ArrayList<RegistrationDTO>readAll(){
 
 		BufferedReader reader = null;
