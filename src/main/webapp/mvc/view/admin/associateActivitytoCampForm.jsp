@@ -13,7 +13,7 @@
 		String messageNextPage = (String)request.getAttribute("message");
 		if (messageNextPage == null) messageNextPage = "";
 			if (customerBean == null || !customerBean.getRol().equals("Admin")) {
-			//No debería estar aquí -> flujo salta a index.jsp
+			//No deberÃ­a estar aquÃ­
 				String nextPage = "/include/errors/errorRol.jsp";
 		%>
 				<jsp:forward page="<%=nextPage%>"></jsp:forward>
