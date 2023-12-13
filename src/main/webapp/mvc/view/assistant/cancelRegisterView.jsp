@@ -1,1 +1,61 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<jsp:useBean id="customerBean" scope="session" class="view.beans.customer.CustomerBean"></jsp:useBean>
 
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" href="../../css/style.css">
+        <meta charset="UTF-8">
+        <title>Cancel registration</title>
+    </head>
+    <body>
+        <%
+            String nextPage="";
+            String messageNextPage = (String)request.getAttribute("message");
+
+            if(customerBean != null || !customerBean.getEmailUser().equals("")){
+                //No debería estar aquí, lo mando al index
+                nextPage="../../../webapp/index.jsp";
+        %>
+                <jsp:forward page="<%=nextPage%>"><jsp:forward>
+        <%
+            }
+            if(customerBean.getRolName() == "Admin"){
+                //Lo mando a la página de admin
+                nextPage="../../controller/admin/admin.jsp";
+        %>
+                <jsp:forward page="<%=nextPage%>"></jsp:forward>
+        <%
+            }
+            else{
+                if(customerBean.getRolName() == "None"){
+                    nextPage="../../../webapp/index.jsp";
+        %>
+                    <jsp:forward page="<%=nextPage%>"><jsp:forward>
+        <%
+                }
+            }
+        %>
+
+        <ul>
+            <li><a href="../../controller/assistant/assistant.jsp"></a>User index</li>
+            <li><a href="../../controller/logout/logout.jsp"></a>Logout</li>
+            <li><a href="../register/changeDataView.jsp"></a>Modify user info</li>
+        </ul>
+<br>
+        <h2>Cancel registration</h2>
+            <%= messageNextPage %><br><br>
+        <form action="/Proyecto-Programacion-Web/CancelRegistration" method="post">
+            
+            <label for="idCamp">Input camp you want to cancel your registration to:</label>
+            <input type="number" name="idCamp" id="idCamp" required>
+
+            <label for="idAssistant">Input your Assistant ID:</label>
+            <input type="number" name="idAssistant" id="idAssistant" required>
+            
+            <button type="submit">Cancel</button>
+        </form>
+
+    </body>
+</html>
