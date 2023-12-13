@@ -39,7 +39,7 @@
         </ul>
 
 <!-- formulario para crear camp -->
-              <h2>Create Campament</h2>
+              <h2>Create Camp:</h2>
               <form action="../../controller/servlets/CreateCamp.java" method="post">
                   <label for="initDate">Start Date:</label>
                   <input type="text" id="initDate" name="initDate" required>
