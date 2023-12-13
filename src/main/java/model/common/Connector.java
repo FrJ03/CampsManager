@@ -8,14 +8,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Class that connect to the database
+ */
 public class Connector {
-	/*
-	 * Representa la dirección al fichero properties.
+	/**
+	 * Properties file path.
 	 */
 	private static String dir_ = "config.properties";
 	/**
-	 * Metodo para realizar la conexión con la base de datos.
-	 * @return Connection
+	 * Method that connect to the database
+	 * @return Connection Database connection
 	 */
 	public Connection getConnection() {
 		BufferedReader reader = null;
@@ -48,8 +51,8 @@ public class Connector {
 	}
 
 	/**
-	 * Método que permite la desconexión de la base de datos.
-	 * @param Connection Conector que permite el acceso a la base de datos.
+	 * Method that close a database connection
+	 * @param Connection Database connector.
 	 * @return void
 	 */
 	public void deleteConnection(Connection conn) {
