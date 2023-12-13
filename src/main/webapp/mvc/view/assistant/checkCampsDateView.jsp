@@ -47,6 +47,7 @@
 
         <h2>Check available camps</h2>
             <%= messageNextPage %><br><br>
+<!-- EXISTE EL CONTROLADOR CHECKCAMPSDATE?? -->
         <form action="/Proyecto-Programacion-Web/CheckCampsDate" method="post">
             
             <label for="dateStart">Date of beginning of camp:</label>
