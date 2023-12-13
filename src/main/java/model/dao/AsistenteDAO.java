@@ -13,21 +13,21 @@ import model.common.Connector;
 import controller.dto.assistant.*;
 
 /**
- * DAO que permite gestionar los accesos a la base de datos relacionados con asistentes.
+ * Class that manage database access related to assistant implemented using Singleton design pattern
  * @author Enrique de los Reyes Montilla
  */
 public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 	/**
-	 * Variable privada Singleton.
+	 * Singleton private attribute.
 	 */
 	private static AsistenteDAO instance_= null;
-	/*
-	 * *Representa la dirección al fichero properties.
+	/**
+	 * Properties file path.
 	 */
 	private static String dir_ = "sql.properties";
 	/**
-	 * Metodo que sirve de acceso a la instancia.
-	 * @return Instancia de la clase AsistenteDAO.
+	 * Instance access method.
+	 * @return AsistenteDAO instance.
 	 */
 	public static AsistenteDAO getInstance() {
 		if(instance_ == null) {
@@ -36,13 +36,13 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 		return instance_;
 	}
 	/**
-	 * Constructor vacío de la clase AsistenteDAO.
+	 * Empty constructor.
 	 */
 	private AsistenteDAO() {}
 	/**
-	 * Añade un nuevo asistente a la base de datos.
-	 * @param object Asistente el cual va a ser añadido a la base de datos.
-	 * @return boolean
+	 * Add a new assistant to the database.
+	 * @param object Assistant to be added.
+	 * @return boolean true if the assistant has been added correctly, else otherwise
 	 */
 	@Override
 	public boolean create(AssistantDTO object) {
@@ -78,9 +78,9 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 		
 	}
 	/**
-	 * Lee un asistente de la base de datos.
-	 * @param Asistente Asistente con el id se va a leer de la base de datos.
-	 * @return Monitor
+	 * Read an assistant from the database.
+	 * @param Asistente Assistant that contains the assistant id to read.
+	 * @return AssistantDTO Assistant red if it has red correctly, else otherwise
 	 */
 	@Override
 	public AssistantDTO read(AssistantDTO object) {
@@ -116,9 +116,9 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 
 	}
 	/**
-	 * Elimina un asistente de la base de datos.
-	 * @param object Asistente el cual se va a eliminar de la base de datos.
-	 * @return boolean
+	 * Delete an assistant.
+	 * @param object Assistant to be deleted.
+	 * @return boolean true if the assistant has been deleted, else otherwise
 	 */
 	@Override
 	public boolean delete(AssistantDTO object) {
@@ -152,8 +152,8 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 
 	}
 	/**
-	 * Añade todos los asistentes de la base de datos a un lista.
-	 * @return Array<Monitor>
+	 * Read all assistant in the database.
+	 * @return ArrayList<AssistantDTO> List of assistants
 	 */
 	public ArrayList<AssistantDTO> readAll(){
 
@@ -187,9 +187,9 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 		return list;
 	}
 	/**
-	 * Actualiza un asistente de la base de datos.
-	 * @param object Asistente el cual va a ser actualizado.
-	 * @return boolean
+	 * Update an assistant.
+	 * @param object Assistant to be updated.
+	 * @return boolean true if the assistant has been updated correctly, else otherwise
 	 */
 	public boolean update(AssistantDTO object){
 
@@ -228,9 +228,9 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 	}
 	
 	/**
-	 * Lee un asistente de la base de datos.
-	 * @param id Id que se va a leer de la base de datos.
-	 * @return Monitor
+	 * Read an assistant from the database.
+	 * @param id Assistant id to read.
+	 * @return AssistantDTO Assistant red if it has red correctly, else otherwise
 	 */
 	public AssistantDTO read(int id) {
 		
@@ -265,9 +265,9 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 
 	}
 	/**
-	 * Lee un asistente de la base de datos.
-	 * @param email Email del asistente que se va a leer de la base de datos.
-	 * @return Monitor
+	 * Read an assistant from the database.
+	 * @param email Assistant id to read.
+	 * @return AssistantDTO Assistant red if it has red correctly, else otherwise
 	 */
 	public AssistantDTO read(String email) {
 		
