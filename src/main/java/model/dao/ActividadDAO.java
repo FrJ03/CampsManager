@@ -15,7 +15,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 /**
- * Class that performs database queries related to assistants implemented using Singleton design pattern
+ * Class that performs database queries related to activities implemented using Singleton design pattern
  * @author Manuel García Obrero
  */
 
