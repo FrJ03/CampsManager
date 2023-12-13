@@ -47,7 +47,7 @@
         
         <h2>Register in a camp:</h2>
             <%= messageNextPage %><br><br>
-<!-- EXISTE EL CONTROLADOR DE CANCELAR REGISTROS?? -->
+<!-- EXISTE EL CONTROLADOR DE HACER REGISTROS?? -->
         <form action="Proyecto-Programacion-Web/DoRegistration" method="post">
 
             <label for="type">Type:</label>
