@@ -22,7 +22,7 @@
             if(customerBean.getRolName() == "Client"){
                 //Lo mando a la página de admin
                 nextPage="../../controller/admin/admin.jsp";
-                <jsp:forward page="<%=nextPage%>"></jsp:forward>
+                <jsp:forward page="<%=nextPage%>"></jsp:forward>;
             }
             else{
                 if(customerBean.getRolName() == "None"){
