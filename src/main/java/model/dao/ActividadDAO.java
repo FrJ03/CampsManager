@@ -15,22 +15,22 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 /**
- * Clase ActividadDAO que realiza las consultas relacionadas con las actividad.
+ * Class that performs database queries related to assistants implemented using Singleton design pattern
  * @author Manuel García Obrero
  */
 
 public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 	/**
-	 * Variable privada Singleton.
+	 * Singleton private attribute.
 	 */
 	private static ActividadDAO instance_= null;
-	/*
-	 * *Representa la dirección al fichero properties.
+	/**
+	 * Properties file path.
 	 */
 	private static String dir_ = "sql.properties";
 	/**
-	 * Metodo que sirve de acceso a la instancia.
-	 * @return Instancia de la clase ActividadDAO.
+	 * Instance access method.
+	 * @return ActividadDAO instance.
 	 */
 	public static ActividadDAO getInstance() {
 		if(instance_ == null) {
@@ -39,14 +39,14 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 		return instance_;
 	}
 	/**
-	 * Constructor vacío de la clase ActividadDAO.
+	 * Empty Constructor.
 	 */
 	private ActividadDAO() {}
 	
 	/**
-	 * Añade una nueva actividad a la base de datos.
-	 * @param object Actividad el cual va a ser añadido a la base de datos.
-	 * @return boolean
+	 * Add a new activity to the database.
+	 * @param object Activity to be added in the database.
+	 * @return boolean true if the activity has been added correctly, else otherwise
 	 */
 	@Override
 	public boolean create(ActivityDTO object) {
@@ -82,9 +82,9 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 	}
 	
 	/**
-	 * Lee una Actividad de la base de datos.
-	 * @param Actividad Actividad con el id que se va a leer de la base de datos.
-	 * @return Actividad
+	 * Read an activity from the database.
+	 * @param object Activity with the activity id to read.
+	 * @return Actividad Activity red if it exists, null otherwise
 	 */
 	@Override
 		public ActivityDTO read(ActivityDTO object) {
@@ -119,9 +119,9 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 		return ac;
 	}
 	/**
-	 * Lee un id pasado y te devuelve la actividad de ese id.
-	 * @param id Actividad que se va a leer de la base de datos.
-	 * @return Actividad 
+	 * Read an activity from the database.
+	 * @param id Activity id to read.
+	 * @return Actividad Activity red if it exists, null otherwise
 	 */
 		public ActivityDTO read(int id) {
 		
@@ -154,9 +154,9 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 		return object;
 	}
 	/**
-	 * Elimina una actividad de la base de datos.
-	 * @param object Actividad el cual se va a eliminar de la base de datos.
-	 * @return boolean
+	 * Delete an activity from the database.
+	 * @param object Activity with the activity id to delete.
+	 * @return boolean true if the activity has been deleted correctly, else otherwise
 	 */
 	@Override
 	public boolean delete(ActivityDTO object) {
@@ -189,8 +189,8 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 	}
 	
 	/**
-	 * Añade todos las Actividades de la base de datos a un lista.
-	 * @return Array<Actividad>
+	 * Read all activities of the database.
+	 * @return Array<Actividad> List of activities
 	 */
 	public ArrayList<ActivityDTO>readAll(){
 		BufferedReader reader = null;
@@ -222,7 +222,11 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 		
 		return list;
 	}
-
+	/**
+	 * Read all monitors of an activity
+	 * @param idActivity Activity identifier
+	 * @return MonitorDTO List of monitors
+	 */
 	public ArrayList<MonitorDTO> readMonitorsActivity(int idActivity){
 		ArrayList<MonitorDTO> monitors = new ArrayList<MonitorDTO>();
 		BufferedReader reader = null;
@@ -252,6 +256,12 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 		} catch(Exception e) { System.out.println(e); }
 		return monitors;
 	}
+	/**
+	 * Add a monitor to an activity
+	 * @param idActivity Activity identifier
+	 * @param idMonitor Monitor identifier
+	 * @return boolean true if the monitor has been added to the activity, else otherwise
+	 */
 	public boolean addActivity(int idActivity, int idMonitor) {
 		BufferedReader reader = null;
 		int status = 0;
@@ -283,4 +293,3 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 	}
 	
 }
-
