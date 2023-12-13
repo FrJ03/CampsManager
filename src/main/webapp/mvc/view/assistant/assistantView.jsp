@@ -12,22 +12,22 @@
     <body>
         <%
             String nextPage="";
-            String messageNextPage="";
+            String messageNextPage = (String)request.getAttribute("message");
 
             if(customerBean != null || !customerBean.getEmailUser().equals("")){
                 //No debería estar aquí, lo mando al index
                 nextPage="../../../webapp/index.jsp";
-                <jsp:include page="<%=nextPage%>"><jsp:include>;
+                <jsp:forward page="<%=nextPage%>"><jsp:forward>;
             }
             if(customerBean.getRolName() == "Admin"){
                 //Lo mando a la página de admin
                 nextPage="../../controller/admin/admin.jsp";
-                <jsp:include page="<%=nextPage%>"></jsp:include>
+                <jsp:forward page="<%=nextPage%>"></jsp:forward>;
             }
             else{
                 if(customerBean.getRolName() == "None"){
                     nextPage="../../../webapp/index.jsp";
-                    <jsp:include page="<%=nextPage%>"><jsp:include>;
+                    <jsp:forward page="<%=nextPage%>"><jsp:forward>;
                 }
             }
         %>
