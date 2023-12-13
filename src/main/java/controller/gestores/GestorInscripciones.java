@@ -160,6 +160,13 @@ public class GestorInscripciones {
 		
 		return listaAux;
 	}
-	
-	
+	public boolean deleteRegistration(int idCamp, int idAssistant) {
+		InscripcionDAO dbI = InscripcionDAO.getInstance();
+		CampamentoDAO dbC = CampamentoDAO.getInstance();
+		AsistenteDAO dbA = AsistenteDAO.getInstance();
+		if(dbC.read(idCamp) == null || dbA.read(idAssistant) == null || dbI.read(idCamp, idAssistant) == null)
+			return false;
+		
+		return dbI.delete(idCamp, idAssistant);
+	}
 }
