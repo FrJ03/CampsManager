@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-    // PONER CSS
     <link rel="stylesheet" href="../../css/style.css">
         <meta charset="UTF-8">
         <title>What you can do as an assistant</title>
