@@ -17,17 +17,23 @@
             if(customerBean != null || !customerBean.getEmailUser().equals("")){
                 //No debería estar aquí, lo mando al index
                 nextPage="../../../webapp/index.jsp";
+        %>
                 <jsp:forward page="<%=nextPage%>"><jsp:forward>
+        <%
             }
             if(customerBean.getRolName() == "Admin"){
                 //Lo mando a la página de admin
                 nextPage="../../controller/admin/admin.jsp";
+        %>
                 <jsp:forward page="<%=nextPage%>"></jsp:forward>
+        <%
             }
             else{
                 if(customerBean.getRolName() == "None"){
                     nextPage="../../../webapp/index.jsp";
+        %>
                     <jsp:forward page="<%=nextPage%>"><jsp:forward>
+        <%
                 }
             }
         %>
