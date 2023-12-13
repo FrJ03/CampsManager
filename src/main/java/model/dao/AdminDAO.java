@@ -10,22 +10,23 @@ import java.util.Properties;
 
 import controller.dto.admin.AdminDTO;
 import model.common.Connector;
+
 /**
- * DAO que permite gestionar los accesos a la base de datos relacionados con un admin.
+ * Class that manage database access related to administrators implemented using Singleton design pattern
  * @author Enrique de los Reyes Montilla
  */
 public class AdminDAO implements InterfaceDAO<AdminDTO>{
 	/**
-	 * Variable privada Singleton.
+	 * Singleton private attribute.
 	 */
 	private static AdminDAO instance_= null;
-	/*
-	 * *Representa la dirección al fichero properties.
+	/**
+	 * Properties file path.
 	 */
 	private static String dir_ = "sql.properties";
 	/**
-	 * Metodo que sirve de acceso a la instancia.
-	 * @return Instancia de la clase AdminDAO.
+	 * Instance access method.
+	 * @return AdminDAO instance.
 	 */
 	public static AdminDAO getInstance() {
 		if(instance_ == null) {
@@ -34,13 +35,13 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 		return instance_;
 	}
 	/**
-	 * Constructor vacío de la clase AdminDAO.
+	 * Empty constructor.
 	 */
 	private AdminDAO() {}
 	/**
-	 * Añade un nuevo Admin a la base de datos.
-	 * @param object Admin el cual va a ser añadido a la base de datos.
-	 * @return boolean
+	 * Add a new admin to the database.
+	 * @param object Admin to add.
+	 * @return boolean true if the admin has been added correctly, else otherwise
 	 */
 	@Override
 	public boolean create(AdminDTO object) {
@@ -76,9 +77,9 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 		
 	}
 	/**
-	 * Lee un Admin de la base de datos.
-	 * @param Admin Admin con el id se va a leer de la base de datos.
-	 * @return Monitor
+	 * Read an admin from the database.
+	 * @param Admin Admin with contains the admin id to read.
+	 * @return AdminDTO Admin red if it exists, null otherwise
 	 */
 	@Override
 	public AdminDTO read(AdminDTO object) {
@@ -114,9 +115,9 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 
 	}
 	/**
-	 * Elimina un Admin de la base de datos.
-	 * @param object Admin el cual se va a eliminar de la base de datos.
-	 * @return boolean
+	 * Delete an admin.
+	 * @param object Admin with contains the admin id to delete.
+	 * @return boolean true if the admin has been deleted, else otherwise
 	 */
 	@Override
 	public boolean delete(AdminDTO object) {
@@ -150,9 +151,9 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 
 	}
 	/**
-	 * Actualiza un Admin de la base de datos.
-	 * @param object Admin el cual va a ser actualizado.
-	 * @return boolean
+	 * Update an admin.
+	 * @param object Admin to update.
+	 * @return boolean true if the admin has been updated, else otherwise
 	 */
 	public boolean update(AdminDTO object){
 
@@ -191,9 +192,9 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 	}
 	
 	/**
-	 * Lee un Admin de la base de datos.
-	 * @param id Id que se va a leer de la base de datos.
-	 * @return Monitor
+	 * Read an admin from the database.
+	 * @param id Admin id to read.
+	 * @return AdminDTO Admin red if it exists, null otherwise
 	 */
 	public AdminDTO read(int id) {
 		
@@ -228,9 +229,9 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 
 	}
 	/**
-	 * Lee un Admin de la base de datos.
-	 * @param email Email del Admin que se va a leer de la base de datos.
-	 * @return Monitor
+	 * Read an admin from the database.
+	 * @param email Admin email to read.
+	 * @return AdminDTO Admin red if it exists, null otherwise
 	 */
 	public AdminDTO read(String email) {
 		
