@@ -34,11 +34,9 @@
         %>
 
         <ul>
-            // LINKAR EL JSP DE OPERACIONES DE ASISTENTE
             <li><a href="../../controller/assistant/assistant.jsp"></a>User index</li>
             <li><a href="../../controller/logout/logout.jsp"></a>Logout</li>
-            // LINKAR MODIFICAR DATOS
-            <li><a href=""></a>Modify user info</li>
+            <li><a href="../register/changeDataView.jsp"></a>Modify user info</li>
         </ul>
 <br>
         <p>
