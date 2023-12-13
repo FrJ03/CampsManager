@@ -17,7 +17,7 @@
             if(customerBean != null || !customerBean.getEmailUser().equals("")){
                 //No debería estar aquí, lo mando al index
                 nextPage="../../../webapp/index.jsp";
-                <jsp:include page="<%=nextPage--%>"><jsp:include>;
+                <jsp:include page="<%=nextPage%>"><jsp:include>;
             }
             if(customerBean.getRolName() == "Client"){
                 //Lo mando a la página de admin
