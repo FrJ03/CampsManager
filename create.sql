@@ -4,6 +4,14 @@ CREATE TABLE IF NOT EXISTS customer(
 	password VARCHAR(32) NOT NULL,
 	rol VARCHAR(8) CHECK (rol='Admin' || rol='Client')
 );
+DROP TABLE IF EXISTS admin;
+CREATE TABLE IF NOT EXISTS admin(
+	id INTEGER PRIMARY KEY AUTO_INCREMENT,
+	emailCustomer VARCHAR(64),
+	nombre TINYTEXT,
+	apellidos TINYTEXT,
+	CONSTRAINT FK_admin_customer FOREIGN KEY (emailCustomer) REFERENCES customer(email)
+);
 DROP TABLE IF EXISTS asistente;
 CREATE TABLE IF NOT EXISTS asistente (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
