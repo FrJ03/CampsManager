@@ -7,23 +7,24 @@ import java.util.ArrayList;
 import model.dao.AsistenteDAO;
 import controller.dto.assistant.*;
 /**
- * Clase que gestiona la información de los asistentes al campamento
+ * Class that manage assistants
+ * @implSpec Singleton Design Pattern
  * @author Manuel García Obrero
  */
 
 public class GestorAsistentes {
 	/**
-	 * Variable privada Singleton.
+	 * Singleton private instance
 	 */
 	private static GestorAsistentes instance_ = null;
 
 	/**
-	 * Constructor privado que crea una lista de asistente vacia.
+	 * Private constructor
 	 */
 	private GestorAsistentes() {};
 	/**
-	 * Metodo que sirve de acceso a la instancia.
-	 * @return Instancia de la clase GestorAsistentes.
+	 * Instance access method
+	 * @return GestorAsistantes Instance
 	 */
 	public static GestorAsistentes getInstance() {
 		if(instance_ == null ) {
@@ -32,39 +33,39 @@ public class GestorAsistentes {
 		return instance_;
 	}
 	/**
-	 * Método que devuelve la lista de asistentes del gestor.
-	 * @return ArrayList<Asistente>.
+	 * Method that returns all assistants
+	 * @return ArrayList<Asistente> List of assistants
 	 */
 	public ArrayList<AssistantDTO> getListaAsistente() {
 		AsistenteDAO db = AsistenteDAO.getInstance();
 		return db.readAll();
 	}
 	/**
-	 * Metodo que devuelve un asistente de la base de datos
-	 * @param email Email del asistente que va a ser leido.
-	 * @return AssistantDTO
+	 * Method that read an assistant using the email address
+	 * @param email Assistant email
+	 * @return AssistantDTO Assistant if exist an assistant with the email, null otherwise
 	 */
 	public AssistantDTO leerAsistente(String email) {	
 		AsistenteDAO da = AsistenteDAO.getInstance();
 		return da.read(email);
 	}
 	/**
-	 * Metodo que añade a la lista de asistente un nuevo asistente pasado como argumento, comprobando si no estaba registrado. Si estaba registrado devuelve false y si no lo estaba true
-	 * @param AssistantDTO asistente que se va a añadir a la lista de asistente.
-	 * @return boolean(false error, true no error).
+	 * Method that add a new assistant
+	 * @param AssistantDTO Assistant to add
+	 * @return boolean True if the assistant has been added, false otherwise
 	 */
 	public boolean darAltaAsistente(AssistantDTO asistente) {	
 		AsistenteDAO db = AsistenteDAO.getInstance();
 		return db.create(asistente);
 	}
 	/**
-	 * Metodo Modificar toda la información de un asistente identificado por su id.
-	 * @param id Identificador único del asistente que se desea modificar.
-	 * @param email Email del asistente.
-  	 * @param nombre Nombre del asistente.
-  	 * @param apellidos Apellidos del asistente.
-  	 * @param fechaNacimiento Representa la fecha de nacimiento del asistente.
-  	 * @param especial Indica si en asistente pertenece a un grupo especial (true) o no (false).
+	 * Method that modify an assistant
+	 * @param id Assistant id
+	 * @param email New email
+  	 * @param nombre New name
+  	 * @param apellidos New lastname
+  	 * @param fechaNacimiento New birth date
+  	 * @param especial New special requirements. True if the assistant needs special requirements, els otherwise
 	 * @return boolean.
 	 */
 	public boolean modificarAsistente(int id, String email, String nombre, String apellidos, String fechaNacimiento, String especial){
@@ -75,19 +76,29 @@ public class GestorAsistentes {
         
 		return db.update(new AssistantDTO(id, email, nombre, apellidos, fechaTrans, Boolean.parseBoolean(especial)));
 	}
+	/**
+	 * Method that modify an assistant
+	 * @param id Assistant id
+	 * @param email New email
+  	 * @param nombre New name
+  	 * @param apellidos New lastname
+  	 * @param fechaNacimiento New birth date
+  	 * @param especial New special requirements. True if the assistant needs special requirements, els otherwise
+	 * @return boolean.
+	 */
 	public boolean modificarAsistente(int id, String email, String nombre, String apellidos, LocalDate fechaNacimiento, boolean especial){
 		AsistenteDAO db = AsistenteDAO.getInstance();
         
 		return db.update(new AssistantDTO(id, email, nombre, apellidos, fechaNacimiento, especial));
 	}
 	/**
-	 * Metodo para dar de alta un asistente.
-	 * @param email Email del asistente.
-  	 * @param nombre Nombre del asistente.
-  	 * @param apellidos Apellidos del asistente.
-  	 * @param fechaNacimiento Representa la fecha de nacimiento del asistente.
-  	 * @param especial Indica si en asistente pertenece a un grupo especial (true) o no (false).
-	 * @return boolean.
+	 * Method that add a new assistant
+	 * @param email Assistant email
+  	 * @param nombre Assistant name
+  	 * @param apellidos Assistant lastname
+  	 * @param fechaNacimiento Assistant birth date
+  	 * @param especial Special requirements. True if the assistant needs special requirements, els otherwise
+	 * @return boolean True if the assistant has been added, false otherwise
 	 */
 	public boolean darAltaAsistente(String email, String nombre, String apellidos, String fechaNacimiento, String especial){
 		AsistenteDAO db = AsistenteDAO.getInstance();
@@ -106,8 +117,8 @@ public class GestorAsistentes {
 		return db.create(aux);
 	}
 	/**
-	 * Metodo que lista a los asistentes actualmente registrados.
-	 * @return String String con la información de los participantes registrados o, en caso de que no haya asistentes registrados, la cadena vacía.
+	 * Read all assistant
+	 * @return String String with all the assistant registered
 	 */
 	public String listaAsistencia(){
 		AsistenteDAO db = AsistenteDAO.getInstance();
@@ -116,7 +127,7 @@ public class GestorAsistentes {
 		
 		if(listaAsistente.size() > 0) {
 			for(AssistantDTO asis : listaAsistente ) {
-				infoAsistentes = asis.toString();
+				infoAsistentes += asis.toString();
 			}
 		}
 		return infoAsistentes;
