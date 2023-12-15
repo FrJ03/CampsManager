@@ -62,8 +62,6 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 			ps.setString(1,object.getEmail());
 			ps.setString(2,object.getNombre());
 			ps.setString(3,object.getApellidos());
-			ps.setBoolean(4,object.getEspecial());
-			ps.setDate(5, java.sql.Date.valueOf(object.get_fechaNacimiento()));
 			
 			status = ps.executeUpdate();	
 			if (status == 1) {
@@ -104,7 +102,7 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 			
 			if (rs.next()) {
 				
-				object = new AdminDTO(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(6).toLocalDate(), rs.getBoolean(5));
+				object = new AdminDTO(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4));
                 as = object;
             } 
 			
@@ -174,9 +172,7 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 	
 			ps.setString(1, object.getNombre());
             ps.setString(2, object.getApellidos());
-            ps.setBoolean(3, object.getEspecial());
-            ps.setDate(4, java.sql.Date.valueOf(object.get_fechaNacimiento()));
-            ps.setInt(5, object.getId());
+            ps.setInt(3, object.getId());
             
 			int rs = ps.executeUpdate();
 			
@@ -218,7 +214,7 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 			
 			if (rs.next()) {
 				
-				as =  new AdminDTO(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(6).toLocalDate(), rs.getBoolean(5));
+				as =  new AdminDTO(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4));
                 
             } 
 			
@@ -255,7 +251,7 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 			
 			if (rs.next()) {
 				
-				as =  new AdminDTO(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(6).toLocalDate(), rs.getBoolean(5));
+				as =  new AdminDTO(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4));
                 
             } 
 			
