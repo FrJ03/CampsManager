@@ -45,7 +45,7 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 	/**
 	 * Method that add a new camp to database.
 	 * @param object Camp to add.
-	 * @return boolean true if the camp has been added correctly, else otherwise
+	 * @return boolean true if the camp has been added correctly, false otherwise
 	 */
 	@Override
 	public boolean create(CampDTO object) {
@@ -91,7 +91,7 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 	/**
 	 * Read a camp from the database.
 	 * @param object Camp that contains the camp id to read.
-	 * @return CampDTO Camp red if it exists, else otherwise
+	 * @return CampDTO Camp red if it exists, null otherwise
 	 */
 	@Override
 	public CampDTO read(CampDTO object) {
@@ -140,7 +140,7 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 	/**
 	 * Delete a camp.
 	 * @param object Camp that contains the camp id to erase.
-	 * @return boolean
+	 * @return boolean true if the camp has been deleted, false otherwise
 	 */
 	@Override
 	public boolean delete(CampDTO object) {
@@ -453,7 +453,7 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 	/**
 	 * Read a camp from the database.
 	 * @param id Camp id to read.
-	 * @return CampDTO Camp red if it exists, else otherwise
+	 * @return CampDTO Camp red if it exists, null otherwise
 	 */
 	public CampDTO read(int id) {
 		
@@ -500,7 +500,7 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 	 * Update the responsible monitor of a camp
 	 * @param idCam Camp id to update.
 	 * @param idMonitor Monitor id to add.
-	 * @return boolean
+	 * @return boolean true if the monitor has been added correctly, false otherwise
 	 */
 	public boolean updateResponsable(int idCam, int idMonitor) {
 		
@@ -539,7 +539,7 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 	 * Update the special monitor of a camp
 	 * @param idCam Camp id to update.
 	 * @param idMonitor Monitor id to add.
-	 * @return boolean
+	 * @return boolean true if the monitor has been added correctly, false otherwise
 	 */
 	public boolean updateEspecial(int idCam, int idMonitor) {
 		
@@ -612,7 +612,7 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 	 * Method that add an activity to a camp
 	 * @param idCamp Camp id
 	 * @param idActivity Activity id to add
-	 * @return boolean true if the activity has been added correctly, else otherwise
+	 * @return boolean true if the activity has been added correctly, false otherwise
 	 */
 	public boolean addActivity(int idCamp, int idActivity) {
 		BufferedReader reader = null;
