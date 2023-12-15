@@ -18,7 +18,7 @@ public class CustomerDTO {
 	   */
 	  private String email_;
 	/**
-	 *	Initialize the customer
+	 *	Empty constructor
 	 */
 	public CustomerDTO() {
 		email_ = "";
@@ -26,7 +26,7 @@ public class CustomerDTO {
 		rol_ = Rol.None;
 	}
 	/**
-	 *	Initialize the customer
+	 *	Constructor
 	 */
 	public CustomerDTO(String email, String password) {
 		email_=email;
@@ -34,7 +34,7 @@ public class CustomerDTO {
 		rol_ = Rol.None;
 	}
 	/**
-	 *	Initialize the customer
+	 *	Constructor
 	 */
 	public CustomerDTO(String email, String password, Rol rol) {
 		email_=email;
@@ -42,22 +42,22 @@ public class CustomerDTO {
 		rol_ = rol;
 	}
 	/**
-	 * Method that returns the customer password
-	 * @return String
+	 * Password get method
+	 * @return String Customer password
 	 */
 	public String getPassword() {
 		return password_;
 	}
 	/**
-	 * Method that returns the customer rol
-	 * @return Rol
+	 * Rol get method
+	 * @return Rol Customer rol
 	 */
 	public Rol getRol() {
 		return rol_;
 	}
 	/**
-	 * Method that returns the customer rol
-	 * @return String ("Admin"/"Client"/"None")
+	 * Rol get method
+	 * @return String Customer rol ("Admin"/"Client"/"None")
 	 */
 	public String getRolName() {
 		if(rol_ == Rol.Admin)
@@ -68,28 +68,28 @@ public class CustomerDTO {
 			return "None";
 	}
 	/**
-	 * Method that returns the customer mail
-	 * @return String mail
+	 * Email address get method
+	 * @return String Customer email address
 	 */
 	public String getEmail() {
 		return email_;
 	}
 	/**
-	 * Method that modify the customer password
+	 * Password set method
 	 * @param password New password
 	 */
 	public void setPassword(String password) {
 		password_ = password;
 	}
 	/**
-	 * Method that modify the customer rol
-	 * @param username New Rol
+	 * Rol set method
+	 * @param rol New Rol
 	 */
 	public void setRol(Rol rol) {
 		rol_ = rol;
 	}
 	/**
-	 * Method that modify the customer rol
+	 * Rol set method
 	 * @param rol New Rol (Must be "Admin", "Client" or "None")
 	 * @return boolean True if the rol value has been modified, false otherwise
 	 */
@@ -108,5 +108,12 @@ public class CustomerDTO {
 		}
 		else
 			return false;
+	}
+	/**
+	 * Email set method
+	 * @param email New email
+	 */
+	public void setEmail(String email) {
+		email_ = email;
 	}
 }
