@@ -13,22 +13,21 @@ import java.io.File;
 import java.io.FileReader;
 
 /**
- * Clase InscripcionDAO que realiza las consultas relacionadas con las inscripciones.
+ * Class that manage database access related to registrations implemented using Singleton design pattern
  * @author Manuel García Obrero
  */
-
 public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{ 
 	/**
-	 * Variable privada Singleton.
+	 * Singleton private attribute.
 	 */
 	private static InscripcionDAO instance_= null;
-	/*
-	 * *Representa la dirección al fichero properties.
+	/**
+	 * Properties file path
 	 */
 	private static String dir_ = "sql.properties";
 	/**
-	 * Metodo que sirve de acceso a la instancia.
-	 * @return Instancia de la clase InscripcionDAO.
+	 * Instance access method.
+	 * @return Instance class.
 	 */
 	public static InscripcionDAO getInstance() {
 		if(instance_ == null) {
@@ -37,14 +36,14 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 		return instance_;
 	}
 	/**
-	 * Constructor vacío de la clase MonitorDAO.
+	 * Empty constructor
 	 */
 	private InscripcionDAO() {}
 	
 	/**
-	 * Añade una nueva inscripcion a la base de datos.
-	 * @param object Inscripcion el cual va a ser añadido a la base de datos.
-	 * @return boolean
+	 * Add a new registration
+	 * @param object Registration to be added.
+	 * @return boolean true if the registration has been added correctly, false otherwise
 	 */
 	@Override
 	public boolean create(RegistrationDTO object) {
@@ -80,9 +79,10 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 		return res;
 	}
 	/**
-	 * Lee una Inscripcion de la base de datos, dado el id del campamento y el id del participante.
-	 * @param idCampamento y idParticipante que son los que se van a leer de la base de datos.
-	 * @return Incripcion
+	 * Read a registration
+	 * @param idCampamento Camp id
+	 * @param idParticipante Assistant id
+	 * @return RegistrationDTO Registration if it exists, null otherwise
 	 */
 	public RegistrationDTO read(int idCampamento, int idParticipante) {
 			
@@ -116,9 +116,9 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 			return object;
 	}
 	/**
-	 * Lee una Inscripcion de la base de datos.
-	 * @param Inscripcion Incripcion con el IdParticipante y IdCampamento que se va a leer de la base de datos.
-	 * @return IncripcionCompleta o InscripcionParcial, depende del tipo que sea la Inscripcion
+	 * Read a registration
+	 * @param object Registration that contains the camp id and assistant id
+	 * @return RegistrationDTO Registration if it exists, null otherwise
 	 */
 	@Override
 	public RegistrationDTO read(RegistrationDTO object) {
@@ -154,9 +154,9 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 	}
 	
 	/**
-	 * Elimina un monitor de la base de datos.
-	 * @param object Monitor el cual se va a eliminar de la base de datos.
-	 * @return boolean
+	 * Delete a registration.
+	 * @param Registration that contains the camp id and assistant id.
+	 * @return boolean true if the registration has been deleted, false otherwise
 	 */
 	@Override
 	public boolean delete(RegistrationDTO object) {
@@ -225,6 +225,10 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 		return status;
 
 	}
+	/**
+	 * Read all registrations
+	 * @return ArrayList<RegistrationDTO> List of registrations
+	 */
 	public ArrayList<RegistrationDTO>readAll(){
 
 		BufferedReader reader = null;
@@ -255,6 +259,10 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 		
 		return list;
 	}
+	/**
+	 * Read all complete registrations
+	 * @return ArrayList<RegistrationDTO> List of registrations
+	 */
 	public ArrayList<RegistrationDTO>readAllComplete(){
 
 		BufferedReader reader = null;
@@ -285,6 +293,10 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 		
 		return list;
 	}
+	/**
+	 * Read all partial registrations
+	 * @return ArrayList<RegistrationDTO> List of registrations
+	 */
 	public ArrayList<RegistrationDTO>readAllPartial(){
 
 		BufferedReader reader = null;
