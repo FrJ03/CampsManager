@@ -10,6 +10,7 @@ import java.util.Properties;
 
 /**
  * Class that connect to the database
+ * @author Enrique de los Reyes Montilla
  */
 public class Connector {
 	/**

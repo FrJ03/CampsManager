@@ -16,21 +16,21 @@ import controller.dto.camp.*;
 import controller.dto.monitor.*;
 
 /**
- * Clase CampamentoDAO que realiza las consultas relacionada con la tabla Campamento.
+ * Class that manage database access related to camps implemented using Singleton design pattern
  * @author Enrique de los Reyes Montilla
  */
 public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 	/**
-	 * Variable privada Singleton.
+	 * Sigleton private attribute.
 	 */
 	private static CampamentoDAO instance_= null;
-	/*
-	 * *Representa la dirección al fichero properties.
+	/**
+	 * Properties file path.
 	 */
 	private static String dir_ = "sql.properties";
 	/**
-	 * Metodo que sirve de acceso a la instancia.
-	 * @return Instancia de la clase CampamentoDAO.
+	 * Instance access method.
+	 * @return CampamentoDAO Instance.
 	 */
 	public static CampamentoDAO getInstance() {
 		if(instance_ == null) {
@@ -39,13 +39,13 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		return instance_;
 	}
 	/**
-	 * Constructor vacío de la clase CampamentoDAO.
+	 * Empty constructor.
 	 */
 	private CampamentoDAO() {}
 	/**
-	 * Añade un nuevo campamento a la base de datos.
-	 * @param object Campamento el cual va a ser añadido a la base de datos.
-	 * @return boolean
+	 * Method that add a new camp to database.
+	 * @param object Camp to add.
+	 * @return boolean true if the camp has been added correctly, else otherwise
 	 */
 	@Override
 	public boolean create(CampDTO object) {
@@ -89,9 +89,9 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		return res;
 	}
 	/**
-	 * Lee un Campamento de la base de datos.
-	 * @param object Campamaneto con ell Id del campamento que va a ser leido de la base de datos.
-	 * @return Campamento
+	 * Read a camp from the database.
+	 * @param object Camp that contains the camp id to read.
+	 * @return CampDTO Camp red if it exists, else otherwise
 	 */
 	@Override
 	public CampDTO read(CampDTO object) {
@@ -138,8 +138,8 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		return cam;
 	}
 	/**
-	 * Elimina un Campaemnto de la base de datos.
-	 * @param object Campamento el cual se va a eliminar de la base de datos.
+	 * Delete a camp.
+	 * @param object Camp that contains the camp id to erase.
 	 * @return boolean
 	 */
 	@Override
@@ -172,8 +172,8 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		return status;
 	}
 	/**
-	 * Añade todos los campamnetos de la base de datos a un lista.
-	 * @return ArrayList<Campamento>
+	 * Read all camps in database.
+	 * @return ArrayList<CampDTO> List of camps
 	 */
 	public ArrayList<CampDTO> readAll(){
 		
@@ -217,8 +217,8 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		return campamentos;
 	}
 	/**
-	 * Añade todos los campamentos disponibles de la base de datos a un lista.
-	 * @return ArrayList<Campamento>
+	 * Read all camps available.
+	 * @return ArrayList<CampDTO> List of available camps
 	 */
 	public ArrayList<CampDTO> readAllAvailable(){
 
@@ -265,8 +265,9 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		
 	}
 	/**
-	 * Añade todos los campamentos disponibles que tengan más de un numero de plazas disponibles de la base de datos a un lista.
-	 * @return ArrayList<Campamento>
+	 * Read all available camps that have more than a number of places
+	 * @param seats Minimum number of places
+	 * @return ArrayList<CampDTO> List of available camps
 	 */
 	public ArrayList<CampDTO> readAllAvailableSeats(int seats){
 
@@ -314,8 +315,9 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		
 	}
 	/**
-	 * Añade todos los campamentos disponibles que tengan mas de un numero de plazas disponibles de la base de datos a un lista.
-	 * @return ArrayList<Campamento>
+	 * Read all available camps that have an specific level
+	 * @param love Camps level
+	 * @return ArrayList<CampDTO> List of available camps
 	 */
 	public ArrayList<CampDTO> readAllAvailableLevel(Nivel love){
 
@@ -363,9 +365,9 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		
 	}
 	/**
-	 * Cuenta el numero de Inscripciones de la base de datos que tienen un determinado idCapamento.
-	 * @param object Campamento con el id que se utilizará para la consulta.
-	 * @return int
+	 * Method that count all registration of a camp
+	 * @param object Camp that contains the camp id
+	 * @return int Number of registration
 	 */
 	public int count(CampDTO object) {
 		ResultSet rs ;
@@ -398,9 +400,9 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		return count;
 	}
 	/**
-	 * Lee un Campamento disponible de la base de datos.
-	 * @param id Id del campamento que va a ser leido de la base de datos.
-	 * @return Campamento
+	 * Read an available camp from the database.
+	 * @param id Camp id to read.
+	 * @return CampDTO Camp red if it exists and is available, else otherwise
 	 */
 	public CampDTO readAvailable(int id) {
 		
@@ -449,9 +451,9 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		return object;
 	}
 	/**
-	 * Lee un Campamento de la base de datos.
-	 * @param id Id del campamento que va a ser leido de la base de datos.
-	 * @return Campamento
+	 * Read a camp from the database.
+	 * @param id Camp id to read.
+	 * @return CampDTO Camp red if it exists, else otherwise
 	 */
 	public CampDTO read(int id) {
 		
@@ -495,9 +497,9 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		return object;
 	}
 	/**
-	 * Actualiza el monitor responsable de un campamento de la base de datos.
-	 * @param idCam Id del campamento que se va a actualizar en la base de datos.
-	 * @param idMonitor Id del monitor que se va a declarar como responsable del campamento.
+	 * Update the responsible monitor of a camp
+	 * @param idCam Camp id to update.
+	 * @param idMonitor Monitor id to add.
 	 * @return boolean
 	 */
 	public boolean updateResponsable(int idCam, int idMonitor) {
@@ -534,9 +536,9 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 
 	}
 	/**
-	 * Actualiza el monitor especial de un campamento de la base de datos.
-	 * @param idCam Id del campamento que se va a actualizar en la base de datos.
-	 * @param idMonitor Id del monitor que se va a declarar como responsable especial del campamento.
+	 * Update the special monitor of a camp
+	 * @param idCam Camp id to update.
+	 * @param idMonitor Monitor id to add.
 	 * @return boolean
 	 */
 	public boolean updateEspecial(int idCam, int idMonitor) {
@@ -572,6 +574,11 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		return status;
 
 	}
+	/**
+	 * Read all activities of a camp
+	 * @param idCamp Camp id
+	 * @return ArrayList<ActivityDTO> List of activities
+	 */
 	public ArrayList<ActivityDTO> readActivitiesCamp(int idCamp){
 		ArrayList<ActivityDTO> activities = new ArrayList<ActivityDTO>();
 		BufferedReader reader = null;
@@ -601,6 +608,12 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		} catch(Exception e) { System.out.println(e); }
 		return activities;
 	}
+	/**
+	 * Method that add an activity to a camp
+	 * @param idCamp Camp id
+	 * @param idActivity Activity id to add
+	 * @return boolean true if the activity has been added correctly, else otherwise
+	 */
 	public boolean addActivity(int idCamp, int idActivity) {
 		BufferedReader reader = null;
 		int status = 0;
