@@ -1,8 +1,5 @@
 package controller.gestores;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import controller.dto.admin.AdminDTO;
 import model.dao.AdminDAO;
 /**
@@ -56,19 +53,13 @@ public class GestorAdmin {
   	 * @param especial Indica si en admin pertenece a un grupo especial (true) o no (false).
 	 * @return void.
 	 */
-	public boolean darAltaAdmin(String email, String nombre, String apellidos, String fechaNacimiento, String especial){
+	public boolean darAltaAdmin(String email, String nombre, String apellidos){
 		AdminDAO db = AdminDAO.getInstance();
 		AdminDTO aux = new AdminDTO();
 		
 		aux.setEmail(email);
 		aux.setNombre(nombre);
 		aux.setApellidos(apellidos);
-		
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-        LocalDate fechaTrans = LocalDate.parse(fechaNacimiento, formatter);
-        
-		aux.setFechaNacimiento(fechaTrans);
-		aux.setEspecial(Boolean.parseBoolean(especial));
 		
 		return db.create(aux);
 	}
@@ -84,10 +75,7 @@ public class GestorAdmin {
 	 */
 	public boolean modificarAdmin(int id, String email, String nombre, String apellidos, String fechaNacimiento, String especial){
 		AdminDAO db = AdminDAO.getInstance();
-		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-        LocalDate fechaTrans = LocalDate.parse(fechaNacimiento, formatter);
         
-		return db.update(new AdminDTO(id, email, nombre, apellidos, fechaTrans, Boolean.parseBoolean(especial)));
+		return db.update(new AdminDTO(id, email, nombre, apellidos));
 	}
 }
