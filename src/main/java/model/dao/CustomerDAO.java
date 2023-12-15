@@ -11,22 +11,23 @@ import java.util.Properties;
 import controller.dto.customer.CustomerDTO;
 import controller.dto.customer.Rol;
 import model.common.Connector;
+
 /**
- * DAO que permite gestionar los accesos a la base de datos relacionados con customers.
+ * Class that manage database access related to customer implemented using Singleton design pattern
  * @author Enrique de los Reyes Montilla
  */
 public class CustomerDAO implements InterfaceDAO<CustomerDTO> {
 	/**
-	 * Variable privada Singleton.
+	 * VSingleton private attribute.
 	 */
 	private static CustomerDAO instance_= null;
-	/*
-	 * *Representa la dirección al fichero properties.
+	/**
+	 * Properties file path.
 	 */
 	private static String dir_ = "sql.properties";
 	/**
-	 * Metodo que sirve de acceso a la instancia.
-	 * @return Instancia de la clase CustomerDAO.
+	 * Instance access method.
+	 * @return Instance class.
 	 */
 	public static CustomerDAO getInstance() {
 		if(instance_ == null) {
@@ -35,13 +36,13 @@ public class CustomerDAO implements InterfaceDAO<CustomerDTO> {
 		return instance_;
 	}
 	/**
-	 * Constructor vacío de la clase CustomerDAO.
+	 * Empty constructor.
 	 */
 	private CustomerDAO() {}
 	/**
-	 * Añade un nuevo Customer a la base de datos.
-	 * @param object Customer el cual va a ser añadido a la base de datos.
-	 * @return boolean
+	 * Add a customer to the database
+	 * @param object Customer to be added.
+	 * @return boolean true if the customer has been added correctly, false otherwise
 	 */
 	@Override
 	public boolean create(CustomerDTO object) {
@@ -76,9 +77,9 @@ public class CustomerDAO implements InterfaceDAO<CustomerDTO> {
 		
 	}
 	/**
-	 * Lee un Customer de la base de datos.
-	 * @param Customer Customer con el id se va a leer de la base de datos.
-	 * @return Monitor
+	 * Read a customer.
+	 * @param object Customer that contains the customer id to read.
+	 * @return CustomerDTO Customer red if it exists, null otherwise
 	 */
 	@Override
 	public CustomerDTO read(CustomerDTO object) {
@@ -114,9 +115,9 @@ public class CustomerDAO implements InterfaceDAO<CustomerDTO> {
 
 	}
 	/**
-	 * Elimina un Customer de la base de datos.
-	 * @param object Customer el cual se va a eliminar de la base de datos.
-	 * @return boolean
+	 * Delete a customer.
+	 * @param object Customer that has the customer id to erase.
+	 * @return boolean true if the customer has been deleted, false otherwise
 	 */
 	@Override
 	public boolean delete(CustomerDTO object) {
@@ -151,9 +152,9 @@ public class CustomerDAO implements InterfaceDAO<CustomerDTO> {
 	}
 	
 	/**
-	 * Actualiza un Customer de la base de datos.
-	 * @param object Customer el cual va a ser actualizado.
-	 * @return boolean
+	 * Update a customer.
+	 * @param object Customer to update.
+	 * @return boolean true if the customer has been updated, false otherwise.
 	 */
 	public boolean update(CustomerDTO object){
 
@@ -190,9 +191,9 @@ public class CustomerDAO implements InterfaceDAO<CustomerDTO> {
 	}
 	
 	/**
-	 * Lee un Customer de la base de datos.
-	 * @param email email del customer que se va a leer de la base de datos.
-	 * @return Monitor
+	 * Read a customer.
+	 * @param email Customer email.
+	 * @return CustomerDTO Customer red if the customer exists, null otherwise
 	 */
 	public CustomerDTO read(String email) {
 		
