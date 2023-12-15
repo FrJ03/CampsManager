@@ -3,46 +3,46 @@ package controller.dto.registration;
 import java.time.LocalDate;
 
 /**
- * Clase abstracta que representa el concepto de inscripcion en el campamento y que se empleará como base en el patrón de diseño Abstract Factory entre inscripciones y registros.
+ * Class that represent a registration in a camp by an assistant
  * @author Francisco José Mellado Ortiz
  * @author Manuel Garcia Obrero
  */
 public class RegistrationDTO {
 	/**
-	 * Identificador del participante que se desea inscribir.
+	 * Assistant identifier
 	 */
 	private int idParticipante_;
 	/**
-	 * Identificador del campamento al que el participante desea inscribirse.
+	 * Camp identifier
 	 */
 	private int idCampamento_;
 	/**
-	 * Fecha de inscripción en el campamento
+	 * Registration date
 	 * */
 	private LocalDate fechaInscripcion_;
 	/**
-	 * Precio de la inscripción.
+	 * Price
 	 */
 	private float precio_;
 	/**
-	 * Identificador de que tipo de Inscripcion(Completa o Parcial).
+	 * Registration type
 	 */
 	private Tipo tipo_;
 	/**
-	 * Identificador de que temporalidad de Inscripcion.
+	 * Registration temporality
 	 */
 	private Temporalidad temporalidad_;
 	
 	/**
-	 * Construye un objeto de la clase inscripción sin información.
+	 * Empty constructor
 	 */
 	public RegistrationDTO(){}
 	/**
-	 * Construye un objeto de la clase inscripción con los datos dados.
-	 * @param idParticipante Identificador del participante.
-	 * @param idCampamento Identificador del campamento.
-	 * @param fechaInscripcion Fecha de la realización de la inscripción.
-	 * @param precio Precio de la inscripción.
+	 * Constructor
+	 * @param idParticipante Assistant identifier
+	 * @param idCampamento Camp identifier
+	 * @param fechaInscripcion Registration date
+	 * @param precio Price
 	 */
 	public RegistrationDTO(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio) {
 		this.idParticipante_ = idParticipante;
@@ -53,11 +53,13 @@ public class RegistrationDTO {
 		this.temporalidad_= Temporalidad.None;
 	}
 	/**
-	 * Construye un objeto de la clase inscripción con los datos dados pero con tipo.
-	 * @param idParticipante Identificador del participante.
-	 * @param idCampamento Identificador del campamento.
-	 * @param fechaInscripcion Fecha de la realización de la inscripción.
-	 * @param precio Precio de la inscripción.
+	 * Constructor
+	 * @param idParticipante Assistant identifier
+	 * @param idCampamento Camp identifier
+	 * @param fechaInscripcion Registration date
+	 * @param precio Price
+	 * @param tipo Registration type
+	 * @param temporalidad Registration temporality
 	 */
 	public RegistrationDTO(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio, Tipo tipo, Temporalidad temporalidad) {
 		this.idParticipante_ = idParticipante;
@@ -67,12 +69,13 @@ public class RegistrationDTO {
 		this.tipo_= tipo;
 		this.temporalidad_=temporalidad;
 	}
-	/**
-	 * Construye un objeto de la clase inscripción con los datos dados pero con tipo.
-	 * @param idParticipante Identificador del participante.
-	 * @param idCampamento Identificador del campamento.
-	 * @param fechaInscripcion Fecha de la realización de la inscripción.
-	 * @param precio Precio de la inscripción.
+   /** Constructor
+	 * @param idParticipante Assistant identifier
+	 * @param idCampamento Camp identifier
+	 * @param fechaInscripcion Registration date
+	 * @param precio Price
+	 * @param tipo Registration type
+	 * @param temporalidad Registration temporality
 	 */
 	public RegistrationDTO(int idParticipante, int idCampamento, LocalDate fechaInscripcion, float precio, String tipo, String temporalidad) {
 		this.idParticipante_ = idParticipante;
@@ -83,94 +86,99 @@ public class RegistrationDTO {
 		this.setTemporalidad(temporalidad);
 	}
 	/**
-	 * Método que devuelve el identificador del participante.
+	 * Assistant id get method
+	 * @return int Assistant id
 	 */
 	public int getIdParticipante() {
 		return this.idParticipante_;
 	}
 	/**
-	 * Método que devuelve el identificador del campamento.
+	 * Camp id get method
+	 * @return int Camp id
 	 */
 	public int getIdCampamento() {
 		return this.idCampamento_;
 	}
 	/**
-	 * Método que devuelve la fecha de inscripción.
+	 * Registration date get method
+	 * @return LocalDate Registration date
 	 */
 	public LocalDate getFechaInscripcion() {
 		return this.fechaInscripcion_;
 	}
 	/**
-	 * Método que devuelve el precio de la inscripción.
+	 * Price get method
+	 * @return float Price
 	 */
 	public float getPrecio() {
 		return this.precio_;
 	}
 	/**
-	 * Método que devuelve el tipo de la inscripción.
+	 * Type get method
+	 * @return Tipo Registration type
 	 */
 	public Tipo getTipo() {
 		return this.tipo_;
 	}
 	/**
-	 * Method that returns the registration type
-	 * @return
+	 * Type get method
+	 * @return String Registration type
 	 */
 	public String getTipoName() {
 		return this.tipo_.toString();
 	}
 	/**
-	 * Método que devuelve la temporalidad de la inscripción.
+	 * Temporality get method
+	 * @return Temporalidad Registration temporality
 	 */
 	public Temporalidad getTemporalidad() {
 		return this.temporalidad_;
 	}
 	/**
-	 * Method that returns the registration timing
-	 * @return
+	 * Temporality get method
+	 * @return String Registration temporality
 	 */
 	public String getTemporalidadName() {
 		return this.temporalidad_.toString();
 	}
 	/**
-	 * Método para la modificación del identificador del participante.
-	 * @param id Identificador del participante.
+	 * Assistant id set method
+	 * @param id New assistant id
 	 */
 	public void setIdParticipante(int id) {
 		this.idParticipante_ = id;
 	}
 	/**
-	 * Método para la modificación del identificador del campamento.
-	 * @param id Identificador del campamento.
+	 * Camp id set method
+	 * @param id New camp id
 	 */
 	public void setIdCampamento(int id) {
 		this.idCampamento_ = id;
 	}
 	/**
-	 * Método para la modificación de la fecha de inscripción.
-	 * @param fecha Fecha de inscripción en el campamento.
+	 * Registration date set method
+	 * @param fecha New registration date
 	 */
 	public void setFechaInscripcion(LocalDate fecha) {
 		this.fechaInscripcion_ = fecha;
 	}
 	/**
-	 * Método para la modificación del precio.
-	 * @param precio Precio de la actividad.
+	 * Price set method
+	 * @param precio New price
 	 */
 	public void setPrecio(float precio) {
 		this.precio_ = precio;
 	}
 	/**
-	 * Método para la modificación de tipo.
-	 * @param tipo Tipo de la actividad.
+	 * Type set method
+	 * @param tipo New Type
 	 */
 	public void setTipo(Tipo tipo) {
 		this.tipo_ = tipo;
 	}
 	/**
-	 * Merhod that modify the registration type
-	 * @param tipo New registration type
-	 * @return
+	 * Type set method
+	 * @param tipo New Type (Completa/Parcial)
 	 */
 	public boolean setTipo(String tipo) {
 		if(tipo.equalsIgnoreCase("completa")) {
@@ -185,16 +193,15 @@ public class RegistrationDTO {
 			return false;
 	}
 	/**
-	 * Método para la modificación de temporalidad.
-	 * @param temporalidad Temporalidad de la actividad.
+	 * Temporality set method
+	 * @param temporalidad New temporality
 	 */
 	public void setTemporalidad(Temporalidad temporalidad) {
 		this.temporalidad_ = temporalidad;
 	}
 	/**
-	 * Merhod that modify the registration type
-	 * @param tipo New registration type
-	 * @return
+	 * Temporality set method
+	 * @param temporalidad New temporality (Temprano/Tardio)
 	 */
 	public boolean setTemporalidad(String temporalidad) {
 		if(temporalidad.equalsIgnoreCase("temprano")) {
@@ -209,32 +216,13 @@ public class RegistrationDTO {
 			return false;
 	}
 	/**
-	 * Método para la creación de un registro en el campamento de forma temprana. Será definido por sus descendientes.
-	 * @param fechaInicio Fecha de inicio del campamento.
-	 * @throws Exception Error: " + fechaInicio +" es mayor que " + fechaInscripcion + "."
-	 */
-	/*public RegistroTemprano crearRegistroTemprano(LocalDate fechaInicio) {
-		
-	}*/
-	/**
-	 * Método para la creación de un registro en el campamento de forma tardía. Será definido por sus descendientes.
-	 * @param fechaInicio Fecha de inicio del campamento.
-	 * @throws Exception Error: " + fechaInicio +" es menor que " + fechaInscripcion + ".".
-	 */
-	/*public boolean crearRegistroTardio(LocalDate fechaInicio) {
-		LocalDate fechaInscripcion = LocalDate.now();
-		//RegistroTemprano r = new RegistroTemprano();
-		
-		Period periodo = fechaInscripcion.until(fechaInicio);
-		if(periodo.getDays() >= 15)
-			//r.registro(fechaInscripcion, fechaInicio);
-			return true;
-		else
-			//throw new Exception("Error: Faltan menos de 15 dias para el inicio del campamento.");
-			return false;
-	}*/
-	/**
-	 * Método que devuelve la información de la inscripción en una cadena. Será definido por sus descendientes.
+	 * Method that returns a string with registration data
+	 * @return String The structure is:
+	 * [Full /Partial ]Registration:\n\t
+	 * Assistant: (assistant.id)\n\t
+	 * Camp: (camp.id)\n\t
+	 * Registration Date: (registration date)\n\t
+	 * Price: (price)\n\t
 	 */
 	public String toString() {
 		String aux = "";
