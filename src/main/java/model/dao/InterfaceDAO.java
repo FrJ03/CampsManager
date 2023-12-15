@@ -1,28 +1,26 @@
 package model.dao;
 
-
-
 /**
- * Interfaces que los DAO deberán de implementa
+ * DAO interface
  * @author Enrique de los Reyes Montilla
  */
 public interface InterfaceDAO<T> {
 	/**
-	 * Añade un nuevo objeto a la base de datos.
-	 * @param object Objeto el cual se va a añadir a la base de datos.
-	 * @return boolean
+	 * Add a new object.
+	 * @param object Objeto to add.
+	 * @return boolean true if the object has been added, false otherwise
 	 */
 	boolean create(T object);
 	/**
-	 * Lee un objeto de la base de datos.
-	 * @param id Id del objeto que se va a leer de la base de datos.
-	 * @return T
+	 * Read an object.
+	 * @param object Object that contains the object id to read.
+	 * @return T Object if the object exists, null otherwise
 	 */
 	T read(T object);
 	/**
-	 * Elimina un objeto de la base de datos.
-	 * @param object Objeto el cual se va a eliminar de la base de datos.
-	 * @return boolean
+	 * Delete an object.
+	 * @param object Object to be deleted.
+	 * @return boolean true if the object has been deleted
 	 */
 	boolean delete(T object);
 }
