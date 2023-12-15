@@ -5,10 +5,13 @@ import java.time.LocalDate;
 
 import controller.dto.person.Person;
 
+/**
+ * Class that represents an admin
+ */
 public class AdminDTO extends Person implements Serializable,  Comparable<AdminDTO>{
 	/**
 	  * Representa si el admin necesita atención especial
-	  * */
+	  */
     private boolean especial_;
     /**
 	  * Representa el email del admin
