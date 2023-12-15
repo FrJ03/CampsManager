@@ -6,56 +6,56 @@ import controller.dto.activity.Nivel;
 import controller.dto.monitor.MonitorDTO;
 
 /**
- * Clase que representa  la organización de un conjunto de actividades durante un periodo de tiempo limitado
+ * Class that represents a camp
  * @author Manuel García Obrero
  */
  public class CampDTO implements Comparable<CampDTO>, Serializable{
      
-	/**Método que indica la versión de la clase que se va a serializar.
+	/**
+	 * Serial version attribute
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	  * Representa el identificador del campamento
-	  * */
+	  * Camp identifier
+	  */
 	private int id_;
 	/**
-	  * Representa el monitor responsable del campamento
-	  * */
+	  * Monitor responsible
+	  */
 	private MonitorDTO responsable_;
 	/**
-	  * Representa eñ monitor especial del campamento
-	  * */
+	  * Special monitor responsible
+	  */
 	private MonitorDTO responsableEspecial_;
 	/**
-	  * Representa la fecha del inicio del campamento
-	  * */
-	
+	  * Camp Start date
+	  */
 	private LocalDate iniciocampamento_;
-	    /**
-	  * Representa la fecha del fin del campamento
-	  * */
+    /**
+	  * Camp End date
+	  */
 	private LocalDate fincampamento_;
 	/**
-	  * Representa el nivel educativo del campamento
-	  * */
+	  * Age level of the camp
+	  */
 	private Nivel nivel_;
 	/**
-	  * Representa el numero máximo de asistentes
-	  * */
+	  * Max number of assistants
+	  */
 	private int asistentesMax_;
 
 	/**
-	  * Construye un objeto vacio
-	  * */
+	  * Empty constructor
+	  */
 	public CampDTO() {};
 	/**
-	  * Construye un objeto con todos sus datos, a excepción de todas las listas que se inicializan vacías
-	  * @param id Representa el identificador del campamento
-	  * @param iniciocampamento Representa la fecha del inicio del campamento
-	  * @param fincampamento Representa la fecha del fin del campamento
-	  * @param nivel Representa el nivel educativo del campamento
-	  * @param asistentesMax Representa el numero máximo de asistentes
-	  * */
+	  * Constructor
+	  * @param id Camp identifier
+	  * @param iniciocampamento Camp start date
+	  * @param fincampamento Camp end date
+	  * @param nivel Representa Camp level
+	  * @param asistentesMax Max number of assistants
+	  */
 	public CampDTO(int id, LocalDate iniciocampamento, LocalDate fincampamento, Nivel nivel, int asistentesMax) {
 
 		this.id_=id;
@@ -67,121 +67,120 @@ import controller.dto.monitor.MonitorDTO;
 		this.responsableEspecial_ = null;
 	}
 	 /**
-	  * Observador de la varible id
-	  * @return id_ del campamento.
+	  * Id get method
+	  * @return int Camp id
 	  * */
 	public int getId() {
 		return id_;
 	}
 	/**
-	  * Modificador de la variable id
-	  * @param id del campamento.
-	  * @return void.
-	  * */
+	  * Id set method
+	  * @param id New id
+	  */
 	public void setId(int id) {
 		this.id_ = id;
 	}
 	/**
-	  * Observador de la varible iniciocampamento
-	  * @return iniciocampamento_.
-	  * */
+	  * Start date get method
+	  * @return LocalDate Start date
+	  */
 	public LocalDate getInicioCampamento() {
 		return iniciocampamento_;
 	}
 	/**
-	  * Modificador de la variable iniciocampamento
-	  * @param iniciocampamento_
-	  * @return void.
-	  * */
+	  * Start date set method
+	  * @param iniciocampamento Start date
+	  */
 	public void setInicioCampamento(LocalDate iniciocampamento) {
 		this.iniciocampamento_ = iniciocampamento;
 	}
 	/**
-	  * Observador de la varible fincampamento
-	  * @return fincampamento_.
-	  * */
+	  * End date get method
+	  * @return LocalDate End date
+	  */
 	public LocalDate getFinCampamento() {
 		return fincampamento_;
 	}
 	/**
-	  * Modificador de la variable fincampamento
-	  * @param fincampamento_
+	  * End date set method
+	  * @param fincampamento New end date
 	  * @return void.
-	  * */
+	  */
 	public void setFinCampamento(LocalDate fincampamento) {
 		this.fincampamento_ = fincampamento;
 	}
 	/**
-	  * Observador de la varible nivel
-	  * @return nivel_ del campamento.
-	  * */
+	  * Level get method
+	  * @return Nivel Camp level
+	  */
 	public Nivel getNivel() {
 		return nivel_;
 	}
 	/**
-	  * Modificador de la variable nivel
-	  * @param nivel del campamento.
-	  * @return void.
-	  * */
+	  * Level set method
+	  * @param Nivel New level
+	  */
 	public void setNivel(Nivel nivel) {
 		this.nivel_ = nivel;
 	}
 	/**
-	  * Observador de la varible asistentesmax
-	  * @return asistentesMax_ del campamento.
-	  * */
+	  * Max number of assistants get method
+	  * @return int Max number of assistants
+	  */
 	public int getAsistentesMax() {
 		return asistentesMax_;
 	}
 	/**
-	  * Modificador de la variable asistentesmax
-	  * @param asistentesMax del campamento.
-	  * @return void.
-	  * */
+	  * Max number of assistant set method
+	  * @param asistentesMax New max number
+	  */
 	public void setAsistentesMax(int asistentesMax) {
 		this.asistentesMax_ = asistentesMax;
 	}
 	/**
-	  * Observador de la varible responsable_
-	  * @return responsable_.
-	  * */
+	  * Responsible monitor get method
+	  * @return MonitorDTO
+	  */
 	public MonitorDTO getResponsable() {
 		return responsable_;
 	}
 	/**
-	  * Modificador de la variable responsable_
-	  * @param responsable.
-	  * @return void.
-	  * */
+	  * Monitor responsible set method
+	  * @param responsable New monitor responsible
+	  */
 	public void setResponsable(MonitorDTO responsable) {
 		this.responsable_ = responsable;
 	}
 	/**
-	  * Observador de la varible responsableEspecial
-	  * @return responsableEspecial.
+	  * Special monitor responsible get method
+	  * @return MonitorDTO Special monitor responsible
 	  * */
 	public MonitorDTO getResponsableEspecial() {
 		return responsableEspecial_;
 	}
 	/**
-	  * Modificador de la variable responsableEspecial_
-	  * @param responsableEspecial_.
+	  * Special monitor responsible set method
+	  * @param responsableEspecial Special responsible mointor
 	  * @return void.
 	  * */
-	public void setResponsableEspecial(MonitorDTO responsableEspecial_) {
-		this.responsableEspecial_ = responsableEspecial_;
+	public void setResponsableEspecial(MonitorDTO responsableEspecial) {
+		this.responsableEspecial_ = responsableEspecial;
 	}
 	/**
-	  * Función que devuelve un string con la información del campamento
-	  * @return La estrucutra es la siguiente:
+	  * Method that returns a String with camp data
+	  * @return The structure is:
 	  * Información del Campamento
       * Id: (id)\n
       * Fecha de Inicio: (iniciocampamento_)\n
       * Fin del campamento: (fincampamento_)\n
       * Nivel Academico: (nivel)\n
       * Numero maximo de asistentes: (asistentesMax_)\n
-      * listaMonitor_
-      * listaActividad_
+      * Monitor Responsable:\n\t
+      * Id: (responsable.id)\n\t
+      * Nombre: (responsable.name)\n
+      * Monitor Especial:\n\t
+      * Id: (responsableEspecial.id)\n\t
+      * Nombre: (responsableEspecial.name)\n
 	  * */
 	public String toString(){
 		String aux = "Información del Campamento\n\tId: " + this.id_ + "\n\tFecha de Inicio: " + this.iniciocampamento_ + 
@@ -194,6 +193,10 @@ import controller.dto.monitor.MonitorDTO;
 		aux += "\n";
 		return aux;
 	}
+	/**
+	 * Method that compares camps
+	 * @return int 0 if both camps has the same id, -1 if this camp id is less than the other, 1 otherwise
+	 */
 	@Override
     public int compareTo(CampDTO c) {
 		if(c.getId() > this.getId())
