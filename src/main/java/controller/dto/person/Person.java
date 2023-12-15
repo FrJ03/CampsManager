@@ -3,42 +3,76 @@ package controller.dto.person;
 import java.io.Serializable;
 
 /**
-	* Clase que representa a una persona
- 	@author Lucía Téllez López
-	**/
+* Class that represents a person
+* @author Lucía Téllez López
+*/
 public class Person implements Serializable{
-	/**Método que indica la versión de la clase que se va a serializar.
+	/**
+	 * Serial version attribute
 	 */
 		private static final long serialVersionUID = 1L;
 	/**
-	* Identificador de la persona, de tipo entero
-	**/
+	* Person identifier
+	*/
 	  private int id_;
-	/**
-	* Nombre y apellidos, de tipo cadena de caracteres
-	**/
+	  /**
+	   * Persona name
+	   */
 	  private String nombre_;
+	  /**
+	   * Persona lastname
+	   */
 	  private String apellidos_;
-	
-	/**
-	* Creadores de la clase con y sin parámetros
-	**/
+	  /**
+	   * Empty constructor
+	   */
 	  public Person() {}
+	  /**
+	   * Constructor
+	   * @param id Person identifier
+	   * @param nombre Person name
+	   * @param apellidos Person lastname
+	   */
 	  public Person(int id, String nombre, String apellidos) {
 		  this.id_ = id;
 		  this.nombre_ = nombre;
 		  this.apellidos_ = apellidos;
 	  }
-
-	/**
-	* Métodos get/set para todos los atributos
-	**/
+	  /**
+	   * Id get method
+	   * @return int Person id
+	   */
 	  public int getId() {return id_;}
+	  /**
+	   * Name get method
+	   * @return String Person name
+	   */
 	  public String getNombre() {return nombre_;}
+	  /**
+	   * Lastname get method
+	   * @return String Person lastname
+	   */
 	  public String getApellidos() {return apellidos_;}
-	  public String getNombreCompleto() {   String nombrecompleto=this.nombre_+ " " + this.apellidos_;
-	                                          return nombrecompleto;}
+	  /**
+	   * Fullname get method
+	   * @return String Person fullname
+	   */
+	  public String getNombreCompleto() {
+		  return this.nombre_+ " " + this.apellidos_;
+      }
+	  /**
+	   * Id set method
+	   * @param id New person id
+	   */
 	  public void setId(int id) {this.id_=id;}
+	  /**
+	   * Name set method
+	   * @param nombre New Name
+	   */
 	  public void setNombre(String nombre) {this.nombre_=nombre;}
+	  /**
+	   * Lastname set method
+	   * @param apellidos New lastname
+	   */
 	  public void setApellidos(String apellidos) {this.apellidos_=apellidos;}
 }
