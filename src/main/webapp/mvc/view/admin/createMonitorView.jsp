@@ -18,10 +18,10 @@
                 //No debería estar aquí, lo mando al index
                 nextPage="../../../webapp/index.jsp";
         %>
-                <jsp:forward page="<%=nextPage--%>"><jsp:forward>;
+                <jsp:forward page="<%=nextPage%>"><jsp:forward>;
         <%
             }
-            if(customerBean.getRolName() == "Client"){
+            if(customerBean.getRol() == "Client"){
                 //Lo mando a la página de admin
                 nextPage="../../controller/assistant/assistant.jsp";
         %>
@@ -29,7 +29,7 @@
         <%
             }
             else{
-                if(customerBean.getRolName() == "None"){
+                if(customerBean.getRol() == "None"){
                     nextPage="../../../webapp/index.jsp";
         %>
                     <jsp:forward page="<%=nextPage%>"><jsp:forward>;
