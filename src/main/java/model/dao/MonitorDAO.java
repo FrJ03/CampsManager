@@ -13,20 +13,20 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 /**
- * Clase MonitorDAO que realiza las consultas relacionadas con los monitores.
+ * Class that manage database access related to monitors implemented using Singleton design pattern
  * @author Enrique de los Reyes Montilla
  */
 public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 	/**
-	 * Variable privada Singleton.
+	 * Singleton private attribute.
 	 */
 	private static MonitorDAO instance_= null;
-	/*
-	 * *Representa la dirección al fichero properties.
+	/**
+	 * Properties file path
 	 */
 	private static String dir_ = "sql.properties";
 	/**
-	 * Metodo que sirve de acceso a la instancia.
+	 * Instance access method.
 	 * @return Instancia de la clase MonitorDAO.
 	 */
 	public static MonitorDAO getInstance() {
@@ -36,13 +36,13 @@ public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 		return instance_;
 	}
 	/**
-	 * COnstructor vacío de la clase MonitorDAO.
+	 * Empty constructor.
 	 */
 	private MonitorDAO() {}
 	/**
-	 * Añade un nuevo monitor a la base de datos.
-	 * @param object Monitor el cual va a ser añadido a la base de datos.
-	 * @return boolean
+	 * Add a monitor to the database.
+	 * @param object Monitor to be added.
+	 * @return boolean true if the monitor has been added correctly, false otherwise
 	 */
 	@Override
 	public boolean create(MonitorDTO object) {
@@ -76,9 +76,9 @@ public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 		return res;
 	}
 	/**
-	 * Lee un monitor de la base de datos.
-	 * @param Monitor Monitor con el id que se va a leer de la base de datos.
-	 * @return Monitor
+	 * Read a monitor
+	 * @param object Monitor that contains the monitor id to read.
+	 * @return MonitorDTO Monitor if the monitor exists, null otherwise
 	 */
 	@Override
 	public MonitorDTO read(MonitorDTO object) {
@@ -116,9 +116,9 @@ public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 		
 	}
 	/**
-	 * Elimina un monitor de la base de datos.
-	 * @param object Monitor el cual se va a eliminar de la base de datos.
-	 * @return boolean
+	 * Delete a monitor
+	 * @param object Monitor that contains the monitor id to erase.
+	 * @return boolean true if the monitor has been deleted correctly, false otherwise
 	 */
 	@Override
 	public boolean delete(MonitorDTO object) {
@@ -152,8 +152,8 @@ public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 		
 	}
 	/**
-	 * Añade todos los monitores de la base de datos a un lista.
-	 * @return Array<Monitor>
+	 * Read all monitors.
+	 * @return Array<MonitorDTO> List of monitors
 	 */
 	public ArrayList<MonitorDTO>readAll(){
 
@@ -187,9 +187,9 @@ public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 		return list;
 	}
 	/**
-	 * Lee un monitor de la base de datos.
-	 * @param Id id del monitor que se va a leer de la base de datos.
-	 * @return Monitor
+	 * Read a monitor.
+	 * @param id Monitor id to add
+	 * @return MonitorDTO Monitor if the monitor exists, null otherwise
 	 */
 	public MonitorDTO read(int id) {
 		
