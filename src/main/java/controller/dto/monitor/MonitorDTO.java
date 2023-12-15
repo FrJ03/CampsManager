@@ -3,50 +3,53 @@ package controller.dto.monitor;
 import controller.dto.person.Person;
 import java.io.Serializable;
 
-/**Esta  clase  representa  a  una  persona  que  se  encarga  de  dirigir  las  actividades  que  suceden  en  el  campamento
+/**
+ * Class that represents the camp monitors
  * @author Francisco José Mellado Ortiz
  */
 public class MonitorDTO extends Person implements Serializable, Comparable<MonitorDTO>{
 	
-/**Representa si el educador esta cualificado para monitorizar actividades donde participen asistentes con necesidades especiales
+/**
+ * Qualification for assistants with special requirements. True if the monitor has it, false otherwise
  */
 private boolean especial_;
-/**Método que indica la versión de la clase que se va a serializar.
+/**
+ * Serial version attribute
  */
 private static final long serialVersionUID = 1L;
 
 /**
- * Construye un objeto de la clase monitor vacío.
+ * Empty constructor
  */
 public MonitorDTO() {}
 /**
- * Construye un objeto de la clase monitor con la información facilitada.
- * @param id Identificador del monitor.
- * @param nombre Nombre del monitor.
- * @param apellidos Apellidos del monitor
- * @param especial Representa si el monitor puede realizar actividades para asistentes con necesidades especiales (true) o no (false)
+ * Constructor
+ * @param id Monitor identifier
+ * @param nombre Monitor name
+ * @param apellidos Monitor lastname
+ * @param especial Qualification for assistants with special requirements. True if the monitor has it, false otherwise
  */
 public MonitorDTO(int id, String nombre, String apellidos, boolean especial){
 	super(id, nombre, apellidos);
   this.especial_=especial;
 }
 /**
- * Método que devuelve si un monitor puede impartir actividades en las que participen asistentes con necesidades especiales.
- * @return true si puede impartir las actividades o false en caso contrario.
+ * Special qualification get method
+ * @return boolean Special qualification. True if the monitor has it, false otherwise
  */
 public boolean getEspecial() {
 	  return this.especial_;
 }
 /**
- * Establece si el monitor puede impartir actividades para asistentes con necesidades especiales.
- * @param especial Valdrá true si puede impartir las actividades o false en caso contrario.
+ * Special qualification set method
+ * @param especial New special qualification. True if the monitor has it, false otherwise
  */
 public void setEspecial(boolean especial) {
 	  this.especial_ = especial;
 }
 /**
- * Función que devuelve una cadena de caracteres con información del monitor.
- * @return La estrucutra es la siguiente:
+ * Method that returns a string with the monitor data
+ * @return String The structure is:
  * Id: (id)\n
  * Nombre Completo: (nombreCompleto)\n
  * Grupo Especial: (Si/No)\n
@@ -63,6 +66,10 @@ public String toString() {
 	 }
 	 return ret;
 }
+/**
+ * Method that compares monitors
+ * @return int 0 if both monitors has the same id, -1 if this monitor id is less than the other, 1 otherwise
+ */
 @Override
 public int compareTo(MonitorDTO m) {
 	if(m.getId() > this.getId())
