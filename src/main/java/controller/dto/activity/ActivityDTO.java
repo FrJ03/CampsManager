@@ -3,46 +3,50 @@ package controller.dto.activity;
 import java.io.Serializable;
 
 /**
- * Clase que representa una actividad que se encuentra en un campamento.
+ * Class that represents an activity.
  * @author Enrique de los Reyes Montilla
  */
 public class ActivityDTO implements Serializable, Comparable<ActivityDTO>{
-	/** Metodo para indicar la versión de la clase a serializar
+	/** Serial version attribute
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * Identificador de la actividad
+	 * Activity identifier
 	 */
 	private int id_;
 	/**
-	  * Representa el nombre de la actividad
-	  * */
+	 * Activity name
+	 */
 	private String name_;
 	/**
-	  * Representa el nivel educativo de la actividad
-	  * */
+	 * Activity level
+	 */
 	private Nivel nivel_;
 	/**
-	  * Representa el turno en el cual se realiza la actividad. Puede ser tanto mañanas como tardes.
-	  * */
+	 * Activity turn
+	 */
 	private Turno turno_;
 	/**
-	  * Representa el numero máximo de participantes
-	  * */
+	 * Max number of assistants
+	 */
 	private int participantesMax_;
 	/**
-	  * Representa el numero máximo de monitores
-	  * */
+	 * Max number of monitors
+	 */
 	private int monitoresMax_;
 	/**
-	  * Construye un objeto vacio.
-	  * @return void
-	  * */
+	 * Empty constructor
+	 */
 	public ActivityDTO() {};
 	/**
-	  * COnstruye un objeto con todos sus datos, a excepción de la lista de monitores que se inicializa vacía.
-	  * @return void
-	  * */
+	 * Constructor
+	 * @param id Identifier
+	 * @param name Activity name
+	 * @param nivel Activity level
+	 * @param participantesMax Max number of assistants
+	 * @param monitoresMax Max number of monitors
+	 * @param turno Activity turn
+	 */
 	public ActivityDTO(int id, String name, Nivel nivel, int participantesMax, 
 			int monitoresMax, Turno turno) {
 		this.id_ = id;
@@ -53,96 +57,92 @@ public class ActivityDTO implements Serializable, Comparable<ActivityDTO>{
 		this.turno_=turno;
 	};
 	/**
-	 * Observador del identificador de la actividad.
-	 * @return
+	 * Id get method.
+	 * @return int Identifier
 	 */
 	public int getId() {
 		return id_;
 	}
 	/**
-	 * Modificador del identificador de la actividad.
-	 * @param id Nuevo identificador.
+	 * Id set method
+	 * @param id New identifier.
 	 */
 	public void setId(int id) {
 		id_ = id;
 	}
 	/**
-	  * Observador de la varible nombre
-	  * @return string
-	  * */
+	  * Name get method
+	  * @return String Activity name
+	  */
 	public String getName() {
 		return name_;
 	}
 	/**
-	  * Modificador de la variable nombre
-	  * @param name Nombre de la actividad
-	  * @return void
-	  * */
+	  * Name set method
+	  * @param name New name
+	  */
 	public void setName(String name) {
 		this.name_ = name;
 	}
 	/**
-	  * Observador de la variable participantesMax
-	  * @return int
-	  * */
+	  * Max number of assistants get method
+	  * @return int Max number of assistantss
+	  */
 	public int getParticipantesMax() {
 		return participantesMax_;
 	}
 	/**
-	  * Modificador de la variable participantesMax.
-	  * @param participantesMax Numero de participantes maximmos en la actividad
-	  * @return void
-	  * */
+	  * Max number of assistant set method
+	  * @param participantesMax New max number of assistants
+	  */
 	public void setParticipantesMax(int participantesMax) {
 		this.participantesMax_ = participantesMax;
 	}
 	/**
-	  * Observador de la variable monitoresMax.
-	  * @return int
-	  * */
+	  * Max number of monitors get method
+	  * @return int Max number of monitors
+	  */
 	public int getMonitoresMax() {
 		return monitoresMax_;
 	}
 	/**
-	  * Modificador de la variable monitoresMax.
-	  * @param monitoresMax Número de monitores maximos en la actividad
-	  * */
+	  * Max number of monitors set method
+	  * @param monitoresMax New max number of monitors
+	  */
 	public void setMonitoresMax(int monitoresMax) {
 		this.monitoresMax_ = monitoresMax;
 	}
 	/**
-	  * Observador de la variable nivel.
-	  * @return nivel
-	  * */
+	  * Level get method
+	  * @return Nivel Activity level
+	  */
 	public Nivel getNivel() {
 		return nivel_;
 	}
 	/**
-	  * Modificador de la variable nivel.
-	  * @param nivel Enumeración que india el nivel de la actividad
-	  * @return void
-	  * */
+	  * Level set method
+	  * @param nivel New level
+	  */
 	public void setNivel(Nivel nivel) {
 		this.nivel_=nivel;
 	}
 	/**
-	  * Observador de la variable turno.
-	  * @return turno
+	  * Turn get method
+	  * @return Turno Activity turn
 	  * */
 	public Turno getTurno() {
 		return turno_;
 	}
 	/**
-	  * Modificador de la variable turno.
-	  * @param turno Enumeración que india el turno de la actividad
-	  * @return void
-	  * */
+	  * Turn set method
+	  * @param turno New turn
+	  */
 	public void setTurno(Turno turno) {
 		this.turno_=turno;
 	}
 	/**
-	  * Método que devuelve un string con la información de la actividad.
-	  * @return String
+	  * Method that returns all activity data
+	  * @return String String that contents the activity data
 	  * */
 	public String toString(){
 		String aux = "Información de la Actividad\n\tId: " + this.id_ + "\n\tNombre:" + this.name_ + "\n\tNivel Academico:"+ this.nivel_ + 
@@ -150,6 +150,11 @@ public class ActivityDTO implements Serializable, Comparable<ActivityDTO>{
 				"\n\tNumero máximo de monitores:" + this.monitoresMax_ + "\n";
 		return aux;
 	}
+	/**
+	 * Method that compare an activity with this activity
+	 * @param a Activity to be compared
+	 * @return int 0 if the activities has the same id, -1 if the id number of a is greater than this number or 1 otherwise
+	 */
 	@Override
     public int compareTo(ActivityDTO a) {
 		if(a.getId() > this.getId())

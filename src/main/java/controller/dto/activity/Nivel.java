@@ -1,6 +1,6 @@
 package controller.dto.activity;
 /**
- * Enumeración que representa los niveles academicos que puede tener una actividad.
+ * Enum class that represents the age level of an activity or a camp
  * @author Enrique de los Reyes Montilla
  */
 public enum Nivel {
