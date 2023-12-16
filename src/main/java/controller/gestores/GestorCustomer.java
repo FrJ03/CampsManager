@@ -4,22 +4,23 @@ import controller.dto.customer.CustomerDTO;
 import controller.dto.customer.Rol;
 import model.dao.CustomerDAO;
 /**
- * Clase que gestiona la información de los customer al campamento
+ * Class that manage customer information
+ * @implSpec Singleton Design Pattern
  * @author Enrique de los Reyes Montilla
  */
 public class GestorCustomer {
 	/**
-	 * Variable privada Singleton.
+	 * Singleton private instance
 	 */
 	private static GestorCustomer instance_ = null;
 
 	/**
-	 * Constructor privado que crea una lista de customer vacia.
+	 * Private constructor
 	 */
 	private GestorCustomer() {};
 	/**
-	 * Metodo que sirve de acceso a la instancia.
-	 * @return Instancia de la clase GestorCustomer.
+	 * Instance access method
+	 * @return GestorCustomer Instance
 	 */
 	public static GestorCustomer getInstance() {
 		if(instance_ == null ) {
@@ -28,32 +29,34 @@ public class GestorCustomer {
 		return instance_;
 	}
 	/**
-	 * Metodo que añade a la lista de customer un nuevo customer pasado como argumento, comprobando si no estaba registrado. Si estaba registrado devuelve false y si no lo estaba true
-	 * @param CustomerDTO customer que se va a añadir a la lista de customer.
-	 * @return boolean(false error, true no error).
+	 * Method that add a new customer
+	 * @param CustomerDTO Customer to add
+	 * @return boolean True if the customer has been added correctly, false otherwise
 	 */
 	public boolean darAltaCustomer(CustomerDTO customer) {	
 		CustomerDAO db = CustomerDAO.getInstance();
 		return db.create(customer);
 	}
 	/**
-	 * Metodo que devuelve un Customer de la base de datos
-	 * @param email Email del customer que va a ser leido.
-	 * @return CustomerDTO
+	 * Method that read a customer
+	 * @param email Customer email
+	 * @return CustomerDTO Customer red if exists, null otherwise
 	 */
 	public CustomerDTO readCustomer(String email) {	
 		CustomerDAO db = CustomerDAO.getInstance();
 		return db.read(email);
 	}
 	/**
-	 * Metodo Modificar toda la información de un customer identificado por su id.
-	 * @param email Identificador único del customer que se desea modificar.
-  	 * @param password Password del customer.
-  	 * @param rol Rol del customer.
-	 * @return void.
+	 * Method that modify a customer
+	 * @param email Customer email
+  	 * @param password Customer password
+  	 * @param rol Customer rol
+	 * @return boolean True if the customer has added correctly, false otherwise
 	 */
 	public boolean modificarCustomer(String email, String password,String rol ){
 		CustomerDAO db = CustomerDAO.getInstance();
+		if(!rol.equalsIgnoreCase(Rol.Admin.toString()) || !rol.equalsIgnoreCase(Rol.Client.toString()))
+			return false;
 		return db.update(new CustomerDTO(email, password, Rol.valueOf(rol)));
 	}
 }
