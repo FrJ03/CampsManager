@@ -7,6 +7,10 @@ import javax.servlet.http.*;
 import controller.gestores.GestorCampamentos;
 import view.beans.customer.CustomerBean;
 
+/**
+ * Servlet implementation class to create a new activity
+ * @author Francisco José Mellado Ortiz
+ */
 public class CreateActivity extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;

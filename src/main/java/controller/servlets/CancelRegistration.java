@@ -10,6 +10,10 @@ import javax.servlet.http.HttpSession;
 import controller.gestores.GestorInscripciones;
 import view.beans.customer.CustomerBean;
 
+/**
+ * Servlet implementation class to cancel a registration
+ * @author Francisco José Mellado Ortiz
+ */
 public class CancelRegistration extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	

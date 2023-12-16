@@ -17,7 +17,8 @@ import controller.gestores.GestorCampamentos;
 import view.beans.customer.CustomerBean;
 
 /**
- * Servlet implementation class AssociateActivitytoCamp
+ * Servlet implementation class to associate an activity to a camp
+ * @author Enrique de los Reyes Montilla
  */
 @WebServlet("/AssociateActivitytoCamp")
 public class AssociateActivitytoCamp extends HttpServlet {

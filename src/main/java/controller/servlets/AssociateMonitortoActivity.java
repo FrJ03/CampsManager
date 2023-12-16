@@ -17,7 +17,8 @@ import controller.gestores.GestorCampamentos;
 import view.beans.customer.CustomerBean;
 
 /**
- * Servlet implementation class AssociateMonitortoActivity
+ * Servlet implementation class to add a monitor to an activity
+ * @author Enrique de los Reyes Monitlla
  */
 @WebServlet("/AssociateMonitortoActivity")
 public class AssociateMonitortoActivity extends HttpServlet {

@@ -12,6 +12,10 @@ import javax.servlet.http.HttpSession;
 import controller.gestores.GestorCampamentos;
 import view.beans.customer.CustomerBean;
 
+/**
+ * Servlet implementation class to create a new camp
+ * @author Francisco José Mellado Ortiz
+ */
 public class CreateCamp extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;

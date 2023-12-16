@@ -19,7 +19,8 @@ import view.beans.customer.CustomerBean;
 
 
 /**
- * Servlet implementation class SearchCampament
+ * Servlet implementation class to search for camps
+ * @author Enrique de los Reyes Montilla
  */
 @WebServlet("/SearchCampament")
 public class SearchCampament extends HttpServlet {

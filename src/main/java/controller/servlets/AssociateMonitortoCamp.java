@@ -17,7 +17,8 @@ import controller.gestores.GestorCampamentos;
 import view.beans.customer.CustomerBean;
 
 /**
- * Servlet implementation class AssociateMonitortoCamp
+ * Servlet implementation class to add a monitor to a camp
+ * @author Enrique de los Reyes Montilla
  */
 @WebServlet("/AssociateMonitortoCamp")
 public class AssociateMonitortoCamp extends HttpServlet {

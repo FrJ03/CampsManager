@@ -18,7 +18,8 @@ import view.beans.customer.CustomerBean;
 
 
 /**
- * Servlet implementation class SearchCampament
+ * Servlet implementation class search a camp by number of seats
+ * @author Enrique de los Reyes Montilla
  */
 @WebServlet("/SearchCampamentSeatsLevel")
 public class SearchCampamentSeatsLevel extends HttpServlet {

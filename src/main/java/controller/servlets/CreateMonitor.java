@@ -8,6 +8,10 @@ import controller.dto.monitor.*;
 import controller.gestores.GestorCampamentos;
 import view.beans.customer.CustomerBean;
 
+/**
+ * Servlet implementation class to create a new monitor
+ * @author Manuel Garcia Obrero
+ */
 public class CreateMonitor extends HttpServlet{
 
 	    private static final long serialVersionUID = 1L;
