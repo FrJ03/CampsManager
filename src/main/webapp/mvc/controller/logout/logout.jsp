@@ -6,4 +6,4 @@
 	<jsp:setProperty property="password" value="" name="customerBean"/>
 	<jsp:setProperty property="rol" value="" name="customerBean"/>
 
-<jsp:include page="../../../index.jsp"></jsp:include>
+<jsp:forward page="../../../index.jsp"></jsp:forward>

@@ -224,7 +224,7 @@ public class CustomerDAO implements InterfaceDAO<CustomerDTO> {
 			
 			if (rs.next()) {
 				
-				as = new CustomerDTO(email, rs.getString(1), Rol.valueOf(rs.getString(2)));
+				as = new CustomerDTO(email, rs.getString(2), Rol.valueOf(rs.getString(3)));
                 
             } 
 			
