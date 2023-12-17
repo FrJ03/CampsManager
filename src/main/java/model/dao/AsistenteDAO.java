@@ -3,6 +3,8 @@ package model.dao;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -53,7 +55,8 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String create = p.getProperty("createAsistente");
 			
@@ -92,7 +95,8 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readAsistente");
 			
@@ -130,7 +134,8 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("deleteAsistente");
 			
@@ -164,7 +169,8 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readAllAsistente");
 			
@@ -200,7 +206,8 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("updateAsistente");
 			
@@ -241,7 +248,8 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readAsistente");
 			
@@ -278,7 +286,8 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readAsistenteEmail");
 			

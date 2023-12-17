@@ -3,6 +3,8 @@ package model.dao;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,7 +54,8 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String create = p.getProperty("createAdmin");
 			
@@ -89,7 +92,8 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readAdmin");
 			
@@ -127,7 +131,8 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("deleteAdmin");
 			
@@ -162,7 +167,8 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("updateAdmin");
 			
@@ -201,7 +207,8 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readAdmin");
 			
@@ -238,7 +245,8 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readAdminEmail");
 			

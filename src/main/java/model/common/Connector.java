@@ -1,8 +1,8 @@
 package model.common;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,7 +16,7 @@ public class Connector {
 	/**
 	 * Properties file path.
 	 */
-	private static String dir_ = "config.properties";
+	//private static String dir_ = "config.properties";
 	/**
 	 * Method that connect to the database
 	 * @return Connection Database connection
@@ -30,7 +30,8 @@ public class Connector {
 			
 			String password, user, dataBase;
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream config = getClass().getClassLoader().getResourceAsStream("config.properties");
+			reader = new BufferedReader(new InputStreamReader(config));
 			p.load(reader);
 			
 			dataBase = p.getProperty("dataBase");

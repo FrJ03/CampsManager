@@ -10,6 +10,8 @@ import controller.dto.monitor.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -54,7 +56,8 @@ public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String create = p.getProperty("createMonitor");
 			
@@ -91,7 +94,8 @@ public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readMonitor");
 			
@@ -130,7 +134,8 @@ public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("deleteMonitor");
 			
@@ -164,7 +169,8 @@ public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readAllMonitor");
 			
@@ -201,7 +207,8 @@ public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readMonitor");
 			
