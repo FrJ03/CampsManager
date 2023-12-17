@@ -55,7 +55,7 @@ if (customerBean == null || customerBean.getEmailUser().equals("")) {
 				}
 				else{
 					GestorAdmin ga = GestorAdmin.getInstance();
-					aux2 = ga.darAltaAdmin(emailUser, nameUser, surnameUser, birthdate, special);
+					aux2 = ga.darAltaAdmin(emailUser, nameUser, surnameUser);
 				}
 				
 				if(aux2){

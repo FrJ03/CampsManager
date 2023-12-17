@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Log in</title>
+<link rel="stylesheet" href="../../../css/styles.css" type="text/css">
+<script src="../../../js/unhiddeRegistrationInput.js"></script>
 </head>
 <body>
 <%
@@ -29,7 +31,7 @@
 	} else {
 	%>
 	<%= messageNextPage %><br/><br/>
-<form method="post" action="/Proyecto-Programacion-Web/mvc/controller/login/registerController.jsp">
+<form class="Form" method="post" action="/Proyecto-Programacion-Web/mvc/controller/login/registerController.jsp">
 	<label for="email">Email: </label>
 	<input type="text" name="email"><br/>
 	<label for="name">Name: </label>
@@ -37,18 +39,21 @@
 	<label for="surname">Surname: </label>
 	<input type="text" name="surname"><br/>
 	<label for="rol">Rol: </label>
-	<input type="text" name="rol"><br/>
+		<select name="rol" id="rol" onchange="showRegistrationInput()">
+            <option value="Admin">Admin</option>
+            <option value="Client" selected >Client</option>
+        </select><br/>
 	<label for="password">Password: </label>
 	<input type="text" name="password" >	
 	<br/>
-	<label for="birthdate">Birthdate: </label>
-	<input type="date" name="birthdate" ><br/>
-	<label for="special">Need special aid?:</label>
+	<div id="toHide"><label for="birthdate" id="birthlabel">Birthdate: </label>
+	<input type="date" name="birthdate" id="birthdate" >
+	<label for="special" id="speciallabel">Need special aid?:</label>
         <select name="special" id="special">
             <option value="True">Yes</option>
             <option value="False">No</option>
         </select>
-	<br>
+	</div>
 	<input type="submit" value="Submit">
 </form>
 <%

@@ -45,7 +45,7 @@ if (customerBean != null || !customerBean.getEmailUser().equals("")) {
 			else{
 				GestorAdmin ga = GestorAdmin.getInstance();
 				AdminDTO adto = ga.leerAdmin(customerBean.getEmailUser());
-				aux2 = ga.modificarAdmin(adto.getId(), customerBean.getEmailUser(), nameUser, surnameUser, birthdate, special);
+				aux2 = ga.modificarAdmin(adto.getId(), customerBean.getEmailUser(), nameUser, surnameUser);
 			}
 			
 			if(aux2){
