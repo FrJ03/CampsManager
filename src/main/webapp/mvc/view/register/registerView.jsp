@@ -40,7 +40,7 @@
 	<input type="text" name="surname"><br/>
 	
 	<label for="password">Password: </label>
-	<input type="text" name="password" >
+	<input type="password" name="password" >
 	<label for="rol">Rol: </label>
 		<select name="rol" id="rol" onchange="showRegistrationInput()">
             <option value="Admin">Admin</option>
