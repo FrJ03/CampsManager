@@ -1,8 +1,6 @@
 package model.dao;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
@@ -23,10 +21,6 @@ public class CustomerDAO implements InterfaceDAO<CustomerDTO> {
 	 * VSingleton private attribute.
 	 */
 	private static CustomerDAO instance_= null;
-	/**
-	 * Properties file path.
-	 */
-	private static String dir_ = "sql.properties";
 	/**
 	 * Instance access method.
 	 * @return Instance class.

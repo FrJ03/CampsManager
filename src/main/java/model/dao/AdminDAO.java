@@ -1,15 +1,12 @@
 package model.dao;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
-
 import controller.dto.admin.AdminDTO;
 import model.common.Connector;
 
@@ -22,10 +19,6 @@ public class AdminDAO implements InterfaceDAO<AdminDTO>{
 	 * Singleton private attribute.
 	 */
 	private static AdminDAO instance_= null;
-	/**
-	 * Properties file path.
-	 */
-	private static String dir_ = "sql.properties";
 	/**
 	 * Instance access method.
 	 * @return AdminDAO instance.

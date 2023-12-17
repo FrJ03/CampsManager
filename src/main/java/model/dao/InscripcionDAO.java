@@ -1,16 +1,13 @@
 package model.dao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Properties;
-
 import model.common.Connector;
 import controller.dto.registration.*;
-
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -23,10 +20,6 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 	 * Singleton private attribute.
 	 */
 	private static InscripcionDAO instance_= null;
-	/**
-	 * Properties file path
-	 */
-	private static String dir_ = "sql.properties";
 	/**
 	 * Instance access method.
 	 * @return Instance class.

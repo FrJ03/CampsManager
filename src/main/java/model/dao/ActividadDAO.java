@@ -4,14 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
-
 import model.common.Connector;
 import controller.dto.activity.*;
 import controller.dto.monitor.MonitorDTO;
-
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -26,10 +22,6 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 	 * Singleton private attribute.
 	 */
 	private static ActividadDAO instance_= null;
-	/**
-	 * Properties file path.
-	 */
-	private static String dir_ = "sql.properties";
 	/**
 	 * Instance access method.
 	 * @return ActividadDAO instance.

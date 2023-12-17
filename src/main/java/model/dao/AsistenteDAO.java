@@ -1,8 +1,6 @@
 package model.dao;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
@@ -10,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Properties;
-
 import model.common.Connector;
 import controller.dto.assistant.*;
 
@@ -23,10 +20,6 @@ public class AsistenteDAO implements InterfaceDAO<AssistantDTO>{
 	 * Singleton private attribute.
 	 */
 	private static AsistenteDAO instance_= null;
-	/**
-	 * Properties file path.
-	 */
-	private static String dir_ = "sql.properties";
 	/**
 	 * Instance access method.
 	 * @return AsistenteDAO instance.
