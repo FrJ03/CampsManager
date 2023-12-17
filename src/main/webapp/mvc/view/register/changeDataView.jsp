@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Log in</title>
+<link rel="stylesheet" href="../../../css/styles.css" type="text/css">
 </head>
 <body>
 <%
@@ -29,22 +30,28 @@
 	} else {
 	%>
 	<%= messageNextPage %><br/><br/>
-<form method="post" action="/Proyecto-Programacion-Web/mvc/controller/login/changeData.jsp">
+<form class="Form" method="post" action="/Proyecto-Programacion-Web/mvc/controller/login/changeData.jsp">
 	<label for="name">Name: </label>
 	<input type="text" name="name" ><br/>
 	<label for="surname">Surname: </label>
 	<input type="text" name="surname"><br/>
 	<label for="password">Password: </label>
-	<input type="text" name="password" >	
+	<input type="password" name="password" >	
 	<br/>
-	<label for="birthdate">Birthdate: </label>
-	<input type="date" name="birthdate" ><br/>
-	<label for="special">Need special aid?:</label>
-        <select name="special" id="special">
-            <option value="True">Yes</option>
-            <option value="False">No</option>
-        </select>
-	<br>
+	<%
+	if(customerBean.getRol().equalsIgnoreCase("Client")){
+		%>
+		<label for="birthdate">Birthdate: </label>
+		<input type="date" name="birthdate" ><br/>
+		<label for="special">Need special aid?:</label>
+	        <select name="special" id="special">
+	            <option value="True">Yes</option>
+	            <option value="False">No</option>
+	        </select>
+		<br>
+		<%
+	}
+	%>
 	<input type="submit" value="Submit">
 </form>
 <%

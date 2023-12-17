@@ -71,7 +71,7 @@ public class GestorAsistentes {
 	public boolean modificarAsistente(int id, String email, String nombre, String apellidos, String fechaNacimiento, String especial){
 		AsistenteDAO db = AsistenteDAO.getInstance();
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fechaTrans = LocalDate.parse(fechaNacimiento, formatter);
         
 		return db.update(new AssistantDTO(id, email, nombre, apellidos, fechaTrans, Boolean.parseBoolean(especial)));
