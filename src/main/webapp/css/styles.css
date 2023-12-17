@@ -1,0 +1,33 @@
+@charset "UTF-8";
+.Button{
+	background-color: #42BFC5;
+ 	border: none;
+  	color: white;
+  	padding: 1% 2%;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 200%;
+  	align-items: center;
+  	margin: 0% 3%;
+}
+.Button:hover{
+	background-color: #5DD8DE;
+ 	border: none;
+  	color: white;
+  	padding: 1% 2%;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 200%;
+  	align-items: center;
+  	margin: 0% 3%;
+}
+.ButtonContainer{
+	text-align: center;
+}
+.Title{
+	text-align: center;
+	display: block;
+	font-size: 550%;
+}

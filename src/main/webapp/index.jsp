@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>homepage</title>
+<link rel="stylesheet" href="css/styles.css" type="text/css">
 </head>
 <body>
 <% 
@@ -17,9 +18,11 @@
 	}
 	if (customerBean == null || customerBean.getEmailUser()=="") {
 %>
-<p>What do you want to do?</p>
-<p><a href="/Proyecto-Programacion-Web/mvc/controller/login/login.jsp">Log in</a></p>
-<p><a href="/Proyecto-Programacion-Web/mvc/controller/login/registerController.jsp">Register</a></p>
+<h1 class="Title">Camps Manager</h1>
+<div class="ButtonContainer">
+	<a class="Button" href="/Proyecto-Programacion-Web/mvc/controller/login/login.jsp">Log in</a>
+	<a class="Button" href="/Proyecto-Programacion-Web/mvc/controller/login/registerController.jsp">Sign up</a>
+</div>
 <% } else { %>
 	<p>Welcome <jsp:getProperty property="emailUser" name="customerBean"/>!! </p>
 	<p><a href="/Proyecto-Programacion-Web/mvc/controller/login/changeData.jsp">Change data</a></p>
