@@ -177,8 +177,8 @@ public class GestorCampamentos {
 		public Boolean crearCampamento(String start, String end, String level, int maxP, int idM) {
 			if(!isDate(start) || !isDate(end))
 				return false;
-			LocalDate s = LocalDate.of(Integer.parseInt(start.substring(0, 4)), Integer.parseInt(start.substring(5, 7)), Integer.parseInt(start.substring(8, 10)));
-			LocalDate e = LocalDate.of(Integer.parseInt(end.substring(0, 4)), Integer.parseInt(end.substring(5, 7)), Integer.parseInt(end.substring(8, 10)));
+			LocalDate s = LocalDate.parse(start);
+			LocalDate e = LocalDate.parse(start);
 			Nivel l;
 			if(level.equalsIgnoreCase("infantil"))
 				l = Nivel.Infantil;

@@ -1,9 +1,7 @@
 package controller.gestores;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
 import model.dao.AsistenteDAO;
 import controller.dto.assistant.*;
 /**
@@ -71,8 +69,7 @@ public class GestorAsistentes {
 	public boolean modificarAsistente(int id, String email, String nombre, String apellidos, String fechaNacimiento, String especial){
 		AsistenteDAO db = AsistenteDAO.getInstance();
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate fechaTrans = LocalDate.parse(fechaNacimiento, formatter);
+        LocalDate fechaTrans = LocalDate.parse(fechaNacimiento);
         
 		return db.update(new AssistantDTO(id, email, nombre, apellidos, fechaTrans, Boolean.parseBoolean(especial)));
 	}
@@ -108,8 +105,7 @@ public class GestorAsistentes {
 		aux.setNombre(nombre);
 		aux.setApellidos(apellidos);
 		
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-        LocalDate fechaTrans = LocalDate.parse(fechaNacimiento, formatter);
+		LocalDate fechaTrans = LocalDate.parse(fechaNacimiento);
         
 		aux.setFechaNacimiento(fechaTrans);
 		aux.setEspecial(Boolean.parseBoolean(especial));
