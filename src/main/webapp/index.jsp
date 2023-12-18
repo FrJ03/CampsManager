@@ -24,39 +24,27 @@
 	<a class="Button" href="/Proyecto-Programacion-Web/mvc/controller/login/registerController.jsp">Sign up</a>
 </div>
 <% } else { %>
-	<p>Welcome <jsp:getProperty property="emailUser" name="customerBean"/>!! </p>
-	<p><a href="/Proyecto-Programacion-Web/mvc/controller/login/changeData.jsp">Change data</a></p>
-	<p><a href="/Proyecto-Programacion-Web/mvc/controller/logout/logout.jsp">Log out</a></p>
 
 	<% if(customerBean.getRol() == "Admin"){ %>
-
-            <p>Welcome <jsp:getProperty property="emailUser" name="customerBean"/>!! </p>
-            <p><a href="/Proyecto-Programacion-Web/mvc/controller/login/changeData.jsp">Change data</a></p>
-	    <p><a href="/Proyecto-Programacion-Web/mvc/controller/logout/logout.jsp">Log out</a></p>
-
-        <!-- PONER divs DEL CSS para que quede bonito -->
-           <br><br>
-           <p>Admin Operations:</p>
-           <br>
-        	<button type="button" class="small-button" onclick="window.location.href='/Proyecto-Programacion-Web/mvc/view/admin/createActivityView.jsp'">Create Activity</button><br>
-        	<br>
-        	<button type="button" class="small-button" onclick="window.location.href='/Proyecto-Programacion-Web/mvc/view/admin/createCampView.jsp'">Create Camp</button><br>
-        	<br>
-        	<button type="button" class="small-button" onclick="window.location.href='/Proyecto-Programacion-Web/mvc/view/admin/createMonitorView.jsp'">Create Monitor</button><br>
-        	<br>
-        	<button type="button" class="small-button" onclick="window.location.href='/Proyecto-Programacion-Web/mvc/view/admin/associateActivitytoCampForm.jsp'">Associate Activity to Camp</button><br>
-        	<br>
-        	<button type="button" class="small-button" onclick="window.location.href='/Proyecto-Programacion-Web/mvc/view/admin/associateMonitortoActivityView.jsp'">Associate Monitor to Activity</button><br>
-        	<br>
-        	<button type="button" class="small-button" onclick="window.location.href='/Proyecto-Programacion-Web/mvc/view/admin/associateMonitortoCampView.jsp'">Associate Monitor to Camp</button><br>
-
-	<% } if(customerBean.getRol() == "Client"){ %>
-
-	    <p>Welcome <jsp:getProperty property="emailUser" name="customerBean"/>!! </p>
-            <p><a href="/Proyecto-Programacion-Web/mvc/controller/login/changeData.jsp">Change data</a></p>
-	    <p><a href="/Proyecto-Programacion-Web/mvc/controller/logout/logout.jsp">Log out</a></p>
-
-	    <br><br>
+		
+		<nav class="Nav">
+			<ul class="nav-1">
+				<li><a href="index.jsp">Home</a></li>
+				<li>Camps Management
+					<ul class="nav-2">
+						<li><a href="mvc/view/admin/createCampView.jsp">Create Camp</a></li>
+						<li><a href="mvc/view/admin/createActivityView.jsp">Create Activity</a></li>
+						<li><a href="mvc/view/admin/createMonitorView.jsp">Create Monitor</a></li>
+						<li><a href="mvc/view/admin/associateActivitytoCampForm.jsp">Activity to Camp</a></li>
+						<li><a href="mvc/view/admin/associateMonitortoActivityView.jsp">Monitor to Activity</a></li>
+						<li><a href="mvc/view/admin/associateMonitortoCampView.jsp">Monitor to Camp</a></li>
+					</ul>
+				</li>
+				<li><a href="mvc/controller/login/changeData.jsp">Edit Profile</a></li>
+				<li><a href="mvc/controller/logout/logout.jsp">Log out</a></li>
+			</ul>
+		</nav>
+	<% }else if(customerBean.getRol() == "Client"){ %>
             <p>Assistant Operations:</p>
             <br>
             	<button type="button" class="small-button" onclick="window.location.href='<%= request.getContextPath() %>/Proyecto-Programacion-Web/mvc/view/assistant/checkCampsView.jsp'">Check available camps</button>

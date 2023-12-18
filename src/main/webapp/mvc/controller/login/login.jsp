@@ -48,6 +48,6 @@ if (customerBean == null || customerBean.getEmailUser().equals("")) {
 }
 %>
 
-<jsp:forward page="<%=nextPage%>">
+<jsp:include page="<%=nextPage%>">
 	<jsp:param value="<%=mensajeNextPage%>" name="message"/>
-</jsp:forward>
+</jsp:include>

@@ -73,3 +73,13 @@
 	cursor:pointer;
 	background-color: #5DD8DE;
 }
+.Nav{
+	position: relative;
+	width: 100%;
+	min-width: 900px;
+	padding: 20px 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #42BFC5;
+}
