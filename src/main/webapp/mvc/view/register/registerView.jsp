@@ -31,6 +31,7 @@
 	} else {
 	%>
 	<%= messageNextPage %><br/><br/>
+	<h1 class="Title">Sign in</h1>
 <form class="Form" method="post" action="/Proyecto-Programacion-Web/mvc/controller/login/registerController.jsp">
 	<label for="email">Email: </label>
 	<input type="text" name="email"><br/>

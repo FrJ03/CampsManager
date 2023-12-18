@@ -19,7 +19,8 @@
 	*/
 	String nextPage = "../../controller/login/changeData.jsp";
 	String messageNextPage = request.getParameter("message");
-	if (messageNextPage == null) messageNextPage = "";
+	if (messageNextPage == null) 
+		messageNextPage = "";
 
 	if (customerBean == null && customerBean.getEmailUser().equals("")) {
 		//No debería estar aquí -> flujo salta a index.jsp
@@ -30,6 +31,7 @@
 	} else {
 	%>
 	<%= messageNextPage %><br/><br/>
+	<h1 class="Title">Change Information</h1>
 <form class="Form" method="post" action="/Proyecto-Programacion-Web/mvc/controller/login/changeData.jsp">
 	<label for="name">Name: </label>
 	<input type="text" name="name" ><br/>

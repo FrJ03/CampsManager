@@ -30,6 +30,7 @@
 	} else {
 	%>
 	<%= messageNextPage %><br/><br/>
+	<h1class="Title">Login</h1>
 <form class="Form" method="post" action="../../controller/login/login.jsp">
 	<label for="email">Email: </label>
 	<input type="text" name="email"><br/>
