@@ -39,7 +39,7 @@
         %>
 
         <ul>
-            <li><a href="../../controller/assistant/assistant.jsp"></a>User index</li>
+            <li><a href="../../../webapp/index.jsp"></a>User index</li>
             <li><a href="../../controller/logout/logout.jsp"></a>Logout</li>
             <li><a href="../register/changeDataView.jsp"></a>Modify user info</li>
         </ul>
