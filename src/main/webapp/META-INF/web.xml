@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <context-param>
-<param-name>properties</param-name>
+<param-name>queries</param-name>
 <param-value>/WEB-INF/sql.properties</param-value>
+</context-param>
+
+<context-param>
+<param-name>database</param-name>
+<param-value>/WEB-INF/config.properties</param-value>
 </context-param>
