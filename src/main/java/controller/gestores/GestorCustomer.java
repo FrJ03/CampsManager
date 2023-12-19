@@ -15,23 +15,16 @@ public class GestorCustomer {
 	private static GestorCustomer instance_ = null;
 
 	/**
-	 * Properties path
+	 * Private constructor
 	 */
-	private String dir_;
-	/**
-	 * Singleton private constructor
-	 * @param dir Properties path
-	 */
-	private GestorCustomer(String dir) {
-		dir_=dir;
-	};
+	private GestorCustomer() {};
 	/**
 	 * Instance access method
 	 * @return GestorCustomer Instance
 	 */
-	public static GestorCustomer getInstance(String dir) {
+	public static GestorCustomer getInstance() {
 		if(instance_ == null ) {
-			instance_ = new GestorCustomer(dir);
+			instance_ = new GestorCustomer();
 		}
 		return instance_;
 	}
@@ -41,7 +34,7 @@ public class GestorCustomer {
 	 * @return boolean True if the customer has been added correctly, false otherwise
 	 */
 	public boolean darAltaCustomer(CustomerDTO customer) {	
-		CustomerDAO db = CustomerDAO.getInstance(dir_);
+		CustomerDAO db = CustomerDAO.getInstance();
 		return db.create(customer);
 	}
 	/**
@@ -50,7 +43,7 @@ public class GestorCustomer {
 	 * @return CustomerDTO Customer red if exists, null otherwise
 	 */
 	public CustomerDTO readCustomer(String email) {	
-		CustomerDAO db = CustomerDAO.getInstance(dir_);
+		CustomerDAO db = CustomerDAO.getInstance();
 		return db.read(email);
 	}
 	/**
@@ -61,7 +54,7 @@ public class GestorCustomer {
 	 * @return boolean True if the customer has added correctly, false otherwise
 	 */
 	public boolean modificarCustomer(String email, String password,String rol ){
-		CustomerDAO db = CustomerDAO.getInstance(dir_);
+		CustomerDAO db = CustomerDAO.getInstance();
 		if(!rol.equalsIgnoreCase(Rol.Admin.toString()) || !rol.equalsIgnoreCase(Rol.Client.toString()))
 			return false;
 		return db.update(new CustomerDTO(email, password, Rol.valueOf(rol)));

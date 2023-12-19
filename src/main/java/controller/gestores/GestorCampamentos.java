@@ -22,23 +22,16 @@ public class GestorCampamentos {
 		 */
 		private static GestorCampamentos instance_ = null;
 		/**
-		 * Properties path
+		 * Private constructor
 		 */
-		private String dir_;
+		private GestorCampamentos() {}
 		/**
-		 * Singleton private constructor
-		 * @param dir Properties path
-		 */
-		private GestorCampamentos(String dir) {
-			dir_=dir;
-		};
-		/**
-		 * Instance access method
+		 * Instance access method.
 		 * @return GestorCampamentos Instance
 		 */
-		public static GestorCampamentos getInstance(String dir) {
+		public static GestorCampamentos getInstance() {
 			if(instance_ == null ) {
-				instance_ = new GestorCampamentos(dir);
+				instance_ = new GestorCampamentos();
 			}
 			return instance_;
 		}
@@ -47,7 +40,7 @@ public class GestorCampamentos {
 		 * @return ArrayList<CampDTO> List of camps.
 		 */
 		public ArrayList<CampDTO> getListaCampamentos() {
-			CampamentoDAO db = CampamentoDAO.getInstance(dir_);
+			CampamentoDAO db = CampamentoDAO.getInstance();
 			return db.readAll();
 		}
 		/**
@@ -56,7 +49,7 @@ public class GestorCampamentos {
 		 * @return ArrayList<CampDTO> List of camps.
 		 */
 		public ArrayList<CampDTO> getListaCampamentos(int seats) {
-			CampamentoDAO db = CampamentoDAO.getInstance(dir_);
+			CampamentoDAO db = CampamentoDAO.getInstance();
 			return db.readAllAvailableSeats(seats);
 		}
 		/**
@@ -65,7 +58,7 @@ public class GestorCampamentos {
 		 * @return ArrayList<CampDTO> List of camps.
 		 */
 		public ArrayList<CampDTO> getListaCampamentos(Nivel love) {
-			CampamentoDAO db = CampamentoDAO.getInstance(dir_);
+			CampamentoDAO db = CampamentoDAO.getInstance();
 			return db.readAllAvailableLevel(love);
 		}
 		/**
@@ -73,7 +66,7 @@ public class GestorCampamentos {
 		 * @return ArrayList<MonitorDTO> List of monitors
 		 */
 		public ArrayList<MonitorDTO> getListaMonitores() {
-			MonitorDAO db = MonitorDAO.getInstance(dir_);
+			MonitorDAO db = MonitorDAO.getInstance();
 			return db.readAll();
 		}
 		/**
@@ -81,7 +74,7 @@ public class GestorCampamentos {
 		 * @return ArrayList<ActivityDTO> List of activities.
 		 */
 		public ArrayList<ActivityDTO> getListaActividades() {
-			ActividadDAO db = ActividadDAO.getInstance(dir_);
+			ActividadDAO db = ActividadDAO.getInstance();
 			return db.readAll();
 		}
 		/**
@@ -90,7 +83,7 @@ public class GestorCampamentos {
 		 * @return ArrayList<ActivityDTO> List of activities.
 		 */
 		public ArrayList<ActivityDTO> getListaActividades(int idC) {
-			CampamentoDAO db = CampamentoDAO.getInstance(dir_);
+			CampamentoDAO db = CampamentoDAO.getInstance();
 			return db.readActivitiesCamp(idC);
 		}
 		/**
@@ -99,7 +92,7 @@ public class GestorCampamentos {
 		 * @return ArrayList<MonitorDTO> List of monitors.
 		 */
 		public ArrayList<MonitorDTO> getListaMonitores(int idA) {
-			ActividadDAO db = ActividadDAO.getInstance(dir_);
+			ActividadDAO db = ActividadDAO.getInstance();
 			return db.readMonitorsActivity(idA);
 		}
 		/**
@@ -108,7 +101,7 @@ public class GestorCampamentos {
 		 * @return boolean True if the monitor has been added, false otherwise
 		 */
 		public Boolean crearMonitor(MonitorDTO monitor) {	
-			MonitorDAO db = MonitorDAO.getInstance(dir_);
+			MonitorDAO db = MonitorDAO.getInstance();
 			return db.create(monitor);
 		}
 		/**
@@ -117,7 +110,7 @@ public class GestorCampamentos {
 		 * @return boolean True if the activity has been added correctly, false otherwise
 		 */
 		public Boolean crearActividad(ActivityDTO actividad) {
-			ActividadDAO db = ActividadDAO.getInstance(dir_);
+			ActividadDAO db = ActividadDAO.getInstance();
 			return db.create(actividad);
 		}
 		/**
@@ -150,7 +143,7 @@ public class GestorCampamentos {
 			else
 				return false;
 			ActivityDTO activity = new ActivityDTO(0, name, l, maxAssistants, maxMonitors, t);
-			ActividadDAO db = ActividadDAO.getInstance(dir_);
+			ActividadDAO db = ActividadDAO.getInstance();
 			return db.create(activity);
 		}
 		/**
@@ -163,13 +156,13 @@ public class GestorCampamentos {
 		 * @return boolean True if the camp has been added correctly, false otherwise
 		 */
 		public Boolean crearCampamento(LocalDate start, LocalDate end, Nivel level, int maxP, int idM) {
-			MonitorDAO dbM = MonitorDAO.getInstance(dir_);
+			MonitorDAO dbM = MonitorDAO.getInstance();
 			MonitorDTO m = dbM.read(idM);
 			if(m == null)
 				return false;
 			CampDTO campamento = new CampDTO(-1, start, end, level, maxP);
 			campamento.setResponsable(m);
-			CampamentoDAO db = CampamentoDAO.getInstance(dir_);
+			CampamentoDAO db = CampamentoDAO.getInstance();
 			return db.create(campamento);
 		}
 		/**
@@ -196,13 +189,13 @@ public class GestorCampamentos {
 			else
 				return false;
 			
-			MonitorDAO dbM = MonitorDAO.getInstance(dir_);
+			MonitorDAO dbM = MonitorDAO.getInstance();
 			MonitorDTO m = dbM.read(idM);
 			if(m == null)
 				return false;
 			CampDTO campamento = new CampDTO(-1, s, e, l, maxP);
 			campamento.setResponsable(m);
-			CampamentoDAO db = CampamentoDAO.getInstance(dir_);
+			CampamentoDAO db = CampamentoDAO.getInstance();
 			return db.create(campamento);
 		}
 		/**
@@ -212,8 +205,8 @@ public class GestorCampamentos {
 		 * @return boolean True if the the monitor has been added to the activity, false otherwise
 		 */
 		public Boolean asociarMonitorActividad(int idA, int idM) {
-			ActividadDAO dbA = ActividadDAO.getInstance(dir_);
-			MonitorDAO dbM = MonitorDAO.getInstance(dir_);
+			ActividadDAO dbA = ActividadDAO.getInstance();
+			MonitorDAO dbM = MonitorDAO.getInstance();
 			
 			if(dbA.read(idA) == null || dbM.read(idM) == null)
 				return false;
@@ -227,8 +220,8 @@ public class GestorCampamentos {
 		 * @return Boolean True if the activity has added to the camp, false otherwise
 		 */
 		public boolean asociarActividadCampamento(int idCampamento, int idActividad) {
-			CampamentoDAO dbC = CampamentoDAO.getInstance(dir_);
-			ActividadDAO dbA = ActividadDAO.getInstance(dir_);
+			CampamentoDAO dbC = CampamentoDAO.getInstance();
+			ActividadDAO dbA = ActividadDAO.getInstance();
 			CampDTO cdto = dbC.read(idCampamento);
 			ActivityDTO adto = dbA.read(idActividad);
 			
@@ -249,8 +242,8 @@ public class GestorCampamentos {
 		 * @return Boolean True if the monitor has been added, else otherwise
 		 */
 		public boolean asociarMonitorResponsable(int idCampamento, int idMonitor) {
-			CampamentoDAO dbC = CampamentoDAO.getInstance(dir_);
-			MonitorDAO dbM = MonitorDAO.getInstance(dir_);
+			CampamentoDAO dbC = CampamentoDAO.getInstance();
+			MonitorDAO dbM = MonitorDAO.getInstance();
 			if(dbC.read(idCampamento) == null || dbM.read(idMonitor) == null)
 				return false;
 			else
@@ -263,8 +256,8 @@ public class GestorCampamentos {
 		 * @return Boolean True if the monitor has been added, else otherwise
 		 */
 		public boolean asociarMonitorEspecial(int idCampamento, int idMonitor) {
-			CampamentoDAO dbC = CampamentoDAO.getInstance(dir_);
-			MonitorDAO dbM = MonitorDAO.getInstance(dir_);
+			CampamentoDAO dbC = CampamentoDAO.getInstance();
+			MonitorDAO dbM = MonitorDAO.getInstance();
 			MonitorDTO monitor;
 			if(dbC.read(idCampamento) == null || (monitor = dbM.read(idMonitor)) == null || !monitor.getEspecial())
 				return false;

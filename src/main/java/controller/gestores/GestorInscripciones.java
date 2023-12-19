@@ -22,32 +22,22 @@ public class GestorInscripciones {
 	 */
 	private static GestorInscripciones instance_= null;
 	/**
-	 * Properties path
-	 */
-	private String dir_;
-	/**
-	 * Singleton private constructor
-	 * @param dir Properties path
-	 */
-	private GestorInscripciones(String dir) {
-		dir_=dir;
-	};
-	/**
 	 * Instance access method
 	 * @return GestorInscripciones Instance
 	 */
-	public static GestorInscripciones getInstance(String dir) {
-		if(instance_ == null ) {
-			instance_ = new GestorInscripciones(dir);
+	public static GestorInscripciones getInstance() {
+		if(instance_ == null) {
+			return new GestorInscripciones();
 		}
 		return instance_;
 	}
+	private GestorInscripciones() {}
 	/**
 	 * Method that returns all partial registrations
 	 * @return ArrayList<RegistrationDTO>.
 	 */
 	public ArrayList<RegistrationDTO> getListaInscripcionParcial() {
-		InscripcionDAO db = InscripcionDAO.getInstance(dir_);
+		InscripcionDAO db = InscripcionDAO.getInstance();
 		return db.readAllPartial();
 	}
 	/**
@@ -55,7 +45,7 @@ public class GestorInscripciones {
 	 * @return ArrayList<RegistrationDTO>.
 	 */
 	public ArrayList<RegistrationDTO> getListaInscripcionCompleta() {
-			InscripcionDAO db = InscripcionDAO.getInstance(dir_);
+			InscripcionDAO db = InscripcionDAO.getInstance();
 		return db.readAllComplete();
 	}
 	/**
@@ -66,9 +56,9 @@ public class GestorInscripciones {
 	 */
 	public boolean realizarRegistroCompleto(int idC, int idA){
 		//Compruebo que el campamento y asistente exista y que no esté el usuario ya escrito
-		CampamentoDAO dbC = CampamentoDAO.getInstance(dir_);
-		AsistenteDAO dbA = AsistenteDAO.getInstance(dir_);
-		InscripcionDAO dbI = InscripcionDAO.getInstance(dir_);
+		CampamentoDAO dbC = CampamentoDAO.getInstance();
+		AsistenteDAO dbA = AsistenteDAO.getInstance();
+		InscripcionDAO dbI = InscripcionDAO.getInstance();
 		CampDTO campamento;
 		if((campamento = dbC.readAvailable(idC)) == null || dbA.read(idA) == null || dbI.read(idC, idA) != null)
 			return false;
@@ -104,9 +94,9 @@ public class GestorInscripciones {
 	 */
 	public boolean realizarRegistroParcial(int idC, int idA){
 		//Compruebo que el campamento y asistente exista y que no esté el usuario ya escrito
-		CampamentoDAO dbC = CampamentoDAO.getInstance(dir_);
-		AsistenteDAO dbA = AsistenteDAO.getInstance(dir_);
-		InscripcionDAO dbI = InscripcionDAO.getInstance(dir_);
+		CampamentoDAO dbC = CampamentoDAO.getInstance();
+		AsistenteDAO dbA = AsistenteDAO.getInstance();
+		InscripcionDAO dbI = InscripcionDAO.getInstance();
 		CampDTO campamento;
 		if((campamento = dbC.readAvailable(idC)) == null || dbA.read(idA) == null || dbI.read(idC, idA) != null)
 			return false;
@@ -155,7 +145,7 @@ public class GestorInscripciones {
 	 * @return String List of camps
 	 */
 	public String obtenerCampamentosDisponibles(){
-		CampamentoDAO db = CampamentoDAO.getInstance(dir_);
+		CampamentoDAO db = CampamentoDAO.getInstance();
 		ArrayList<CampDTO> disponibles = db.readAllAvailable();
 		
 		String listaAux = "";
@@ -173,9 +163,9 @@ public class GestorInscripciones {
 	 * @return boolean True if the registration has been deleted, false otherwise
 	 */
 	public boolean deleteRegistration(int idCamp, int idAssistant) {
-		InscripcionDAO dbI = InscripcionDAO.getInstance(dir_);
-		CampamentoDAO dbC = CampamentoDAO.getInstance(dir_);
-		AsistenteDAO dbA = AsistenteDAO.getInstance(dir_);
+		InscripcionDAO dbI = InscripcionDAO.getInstance();
+		CampamentoDAO dbC = CampamentoDAO.getInstance();
+		AsistenteDAO dbA = AsistenteDAO.getInstance();
 		if(dbC.read(idCamp) == null || dbA.read(idAssistant) == null || dbI.read(idCamp, idAssistant) == null)
 			return false;
 		

@@ -1,8 +1,8 @@
 package model.dao;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,26 +22,19 @@ public class CustomerDAO implements InterfaceDAO<CustomerDTO> {
 	 */
 	private static CustomerDAO instance_= null;
 	/**
-	 * Properties path
+	 * Instance access method.
+	 * @return Instance class.
 	 */
-	private String dir_;
-	/**
-	 * Singleton private constructor
-	 * @param dir Properties path
-	 */
-	private CustomerDAO(String dir) {
-		dir_=dir;
-	};
-	/**
-	 * Instance access method
-	 * @return CampamentoDAO Instance
-	 */
-	public static CustomerDAO getInstance(String dir) {
-		if(instance_ == null ) {
-			instance_ = new CustomerDAO(dir);
+	public static CustomerDAO getInstance() {
+		if(instance_ == null) {
+			return new CustomerDAO();
 		}
 		return instance_;
 	}
+	/**
+	 * Empty constructor.
+	 */
+	private CustomerDAO() {}
 	/**
 	 * Add a customer to the database
 	 * @param object Customer to be added.
@@ -56,7 +49,8 @@ public class CustomerDAO implements InterfaceDAO<CustomerDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String create = p.getProperty("createCustomer");
 			
@@ -94,7 +88,8 @@ public class CustomerDAO implements InterfaceDAO<CustomerDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readCustomer");
 			
@@ -132,7 +127,8 @@ public class CustomerDAO implements InterfaceDAO<CustomerDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("deleteCustomer");
 			
@@ -168,7 +164,8 @@ public class CustomerDAO implements InterfaceDAO<CustomerDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("updateCustomer");
 			
@@ -207,7 +204,8 @@ public class CustomerDAO implements InterfaceDAO<CustomerDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readCustomer");
 			

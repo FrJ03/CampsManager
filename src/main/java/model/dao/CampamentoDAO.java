@@ -1,8 +1,8 @@
 package model.dao;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
@@ -25,26 +25,19 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 	 */
 	private static CampamentoDAO instance_= null;
 	/**
-	 * Properties path
+	 * Instance access method.
+	 * @return CampamentoDAO Instance.
 	 */
-	private String dir_;
-	/**
-	 * Singleton private constructor
-	 * @param dir Properties path
-	 */
-	private CampamentoDAO(String dir) {
-		dir_=dir;
-	};
-	/**
-	 * Instance access method
-	 * @return CampamentoDAO Instance
-	 */
-	public static CampamentoDAO getInstance(String dir) {
-		if(instance_ == null ) {
-			instance_ = new CampamentoDAO(dir);
+	public static CampamentoDAO getInstance() {
+		if(instance_ == null) {
+			instance_ = new CampamentoDAO();
 		}
 		return instance_;
 	}
+	/**
+	 * Empty constructor.
+	 */
+	private CampamentoDAO() {}
 	/**
 	 * Method that add a new camp to database.
 	 * @param object Camp to add.
@@ -60,7 +53,8 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String create = p.getProperty("createCampameto");
 			
@@ -106,7 +100,8 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readCampamento");
 			
@@ -124,7 +119,7 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 				
 				con.deleteConnection(c);
 				
-				MonitorDAO daoMonitor = MonitorDAO.getInstance(dir_);
+				MonitorDAO daoMonitor = MonitorDAO.getInstance();
 				MonitorDTO res = new MonitorDTO();
 				res.setId(r);
 				object.setResponsable(daoMonitor.read(res));
@@ -154,7 +149,8 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("deleteCampamento");
 			
@@ -188,7 +184,8 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readAllCampamentos");
 			
@@ -204,7 +201,7 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 				int e = rs.getInt(3);
 				
 				
-				MonitorDAO daoMonitor = MonitorDAO.getInstance(dir_);
+				MonitorDAO daoMonitor = MonitorDAO.getInstance();
 				MonitorDTO res = new MonitorDTO();
 				res.setId(r);
 				object.setResponsable(daoMonitor.read(res));
@@ -233,7 +230,8 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readAllCampamentosAvailable");
 			
@@ -251,7 +249,7 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 				int e = rs.getInt(3);
 				
 				
-				MonitorDAO daoMonitor = MonitorDAO.getInstance(dir_);
+				MonitorDAO daoMonitor = MonitorDAO.getInstance();
 				MonitorDTO res = new MonitorDTO();
 				res.setId(r);
 				object.setResponsable(daoMonitor.read(res));
@@ -282,7 +280,8 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readAllCampamentoAvailableSeats");
 			
@@ -301,7 +300,7 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 				int e = rs.getInt(3);
 				
 				
-				MonitorDAO daoMonitor = MonitorDAO.getInstance(dir_);
+				MonitorDAO daoMonitor = MonitorDAO.getInstance();
 				MonitorDTO res = new MonitorDTO();
 				res.setId(r);
 				object.setResponsable(daoMonitor.read(res));
@@ -332,7 +331,8 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readAllCampamentoAvailableLevel");
 			
@@ -351,7 +351,7 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 				int e = rs.getInt(3);
 				
 				
-				MonitorDAO daoMonitor = MonitorDAO.getInstance(dir_);
+				MonitorDAO daoMonitor = MonitorDAO.getInstance();
 				MonitorDTO res = new MonitorDTO();
 				res.setId(r);
 				object.setResponsable(daoMonitor.read(res));
@@ -381,7 +381,8 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("countParticipantes");
 			
@@ -416,7 +417,8 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readCampamentoAvailable");
 			
@@ -436,7 +438,7 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 				
 				con.deleteConnection(c);
 				
-				MonitorDAO daoMonitor = MonitorDAO.getInstance(dir_);
+				MonitorDAO daoMonitor = MonitorDAO.getInstance();
 				MonitorDTO res = new MonitorDTO();
 				res.setId(r);
 				object.setResponsable(daoMonitor.read(res));
@@ -467,7 +469,8 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readCampamento");
 			
@@ -485,7 +488,7 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 				
 				con.deleteConnection(c);
 				
-				MonitorDAO daoMonitor = MonitorDAO.getInstance(dir_);
+				MonitorDAO daoMonitor = MonitorDAO.getInstance();
 				MonitorDTO res = new MonitorDTO();
 				res.setId(r);
 				object.setResponsable(daoMonitor.read(res));
@@ -514,7 +517,8 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("updateResponsable");
 			
@@ -553,7 +557,8 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("updateEspecial");
 			
@@ -590,7 +595,8 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readActividadCampamento");
 			
@@ -625,7 +631,8 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String create = p.getProperty("createCampamentoActividad");
 			

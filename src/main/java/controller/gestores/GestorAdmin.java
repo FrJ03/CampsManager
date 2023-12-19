@@ -11,24 +11,18 @@ public class GestorAdmin {
 	 * Singleton private instance
 	 */
 	private static GestorAdmin instance_ = null;
-	/**
-	 * Properties path
-	 */
-	private String dir_;
+
 	/**
 	 * Singleton private constructor
-	 * @param dir Properties path
 	 */
-	private GestorAdmin(String dir) {
-		dir_=dir;
-	};
+	private GestorAdmin() {};
 	/**
 	 * Instance access method
 	 * @return GestorAdmin Instance
 	 */
-	public static GestorAdmin getInstance(String dir) {
+	public static GestorAdmin getInstance() {
 		if(instance_ == null ) {
-			instance_ = new GestorAdmin(dir);
+			instance_ = new GestorAdmin();
 		}
 		return instance_;
 	}
@@ -38,7 +32,7 @@ public class GestorAdmin {
 	 * @return boolean True if the assistant has been added correctly, false otherwise
 	 */
 	public boolean darAltaAdmin(AdminDTO Admin) {	
-		AdminDAO db = AdminDAO.getInstance(dir_);
+		AdminDAO db = AdminDAO.getInstance();
 		return db.create(Admin);
 	}
 	/**
@@ -47,7 +41,7 @@ public class GestorAdmin {
 	 * @return AdminDTO Admin if the admin exists, null otherwise
 	 */
 	public AdminDTO leerAdmin(String email) {	
-		AdminDAO db = AdminDAO.getInstance(dir_);
+		AdminDAO db = AdminDAO.getInstance();
 		return db.read(email);
 	}
 	/**
@@ -58,7 +52,7 @@ public class GestorAdmin {
 	 * @return boolean True if the assistant has been added correctly, false otherwise
 	 */
 	public boolean darAltaAdmin(String email, String nombre, String apellidos){
-		AdminDAO db = AdminDAO.getInstance(dir_);
+		AdminDAO db = AdminDAO.getInstance();
 		AdminDTO aux = new AdminDTO();
 		
 		aux.setEmail(email);
@@ -76,7 +70,7 @@ public class GestorAdmin {
 	 * @return boolean true if the admin has been modified, false otherwise
 	 */
 	public boolean modificarAdmin(int id, String email, String nombre, String apellidos){
-		AdminDAO db = AdminDAO.getInstance(dir_);
+		AdminDAO db = AdminDAO.getInstance();
         
 		return db.update(new AdminDTO(id, email, nombre, apellidos));
 	}

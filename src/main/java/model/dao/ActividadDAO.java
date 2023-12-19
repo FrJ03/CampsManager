@@ -8,8 +8,8 @@ import model.common.Connector;
 import controller.dto.activity.*;
 import controller.dto.monitor.MonitorDTO;
 import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -23,26 +23,19 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 	 */
 	private static ActividadDAO instance_= null;
 	/**
-	 * Properties path
+	 * Instance access method.
+	 * @return ActividadDAO instance.
 	 */
-	private String dir_;
-	/**
-	 * Singleton private constructor
-	 * @param dir Properties path
-	 */
-	private ActividadDAO(String dir) {
-		dir_=dir;
-	};
-	/**
-	 * Instance access method
-	 * @return ActividadDAO Instance
-	 */
-	public static ActividadDAO getInstance(String dir) {
-		if(instance_ == null ) {
-			instance_ = new ActividadDAO(dir);
+	public static ActividadDAO getInstance() {
+		if(instance_ == null) {
+			instance_ = new ActividadDAO();
 		}
 		return instance_;
 	}
+	/**
+	 * Empty Constructor.
+	 */
+	private ActividadDAO() {}
 	
 	/**
 	 * Add a new activity to the database.
@@ -58,7 +51,8 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String create = p.getProperty("createActividad");
 			
@@ -97,7 +91,8 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readActividad");
 			
@@ -134,7 +129,8 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readActividad");
 			
@@ -168,7 +164,8 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("deleteActividad");
 			
@@ -201,7 +198,8 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readAllActividad");
 			
@@ -236,7 +234,8 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String query = p.getProperty("readMonitorActividad");
 			
@@ -271,7 +270,8 @@ public class ActividadDAO implements InterfaceDAO<ActivityDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			reader = new BufferedReader(new FileReader(new File(dir_)));
+			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
+			reader = new BufferedReader(new InputStreamReader(queries));
 			p.load(reader);
 			String create = p.getProperty("createActividadMonitor");
 			
