@@ -1,6 +1,4 @@
 # Camps Manager
-![eclipse]({https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white})
-![html]({https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white})
 ## Index
 - Purpose
 - Execution Requeriments
