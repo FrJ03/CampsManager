@@ -22,7 +22,7 @@ import view.beans.customer.CustomerBean;
  * @author Enrique de los Reyes Montilla
  */
 @WebServlet("/SearchCampamentByEducationalLevel")
-public class SearchCampamentSeatsLevel extends HttpServlet {
+public class SearchCampamentByEducationalLevel extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -70,8 +70,11 @@ public class SearchCampamentSeatsLevel extends HttpServlet {
 	    
 	    if(educationalLevel != "") {
 	    	ArrayList<CampDTO> listc = gc.getListaCampamentos(Nivel.valueOf(educationalLevel));
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/assistant/searchCampamentByEducationalLevel.jsp");
+        	request.setAttribute("message", "Campaments find:");
+            dispatcher.include(request, response);
 	        String turno = "true";
-	        RequestDispatcher dispatcher;
+	       
 	    	for(CampDTO aux : listc) {
 	    		dispatcher = campView(aux, turno, request);
 	    		dispatcher.include(request, response);
