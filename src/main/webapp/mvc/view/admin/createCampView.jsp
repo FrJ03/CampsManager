@@ -45,8 +45,8 @@
         </ul>
 
 <!-- formulario para crear camp -->
-              <h2>Create Camp:</h2>
-              <form action="../../controller/servlets/CreateCamp.java" method="post">
+              <h1 class="Title">Create Camp</h1>
+              <form class="Form" action="../../controller/servlets/CreateCamp.java" method="post">
                   <label for="initDate">Start Date:</label>
                   <input type="text" id="initDate" name="initDate" required>
           

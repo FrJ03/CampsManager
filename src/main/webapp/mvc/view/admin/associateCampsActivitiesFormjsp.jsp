@@ -13,7 +13,7 @@
 		String messageNextPage = (String)request.getAttribute("message");
 		
 			if (customerBean == null || !customerBean.getRol().equals("Admin")) {
-			//No debería estar aquí -> flujo salta a index.jsp
+			//No deberï¿½a estar aquï¿½ -> flujo salta a index.jsp
 				String nextPage = "/include/errors/errorRol.jsp";
 		%>
 				<jsp:forward page="<%=nextPage%>"></jsp:forward>
@@ -21,7 +21,7 @@
 			}
 		%>
 	<h2>Asociate the camp and the activity</h2>
-    <form method="post" action="../../">
+    <form class="Form" method="post" action="../../">
 	<label for="camp">Campament: </label>
 	<input type="text" name="camp"><br/>
 	<label for="activity">Activity: </label>

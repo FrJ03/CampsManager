@@ -45,8 +45,8 @@
         </ul>
 
 <!-- formulario para crear mon -->
-              <h2>Create Monitor</h2>
-              <form action="../../controller/servlets/CreateMonitor.java" method="post">
+              <h1>Create Monitor</h1>
+              <form class="Form" action="../../controller/servlets/CreateMonitor.java" method="post">
                   <label for="initDate">Name:</label>
                   <input type="text" id="name" name="name" required>
           

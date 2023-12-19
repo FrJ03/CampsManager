@@ -45,8 +45,8 @@
         </ul>
 
 <!-- formulario para crear act -->
-              <h2>Create Activity</h2>
-              <form action="../../controller/servlets/CreateActivity.java" method="post">
+              <h1 class="Title">Create Activity</h1>
+              <form class="Form" action="../../controller/servlets/CreateActivity.java" method="post">
                   <label for="initDate">Name of Activity:</label>
                   <input type="text" id="name" name="name" required>
           

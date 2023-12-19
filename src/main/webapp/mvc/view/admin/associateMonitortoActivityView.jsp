@@ -22,7 +22,7 @@
 		%>
     <h2>Associate monitor to an activity</h2>
 	<%= messageNextPage %><br/><br/>
-    <form action="/Proyecto-Programacion-Web/AssociateMonitortoActivity" method="post">
+    <form class="Form" action="/Proyecto-Programacion-Web/AssociateMonitortoActivity" method="post">
         <label for="mon">Monitor: </label>
 	<input type="text" name="mon"><br/>
 	<label for="activity">Activity: </label>

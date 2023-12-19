@@ -24,7 +24,7 @@
     <h2>Search Camp</h2>
 	<%= messageNextPage %><br/><br/>
 
-    <form action="/Proyecto-Programacion-Web/SearchCampamentByAvailableSeats" method="post">
+    <form class="Form" action="/Proyecto-Programacion-Web/SearchCampamentByAvailableSeats" method="post">
         <label for="availableSeats">Search by Available Seats:</label>
         <input type="number" name="availableSeats" id="availableSeats" min="1">
         <button type="submit">Search</button>

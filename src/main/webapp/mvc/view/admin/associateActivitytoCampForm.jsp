@@ -22,7 +22,7 @@
 		%>
 	<h2>Asociate a camp to an activity</h2>
 	<p><%=messageNextPage%></p>
-    <form method="post" action="/Proyecto-Programacion-Web/AssociateActivitytoCamp">
+    <form class="Form" method="post" action="/Proyecto-Programacion-Web/AssociateActivitytoCamp">
 	<label for="camp">Campament: </label>
 	<input type="text" name="camp"><br/>
 	<label for="activity">Activity: </label>
