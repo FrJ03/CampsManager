@@ -96,6 +96,7 @@
 	cursor: pointer;
 	padding: 20px;
 	transition: all 0.3s ease 0s;
+	color:#fff ;
 }
 .nav1 > li:hover, .nav2 > li:hover{
 	background-color: #5DD8DE;;
@@ -119,4 +120,11 @@
 }
 .desplegar:hover > .nav2{
 	display: block;
+}
+.navLink{
+	color: #fff;
+	text-decoration: none;
+}
+.navLink:visited{
+	color: #fff;
 }
