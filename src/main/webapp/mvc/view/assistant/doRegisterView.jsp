@@ -48,7 +48,7 @@
         <h2>Register in a camp:</h2>
             <%= messageNextPage %><br><br>
 <!-- EXISTE EL CONTROLADOR DE HACER REGISTROS?? -->
-        <form action="Proyecto-Programacion-Web/DoRegistration" method="post">
+        <form class="Form" action="Proyecto-Programacion-Web/DoRegistration" method="post">
 
             <label for="type">Type:</label>
             <select name="type" id="type">

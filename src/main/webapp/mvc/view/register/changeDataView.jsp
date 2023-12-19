@@ -31,7 +31,7 @@
 	} else {
 	%>
 	<%= messageNextPage %><br/><br/>
-	<h1 class="Title">Change Information</h1>
+	<h1 class="Title">Edir Profile</h1>
 <form class="Form" method="post" action="/Proyecto-Programacion-Web/mvc/controller/login/changeData.jsp">
 	<label for="name">Name: </label>
 	<input type="text" name="name" ><br/>
