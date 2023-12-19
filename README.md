@@ -1,5 +1,5 @@
 # Camps Manager
-![eclipse]({https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white})
+![image]({https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white})
 
 ## Index
 - Purpose
