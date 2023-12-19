@@ -17,11 +17,10 @@ import controller.gestores.GestorCampamentos;
 import view.beans.customer.CustomerBean;
 
 /**
- * Servlet implementation class to add a monitor to a camp
- * @author Enrique de los Reyes Montilla
+ * Servlet implementation class AssociateSpecialMonitorToCamp
  */
-@WebServlet("/AssociateSupervisortoCamp")
-public class AssociateMonitortoCamp extends HttpServlet {
+@WebServlet("/AssociateSpecialMonitorToCamp")
+public class AssociateSpecialMonitorToCamp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	/**
@@ -42,7 +41,7 @@ public class AssociateMonitortoCamp extends HttpServlet {
         	// El cliente existe y tiene el rol de cliente
         	RequestDispatcher dispatcher;
         	String message ="";
-            String type = "Supervisor";
+        	String type = "Special-monitor";
     	    dispatcher = setAttributes(message,type, request);
             dispatcher.include(request, response);
             dispatcher = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
@@ -67,39 +66,39 @@ public class AssociateMonitortoCamp extends HttpServlet {
 	    }
 	        // Get the form parameters
 	        String camp = request.getParameter("Campament");
-	        String supervisor = request.getParameter("Supervisor");
+	        String special = request.getParameter("Special-monitor");
 	        
-	    if (camp == "" && supervisor=="") {
-        	String message ="Error, the camp/monitor doesn't exist.";
-            String type = "Supervisor";
-            RequestDispatcher dispatcher = setAttributes(message,type, request);
+	    if (  camp == "" && special=="") {
+	    	String message="Error, the camp/monitor doesn't exist.";
+        	String type = "Special-monitor";
+        	RequestDispatcher dispatcher = setAttributes(message,type, request);
             dispatcher.include(request, response);
             dispatcher = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
             dispatcher.include(request, response);
             createPage(request, response);
-
 	    }
 	    
 	    else {
-	    	
-	    	if (!gc.asociarMonitorResponsable(Integer.parseInt(camp),Integer.parseInt(supervisor))) {
-	        	String type = "Supervisor";
-	            String message ="Error, this monitor cannot be supervisor.";
-	    	    RequestDispatcher dispatcher = setAttributes(message,type, request);
+    	
+	    	if (!gc.asociarMonitorEspecial(Integer.parseInt(camp),Integer.parseInt(special))) {
+	        	String type = "Special-monitor";
+	        	String message ="Error, this monitor cannot be a special-monitor for this camp.";
+	        	RequestDispatcher dispatcher = setAttributes(message,type, request);
 	            dispatcher.include(request, response);
 	            dispatcher = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
 	            dispatcher.include(request, response);
 	            createPage(request, response);
-            }
+	        }
 	    	else {
-	    		String type = "Supervisor";
-	            String message ="The monitor <strong>"+supervisor+"</strong> is now the supervisor of the campament <strong>"+camp+"</strong>.";	          
+	    		String type = "Special-monitor";
+	        	String message ="The monitor <strong>"+special+"</strong> is now the special monitor of the campament <strong>"+camp+"</strong>.";	          
 	        	RequestDispatcher dispatcher = setAttributes(message,type, request);
+	            dispatcher.include(request, response);
+	            dispatcher = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
 	            dispatcher.include(request, response);
 	            createPage(request, response);
 	    	}
-		}
-	    
+	    }
 	}
 	
 	private RequestDispatcher setAttributes(String message, String type, HttpServletRequest request) {
@@ -107,7 +106,7 @@ public class AssociateMonitortoCamp extends HttpServlet {
 	    request.setAttribute("message", message);
 	    request.setAttribute("atribute1", "Campament");
     	request.setAttribute("atribute2", type);
-    	request.setAttribute("path", "/Proyecto-Programacion-Web/AssociateSupervisortoCamp");
+    	request.setAttribute("path", "/Proyecto-Programacion-Web/AssociateSpecialMonitorToCamp");
     	request.setAttribute("h2", "Asociate a "+type+" to an activity");
     	return dispatcher;
 	}
@@ -150,7 +149,6 @@ public class AssociateMonitortoCamp extends HttpServlet {
       		dispatcher.include(request, response);
       		turno = "false";
       	}
-
 	}
 
 }
