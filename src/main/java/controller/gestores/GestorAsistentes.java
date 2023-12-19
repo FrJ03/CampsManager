@@ -17,16 +17,23 @@ public class GestorAsistentes {
 	private static GestorAsistentes instance_ = null;
 
 	/**
-	 * Private constructor
+	 * Properties path
 	 */
-	private GestorAsistentes() {};
+	private String dir_;
+	/**
+	 * Singleton private constructor
+	 * @param dir Properties path
+	 */
+	private GestorAsistentes(String dir) {
+		dir_=dir;
+	};
 	/**
 	 * Instance access method
-	 * @return GestorAsistantes Instance
+	 * @return GestorAsistentes Instance
 	 */
-	public static GestorAsistentes getInstance() {
+	public static GestorAsistentes getInstance(String dir) {
 		if(instance_ == null ) {
-			instance_ = new GestorAsistentes();
+			instance_ = new GestorAsistentes(dir);
 		}
 		return instance_;
 	}
@@ -35,7 +42,7 @@ public class GestorAsistentes {
 	 * @return ArrayList<Asistente> List of assistants
 	 */
 	public ArrayList<AssistantDTO> getListaAsistente() {
-		AsistenteDAO db = AsistenteDAO.getInstance();
+		AsistenteDAO db = AsistenteDAO.getInstance(dir_);
 		return db.readAll();
 	}
 	/**
@@ -44,7 +51,7 @@ public class GestorAsistentes {
 	 * @return AssistantDTO Assistant if exist an assistant with the email, null otherwise
 	 */
 	public AssistantDTO leerAsistente(String email) {	
-		AsistenteDAO da = AsistenteDAO.getInstance();
+		AsistenteDAO da = AsistenteDAO.getInstance(dir_);
 		return da.read(email);
 	}
 	/**
@@ -53,7 +60,7 @@ public class GestorAsistentes {
 	 * @return boolean True if the assistant has been added, false otherwise
 	 */
 	public boolean darAltaAsistente(AssistantDTO asistente) {	
-		AsistenteDAO db = AsistenteDAO.getInstance();
+		AsistenteDAO db = AsistenteDAO.getInstance(dir_);
 		return db.create(asistente);
 	}
 	/**
@@ -67,7 +74,7 @@ public class GestorAsistentes {
 	 * @return boolean.
 	 */
 	public boolean modificarAsistente(int id, String email, String nombre, String apellidos, String fechaNacimiento, String especial){
-		AsistenteDAO db = AsistenteDAO.getInstance();
+		AsistenteDAO db = AsistenteDAO.getInstance(dir_);
 		
         LocalDate fechaTrans = LocalDate.parse(fechaNacimiento);
         
@@ -84,7 +91,7 @@ public class GestorAsistentes {
 	 * @return boolean.
 	 */
 	public boolean modificarAsistente(int id, String email, String nombre, String apellidos, LocalDate fechaNacimiento, boolean especial){
-		AsistenteDAO db = AsistenteDAO.getInstance();
+		AsistenteDAO db = AsistenteDAO.getInstance(dir_);
         
 		return db.update(new AssistantDTO(id, email, nombre, apellidos, fechaNacimiento, especial));
 	}
@@ -98,7 +105,7 @@ public class GestorAsistentes {
 	 * @return boolean True if the assistant has been added, false otherwise
 	 */
 	public boolean darAltaAsistente(String email, String nombre, String apellidos, String fechaNacimiento, String especial){
-		AsistenteDAO db = AsistenteDAO.getInstance();
+		AsistenteDAO db = AsistenteDAO.getInstance(dir_);
 		AssistantDTO aux = new AssistantDTO();
 		
 		aux.setEmail(email);
@@ -117,7 +124,7 @@ public class GestorAsistentes {
 	 * @return String String with all the assistant registered
 	 */
 	public String listaAsistencia(){
-		AsistenteDAO db = AsistenteDAO.getInstance();
+		AsistenteDAO db = AsistenteDAO.getInstance(dir_);
 		ArrayList<AssistantDTO> listaAsistente = db.readAll();	
 		String infoAsistentes = "";
 		
