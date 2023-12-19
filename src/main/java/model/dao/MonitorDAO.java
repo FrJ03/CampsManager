@@ -7,8 +7,8 @@ import java.util.Properties;
 import model.common.Connector;
 import controller.dto.monitor.*;
 import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 /**
@@ -21,19 +21,26 @@ public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 	 */
 	private static MonitorDAO instance_= null;
 	/**
-	 * Instance access method.
-	 * @return Instancia de la clase MonitorDAO.
+	 * Properties path
 	 */
-	public static MonitorDAO getInstance() {
-		if(instance_ == null) {
-			instance_ = new MonitorDAO();
+	private String dir_;
+	/**
+	 * Singleton private constructor
+	 * @param dir Properties path
+	 */
+	private MonitorDAO(String dir) {
+		dir_=dir;
+	};
+	/**
+	 * Instance access method
+	 * @return MonitorDAO Instance
+	 */
+	public static MonitorDAO getInstance(String dir) {
+		if(instance_ == null ) {
+			instance_ = new MonitorDAO(dir);
 		}
 		return instance_;
 	}
-	/**
-	 * Empty constructor.
-	 */
-	private MonitorDAO() {}
 	/**
 	 * Add a monitor to the database.
 	 * @param object Monitor to be added.
@@ -49,8 +56,7 @@ public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
-			reader = new BufferedReader(new InputStreamReader(queries));
+			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
 			String create = p.getProperty("createMonitor");
 			
@@ -87,8 +93,7 @@ public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
-			reader = new BufferedReader(new InputStreamReader(queries));
+			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
 			String query = p.getProperty("readMonitor");
 			
@@ -127,8 +132,7 @@ public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
-			reader = new BufferedReader(new InputStreamReader(queries));
+			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
 			String query = p.getProperty("deleteMonitor");
 			
@@ -162,8 +166,7 @@ public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
-			reader = new BufferedReader(new InputStreamReader(queries));
+			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
 			String query = p.getProperty("readAllMonitor");
 			
@@ -200,8 +203,7 @@ public class MonitorDAO implements InterfaceDAO<MonitorDTO> {
 		try{
 			
 			Properties p = new Properties();	
-			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
-			reader = new BufferedReader(new InputStreamReader(queries));
+			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
 			String query = p.getProperty("readMonitor");
 			

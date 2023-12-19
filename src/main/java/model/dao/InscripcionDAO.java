@@ -8,8 +8,8 @@ import java.util.Properties;
 import model.common.Connector;
 import controller.dto.registration.*;
 import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.File;
+import java.io.FileReader;
 
 /**
  * Class that manage database access related to registrations implemented using Singleton design pattern
@@ -21,19 +21,26 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 	 */
 	private static InscripcionDAO instance_= null;
 	/**
-	 * Instance access method.
-	 * @return Instance class.
+	 * Properties path
 	 */
-	public static InscripcionDAO getInstance() {
-		if(instance_ == null) {
-			instance_ = new InscripcionDAO();
+	private String dir_;
+	/**
+	 * Singleton private constructor
+	 * @param dir Properties path
+	 */
+	private InscripcionDAO(String dir) {
+		dir_=dir;
+	};
+	/**
+	 * Instance access method
+	 * @return InscripcionDAO Instance
+	 */
+	public static InscripcionDAO getInstance(String dir) {
+		if(instance_ == null ) {
+			instance_ = new InscripcionDAO(dir);
 		}
 		return instance_;
 	}
-	/**
-	 * Empty constructor
-	 */
-	private InscripcionDAO() {}
 	
 	/**
 	 * Add a new registration
@@ -49,8 +56,7 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
-			reader = new BufferedReader(new InputStreamReader(queries));
+			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
 			String create = p.getProperty("createInscripcion");
 			
@@ -90,8 +96,7 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 			try{
 				
 				Properties p = new Properties();	
-				InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
-			reader = new BufferedReader(new InputStreamReader(queries));
+				reader = new BufferedReader(new FileReader(new File(dir_)));
 				p.load(reader);
 				String query = p.getProperty("readInscripcion");
 				
@@ -127,8 +132,7 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
-			reader = new BufferedReader(new InputStreamReader(queries));
+			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
 			String query = p.getProperty("readInscripcion");
 			
@@ -165,8 +169,7 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
-			reader = new BufferedReader(new InputStreamReader(queries));
+			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
 			String query = p.getProperty("deleteInscripcion");
 			
@@ -202,8 +205,7 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
-			reader = new BufferedReader(new InputStreamReader(queries));
+			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
 			String query = p.getProperty("deleteInscripcion");
 			
@@ -238,8 +240,7 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
-			reader = new BufferedReader(new InputStreamReader(queries));
+			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
 			String query = p.getProperty("readAllInscripcion");
 			
@@ -273,8 +274,7 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
-			reader = new BufferedReader(new InputStreamReader(queries));
+			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
 			String query = p.getProperty("readAllInscripcionCompleta");
 			
@@ -308,8 +308,7 @@ public class InscripcionDAO implements InterfaceDAO<RegistrationDTO>{
 		try{
 			
 			Properties p = new Properties();	
-			InputStream queries = getClass().getClassLoader().getResourceAsStream("sql.properties");
-			reader = new BufferedReader(new InputStreamReader(queries));
+			reader = new BufferedReader(new FileReader(new File(dir_)));
 			p.load(reader);
 			String query = p.getProperty("readAllInscripcionParcial");
 			
