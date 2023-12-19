@@ -91,13 +91,13 @@
 	margin-right: 50px;
 	position: absolute;
 }
-.li1{
+.nav1 > li, .nav2 > li{
 	list-style: none;
 	cursor: pointer;
 	padding: 20px;
 	transition: all 0.3s ease 0s;
 }
-.li1:hover{
+.nav1 > li:hover, .nav2 > li:hover{
 	background-color: #5DD8DE;;
 }
 .nav2{
@@ -105,7 +105,7 @@
 	display: none;
 	transform: translateY(20px);
 }
-.li2{
+.nav2 > li{
 	border-bottom: solid 1px #000;
 	text-align: center;
 	background-color: #42BFC5;
@@ -114,9 +114,9 @@
 	transform: translateX(-20px);
 	padding: 20px;
 }
-.li2:hover{
+.nav2 > li:hover{
 	background-color: #5DD8DE;
 }
-.desplegar:hover{
+.desplegar:hover > .nav2{
 	display: block;
 }

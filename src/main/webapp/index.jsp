@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>homepage</title>
-<link rel="stylesheet" href="css/styles.css" type="text/css">
+<link rel="stylesheet" href="/Proyecto-Programacion-Web/css/styles.css" type="text/css">
 </head>
 <body>
 <% 
@@ -29,19 +29,19 @@
 		
 		<nav class="Nav">
 			<ul class="nav1">
-				<li class="li1"><a href="index.jsp">Home</a></li>
-				<li class="li1" class="desplegar">Camps Management
+				<li><a href="/Proyecto-Programacion-Web/index.jsp">Home</a></li>
+				<li class="desplegar">Camps Management
 					<ul class="nav2">
-						<li class="li2"><a href="mvc/view/admin/createCampView.jsp">Create Camp</a></li>
-						<li class="li2"><a href="mvc/view/admin/createActivityView.jsp">Create Activity</a></li>
-						<li class="li2"><a href="mvc/view/admin/createMonitorView.jsp">Create Monitor</a></li>
-						<li class="li2"><a href="mvc/view/admin/associateActivitytoCampForm.jsp">Activity to Camp</a></li>
-						<li class="li2"><a href="mvc/view/admin/associateMonitortoActivityView.jsp">Monitor to Activity</a></li>
-						<li class="li2"><a href="mvc/view/admin/associateMonitortoCampView.jsp">Monitor to Camp</a></li>
+						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/createCampView.jsp">Create Camp</a></li>
+						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/createActivityView.jsp">Create Activity</a></li>
+						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/createMonitorView.jsp">Create Monitor</a></li>
+						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/associateActivitytoCampForm.jsp">Activity to Camp</a></li>
+						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/associateMonitortoActivityView.jsp">Monitor to Activity</a></li>
+						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/associateMonitortoCampView.jsp">Monitor to Camp</a></li>
 					</ul>
 				</li>
-				<li class="li1"><a href="mvc/controller/login/changeData.jsp">Edit Profile</a></li>
-				<li class="li1"><a href="mvc/controller/logout/logout.jsp">Log out</a></li>
+				<li><a href="/Proyecto-Programacion-Web/mvc/controller/login/changeData.jsp">Edit Profile</a></li>
+				<li><a href="/Proyecto-Programacion-Web/mvc/controller/logout/logout.jsp">Log out</a></li>
 			</ul>
 		</nav>
 	<% }else if(customerBean.getRol() == "Client"){ %>
