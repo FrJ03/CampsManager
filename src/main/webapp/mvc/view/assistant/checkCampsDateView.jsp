@@ -1,49 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean id="customerBean" scope="session" class="view.beans.customer.CustomerBean"></jsp:useBean>
+<jsp:useBean  id="customerBean" scope="session" class="view.beans.customer.CustomerBean"></jsp:useBean>
 
 <!DOCTYPE html>
-<html>
-    <head>
-    <link rel="stylesheet" href="../../css/style.css">
-        <meta charset="UTF-8">
-        <title>Check available camps</title>
-    </head>
-    <body>
-        <%
-            String nextPage="";
-            String messageNextPage = (String)request.getAttribute("message");
-
-            if(customerBean != null || !customerBean.getEmailUser().equals("")){
-                //No debería estar aquí, lo mando al index
-                nextPage="../../../webapp/index.jsp";
-        %>
-                <jsp:forward page="<%=nextPage%>"/>
-        <%
-            }
-            if(customerBean.getRol() == "Admin"){
-                //Lo mando a la página de admin
-                nextPage="../../controller/admin/admin.jsp";
-        %>
-                <jsp:forward page="<%=nextPage%>"></jsp:forward>
-        <%
-            }
-            else{
-                if(customerBean.getRol() == "None"){
-                    nextPage="../../../webapp/index.jsp";
-        %>
-                    <jsp:forward page="<%=nextPage%>"/>
-        <%
-                }
-            }
-        %>
-
-        <ul>
-            <li><a href="../../../webapp/index.jsp"></a>User index</li>
-            <li><a href="../../controller/logout/logout.jsp"></a>Logout</li>
-            <li><a href="../register/changeDataView.jsp"></a>Modify user info</li>
-        </ul>
-<br>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Camp</title>
+</head>
+<body>
+		<% 
+		String messageNextPage = (String)request.getAttribute("message");
+		
+			if (customerBean == null || !customerBean.getRol().equals("Client")) {
+			//No debería estar aquí -> flujo salta a index.jsp
+				String nextPage = "/include/errors/errorRol.jsp";
+		%>
+				<jsp:forward page="<%=nextPage%>"></jsp:forward>
+		<% 
+			}
+		%>
 
         <h2>Check available camps</h2>
             <%= messageNextPage %><br><br>
@@ -58,6 +35,10 @@
         
             <button type="submit">Search</button>
         </form>
+
+    </body>
+</html>
+
 
     </body>
 </html>
