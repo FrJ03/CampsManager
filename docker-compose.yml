@@ -7,7 +7,7 @@ services:
     container_name: pw
     environment:
       MYSQL_ROOT_PASSWORD: PracticaPW
-      MYSQL_DATABASE: PracticaPW
+      MYSQL_DATABASE: i12meorf
       MYSQL_USER: i12meorf
       MYSQL_PASSWORD: PracticaPW
     volumes:
