@@ -38,12 +38,6 @@
             }
         %>
 
-        <ul>
-            <li><a href="../../../webapp/index.jsp"></a>Admin page</li>
-            <li><a href="../../controller/logout/logout.jsp"></a>Logout</li>
-            <li><a href="../register/changeDataView.jsp"></a>Modify user info</li>
-        </ul>
-
 <!-- formulario para crear camp -->
               <h2>Create Camp:</h2>
               <form action="../../controller/servlets/CreateCamp.java" method="post">
