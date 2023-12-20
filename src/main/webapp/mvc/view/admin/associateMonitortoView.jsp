@@ -5,22 +5,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Associate monitor to camp</title>
+    <meta charset="ISO-8859-1">
+    <title>Associate monitor to camp</title>
+    <link rel="stylesheet" href="Proyecto-Programacion-Web/css/style.css">
 </head>
 <body>
 	<% 
 		String messageNextPage = (String)request.getAttribute("message");
 		
 			if (customerBean == null || !customerBean.getRol().equals("Admin")) {
-			//No debería estar aquí -> flujo salta a index.jsp
+			//No deberï¿½a estar aquï¿½ -> flujo salta a index.jsp
 				String nextPage = "/include/errors/errorRol.jsp";
 		%>
 				<jsp:forward page="<%=nextPage%>"></jsp:forward>
 		<% 
 			}
 		%>
-    <h2>Associate special monitor to a camp</h2>
+    <jsp:include page="</Proyecto-Programacion-Web/include/templates/adminNav.html>"></jsp:include>
+    <h1 class="Form">Associate special monitor to a camp</h1>
 	<%= messageNextPage %><br/><br/>
     <form action="/Proyecto-Programacion-Web/AssociateMonitortoCamp" method="post">
         <label for="special">:</label>

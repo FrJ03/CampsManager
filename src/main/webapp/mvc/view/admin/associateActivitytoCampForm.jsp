@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Asociate activity to camp</title>
+	<meta charset="ISO-8859-1">
+	<title>Asociate activity to camp</title>
+	<link rel="stylesheet" href="Proyecto-Programacion-Web/css/style.css">
 </head>
 <body>
 	<body>
@@ -20,7 +21,8 @@
 		<% 
 			}
 		%>
-	<h2>Asociate a camp to an activity</h2>
+	<jsp:include page="</Proyecto-Programacion-Web/include/templates/adminNav.html>"></jsp:include>
+	<h1 class="Form">Asociate a camp to an activity</h1>
 	<p><%=messageNextPage%></p>
     <form class="Form" method="post" action="/Proyecto-Programacion-Web/AssociateActivitytoCamp">
 	<label for="camp">Campament: </label>

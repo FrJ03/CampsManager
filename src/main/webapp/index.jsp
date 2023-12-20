@@ -5,9 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>homepage</title>
-<link rel="stylesheet" href="/Proyecto-Programacion-Web/css/styles.css" type="text/css">
+	<meta charset="UTF-8">
+	<title>homepage</title>
+	<link rel="stylesheet" href="/Proyecto-Programacion-Web/css/styles.css" type="text/css">
 </head>
 <body>
 <% 

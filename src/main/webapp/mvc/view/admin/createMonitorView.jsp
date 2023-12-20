@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <link rel="stylesheet" href="../../css/style.css">
+        <link rel="stylesheet" href="Proyecto-Programacion-Web/css/style.css">
         <meta charset="UTF-8">
         <title>Create Monitor</title>
     </head>
@@ -37,15 +37,9 @@
                 }
             }
         %>
-
-        <ul>
-            <li><a href="../../../webapp/index.jsp"></a>Admin page</li>
-            <li><a href="../../controller/logout/logout.jsp"></a>Logout</li>
-            <li><a href="../register/changeDataView.jsp"></a>Modify user info</li>
-        </ul>
-
+        <jsp:include page="</Proyecto-Programacion-Web/include/templates/adminNav.html>"></jsp:include>
 <!-- formulario para crear mon -->
-              <h1>Create Monitor</h1>
+              <h1 class="Title">Create Monitor</h1>
               <form class="Form" action="../../controller/servlets/CreateMonitor.java" method="post">
                   <label for="initDate">Name:</label>
                   <input type="text" id="name" name="name" required>

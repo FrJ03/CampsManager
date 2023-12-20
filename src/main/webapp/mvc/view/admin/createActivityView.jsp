@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <link rel="stylesheet" href="../../css/style.css">
+        <link rel="stylesheet" href="Proyecto-Programacion-Web/css/style.css">
         <meta charset="UTF-8">
         <title>Create Activity</title>
     </head>
@@ -37,12 +37,7 @@
                 }
             }
         %>
-
-        <ul>
-            <li><a href="../../../webapp/index.jsp"></a>Admin page</li>
-            <li><a href="../../controller/logout/logout.jsp"></a>Logout</li>
-            <li><a href="../register/changeDataView.jsp"></a>Modify user info</li>
-        </ul>
+        <jsp:include page="</Proyecto-Programacion-Web/include/templates/adminNav.html>"></jsp:include>
 
 <!-- formulario para crear act -->
               <h1 class="Title">Create Activity</h1>
