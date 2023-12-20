@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Log in</title>
-<link rel="stylesheet" href="../../../css/styles.css" type="text/css">
+<link rel="stylesheet" href="/Proyecto-Programacion-Web/css/styles.css" type="text/css">
 </head>
 <body>
 <%
