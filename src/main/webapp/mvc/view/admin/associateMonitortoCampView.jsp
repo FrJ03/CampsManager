@@ -21,7 +21,7 @@
 		<% 
 			}
 		%>
-    <jsp:include page="</Proyecto-Programacion-Web/include/templates/adminNav.html>"></jsp:include>
+    <jsp:include page="/Proyecto-Programacion-Web/include/templates/adminNav.html"></jsp:include>
     <h1 class="Form">Associate special monitor to a camp</h1>
 	<%= messageNextPage %><br/><br/>
     <form action="/Proyecto-Programacion-Web/AssociateMonitortoCamp" method="post">

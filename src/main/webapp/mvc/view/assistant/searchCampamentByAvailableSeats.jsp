@@ -22,7 +22,7 @@
 		<% 
 			}
 		%>
-	<jsp:include page="</Proyecto-Programacion-Web/include/templates/assistantNav.html>"></jsp:include>
+	<jsp:include page="/Proyecto-Programacion-Web/include/templates/assistantNav.html"></jsp:include>
     <h1 class="Title">Search Camp</h1>
 	<%= messageNextPage %><br/><br/>
 

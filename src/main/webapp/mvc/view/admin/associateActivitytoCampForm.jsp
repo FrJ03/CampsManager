@@ -21,7 +21,7 @@
 		<% 
 			}
 		%>
-	<jsp:include page="</Proyecto-Programacion-Web/include/templates/adminNav.html>"></jsp:include>
+	<jsp:include page="/Proyecto-Programacion-Web/include/templates/adminNav.html"></jsp:include>
 	<h1 class="Form">Asociate a camp to an activity</h1>
 	<p><%=messageNextPage%></p>
     <form class="Form" method="post" action="/Proyecto-Programacion-Web/AssociateActivitytoCamp">

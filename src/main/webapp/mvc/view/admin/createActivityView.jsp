@@ -37,7 +37,7 @@
                 }
             }
         %>
-        <jsp:include page="</Proyecto-Programacion-Web/include/templates/adminNav.html>"></jsp:include>
+        <jsp:include page="/Proyecto-Programacion-Web/include/templates/adminNav.html"></jsp:include>
 
 <!-- formulario para crear act -->
               <h1 class="Title">Create Activity</h1>

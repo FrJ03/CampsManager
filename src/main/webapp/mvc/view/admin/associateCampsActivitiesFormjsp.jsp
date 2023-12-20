@@ -21,7 +21,7 @@
 		<% 
 			}
 		%>
-	<jsp:include page="</Proyecto-Programacion-Web/include/templates/adminNav.html>"></jsp:include>
+	<jsp:include page="/Proyecto-Programacion-Web/include/templates/adminNav.html"></jsp:include>
 	<h1 class="Form">Asociate the camp and the activity</h1>
     <form class="Form" method="post" action="../../">
 	<label for="camp">Campament: </label>

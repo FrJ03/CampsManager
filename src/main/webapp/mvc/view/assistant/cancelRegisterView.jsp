@@ -37,7 +37,7 @@
                 }
             }
         %>
-        <jsp:include page="</Proyecto-Programacion-Web/include/templates/assistantNav.html>"></jsp:include>
+        <jsp:include page="/Proyecto-Programacion-Web/include/templates/assistantNav.html"></jsp:include>
         <h1 class="Title">Cancel registration</h1>
             <%= messageNextPage %><br><br>
         <form class="Form" action="/Proyecto-Programacion-Web/CancelRegistration" method="post">

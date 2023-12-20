@@ -37,7 +37,7 @@
                 }
             }
         %>
-        <jsp:include page="</Proyecto-Programacion-Web/include/templates/assistantNav.html>"></jsp:include>
+        <jsp:include page="/Proyecto-Programacion-Web/include/templates/assistantNav.html"></jsp:include>
         <h1 class="Title">Check available camps</h1>
             <%= messageNextPage %><br><br>
 <!-- EXISTE EL CONTROLADOR CHECKCAMPSDATE?? -->
