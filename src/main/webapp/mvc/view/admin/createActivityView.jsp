@@ -41,7 +41,7 @@
 
 <!-- formulario para crear act -->
               <h1 class="Title">Create Activity</h1>
-              <form class="Form" action="../../controller/servlets/CreateActivity.java" method="post">
+              <form class="Form" action="/Proyecto-Programacion-Web/CreateActivity" method="post">
                   <label for="initDate">Name of Activity:</label>
                   <input type="text" id="name" name="name" required>
           
