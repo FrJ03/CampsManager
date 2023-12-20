@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <link rel="stylesheet" href="../../css/style.css">
+        <link rel="stylesheet" href="/Proyecto-Programacion-Web/css/style.css">
         <meta charset="UTF-8">
         <title>Register in a camp</title>
     </head>
@@ -37,15 +37,8 @@
                 }
             }
         %>
-
-        <ul>
-            <li><a href="../../../webapp/index.jsp"></a>User index</li>
-            <li><a href="../../controller/logout/logout.jsp"></a>Logout</li>
-            <li><a href="../register/changeDataView.jsp"></a>Modify user info</li>
-        </ul>
-<br>
-        
-        <h2>Register in a camp:</h2>
+        <jsp:include page="</Proyecto-Programacion-Web/include/templates/assistantNav.html>"></jsp:include>
+        <h1 class="Title">Register in a camp:</h1>
             <%= messageNextPage %><br><br>
 <!-- EXISTE EL CONTROLADOR DE HACER REGISTROS?? -->
         <form class="Form" action="Proyecto-Programacion-Web/DoRegistration" method="post">
