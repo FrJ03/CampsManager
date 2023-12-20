@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="/Proyecto-Programacion-Web/css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
         <meta charset="UTF-8">
         <title>Create Monitor</title>
     </head>
@@ -30,17 +30,23 @@
             }
             else{
                 if(customerBean.getRol() == "None"){
-                    nextPage="/Proyecto-Programacion-Web/index.jsp";
+                    nextPage="../../../webapp/index.jsp";
         %>
                     <jsp:forward page="<%=nextPage%>"/>
         <%
                 }
             }
         %>
-        <jsp:include page="/Proyecto-Programacion-Web/include/templates/adminNav.html"></jsp:include>
+
+        <ul>
+            <li><a href="../../../webapp/index.jsp"></a>Admin page</li>
+            <li><a href="../../controller/logout/logout.jsp"></a>Logout</li>
+            <li><a href="../register/changeDataView.jsp"></a>Modify user info</li>
+        </ul>
+
 <!-- formulario para crear mon -->
-              <h1 class="Title">Create Monitor</h1>
-              <form class="Form" action="/Proyecto-Programacion-Web/CreateMonitor.java" method="post">
+              <h2>Create Monitor</h2>
+              <form action="../../controller/servlets/CreateMonitor.java" method="post">
                   <label for="initDate">Name:</label>
                   <input type="text" id="name" name="name" required>
           

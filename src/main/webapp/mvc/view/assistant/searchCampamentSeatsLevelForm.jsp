@@ -8,7 +8,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Camp</title>
-    <link rel="stylesheet" href="/Proyecto-Programacion-Web/css/style.css">
 </head>
 <body>
 		<% 
@@ -22,8 +21,7 @@
 		<% 
 			}
 		%>
-    <jsp:include page="/Proyecto-Programacion-Web/include/templates/assistantNav.html"></jsp:include>
-    <h1 class="Title">Search Camp</h1>
+    <h2>Search Camp</h2>
 	<%= messageNextPage %><br/><br/>
     <form action="/Proyecto-Programacion-Web/SearchCampamentSeatsLevel" method="post">
         <label for="educationalLevel">Search by Educational Level:</label>

@@ -5,9 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="ISO-8859-1">
-	<title>Associate monitor to activity</title>
-	<link rel="stylesheet" href="/Proyecto-Programacion-Web/css/style.css">
+<meta charset="ISO-8859-1">
+<title>Associate monitor to activity</title>
 </head>
 <body>
 	<% 
@@ -21,10 +20,9 @@
 		<% 
 			}
 		%>
-	<jsp:include page="/Proyecto-Programacion-Web/include/templates/adminNav.html"></jsp:include>
-    <h1 class="Form">Associate monitor to an activity</h1>
+    <h2>Associate monitor to an activity</h2>
 	<%= messageNextPage %><br/><br/>
-    <form class="Form" action="/Proyecto-Programacion-Web/AssociateMonitortoActivity" method="post">
+    <form action="/Proyecto-Programacion-Web/AssociateMonitortoActivity" method="post">
         <label for="mon">Monitor: </label>
 	<input type="text" name="mon"><br/>
 	<label for="activity">Activity: </label>

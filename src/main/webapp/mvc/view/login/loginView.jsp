@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Log in</title>
-<link rel="stylesheet" href="/Proyecto-Programacion-Web/css/styles.css" type="text/css">
+<link rel="stylesheet" href="../../../css/styles.css" type="text/css">
 </head>
 <body>
 <%
@@ -30,7 +30,7 @@
 	} else {
 	%>
 	<%= messageNextPage %><br/><br/>
-	<h1 class="Title">Login</h1>
+	<h1class="Title">Login</h1>
 <form class="Form" method="post" action="../../controller/login/login.jsp">
 	<label for="email">Email: </label>
 	<input type="text" name="email"><br/>

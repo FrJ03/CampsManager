@@ -120,10 +120,3 @@
 .desplegar:hover > .nav2{
 	display: block;
 }
-.navLink{
-	color: #fff;
-	text-decoration: none;
-}
-.navLink:visited{
-	color: #fff;
-}

@@ -5,9 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Associate monitor to camp</title>
-    <link rel="stylesheet" href="/Proyecto-Programacion-Web/css/style.css">
+<meta charset="ISO-8859-1">
+<title>Associate monitor to camp</title>
 </head>
 <body>
 	<% 
@@ -21,8 +20,7 @@
 		<% 
 			}
 		%>
-    <jsp:include page="/Proyecto-Programacion-Web/include/templates/adminNav.html"></jsp:include>
-    <h1 class="Form">Associate special monitor to a camp</h1>
+    <h2>Associate special monitor to a camp</h2>
 	<%= messageNextPage %><br/><br/>
     <form action="/Proyecto-Programacion-Web/AssociateMonitortoCamp" method="post">
         <label for="special">Search by Available Seats::</label>

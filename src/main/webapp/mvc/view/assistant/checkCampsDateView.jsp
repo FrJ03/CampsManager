@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="/Proyecto-Programacion-Web/css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
         <meta charset="UTF-8">
         <title>Check available camps</title>
     </head>
@@ -16,7 +16,7 @@
 
             if(customerBean != null || !customerBean.getEmailUser().equals("")){
                 //No debería estar aquí, lo mando al index
-                nextPage="/Proyecto-Programacion-Web/index.jsp";
+                nextPage="../../../webapp/index.jsp";
         %>
                 <jsp:forward page="<%=nextPage%>"/>
         <%
@@ -30,18 +30,25 @@
             }
             else{
                 if(customerBean.getRol() == "None"){
-                    nextPage="/Proyecto-Programacion-Web/index.jsp";
+                    nextPage="../../../webapp/index.jsp";
         %>
                     <jsp:forward page="<%=nextPage%>"/>
         <%
                 }
             }
         %>
-        <jsp:include page="/Proyecto-Programacion-Web/include/templates/assistantNav.html"></jsp:include>
-        <h1 class="Title">Check available camps</h1>
+
+        <ul>
+            <li><a href="../../../webapp/index.jsp"></a>User index</li>
+            <li><a href="../../controller/logout/logout.jsp"></a>Logout</li>
+            <li><a href="../register/changeDataView.jsp"></a>Modify user info</li>
+        </ul>
+<br>
+
+        <h2>Check available camps</h2>
             <%= messageNextPage %><br><br>
 <!-- EXISTE EL CONTROLADOR CHECKCAMPSDATE?? -->
-        <form class="Form" action="/Proyecto-Programacion-Web/CheckCampsDate" method="post">
+        <form action="/Proyecto-Programacion-Web/CheckCampsDate" method="post">
             
             <label for="dateStart">Date of beginning of camp:</label>
             <input type="date" name="dateStart" id="dateStart" required>

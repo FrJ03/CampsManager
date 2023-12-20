@@ -5,9 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>homepage</title>
-	<link rel="stylesheet" href="/Proyecto-Programacion-Web/css/styles.css" type="text/css">
+<meta charset="UTF-8">
+<title>homepage</title>
+<link rel="stylesheet" href="/Proyecto-Programacion-Web/css/styles.css" type="text/css">
 </head>
 <body>
 <% 
@@ -27,10 +27,34 @@
 
 	<% if(customerBean.getRol() == "Admin"){ %>
 		
-		<jsp:include page="/Proyecto-Programacion-Web/include/templates/adminNav.html"></jsp:include>
+		<nav class="Nav">
+			<ul class="nav1">
+				<li><a href="/Proyecto-Programacion-Web/index.jsp">Home</a></li>
+				<li class="desplegar">Camps Management
+					<ul class="nav2">
+						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/createCampView.jsp">Create Camp</a></li>
+						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/createActivityView.jsp">Create Activity</a></li>
+						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/createMonitorView.jsp">Create Monitor</a></li>
+						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/associateActivitytoCampForm.jsp">Activity to Camp</a></li>
+						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/associateMonitortoActivityView.jsp">Monitor to Activity</a></li>
+						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/associateMonitortoCampView.jsp">Monitor to Camp</a></li>
+					</ul>
+				</li>
+				<li><a href="/Proyecto-Programacion-Web/mvc/controller/login/changeData.jsp">Edit Profile</a></li>
+				<li><a href="/Proyecto-Programacion-Web/mvc/controller/logout/logout.jsp">Log out</a></li>
+			</ul>
+		</nav>
 	<% }else if(customerBean.getRol() == "Client"){ %>
-
-		<jsp:include page="/Proyecto-Programacion-Web/include/templates/assistantNav.html"></jsp:include>
+            <p>Assistant Operations:</p>
+            <br>
+            	<button type="button" class="small-button" onclick="window.location.href='<%= request.getContextPath() %>/Proyecto-Programacion-Web/mvc/view/assistant/checkCampsView.jsp'">Check available camps</button>
+            	<br>
+            	<button type="button" class="small-button" onclick="window.location.href='<%= request.getContextPath() %>/Proyecto-Programacion-Web/mvc/view/assistant/searchCampView.jsp'">Search camp</button>
+            	<br>
+            	<button type="button" class="small-button" onclick="window.location.href='<%= request.getContextPath() %>/Proyecto-Programacion-Web/mvc/view/assistant/doRegisterView.jsp'">Make a registration for a camp</button>
+            	<br>
+            	<button type="button" class="small-button" onclick="window.location.href='<%= request.getContextPath() %>/Proyecto-Programacion-Web/mvc/view/assistant/cancelRegisterView.jsp'">Cancel a registration for a camp</button>
+	
 	<% } %>
 <% } %>
 </body>

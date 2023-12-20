@@ -21,7 +21,7 @@ import view.beans.customer.CustomerBean;
  * Servlet implementation class search a camp by number of seats
  * @author Enrique de los Reyes Montilla
  */
-@WebServlet("/SearchCampamentByEducationalLevel")
+@WebServlet("/SearchCampamentSeatsLevel")
 public class SearchCampamentSeatsLevel extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	/**
@@ -40,7 +40,7 @@ public class SearchCampamentSeatsLevel extends HttpServlet {
 	            dispatcher.forward(request, response);
 	        } else {
 	        	// El cliente existe y tiene el rol de cliente
-	        	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/assistant/searchCampamentByEducationalLevel.jsp");
+	        	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/assistant/searchCampamentSeatsLevelForm.jsp");
 	        	request.setAttribute("message", "");
 	            dispatcher.forward(request, response);
 	        }
@@ -62,14 +62,26 @@ public class SearchCampamentSeatsLevel extends HttpServlet {
 	    }
 	        // Get the form parameters
 	        String educationalLevel = request.getParameter("educationalLevel");
-	    if ((educationalLevel == null) ) {
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/assistant/searchCampamentByEducationalLevel.jsp");
+	        String availableSeatsStr = request.getParameter("availableSeats");
+	    if ((educationalLevel == null && availableSeatsStr == "") ) {
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/assistant/searchCampamentSeatsLevelForm.jsp");
         	request.setAttribute("message", "The value of the request is invalid");
             dispatcher.forward(request, response);
 	    }
 	    
 	    if(educationalLevel != "") {
 	    	ArrayList<CampDTO> listc = gc.getListaCampamentos(Nivel.valueOf(educationalLevel));
+	        String turno = "true";
+	        RequestDispatcher dispatcher;
+	    	for(CampDTO aux : listc) {
+	    		dispatcher = campView(aux, turno, request);
+	    		dispatcher.include(request, response);
+	    		turno = "false";
+	    	}
+	    }
+	    
+	    else {
+	    	ArrayList<CampDTO> listc = gc.getListaCampamentos(Integer.valueOf(availableSeatsStr));
 	        String turno = "true";
 	        RequestDispatcher dispatcher;
 	    	for(CampDTO aux : listc) {

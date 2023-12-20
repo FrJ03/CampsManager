@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="/Proyecto-Programacion-Web/css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
         <meta charset="UTF-8">
         <title>Create Activity</title>
     </head>
@@ -16,7 +16,7 @@
 
             if(customerBean != null || !customerBean.getEmailUser().equals("")){
                 //No debería estar aquí, lo mando al index
-                nextPage="/Proyecto-Programacion-Web/index.jsp";
+                nextPage="../../../webapp/index.jsp";
         %>
                 <jsp:forward page="<%=nextPage%>"/>
         <%
@@ -30,18 +30,23 @@
             }
             else{
                 if(customerBean.getRol() == "None"){
-                    nextPage="/Proyecto-Programacion-Web/index.jsp";
+                    nextPage="../../../webapp/index.jsp";
         %>
                     <jsp:forward page="<%=nextPage%>"/>
         <%
                 }
             }
         %>
-        <jsp:include page="/Proyecto-Programacion-Web/include/templates/adminNav.html"></jsp:include>
+
+        <ul>
+            <li><a href="../../../webapp/index.jsp"></a>Admin page</li>
+            <li><a href="../../controller/logout/logout.jsp"></a>Logout</li>
+            <li><a href="../register/changeDataView.jsp"></a>Modify user info</li>
+        </ul>
 
 <!-- formulario para crear act -->
-              <h1 class="Title">Create Activity</h1>
-              <form class="Form" action="/Proyecto-Programacion-Web/CreateActivity" method="post">
+              <h2>Create Activity</h2>
+              <form action="../../controller/servlets/CreateActivity.java" method="post">
                   <label for="initDate">Name of Activity:</label>
                   <input type="text" id="name" name="name" required>
           
