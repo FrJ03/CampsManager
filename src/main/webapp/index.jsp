@@ -27,10 +27,10 @@
 
 	<% if(customerBean.getRol() == "Admin"){ %>
 		
-		<jsp:include page="/Proyecto-Programacion-Web/include/templates/adminNav.html"></jsp:include>
+		<jsp:include page="include/templates/adminNav.html"></jsp:include>
 	<% }else if(customerBean.getRol() == "Client"){ %>
 
-		<jsp:include page="/Proyecto-Programacion-Web/include/templates/assistantNav.html"></jsp:include>
+		<jsp:include page="include/templates/assistantNav.html"></jsp:include>
 	<% } %>
 <% } %>
 </body>
