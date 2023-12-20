@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="Proyecto-Programacion-Web/css/style.css">
+        <link rel="stylesheet" href="/Proyecto-Programacion-Web/css/style.css">
         <meta charset="UTF-8">
         <title>Create Monitor</title>
     </head>

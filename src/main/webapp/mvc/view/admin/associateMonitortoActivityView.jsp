@@ -7,7 +7,7 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Associate monitor to activity</title>
-	<link rel="stylesheet" href="Proyecto-Programacion-Web/css/style.css">
+	<link rel="stylesheet" href="/Proyecto-Programacion-Web/css/style.css">
 </head>
 <body>
 	<% 
