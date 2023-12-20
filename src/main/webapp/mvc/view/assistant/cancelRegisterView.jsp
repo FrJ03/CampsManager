@@ -16,7 +16,7 @@
 
             if(customerBean != null || !customerBean.getEmailUser().equals("")){
                 //No debería estar aquí, lo mando al index
-                nextPage="../../../webapp/index.jsp";
+                nextPage="/Proyecto-Programacion-Web/index.jsp";
         %>
                 <jsp:forward page="<%=nextPage%>"/>
         <%
@@ -30,7 +30,7 @@
             }
             else{
                 if(customerBean.getRol() == "None"){
-                    nextPage="../../../webapp/index.jsp";
+                    nextPage="/Proyecto-Programacion-Web/index.jsp";
         %>
                     <jsp:forward page="<%=nextPage%>"/>
         <%

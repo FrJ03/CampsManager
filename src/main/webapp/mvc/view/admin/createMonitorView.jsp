@@ -30,7 +30,7 @@
             }
             else{
                 if(customerBean.getRol() == "None"){
-                    nextPage="../../../webapp/index.jsp";
+                    nextPage="/Proyecto-Programacion-Web/index.jsp";
         %>
                     <jsp:forward page="<%=nextPage%>"/>
         <%
