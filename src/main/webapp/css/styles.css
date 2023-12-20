@@ -98,7 +98,8 @@
 	transition: all 0.3s ease 0s;
 }
 .nav1 > li:hover, .nav2 > li:hover{
-	background-color: #5DD8DE;;
+	background-color: #5DD8DE;
+	color: #fff;
 }
 .nav2{
 	position: absolute;
