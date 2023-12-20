@@ -27,44 +27,10 @@
 
 	<% if(customerBean.getRol() == "Admin"){ %>
 		
-		<nav class="Nav">
-			<ul class="nav1">
-				<li><a href="/Proyecto-Programacion-Web/index.jsp" class="navLink">Home</a></li>
-				<li class="desplegar">Camps Management
-					<ul class="nav2">
-						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/createCampView.jsp" class="navLink">Create Camp</a></li>
-						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/createActivityView.jsp" class="navLink">Create Activity</a></li>
-						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/createMonitorView.jsp" class="navLink">Create Monitor</a></li>
-						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/associateActivitytoCampForm.jsp" class="navLink">Activity to Camp</a></li>
-						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/associateMonitortoActivityView.jsp" class="navLink">Monitor to Activity</a></li>
-						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/admin/associateMonitortoCampView.jsp" class="navLink">Monitor to Camp</a></li>
-					</ul>
-				</li>
-				<li><a href="/Proyecto-Programacion-Web/mvc/controller/login/changeData.jsp" class="navLink">Edit Profile</a></li>
-				<li><a href="/Proyecto-Programacion-Web/mvc/controller/logout/logout.jsp" class="navLink">Log out</a></li>
-			</ul>
-		</nav>
+		<jsp:include page="</Proyecto-Programacion-Web/include/templates/adminNav.html>"></jsp:include>
 	<% }else if(customerBean.getRol() == "Client"){ %>
-	
-			<nav class="Nav">
-			<ul class="nav1">
-				<li><a href="/Proyecto-Programacion-Web/index.jsp" class="navLink">Home</a></li>
-				<li class="desplegar">Camps
-					<ul class="nav2">
-						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/assistant/checkCampsDateView.jsp" class="navLink">By Date</a></li>
-						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/assistant/searchCampamentSeatsLevelForm.jsp" class="navLink">By Level or Seats</a></li>
-					</ul>
-				</li>
-				<li class="desplegar">Registration
-					<ul class="nav2">
-						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/assistant/doRegisterView.jsp" class="navLink">Make</a></li>
-						<li class="li2"><a href="/Proyecto-Programacion-Web/mvc/view/assistant/cancelRegisterView.jsp" class="navLink">Cancel</a></li>
-					</ul>
-				</li>
-				<li><a href="/Proyecto-Programacion-Web/mvc/controller/login/changeData.jsp" class="navLink">Edit Profile</a></li>
-				<li><a href="/Proyecto-Programacion-Web/mvc/controller/logout/logout.jsp" class="navLink">Log out</a></li>
-			</ul>
-		</nav>	
+
+		<jsp:include page="</Proyecto-Programacion-Web/include/templates/assistantNav.html>"></jsp:include>
 	<% } %>
 <% } %>
 </body>
