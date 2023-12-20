@@ -11,7 +11,7 @@
 		b) No hay parámetros en el request -> procede de otra funcionalidad o index.jsp
 	*/
 //Caso 1: Por defecto, vuelve al index
-String nextPage = "../../../index.jsp";
+String nextPage = "/Proyecto-Programacion-Web/index.jsp";
 String mensajeNextPage = "";
 //Caso 2
 if (customerBean == null || customerBean.getEmailUser().equals("")) {
