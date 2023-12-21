@@ -58,6 +58,10 @@ public class CreateActivity extends HttpServlet{
 				RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errorAddActivity.html");
 				disp.forward(request, response);
 			}
+			else {
+				RequestDispatcher disp = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
+			  disp.forward(request, response);
+			}
 		}
 	}
 	private boolean isInteger(String number) {

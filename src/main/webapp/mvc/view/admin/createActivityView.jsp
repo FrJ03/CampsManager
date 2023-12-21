@@ -41,12 +41,12 @@
 		<jsp:include page="../../../include/templates/adminNav.html"></jsp:include>
 <!-- formulario para crear act -->
               <h1 class="Title">Create Activity</h1>
-              <form class="Form" action="../../controller/servlets/CreateActivity.java" method="post">
+              <form class="Form" action="/Proyecto-Programacion-Web/CreateActivity.java" method="post">
                   <label for="name">Name of Activity:</label>
                   <input type="text" id="name" name="name" required>
           
                   <label for="level">Level:</label>
-                  <select id="level" required>
+                  <select id="level" name="level" required>
 			            <option value="Infantil">Infantile</option>
 			            <option value="Juvenil">Juvenile</option>
 			            <option value="Adolescente">Teenager</option>
@@ -59,7 +59,7 @@
                   <input type="number" id="maxMonitors" name="maxMonitors" required>
 
                   <label for="turn">Turn:</label>
-                  <select id="level" required>
+                  <select id="turn" name="turn" required>
 			            <option value="Morning">Morning</option>
 			            <option value="Afternoon">Afternoon</option>
 			        </select>
