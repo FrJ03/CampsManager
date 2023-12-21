@@ -49,13 +49,13 @@
                   <input type="date" id="endDate" name="endDate" required>
           
                   <label for="level">Level:</label>
-          			<select id="level" required>
+          			<select id="level" name="level" required>
 			            <option value="Infantil">Infantile</option>
 			            <option value="Juvenil">Juvenile</option>
 			            <option value="Adolescente">Teenager</option>
 			        </select>
-                  <label for="maxMonitors">Max Number of Assistants:</label>
-                  <input type="number" id="maxMonitors" name="maxMonitors" required>
+                  <label for="maxAssistants">Max Number of Assistants:</label>
+                  <input type="number" id="maxAssistants" name="maxAssistants" required>
           
                   <input type="submit" value="Create Camp">
               </form>
