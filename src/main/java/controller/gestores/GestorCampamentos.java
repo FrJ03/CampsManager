@@ -192,8 +192,10 @@ public class GestorCampamentos {
 		public Boolean asociarMonitorActividad(int idA, int idM) {
 			ActividadDAO dbA = ActividadDAO.getInstance();
 			MonitorDAO dbM = MonitorDAO.getInstance();
-			
-			if(dbA.read(idA) == null || dbM.read(idM) == null)
+			ActivityDTO a = dbA.read(idA);
+			if(a == null || dbM.read(idM) == null)
+				return false;
+			if (dbA.readMonitorsActivity(idA).size() == a.getMonitoresMax())
 				return false;
 			else
 				return dbA.addActivity(idA, idM);
