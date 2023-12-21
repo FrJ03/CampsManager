@@ -32,9 +32,8 @@ public class CreateCamp extends HttpServlet{
 			String endDate = request.getParameter("endDate");
 			String level = request.getParameter("level");
 			String maxAssistants= request.getParameter("maxMonitors");
-			String idMonitor = request.getParameter("respMonitor");
 			
-			if(!isInteger(maxAssistants) || !isInteger(idMonitor) ||!GestorCampamentos.getInstance().crearCampamento(initDate, endDate, level, Integer.parseInt(maxAssistants), Integer.parseInt(idMonitor))) {
+			if(!isInteger(maxAssistants) ||!GestorCampamentos.getInstance().crearCampamento(initDate, endDate, level, Integer.parseInt(maxAssistants))) {
 				RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errorAddCamp.html");
 				disp.forward(request, response);
 			}

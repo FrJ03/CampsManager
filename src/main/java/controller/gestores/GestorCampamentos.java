@@ -152,16 +152,10 @@ public class GestorCampamentos {
 		 * @param end Camp end date
 		 * @param level Camp level
 		 * @param maxP Max level of assistants registered in the camp
-		 * @param idM Max level of monitors in the camp
 		 * @return boolean True if the camp has been added correctly, false otherwise
 		 */
-		public Boolean crearCampamento(LocalDate start, LocalDate end, Nivel level, int maxP, int idM) {
-			MonitorDAO dbM = MonitorDAO.getInstance();
-			MonitorDTO m = dbM.read(idM);
-			if(m == null)
-				return false;
+		public Boolean crearCampamento(LocalDate start, LocalDate end, Nivel level, int maxP) {
 			CampDTO campamento = new CampDTO(-1, start, end, level, maxP);
-			campamento.setResponsable(m);
 			CampamentoDAO db = CampamentoDAO.getInstance();
 			return db.create(campamento);
 		}
@@ -171,10 +165,9 @@ public class GestorCampamentos {
 		 * @param end Camp end date
 		 * @param level Camp level
 		 * @param maxP Max level of assistants registered in the camp
-		 * @param idM Max level of monitors in the camp
 		 * @return boolean True if the camp has been added correctly, false otherwise
 		 */
-		public Boolean crearCampamento(String start, String end, String level, int maxP, int idM) {
+		public Boolean crearCampamento(String start, String end, String level, int maxP) {
 			if(!isDate(start) || !isDate(end))
 				return false;
 			LocalDate s = LocalDate.parse(start);
@@ -188,13 +181,7 @@ public class GestorCampamentos {
 				l = Nivel.Adolescente;
 			else
 				return false;
-			
-			MonitorDAO dbM = MonitorDAO.getInstance();
-			MonitorDTO m = dbM.read(idM);
-			if(m == null)
-				return false;
 			CampDTO campamento = new CampDTO(-1, s, e, l, maxP);
-			campamento.setResponsable(m);
 			CampamentoDAO db = CampamentoDAO.getInstance();
 			return db.create(campamento);
 		}

@@ -61,20 +61,12 @@ public class CampamentoDAO implements InterfaceDAO<CampDTO>{
 			Connection c=con.getConnection();
 			PreparedStatement ps=c.prepareStatement(create);
 			
-             ps.setDate(3,  java.sql.Date.valueOf(object.getInicioCampamento())); 
+             ps.setDate(1,  java.sql.Date.valueOf(object.getInicioCampamento())); 
             
-             ps.setDate(4, java.sql.Date.valueOf(object.getFinCampamento()));
-             ps.setString(5, object.getNivel().toString()); 
-             ps.setInt(6, object.getAsistentesMax()); 
-             ps.setInt(1, object.getResponsable().getId());
-             if(object.getResponsableEspecial()!=null) {
-            	 ps.setInt(2, object.getResponsableEspecial().getId());
-             }
-             else {
-            	 ps.setInt(2, -1);
-             }
-             
-			
+             ps.setDate(2, java.sql.Date.valueOf(object.getFinCampamento()));
+             ps.setString(3, object.getNivel().toString()); 
+             ps.setInt(4, object.getAsistentesMax()); 
+             			
 			status = ps.executeUpdate();	
 			if (status == 1) {
 				res = true;

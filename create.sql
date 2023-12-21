@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS monitor(
 DROP TABLE IF EXISTS campamento;
 CREATE TABLE IF NOT EXISTS campamento (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    responsable INTEGER NOT NULL,
+    responsable INTEGER,
     responsableEspecial INTEGER,
     inicio DATE,
     fin DATE,
