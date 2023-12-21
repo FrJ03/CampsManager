@@ -46,7 +46,7 @@
                   <input type="text" id="name" name="name" required>
           
                   <label for="lastName">Last names:</label>
-                  <input type="text" id="lastName" name="lastNames" required>
+                  <input type="text" id="lastName" name="lastName" required>
           
                   <label for="special">Special Monitor?:</label>
                   <select id="special" name="special" required>
