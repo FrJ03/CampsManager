@@ -210,7 +210,8 @@ public class GestorCampamentos {
 			CampDTO cdto = dbC.read(idCampamento);
 			ActivityDTO adto = dbA.read(idActividad);
 			
-			if(cdto == null || adto == null)
+			if(cdto == null || adto == null || !cdto.getNivel().toString().equalsIgnoreCase(adto.getNivel().toString())
+			)
 				return false;
 			else {
 				if(cdto.getNivel() == adto.getNivel()) 
