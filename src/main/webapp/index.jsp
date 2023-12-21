@@ -16,22 +16,22 @@
 	<jsp:setProperty property="emailUser" value="" name="customerBean"/>
 	<%
 	}
-	if (customerBean == null || customerBean.getEmailUser()=="") {
+if (customerBean == null || customerBean.getEmailUser().equals("")) {
 %>
 <h1 class="Title">Camps Manager</h1>
 <div class="ButtonContainer">
-	<a class="Button" href="/Proyecto-Programacion-Web/mvc/controller/login/login.jsp">Log in</a>
-	<a class="Button" href="/Proyecto-Programacion-Web/mvc/controller/login/registerController.jsp">Sign up</a>
+<a class="Button" href="/Proyecto-Programacion-Web/mvc/controller/login/login.jsp">Log in</a>
+<a class="Button" href="/Proyecto-Programacion-Web/mvc/controller/login/registerController.jsp">Sign up</a>
 </div>
 <% } else { %>
 
-	<% if(customerBean.getRol() == "Admin"){ %>
-		
-		<jsp:include page="include/templates/adminNav.html"></jsp:include>
-	<% }else if(customerBean.getRol() == "Client"){ %>
+<% if(customerBean.getRol().equalsIgnoreCase("Admin")){ %>
+	
+	<jsp:include page="include/templates/adminNav.html"></jsp:include>
+<% }else if(customerBean.getRol().equalsIgnoreCase("Client")){ %>
 
-		<jsp:include page="include/templates/assistantNav.html"></jsp:include>
-	<% } %>
+	<jsp:include page="include/templates/assistantNav.html"></jsp:include>
+<% } %>
 <% } %>
 </body>
 </html>
