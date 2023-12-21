@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../../css/styles.css">
         <meta charset="UTF-8">
         <title>Create Activity</title>
     </head>
@@ -14,9 +14,9 @@
             String nextPage="";
             String messageNextPage = (String)request.getAttribute("message");
 
-            if(customerBean != null || !customerBean.getEmailUser().equals("")){
+            if(customerBean == null || customerBean.getEmailUser().equals("")){
                 //No debería estar aquí, lo mando al index
-                nextPage="../../../webapp/index.jsp";
+                nextPage="../../../index.jsp";
         %>
                 <jsp:forward page="<%=nextPage%>"/>
         <%
@@ -30,7 +30,7 @@
             }
             else{
                 if(customerBean.getRol() == "None"){
-                    nextPage="../../../webapp/index.jsp";
+                    nextPage="../../../index.jsp";
         %>
                     <jsp:forward page="<%=nextPage%>"/>
         <%
@@ -38,15 +38,10 @@
             }
         %>
 
-        <ul>
-            <li><a href="../../../webapp/index.jsp"></a>Admin page</li>
-            <li><a href="../../controller/logout/logout.jsp"></a>Logout</li>
-            <li><a href="../register/changeDataView.jsp"></a>Modify user info</li>
-        </ul>
-
+		<jsp:include page="../../../include/templates/assistantNav.html"></jsp:include>
 <!-- formulario para crear act -->
-              <h2>Create Activity</h2>
-              <form action="../../controller/servlets/CreateActivity.java" method="post">
+              <h1 class="Title">Create Activity</h1>
+              <form class="Form" action="../../controller/servlets/CreateActivity.java" method="post">
                   <label for="initDate">Name of Activity:</label>
                   <input type="text" id="name" name="name" required>
           
