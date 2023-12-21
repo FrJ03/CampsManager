@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="../../../css/styles.css">
 <title>Asociate activity to camp</title>
 </head>
 <body>
@@ -14,15 +15,15 @@
 		if (messageNextPage == null) messageNextPage = "";
 			if (customerBean == null || !customerBean.getRol().equals("Admin")) {
 			//No debería estar aquí
-				String nextPage = "/include/errors/errorRol.jsp";
+				String nextPage = "../../../include/errors/errorRol.jsp";
 		%>
 				<jsp:forward page="<%=nextPage%>"></jsp:forward>
 		<% 
 			}
 		%>
-	<h2>Asociate a camp to an activity</h2>
+	<h1 class="Title">Asociate a camp to an activity</h1>
 	<p><%=messageNextPage%></p>
-    <form method="post" action="/Proyecto-Programacion-Web/AssociateActivitytoCamp">
+    <form class="Form" method="post" action="/Proyecto-Programacion-Web/AssociateActivitytoCamp">
 	<label for="camp">Campament: </label>
 	<input type="text" name="camp"><br/>
 	<label for="activity">Activity: </label>

@@ -43,14 +43,19 @@
               <h1 class="Title">Create Camp</h1>
               <form  class="Form" action="../../controller/servlets/CreateCamp.java" method="post">
                   <label for="initDate">Start Date:</label>
-                  <input type="text" id="initDate" name="initDate" required>
+                  <input type="date" id="initDate" name="initDate" required>
           
                   <label for="endDate">End Date:</label>
-                  <input type="text" id="endDate" name="endDate" required>
+                  <input type="date" id="endDate" name="endDate" required>
           
                   <label for="level">Level:</label>
                   <input type="text" id="level" name="level" required>
-          
+          			<select id="level" required>
+			            <option value="Infantil">Infantile</option>
+			            <option value="Juvenil">Juvenile</option>
+			            <option value="Adolescente">Teenager</option>
+			            <option value="False">No</option>
+			        </select>
                   <label for="maxMonitors">Max Number of Assistants:</label>
                   <input type="text" id="maxMonitors" name="maxMonitors" required>
           

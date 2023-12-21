@@ -92,6 +92,7 @@
 	position: absolute;
 }
 .nav1 > li, .nav2 > li{
+	color: #fff;
 	list-style: none;
 	cursor: pointer;
 	padding: 20px;
