@@ -171,7 +171,7 @@ public class GestorCampamentos {
 			if(!isDate(start) || !isDate(end))
 				return false;
 			LocalDate s = LocalDate.parse(start);
-			LocalDate e = LocalDate.parse(start);
+			LocalDate e = LocalDate.parse(end);
 			Nivel l;
 			if(level.equalsIgnoreCase("infantil"))
 				l = Nivel.Infantil;
