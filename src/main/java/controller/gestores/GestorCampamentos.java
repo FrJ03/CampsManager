@@ -263,6 +263,20 @@ public class GestorCampamentos {
 			MonitorDTO monitor;
 			if(dbC.read(idCampamento) == null || (monitor = dbM.read(idMonitor)) == null || !monitor.getEspecial())
 				return false;
+			ArrayList<ActivityDTO> acts = dbC.readActivitiesCamp(idCampamento);
+			boolean find = false;
+			for(ActivityDTO a : acts){
+				if(!find){
+					ArrayList<MonitorDTO> monitors = dbA.readMonitorsActivity(a.getId());
+					for(MonitorDTO m : monitors){
+						if(!find){
+							find = m.getId() == idMonitor;
+						}
+					}
+				}
+			}
+			if(!find)
+				return false;
 			else
 				return dbC.updateEspecial(idCampamento, idMonitor);
 		}
