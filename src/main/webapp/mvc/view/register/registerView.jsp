@@ -34,22 +34,22 @@
 	<h1 class="Title">Sign in</h1>
 <form class="Form" method="post" action="/Proyecto-Programacion-Web/mvc/controller/login/registerController.jsp">
 	<label for="email">Email: </label>
-	<input type="email" name="email"><br/>
+	<input type="email" name="email" required><br/>
 	<label for="name">Name: </label>
-	<input type="text" name="name" ><br/>
+	<input type="text" name="name" required><br/>
 	<label for="surname">Surname: </label>
-	<input type="text" name="surname"><br/>
+	<input type="text" name="surname" required><br/>
 	
 	<label for="password">Password: </label>
-	<input type="password" name="password" >
+	<input type="password" name="password" required>
 	<label for="rol">Rol: </label>
-		<select name="rol" id="rol" onchange="showRegistrationInput()">
+		<select name="rol" id="rol" onchange="showRegistrationInput()" required>
             <option value="Admin">Admin</option>
             <option value="Client" selected >Client</option>
         </select><br/>	
 	<br/>
 	<div id="toHide"><label for="birthdate" id="birthlabel">Birthdate: </label>
-	<input type="date" name="birthdate" id="birthdate" >
+	<input type="date" name="birthdate" id="birthdate">
 	<label for="special" id="speciallabel">Need special aid?:</label>
         <select name="special" id="special">
             <option value="True">Yes</option>

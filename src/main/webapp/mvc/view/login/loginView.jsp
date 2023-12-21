@@ -33,9 +33,9 @@
 	<h1 class="Title">Login</h1>
 <form class="Form" method="post" action="../../controller/login/login.jsp">
 	<label for="email">Email: </label>
-	<input type="email" name="email"><br/>
+	<input type="email" name="email" required><br/>
 	<label for="password">Password: </label>
-	<input type="password" name="password" ><br/>
+	<input type="password" name="password" required><br/>
 	<input type="submit" value="Submit">
 </form>
 <%
