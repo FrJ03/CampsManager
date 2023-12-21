@@ -260,6 +260,7 @@ public class GestorCampamentos {
 		public boolean asociarMonitorEspecial(int idCampamento, int idMonitor) {
 			CampamentoDAO dbC = CampamentoDAO.getInstance();
 			MonitorDAO dbM = MonitorDAO.getInstance();
+			ActividadDAO dbA = ActividadDAO.getInstance();
 			MonitorDTO monitor;
 			if(dbC.read(idCampamento) == null || (monitor = dbM.read(idMonitor)) == null || !monitor.getEspecial())
 				return false;
