@@ -38,7 +38,7 @@
             }
         %>
 	
-		<jsp:include page="../../../include/templates/assistantNav.html"></jsp:include>
+		<jsp:include page="../../../include/templates/adminNav.html"></jsp:include>
 <!-- formulario para crear mon -->
               <h1 class="Title">Create Monitor</h1>
               <form class="Form" action="../../controller/servlets/CreateMonitor.java" method="post">
