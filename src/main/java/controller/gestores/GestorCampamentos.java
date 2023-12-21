@@ -230,9 +230,25 @@ public class GestorCampamentos {
 		public boolean asociarMonitorResponsable(int idCampamento, int idMonitor) {
 			CampamentoDAO dbC = CampamentoDAO.getInstance();
 			MonitorDAO dbM = MonitorDAO.getInstance();
-			if(dbC.read(idCampamento) == null || dbM.read(idMonitor) == null)
+			ActividadDAO dbA = ActividadDAO.getInstance();
+			CampDTO c = dbC.read(idCampamento);
+			if(c == null || dbM.read(idMonitor) == null)
 				return false;
-			else
+			ArrayList<ActivityDTO> acts = dbC.readActivitiesCamp(idCampamento);
+			boolean find = false;
+			for(ActivityDTO a : acts){
+				if(!find){
+					ArrayList<MonitorDTO> monitors = dbA.readMonitorsActivity(a.getId());
+					for(MonitorDTO m : monitors){
+						if(!find){
+							find = m.getId() == idMonitor;
+						}
+					}
+				}
+			}
+			if(!find)
+				return false;
+			else 
 				return dbC.updateResponsable(idCampamento, idMonitor);
 		}
 		/**
