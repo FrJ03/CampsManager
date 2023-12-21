@@ -21,7 +21,7 @@ import view.beans.customer.CustomerBean;
  * @author Enrique de los Reyes Montilla
  */
 @WebServlet("/AssociateSupervisortoCamp")
-public class AssociateMonitortoCamp extends HttpServlet {
+public class AssociateSupervisortoCamp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	/**

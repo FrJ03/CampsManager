@@ -1,5 +1,6 @@
 package controller.servlets;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -11,18 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import controller.dto.activity.Nivel;
 import controller.dto.camp.CampDTO;
 import controller.gestores.GestorCampamentos;
 import view.beans.customer.CustomerBean;
 
-
 /**
- * Servlet implementation class search a camp by number of seats
- * @author Enrique de los Reyes Montilla
+ * Servlet implementation class SearchCampamentByAvailableSeats
  */
-@WebServlet("/SearchCampamentByEducationalLevel")
-public class SearchCampamentByEducationalLevel extends HttpServlet {
+@WebServlet("/SearchCampamentByAvailableSeats")
+public class SearchCampamentByAvailableSeats extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,7 +38,7 @@ public class SearchCampamentByEducationalLevel extends HttpServlet {
 	            dispatcher.forward(request, response);
 	        } else {
 	        	// El cliente existe y tiene el rol de cliente
-	        	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/assistant/searchCampamentByEducationalLevel.jsp");
+	        	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/assistant/searchCampamentByAvailableSeats.jsp");
 	        	request.setAttribute("message", "");
 	            dispatcher.forward(request, response);
 	        }
@@ -61,20 +59,20 @@ public class SearchCampamentByEducationalLevel extends HttpServlet {
 	            dispatcher.forward(request, response);
 	    }
 	        // Get the form parameters
-	        String educationalLevel = request.getParameter("educationalLevel");
-	    if ((educationalLevel == null) ) {
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/assistant/searchCampamentByEducationalLevel.jsp");
+	        String availableSeatsStr = request.getParameter("availableSeats");
+	    if (availableSeatsStr == "" ) {
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/assistant/searchCampamentByAvailableSeats.jsp");
         	request.setAttribute("message", "The value of the request is invalid");
             dispatcher.forward(request, response);
 	    }
 	    
-	    else{
-	    	ArrayList<CampDTO> listc = gc.getListaCampamentos(Nivel.valueOf(educationalLevel));
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/assistant/searchCampamentByEducationalLevel.jsp");
-        	request.setAttribute("message", "Campaments find:");
-            dispatcher.include(request, response);
+	    else {
+	    	ArrayList<CampDTO> listc = gc.getListaCampamentos(Integer.valueOf(availableSeatsStr));
 	        String turno = "true";
-	       
+	        RequestDispatcher dispatcher;
+	        dispatcher = request.getRequestDispatcher("/mvc/view/assistant/searchCampamentByAvailableSeats.jsp");
+        	request.setAttribute("message", "Campaments find:");
+            dispatcher.forward(request, response);
 	    	for(CampDTO aux : listc) {
 	    		dispatcher = campView(aux, turno, request);
 	    		dispatcher.include(request, response);
@@ -92,4 +90,5 @@ public class SearchCampamentByEducationalLevel extends HttpServlet {
 	    request.setAttribute("turnoCamp", turno);
     	return dispatcher;
 	}
+
 }
