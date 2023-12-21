@@ -63,6 +63,10 @@ public class CreateMonitor extends HttpServlet{
                         				RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errorAddMonitor.html");
                         				disp.forward(request, response);
                   			}
+                  			else {
+                  				RequestDispatcher disp = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
+                				disp.forward(request, response);
+                  			}
 	            		}
           	}
             private boolean isBoolean(String value) {

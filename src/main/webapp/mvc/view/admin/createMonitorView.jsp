@@ -41,7 +41,7 @@
 		<jsp:include page="../../../include/templates/adminNav.html"></jsp:include>
 <!-- formulario para crear mon -->
               <h1 class="Title">Create Monitor</h1>
-              <form class="Form" action="../../controller/servlets/CreateMonitor.java" method="post">
+              <form class="Form" action="/Proyecto-Programacion-Web/CreateMonitor" method="post">
                   <label for="name">Name</label>
                   <input type="text" id="name" name="name" required>
           
