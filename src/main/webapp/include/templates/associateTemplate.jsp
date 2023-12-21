@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Asociate Form</title>
+<title>Associate Form</title>
+<link rel="stylesheet" href="/Proyecto-Programacion-Web/css/styles.css">
 </head>
 <body>
 	<body>
@@ -24,9 +25,10 @@
 		<% 
 			}
 		%>
-	<h2><%=h2%></h2>
+	<jsp:include page="adminNav.html"></jsp:include>
+	<h1 class="Title"><%=h2%></h1>
 	<p><%=messageNextPage%></p>
-    <form method="post" action="<%=path%>">
+    <form class="Form" method="post" action="<%=path%>">
 	<label for="<%=atribute1%>"><%=atribute1%>: </label>
 	<input type="number" name="<%=atribute1%>" min=1><br/>
 	<label for="<%=atribute2%>"><%=atribute2%>: </label>
