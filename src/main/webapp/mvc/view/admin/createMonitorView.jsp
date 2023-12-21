@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <link rel="stylesheet" href="../../../css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
         <meta charset="UTF-8">
         <title>Create Monitor</title>
     </head>
@@ -42,14 +42,17 @@
 <!-- formulario para crear mon -->
               <h1 class="Title">Create Monitor</h1>
               <form class="Form" action="../../controller/servlets/CreateMonitor.java" method="post">
-                  <label for="initDate">Name:</label>
+                  <label for="name">Name</label>
                   <input type="text" id="name" name="name" required>
           
-                  <label for="endDate">Last names:</label>
-                  <input type="text" id="last_names" name="last_names" required>
+                  <label for="lastName">Last names:</label>
+                  <input type="text" id="lastName" name="lastNames" required>
           
-                  <label for="respMonitor">Special Monitor?:</label>
-                  <input type="text" id="special" name="special" required>
+                  <label for="special">Special Monitor?:</label>
+                  <select id="special" name="special" required>
+			            <option value="True">Yes</option>
+			            <option value="False">No</option>
+		      		</select>
           
                   <input type="submit" value="Create Monitor">
               </form>

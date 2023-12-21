@@ -49,7 +49,7 @@ public class CreateMonitor extends HttpServlet{
                 		}
                 		else {
                   			String name = request.getParameter("name");
-                  			String last = request.getParameter("last_names");
+                  			String last = request.getParameter("lastName");
                   			String special = request.getParameter("special");
 
                             MonitorDTO mon=new MonitorDTO(-1, name,last,Boolean.parseBoolean(special));
