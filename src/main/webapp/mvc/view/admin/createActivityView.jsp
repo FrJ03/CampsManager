@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <link rel="stylesheet" href="../../../css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
         <meta charset="UTF-8">
         <title>Create Activity</title>
     </head>
@@ -42,20 +42,27 @@
 <!-- formulario para crear act -->
               <h1 class="Title">Create Activity</h1>
               <form class="Form" action="../../controller/servlets/CreateActivity.java" method="post">
-                  <label for="initDate">Name of Activity:</label>
+                  <label for="name">Name of Activity:</label>
                   <input type="text" id="name" name="name" required>
           
-                  <label for="endDate">Level:</label>
-                  <input type="text" id="level" name="level" required>
+                  <label for="level">Level:</label>
+                  <select id="level" required>
+			            <option value="Infantil">Infantile</option>
+			            <option value="Juvenil">Juvenile</option>
+			            <option value="Adolescente">Teenager</option>
+			        </select>
           
-                  <label for="maxMonitors">Max Number of Assistants:</label>
-                  <input type="text" id="maxAssistants" name="maxAssistants" required>
+                  <label for="maxAssistants">Max Number of Assistants:</label>
+                  <input type="number" id="maxAssistants" name="maxAssistants" required>
           
-                  <label for="respMonitor">Max Number of Monitors:</label>
-                  <input type="text" id="maxMonitors" name="maxMonitors" required>
+                  <label for="maxMonitors">Max Number of Monitors:</label>
+                  <input type="number" id="maxMonitors" name="maxMonitors" required>
 
-                  <label for="level">Turn:</label>
-                  <input type="text" id="turn" name="turn" required>
+                  <label for="turn">Turn:</label>
+                  <select id="level" required>
+			            <option value="Morning">Morning</option>
+			            <option value="Afternoon">Afternoon</option>
+			        </select>
           
                   <input type="submit" value="Create Activity">
               </form>
