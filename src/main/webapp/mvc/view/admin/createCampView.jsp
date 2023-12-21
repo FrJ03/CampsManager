@@ -55,10 +55,7 @@
 			            <option value="Adolescente">Teenager</option>
 			        </select>
                   <label for="maxMonitors">Max Number of Assistants:</label>
-                  <input type="text" id="maxMonitors" name="maxMonitors" required>
-          
-                  <label for="respMonitor">Responsible Monitor:</label>
-                  <input type="text" id="respMonitor" name="respMonitor" required>
+                  <input type="number" id="maxMonitors" name="maxMonitors" required>
           
                   <input type="submit" value="Create Camp">
               </form>
