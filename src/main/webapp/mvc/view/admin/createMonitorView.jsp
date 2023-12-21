@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../../css/styles.css">
         <meta charset="UTF-8">
         <title>Create Monitor</title>
     </head>
@@ -14,9 +14,9 @@
             String nextPage="";
             String messageNextPage = (String)request.getAttribute("message");
 
-            if(customerBean != null || !customerBean.getEmailUser().equals("")){
+            if(customerBean == null || customerBean.getEmailUser().equals("")){
                 //No debería estar aquí, lo mando al index
-                nextPage="../../../webapp/index.jsp";
+                nextPage="../../../index.jsp";
         %>
                 <jsp:forward page="<%=nextPage%>"/>
         <%
@@ -30,23 +30,18 @@
             }
             else{
                 if(customerBean.getRol() == "None"){
-                    nextPage="../../../webapp/index.jsp";
+                    nextPage="../../../index.jsp";
         %>
                     <jsp:forward page="<%=nextPage%>"/>
         <%
                 }
             }
         %>
-
-        <ul>
-            <li><a href="../../../webapp/index.jsp"></a>Admin page</li>
-            <li><a href="../../controller/logout/logout.jsp"></a>Logout</li>
-            <li><a href="../register/changeDataView.jsp"></a>Modify user info</li>
-        </ul>
-
+	
+		<jsp:include page="../../../include/templates/assistantNav.html"></jsp:include>
 <!-- formulario para crear mon -->
-              <h2>Create Monitor</h2>
-              <form action="../../controller/servlets/CreateMonitor.java" method="post">
+              <h1 class="Title">Create Monitor</h1>
+              <form class="Form" action="../../controller/servlets/CreateMonitor.java" method="post">
                   <label for="initDate">Name:</label>
                   <input type="text" id="name" name="name" required>
           
