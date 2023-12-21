@@ -49,12 +49,10 @@
                   <input type="date" id="endDate" name="endDate" required>
           
                   <label for="level">Level:</label>
-                  <input type="text" id="level" name="level" required>
           			<select id="level" required>
 			            <option value="Infantil">Infantile</option>
 			            <option value="Juvenil">Juvenile</option>
 			            <option value="Adolescente">Teenager</option>
-			            <option value="False">No</option>
 			        </select>
                   <label for="maxMonitors">Max Number of Assistants:</label>
                   <input type="text" id="maxMonitors" name="maxMonitors" required>
