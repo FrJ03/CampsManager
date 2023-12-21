@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    	<link rel="stylesheet" href="../../../css/styles.css">
+    	<link rel="stylesheet" href="css/styles.css">
         <meta charset="UTF-8">
         <title>Create Camp</title>
     </head>
