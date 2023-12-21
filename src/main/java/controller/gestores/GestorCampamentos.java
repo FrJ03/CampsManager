@@ -195,7 +195,7 @@ public class GestorCampamentos {
 			ActivityDTO a = dbA.read(idA);
 			if(a == null || dbM.read(idM) == null)
 				return false;
-			if (dbA.readMonitorsActivity(idA).size() == a.getMonitoresMax())
+			if (dbA.readMonitorsActivity(idA).size() >= a.getMonitoresMax())
 				return false;
 			else
 				return dbA.addActivity(idA, idM);
