@@ -168,8 +168,6 @@ public class GestorCampamentos {
 		 * @return boolean True if the camp has been added correctly, false otherwise
 		 */
 		public Boolean crearCampamento(String start, String end, String level, int maxP) {
-			/*if(!isDate(start) || !isDate(end))
-				return false;*/
 			LocalDate s = LocalDate.parse(start);
 			LocalDate e = LocalDate.parse(end);
 			Nivel l;

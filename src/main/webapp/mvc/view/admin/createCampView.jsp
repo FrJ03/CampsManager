@@ -41,7 +41,7 @@
 		<jsp:include page="../../../include/templates/adminNav.html"></jsp:include>
 <!-- formulario para crear camp -->
               <h1 class="Title">Create Camp</h1>
-              <form  class="Form" action="../../controller/servlets/CreateCamp.java" method="post">
+              <form  class="Form" action="/Proyecto-Programacion-Web/CreateCamp" method="post">
                   <label for="initDate">Start Date:</label>
                   <input type="date" id="initDate" name="initDate" required>
           
