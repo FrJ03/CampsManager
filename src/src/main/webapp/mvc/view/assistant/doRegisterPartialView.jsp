@@ -35,17 +35,13 @@
             cursor: pointer;
         }
     </style>
-    <script>
-   		RegisterDTO p = new RegisterDTO;
-   		
-    
-    </script>
+
 </head>
 <body>
 	<% 
 		String messageNextPage = (String)request.getAttribute("message");
 		
-			if (customerBean == null || !customerBean.getRol().equals("Client")) {
+			if (customerBean == null || !customerBean.getRol().equals("Admin")) {
 			//No debería estar aquí -> flujo salta a index.jsp
 				String nextPage = "/include/errors/errorRol.jsp";
 		%>
@@ -55,12 +51,12 @@
 		%>
    
 
-<h1>Registro Parcial</h1>
+<h1>Register Partial</h1>
     
     <!-- Formulario de Registro Parcial -->
-    <form class="Form" method="post" action="">
-        <label for="numero_campamento">ID of the camp you want to register:</label>
-        <input type="text" id="numero_campamento" name="numero_campamento" required>
+    <form class="Form" action="../../controller/servlets/DoRegistrationPartial.java" method="post">
+        <label for="idCamp">ID of the camp you want to register:</label>
+        <input type="text" id="idCamp" name="idCamp" required>
 
         <input type="submit" value="Submit">
     </form>
