@@ -26,14 +26,11 @@ public class DoRegistration extends HttpServlet{
 			disp.forward(request, response);
 		}
 		else {
-			AsistenteDAO a = null;
-			a = leerAsistente(customer.getEmailUser());
-			AssistantDTO aux = null;
-			aux = a.read(customer.getEmailUser());
-			
+			AssistantDTO a = GestorAsistentes.getInstance().leerAsistente(customer.getEmailUser());
+				
 			String idCamp = request.getParameter("idCamp");		
-			
-			if(!GestorInscripciones.getInstance().realizarRegistroParcial(Integer.parseInt(idCamp), aux.getId())) {
+				
+			if(!GestorInscripciones.getInstance().realizarRegistroParcial(Integer.parseInt(idCamp), a.getId())) {
 					RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errordoRegistration.html");
 					disp.forward(request, response);
 			}
