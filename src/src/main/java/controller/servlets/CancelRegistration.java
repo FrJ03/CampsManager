@@ -1,14 +1,19 @@
 package controller.servlets;
 
 import java.io.IOException;
+import javax.servlet.annotation.WebServlet;
+import controller.gestores.GestorInscripciones;
+import controller.dto.assistant.AssistantDTO;
+import controller.gestores.GestorAsistentes;
+
+import view.beans.customer.CustomerBean;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import controller.gestores.GestorInscripciones;
-import view.beans.customer.CustomerBean;
 
 /**
  * Servlet implementation class to cancel a registration
@@ -24,15 +29,12 @@ public class CancelRegistration extends HttpServlet{
 			RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errorRol.jsp");
 			disp.forward(request, response);
 		}
-		else {
-			AsistenteDAO a = new AsistenteDAO;
-			a = leerAsistente(customer.getEmailUser());
-			AssistantDTO aux = new AssistantDAO;
-			aux = a.read(customer.getEmailUser());
+		else {			
+			String idCamp = request.getParameter("idCamp");
+			//String idAssistant = request.getParameter("idAssistant");
+			AssistantDTO a = GestorAsistentes.getInstance().leerAsistente(customer.getEmailUser());
 			
-			String idCamp = request.getParameter("idCamp")
-			
-			if(!isInteger(idCamp) || !isInteger(idAssistant) || !GestorInscripciones.getInstance().deleteRegistration(Integer.parseInt(idCamp), aux.getId())) {
+			if(!isInteger(idCamp) || !GestorInscripciones.getInstance().deleteRegistration(Integer.parseInt(idCamp), a.getId())) {
 				RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errorCancelRegistration.html");
 				disp.forward(request, response);
 			}
