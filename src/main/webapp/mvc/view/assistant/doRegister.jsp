@@ -29,7 +29,7 @@
     <!-- Formulario de Registro Parcial -->
     <form class="Form" method="post" action="/Proyecto-Programacion-Web/DoRegistration">
         <label for="idCamp">Camp ID</label>
-        <input type="text" id="idCamp" name="idCamp" required>
+        <input type="number" id="idCamp" name="idCamp" required>
         <label for="type">Type</label>
 		<select id="type" name="type" required>
            <option value="Full">Full</option>
