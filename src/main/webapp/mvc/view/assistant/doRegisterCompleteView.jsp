@@ -58,7 +58,7 @@
 <h1>Registro Parcial</h1>
     
     <!-- Formulario de Registro Parcial -->
-    <form class="Form" method="post" action="">
+    <form class="Form" method="post" action="Proyecto-Programacion-Web/DoRegistrationComplete">
         <label for="numero_campamento">ID of the camp you want to register:</label>
         <input type="text" id="numero_campamento" name="numero_campamento" required>
 
