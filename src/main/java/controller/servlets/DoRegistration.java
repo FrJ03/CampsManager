@@ -56,7 +56,7 @@ public class DoRegistration extends HttpServlet{
 			String type = request.getParameter("type");
 		
 			
-			if(type=="Partial") {
+			if(type.equalsIgnoreCase("Partial")) {
 				if(!GestorInscripciones.getInstance().realizarRegistroParcial(Integer.parseInt(idCamp), a.getId())) {
 					RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errordoRegistration.html");
 					disp.forward(request, response);
@@ -66,10 +66,10 @@ public class DoRegistration extends HttpServlet{
 					disp.forward(request, response);
 				}
 			}
-			if(type=="Full") {
+			if(type.equalsIgnoreCase("Full")) {
 				if(!GestorInscripciones.getInstance().realizarRegistroCompleto(Integer.parseInt(idCamp), a.getId())) {
 					RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errordoRegistration.html");
-					disp.forward(request, response);
+					disp.include(request, response);
 				}
 				else {
 					RequestDispatcher disp = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
