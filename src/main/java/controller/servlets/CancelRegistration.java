@@ -54,7 +54,6 @@ public class CancelRegistration extends HttpServlet{
 		}
 		else {
 			String idCamp = request.getParameter("idCamp");
-			//String idAssistant = request.getParameter("idAssistant");
 			AssistantDTO a = GestorAsistentes.getInstance().leerAsistente(customer.getEmailUser());
 			
 			if(!isInteger(idCamp) || !GestorInscripciones.getInstance().deleteRegistration(Integer.parseInt(idCamp), a.getId())) {
