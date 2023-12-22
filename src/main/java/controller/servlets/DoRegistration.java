@@ -5,6 +5,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 import controller.gestores.GestorInscripciones;
+import controller.gestores.GestorAsistentes;
+import controller.dto.AssistantDTO;
 import view.beans.customer.CustomerBean;
 
 /**
@@ -48,19 +50,20 @@ public class DoRegistration extends HttpServlet{
 			disp.forward(request, response);
 		}
 		else {
-			String idUser = request.getParameter("idUser");
+
+			AssistantDTO a = GestorAsistentes.getInstance().leerAsistente(customer.getEmailUser());
 			String idCamp = request.getParameter("idCamp");
 			String type = request.getParameter("type");
 		
 			
-			if(type=="Parcial") {
-				if(!GestorInscripciones.getInstance().realizarRegistroParcial(Integer.parseInt(idCamp), Integer.parseInt(idUser))) {
+			if(type=="Partial") {
+				if(!GestorInscripciones.getInstance().realizarRegistroParcial(Integer.parseInt(idCamp), a.getId())) {
 					RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errordoRegistration.html");
 					disp.forward(request, response);
 				}
 			}
-			if(type=="Completa") {
-				if(!GestorInscripciones.getInstance().realizarRegistroCompleto(Integer.parseInt(idCamp), Integer.parseInt(idUser))) {
+			if(type=="Full") {
+				if(!GestorInscripciones.getInstance().realizarRegistroCompleto(Integer.parseInt(idCamp), a.getId())) {
 					RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errordoRegistration.html");
 					disp.forward(request, response);
 				}

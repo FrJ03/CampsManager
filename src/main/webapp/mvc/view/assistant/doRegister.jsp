@@ -7,35 +7,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-     <style>
-        body {
-            text-align: center;
-            padding: 20px;
-        }
-
-        h1 {
-            margin-bottom: 20px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        input[type="submit"] {
-            margin-bottom: 10px;
-            padding: 10px 20px; /* Ajusta el tamaño de los botones según sea necesario */
-            font-size: 16px;   /* Ajusta el tamaño del texto dentro de los botones */
-        }
-    </style>
+    <title>Registration</title>
 </head>
 <body>
 	<% 
 		String messageNextPage = (String)request.getAttribute("message");
 		
-			if (customerBean == null || !customerBean.getRol().equals("Client")) {
+			if (customerBean == null || !customerBean.getRol().equalsIgnoreCase("Client")) {
 			//No debería estar aquí -> flujo salta a index.jsp
 				String nextPage = "/include/errors/errorRol.jsp";
 		%>
@@ -45,16 +23,22 @@
 		%>
    
 
-<h1>¿Cómo quieres hacer la reserva?</h1>
+<h1 class="Title">Make Registration</h1>
     
-    <!-- Botones de opción -->
-    <form action="doRegisterPartialView.jsp" method="post">
-        <input type="submit" name="tipo_reserva" value="Reserva Parcial">
-    </form>
-    <form action="doRegisterCompleteView.jsp" method="post">
-         <input type="submit" name="tipo_reserva" value="Reserva Completa">  
+    <!-- Formulario de Registro Parcial -->
+    <form class="Form" method="post" action="Proyecto-Programacion-Web/DoRegistrationComplete">
+        <label for="idCamp">Camp ID</label>
+        <input type="text" id="idCamp" name="idCamp" required>
+        <label for="type">Type</label>
+		<select id="type" name="type" required>
+           <option value="Full">Full</option>
+           <option value="Partial">Partial</option>
+       </select>
+
+        <input type="submit" value="Submit">
     </form>
     
     <p><a href="/Proyecto-Programacion-Web/index.jsp">Return</a></p>
+
 </body>
 </html>
