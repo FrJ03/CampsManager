@@ -167,6 +167,34 @@ public class GestorInscripciones {
 		return listaAux;
 	}
 	/**
+	 * Method that check the modality
+	 * @param idC Camp ID to check
+	 * @return String Modality
+	 */
+	public String calcularModalidad(int idC) {
+		
+		CampamentoDAO dbC = CampamentoDAO.getInstance();
+		CampDTO c = dbC.readAvailable(idC);
+		if(c != null) {
+			LocalDate now = LocalDate.now());
+			// Calcular la diferencia entre la fecha del campamento y la de inscripcion
+	        Period periodo = now.until(c.getInicioCampamento());
+
+	        // Obtener el número de días de la diferencia
+	        int diferenciaDias = periodo.getDays();
+	        
+	        if(diferenciaDias >= 15 )
+				return "temprano";
+			else if(diferenciaDias >= 2)
+				return "tardio";
+			else
+				return "No se puede registrar";
+		}
+		else 
+			return "No se puede registrar";	
+		
+	}
+	/**
 	 * Delete a registration
 	 * @param idCamp Camp id
 	 * @param idAssistant Assistant id
