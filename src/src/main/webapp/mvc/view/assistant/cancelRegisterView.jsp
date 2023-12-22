@@ -46,7 +46,7 @@
 <br>
         <h2>Cancel registration</h2>
             <%= messageNextPage %><br><br>
-        <form action="/Proyecto-Programacion-Web/CancelRegistration.java" method="post">
+        <form action="../../controller/servlets/DoRegistrationPartial.java" method="post">
             
             <label for="idCamp">Input camp you want to cancel your registration to:</label>
             <input type="number" name="idCamp" id="idCamp" required>
