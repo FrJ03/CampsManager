@@ -60,6 +60,10 @@ public class CancelRegistration extends HttpServlet{
 				RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errorCancelRegistration.html");
 				disp.forward(request, response);
 			}
+			else {
+				RequestDispatcher disp = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
+				disp.forward(request, response);
+			}
 		}
 	}
 	private boolean isInteger(String number) {
