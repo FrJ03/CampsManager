@@ -185,7 +185,7 @@ public class RegistrationDTO {
 			tipo_ = Tipo.Completa;
 			return true;
 		}
-		else if(tipo.contentEquals("parcial")) {
+		else if(tipo.equalsIgnoreCase("parcial")) {
 			tipo_ = Tipo.Parcial;
 			return true;
 		}
@@ -208,7 +208,7 @@ public class RegistrationDTO {
 			temporalidad_ = Temporalidad.Temprano;
 			return true;
 		}
-		else if(temporalidad.contentEquals("tardio")) {
+		else if(temporalidad.equalsIgnoreCase("tardio")) {
 			temporalidad_ = Temporalidad.Tardio;
 			return true;
 		}
