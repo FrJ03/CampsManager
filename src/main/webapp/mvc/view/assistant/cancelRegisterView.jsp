@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="/Proyecto-Programacion-Web/css/styles.css">
         <meta charset="UTF-8">
         <title>Cancel registration</title>
     </head>
@@ -14,47 +14,27 @@
             String nextPage="";
             String messageNextPage = (String)request.getAttribute("message");
 
-            if(customerBean != null || !customerBean.getEmailUser().equals("")){
-                //No debería estar aquí, lo mando al index
-                nextPage="../../../webapp/index.jsp";
-        %>
-                <jsp:forward page="<%=nextPage%>"/>
-        <%
-            }
-            if(customerBean.getRol() == "Admin"){
-                //Lo mando a la página de admin
-                nextPage="../../controller/admin/admin.jsp";
-        %>
-                <jsp:forward page="<%=nextPage%>"></jsp:forward>
-        <%
-            }
-            else{
-                if(customerBean.getRol() == "None"){
-                    nextPage="../../../webapp/index.jsp";
-        %>
-                    <jsp:forward page="<%=nextPage%>"/>
-        <%
-                }
-            }
+            if (customerBean == null || !customerBean.getRol().equals("Client")) {
+    			//No debería estar aquí -> flujo salta a index.jsp
+    				nextPage = "/include/errors/errorRol.jsp";
+    		%>
+    				<jsp:forward page="<%=nextPage%>"></jsp:forward>
+    		<% 
+   			}
         %>
 
-        <ul>
-            <li><a href="../../../webapp/index.jsp"></a>User index</li>
-            <li><a href="../../controller/logout/logout.jsp"></a>Logout</li>
-            <li><a href="../register/changeDataView.jsp"></a>Modify user info</li>
-        </ul>
-<br>
-        <h2>Cancel registration</h2>
-            <%= messageNextPage %><br><br>
-        <form action="/Proyecto-Programacion-Web/CancelRegistration" method="post">
+		<jsp:include page="/include/templates/assistantNav.html"></jsp:include>
+        <h1 class="Title">Cancel registration</h1>
+        <form class="Form" action="/Proyecto-Programacion-Web/CancelRegistration" method="post">
             
-            <label for="idCamp">Input camp you want to cancel your registration to:</label>
+            <label for="idCamp">Camp to cancel your registration</label>
             <input type="number" name="idCamp" id="idCamp" required>
 
-            <label for="idAssistant">Input your Assistant ID:</label>
+            <label for="idAssistant">Assistant ID:</label>
             <input type="number" name="idAssistant" id="idAssistant" required>
             
-            <button type="submit">Cancel</button>
+            
+			<input type="submit" value="Submit">
         </form>
 
     </body>
