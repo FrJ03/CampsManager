@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Camp</title>
+    <link rel="stylesheet" href="/Proyecto-Programacion-Web/css/styles.css">
 </head>
 <body>
 		<% 
@@ -21,11 +22,10 @@
 		<% 
 			}
 		%>
-
-        <h2>Check available camps</h2>
-            <%= messageNextPage %><br><br>
+<jsp:include page="../../../include/templates/assistantNav.html"></jsp:include>
+        <h1 class="Title">Check available camps</h1>
 <!-- EXISTE EL CONTROLADOR CHECKCAMPSDATE?? -->
-        <form action="/Proyecto-Programacion-Web/CheckCampsDate" method="post">
+        <form class="Form" action="/Proyecto-Programacion-Web/CheckCampsDate" method="post">
             
             <label for="dateStart">Date of beginning of camp:</label>
             <input type="date" name="dateStart" id="dateStart" required>
@@ -33,12 +33,8 @@
             <label for="dateEnd">Date of ending of camp:</label>
             <input type="date" name="dateEnd" id="dateEnd" required>
         
-            <button type="submit">Search</button>
+            <input type="submit" value="Search">
         </form>
-
-    </body>
-</html>
-
 
     </body>
 </html>
