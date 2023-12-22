@@ -27,7 +27,7 @@
         <h1 class="Title">Cancel registration</h1>
         <form class="Form" action="/Proyecto-Programacion-Web/CancelRegistration" method="post">
             
-            <label for="idCamp">Camp to cancel your registration</label>
+            <label for="idCamp">Camp ID to cancel Registration</label>
             <input type="number" name="idCamp" id="idCamp" required>            
             
 			<input type="submit" value="Submit">
