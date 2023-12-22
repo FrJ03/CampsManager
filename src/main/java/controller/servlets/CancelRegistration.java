@@ -48,7 +48,7 @@ public class CancelRegistration extends HttpServlet{
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		CustomerBean customer = (CustomerBean) session.getAttribute("customerBean");
-		if(customer == null || !customer.getRol().equals("Admin")) {
+		if(customer == null || !customer.getRol().equalsIgnoreCase("Client")) {
 			RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errorRol.jsp");
 			disp.forward(request, response);
 		}
