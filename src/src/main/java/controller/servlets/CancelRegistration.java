@@ -25,10 +25,14 @@ public class CancelRegistration extends HttpServlet{
 			disp.forward(request, response);
 		}
 		else {
-			String idCamp = request.getParameter("idCamp");
-			String idAssistant = request.getParameter("idAssistant");
+			AsistenteDAO a = new AsistenteDAO;
+			a = leerAsistente(customer.getEmailUser());
+			AssistantDTO aux = new AssistantDAO;
+			aux = a.read(customer.getEmailUser());
 			
-			if(!isInteger(idCamp) || !isInteger(idAssistant) || !GestorInscripciones.getInstance().deleteRegistration(Integer.parseInt(idCamp), Integer.parseInt(idAssistant))) {
+			String idCamp = request.getParameter("idCamp")
+			
+			if(!isInteger(idCamp) || !isInteger(idAssistant) || !GestorInscripciones.getInstance().deleteRegistration(Integer.parseInt(idCamp), aux.getId())) {
 				RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errorCancelRegistration.html");
 				disp.forward(request, response);
 			}
