@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Camp by Level</title>
-    <link rel="stylesheet" href="/Proyecto-Programacion-Web/css/style.css">
+    <link rel="stylesheet" href="/Proyecto-Programacion-Web/css/styles.css">
 </head>
 <body>
 		<% 
@@ -32,7 +32,7 @@
             <option value="Juvenil">Young teens</option>
             <option value="Adolescente">Teenagers</option>
         </select>
-        <button type="submit">Search</button>
+        <input type="submit" value="Search">
     </form>
 
 </body>
