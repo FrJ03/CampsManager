@@ -32,7 +32,7 @@ public class DoRegistration extends HttpServlet{
             dispatcher.forward(request, response);
         } else {
         	// El cliente existe y tiene el rol de cliente
-        	RequestDispatcher dispatcher= request.getRequestDispatcher("/mvc/view/admin/doRegistrationView.jsp");
+        	RequestDispatcher dispatcher= request.getRequestDispatcher("/mvc/view/assistant/doRegister.jsp");
         	request.setAttribute("path", "/Proyecto-Programacion-Web/DoRegistration");
             dispatcher.include(request, response);
             //createPage(request, response);
