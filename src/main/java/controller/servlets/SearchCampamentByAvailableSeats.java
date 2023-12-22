@@ -68,11 +68,11 @@ public class SearchCampamentByAvailableSeats extends HttpServlet {
 	    
 	    else {
 	    	ArrayList<CampDTO> listc = gc.getListaCampamentos(Integer.valueOf(availableSeatsStr));
-	        String turno = "true";
-	        RequestDispatcher dispatcher;
-	        dispatcher = request.getRequestDispatcher("/mvc/view/assistant/searchCampamentByAvailableSeats.jsp");
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/mvc/view/assistant/searchCampamentByAvailableSeats.jsp");
         	request.setAttribute("message", "Campaments find:");
-            dispatcher.forward(request, response);
+            dispatcher.include(request, response);
+	        String turno = "true";
+	       
 	    	for(CampDTO aux : listc) {
 	    		dispatcher = campView(aux, turno, request);
 	    		dispatcher.include(request, response);
