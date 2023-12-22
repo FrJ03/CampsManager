@@ -27,7 +27,7 @@
 	<%= messageNextPage %><br/><br/>
     <form class="Form" action="/Proyecto-Programacion-Web/SearchCampamentByEducationalLevel" method="post">
         <label for="educationalLevel">Search by Educational Level:</label>
-        <select name="educationalLevel" id="educationalLevel">
+        <select name="educationalLevel" id="educationalLevel" requiered>
             <option value="Infantil">Infants</option>
             <option value="Juvenil">Young teens</option>
             <option value="Adolescente">Teenagers</option>
