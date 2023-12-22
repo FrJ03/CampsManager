@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Partial</title>
+    <title>Register Complete</title>
  <style>
         body {
             text-align: center;
@@ -35,11 +35,6 @@
             cursor: pointer;
         }
     </style>
-    <script>
-   		RegisterDTO p = new RegisterDTO;
-   		
-    
-    </script>
 </head>
 <body>
 	<% 
@@ -55,12 +50,12 @@
 		%>
    
 
-<h1>Registro Parcial</h1>
+<h1>Register Complete</h1>
     
-    <!-- Formulario de Registro Parcial -->
-    <form class="Form" method="post" action="">
-        <label for="numero_campamento">ID of the camp you want to register:</label>
-        <input type="text" id="numero_campamento" name="numero_campamento" required>
+    <!-- Formulario de Register Complete -->
+    <form class="Form" action="../../controller/servlets/DoRegistrationComplete.java" method="post">
+        <label for="idCamp">ID of the camp you want to register:</label>
+        <input type="text" id="idCamp" name="idCamp" required>
 
         <input type="submit" value="Submit">
     </form>
