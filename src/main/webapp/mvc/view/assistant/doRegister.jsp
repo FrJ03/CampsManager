@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Proyecto-Programacion-Web/css/styles.css">
     <title>Registration</title>
 </head>
 <body>
@@ -22,7 +23,7 @@
 			}
 		%>
    
-
+<jsp:include page="../../../include/templates/assistantNav.html"></jsp:include>
 <h1 class="Title">Make Registration</h1>
     
     <!-- Formulario de Registro Parcial -->
@@ -37,8 +38,5 @@
 
         <input type="submit" value="Submit">
     </form>
-    
-    <p><a href="/Proyecto-Programacion-Web/index.jsp">Return</a></p>
-
 </body>
 </html>
