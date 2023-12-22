@@ -193,19 +193,7 @@ public class Programa {
 							max = Integer.parseInt(aux);
 						}while(max < 1);
 						
-						int idMonitor;
-						do {
-							System.out.print("Monitor in Charge ID: ");
-							try {
-								aux = teclado.readLine();
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-						}while(!isNumber(aux));
-							
-						idMonitor = Integer.parseInt(aux);
-						
-						if(campamentos.crearCampamento(fechaInicio, fechaFin, nivel, max, idMonitor))
+						if(campamentos.crearCampamento(fechaInicio, fechaFin, nivel, max))
 							System.out.println("Succesfull.");
 						else
 							System.out.println("Error creating the camp.");
