@@ -6,7 +6,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 import controller.gestores.GestorInscripciones;
 import controller.gestores.GestorAsistentes;
-import controller.dto.AssistantDTO;
+import controller.dto.assistant.AssistantDTO;
 import view.beans.customer.CustomerBean;
 
 /**
