@@ -46,14 +46,11 @@
 <br>
         <h2>Cancel registration</h2>
             <%= messageNextPage %><br><br>
-        <form action="/Proyecto-Programacion-Web/CancelRegistration" method="post">
+        <form action="/Proyecto-Programacion-Web/CancelRegistration.java" method="post">
             
             <label for="idCamp">Input camp you want to cancel your registration to:</label>
             <input type="number" name="idCamp" id="idCamp" required>
 
-            <label for="idAssistant">Input your Assistant ID:</label>
-            <input type="number" name="idAssistant" id="idAssistant" required>
-            
             <button type="submit">Cancel</button>
         </form>
 
