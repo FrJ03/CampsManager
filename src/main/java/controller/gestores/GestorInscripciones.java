@@ -135,7 +135,7 @@ public class GestorInscripciones {
 			return 300 + 20 * dbC.readActivitiesCamp(idC).size();
 		}
 		else
-			return -1.0;
+			return -1;
 	}
 	/**
 	 * Method that calculate the price of the partial registrations
@@ -148,7 +148,7 @@ public class GestorInscripciones {
 			return 100 + 20 * dbC.readActivitiesCamp(idC).size();
 		}
 		else
-			return -1.0;
+			return -1;
 	}
 	/**
 	 * Method that returns all available camps
