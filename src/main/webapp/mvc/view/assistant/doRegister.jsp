@@ -27,7 +27,7 @@
 <h1 class="Title">Make Registration</h1>
     
     <!-- Formulario de Registro Parcial -->
-    <form class="Form" method="post" action="Proyecto-Programacion-Web/DoRegistration">
+    <form class="Form" method="post" action="/Proyecto-Programacion-Web/DoRegistration">
         <label for="idCamp">Camp ID</label>
         <input type="text" id="idCamp" name="idCamp" required>
         <label for="type">Type</label>
