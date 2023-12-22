@@ -5,6 +5,9 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 import controller.gestores.GestorInscripciones;
+import model.dao.AsistenteDAO;
+import controller.dto.assistant.AssistantDTO;
+import controller.gestores.GestorAsistentes;
 import view.beans.customer.CustomerBean;
 
 /**
@@ -18,27 +21,21 @@ public class DoRegistration extends HttpServlet{
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		CustomerBean customer = (CustomerBean) session.getAttribute("customerBean");
-		if(customer == null || !customer.getRol().equals("Admin")) {
-			RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errorRol.jsp");
-			disp.forward(request, response);
-		}
+		//if(customer == null || !customer.getRol().equals("Client")) {
+			//RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errorRol.jsp");
+			//disp.forward(request, response);
+		//}
 		else {
-			String idUser = request.getParameter("idUser");
-			String idCamp = request.getParameter("idCamp");
-			String type = request.getParameter("type");
-		
+			AsistenteDAO a = null;
+			a = leerAsistente(customer.getEmailUser());
+			AssistantDTO aux = null;
+			aux = a.read(customer.getEmailUser());
 			
-			if(type=="Parcial") {
-				if(!GestorInscripciones.getInstance().realizarRegistroParcial(Integer.parseInt(idCamp), Integer.parseInt(idUser))) {
+			String idCamp = request.getParameter("idCamp");		
+			
+			if(!GestorInscripciones.getInstance().realizarRegistroParcial(Integer.parseInt(idCamp), aux.getId())) {
 					RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errordoRegistration.html");
 					disp.forward(request, response);
-				}
-			}
-			if(type=="Completa") {
-				if(!GestorInscripciones.getInstance().realizarRegistroCompleto(Integer.parseInt(idCamp), Integer.parseInt(idUser))) {
-					RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errordoRegistration.html");
-					disp.forward(request, response);
-				}
 			}
 		}
 	}
