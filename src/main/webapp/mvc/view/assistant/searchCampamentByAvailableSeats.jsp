@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Camp by available seats</title>
-	<link rel="stylesheet" href="/Proyecto-Programacion-Web/css/style.css">
+	<link rel="stylesheet" href="/Proyecto-Programacion-Web/css/styles.css">
 </head>
 <body>
 		<% 
@@ -28,8 +28,8 @@
 
     <form class="Form" action="/Proyecto-Programacion-Web/SearchCampamentByAvailableSeats" method="post">
         <label for="availableSeats">Search by Available Seats:</label>
-        <input type="number" name="availableSeats" id="availableSeats" min="1">
-        <button type="submit">Search</button>
+        <input type="number" name="availableSeats" id="availableSeats" min="1" requiered>
+        <input type="submit" value="Search">
     </form>
 
 </body>
