@@ -68,7 +68,7 @@ public class DoRegistration extends HttpServlet{
 			}
 			if(type.equalsIgnoreCase("Full")) {
 				
-					float res = gi.calcularPrecioParcial(Integer.parseInt(idCamp));
+					float res = gi.calcularPrecioCompleto(Integer.parseInt(idCamp));
 					RequestDispatcher disp = request.getRequestDispatcher("/mvc/view/assistant/ConfirmDoRegistration.jsp");
 					request.setAttribute("price", Float.toString(res));
 					request.setAttribute("type", type);
