@@ -60,7 +60,7 @@ public class CreateActivity extends HttpServlet{
 			}
 			else {
 				RequestDispatcher disp = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
-			  disp.forward(request, response);
+				disp.forward(request, response);
 			}
 		}
 	}

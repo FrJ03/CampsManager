@@ -61,10 +61,18 @@ public class DoRegistration extends HttpServlet{
 					RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errordoRegistration.html");
 					disp.forward(request, response);
 				}
+				else {
+					RequestDispatcher disp = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
+					disp.forward(request, response);
+				}
 			}
 			if(type=="Full") {
 				if(!GestorInscripciones.getInstance().realizarRegistroCompleto(Integer.parseInt(idCamp), a.getId())) {
 					RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errordoRegistration.html");
+					disp.forward(request, response);
+				}
+				else {
+					RequestDispatcher disp = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
 					disp.forward(request, response);
 				}
 			}
