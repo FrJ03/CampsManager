@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import controller.dto.assistant.AssistantDTO;
+import controller.gestores.GestorAsistentes;
 import controller.gestores.GestorInscripciones;
 import view.beans.customer.CustomerBean;
 
@@ -53,9 +55,9 @@ public class CancelRegistration extends HttpServlet{
 		else {
 			String idCamp = request.getParameter("idCamp");
 			//String idAssistant = request.getParameter("idAssistant");
-			AssistantDTO a = GestorAsistentes.getInstance().read(customer.getEmail());
+			AssistantDTO a = GestorAsistentes.getInstance().leerAsistente(customer.getEmailUser());
 			
-			if(!isInteger(idCamp) || !isInteger(idAssistant) || !GestorInscripciones.getInstance().deleteRegistration(Integer.parseInt(idCamp), a.getId())) {
+			if(!isInteger(idCamp) || !GestorInscripciones.getInstance().deleteRegistration(Integer.parseInt(idCamp), a.getId())) {
 				RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errorCancelRegistration.html");
 				disp.forward(request, response);
 			}
