@@ -176,7 +176,7 @@ public class GestorInscripciones {
 		CampamentoDAO dbC = CampamentoDAO.getInstance();
 		CampDTO c = dbC.readAvailable(idC);
 		if(c != null) {
-			LocalDate now = LocalDate.now());
+			LocalDate now = LocalDate.now();
 			// Calcular la diferencia entre la fecha del campamento y la de inscripcion
 	        Period periodo = now.until(c.getInicioCampamento());
 

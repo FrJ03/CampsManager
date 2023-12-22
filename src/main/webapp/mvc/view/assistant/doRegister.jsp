@@ -13,7 +13,7 @@
 <body>
 	<% 
 		String messageNextPage = (String)request.getAttribute("message");
-		
+		if (messageNextPage == null) messageNextPage = "";
 			if (customerBean == null || !customerBean.getRol().equalsIgnoreCase("Client")) {
 			//No debería estar aquí -> flujo salta a index.jsp
 				String nextPage = "/include/errors/errorRol.jsp";
@@ -25,7 +25,7 @@
    
 <jsp:include page="../../../include/templates/assistantNav.html"></jsp:include>
 <h1 class="Title">Make Registration</h1>
-    
+    <p><%=messageNextPage%></p>
     <!-- Formulario de Registro Parcial -->
     <form class="Form" method="post" action="/Proyecto-Programacion-Web/DoRegistration">
         <label for="idCamp">Camp ID</label>

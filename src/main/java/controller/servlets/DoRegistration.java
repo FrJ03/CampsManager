@@ -5,8 +5,10 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 import controller.gestores.GestorInscripciones;
+import model.dao.CampamentoDAO;
 import controller.gestores.GestorAsistentes;
 import controller.dto.assistant.AssistantDTO;
+import controller.dto.camp.CampDTO;
 import view.beans.customer.CustomerBean;
 
 /**
@@ -51,30 +53,29 @@ public class DoRegistration extends HttpServlet{
 		}
 		else {
 
-			AssistantDTO a = GestorAsistentes.getInstance().leerAsistente(customer.getEmailUser());
 			String idCamp = request.getParameter("idCamp");
 			String type = request.getParameter("type");
-		
+			GestorInscripciones gi = GestorInscripciones.getInstance();
 			
 			if(type.equalsIgnoreCase("Partial")) {
-				if(!GestorInscripciones.getInstance().realizarRegistroParcial(Integer.parseInt(idCamp), a.getId())) {
-					RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errordoRegistration.html");
+					float res = gi.calcularPrecioParcial(Integer.parseInt(idCamp));
+					RequestDispatcher disp = request.getRequestDispatcher("/mvc/view/assistant/ConfirmDoRegistration.jsp");
+					request.setAttribute("price", Float.toString(res));
+					request.setAttribute("idCamp", idCamp);
+					request.setAttribute("type", type);
+					request.setAttribute("modalidad", gi.calcularModalidad(Integer.parseInt(idCamp)));
 					disp.forward(request, response);
-				}
-				else {
-					RequestDispatcher disp = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
-					disp.forward(request, response);
-				}
 			}
 			if(type.equalsIgnoreCase("Full")) {
-				if(!GestorInscripciones.getInstance().realizarRegistroCompleto(Integer.parseInt(idCamp), a.getId())) {
-					RequestDispatcher disp = request.getRequestDispatcher("/include/errors/errordoRegistration.html");
-					disp.include(request, response);
-				}
-				else {
-					RequestDispatcher disp = request.getRequestDispatcher("/include/templates/returnToIndex.jsp");
+				
+					float res = gi.calcularPrecioParcial(Integer.parseInt(idCamp));
+					RequestDispatcher disp = request.getRequestDispatcher("/mvc/view/assistant/ConfirmDoRegistration.jsp");
+					request.setAttribute("price", Float.toString(res));
+					request.setAttribute("type", type);
+					request.setAttribute("idCamp", idCamp);
+					request.setAttribute("modalidad", gi.calcularModalidad(Integer.parseInt(idCamp)));
 					disp.forward(request, response);
-				}
+				
 			}
 		}
 	}
