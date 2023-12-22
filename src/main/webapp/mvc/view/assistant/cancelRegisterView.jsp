@@ -28,11 +28,7 @@
         <form class="Form" action="/Proyecto-Programacion-Web/CancelRegistration" method="post">
             
             <label for="idCamp">Camp to cancel your registration</label>
-            <input type="number" name="idCamp" id="idCamp" required>
-
-            <label for="idAssistant">Assistant ID:</label>
-            <input type="number" name="idAssistant" id="idAssistant" required>
-            
+            <input type="number" name="idCamp" id="idCamp" required>            
             
 			<input type="submit" value="Submit">
         </form>
