@@ -26,7 +26,7 @@ public class DoRegistration extends HttpServlet{
         // Obtener el CustomerBean de la sesión
         CustomerBean customer = (CustomerBean) session.getAttribute("customerBean");
         // Verificar si el CustomerBean existe y tiene el rol asignado de cliente
-        if (customer == null || !customer.getRol().equals("Admin")) {
+        if (customer == null || !customer.getRol().equalsIgnoreCase("Client")) {
         	// El cliente no existe o no tiene el rol de cliente
         	RequestDispatcher dispatcher = request.getRequestDispatcher("/include/errors/errorRol.jsp");
             dispatcher.forward(request, response);
