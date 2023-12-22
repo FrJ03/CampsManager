@@ -63,7 +63,7 @@ public class GestorInscripciones {
 		if((campamento = dbC.readAvailable(idC)) == null || dbA.read(idA) == null || dbI.read(idC, idA) != null)
 			return false;
 		//Calculo el precio
-		float precio = calcularPrecioCompleto(dbC.readActivitiesCamp(idC).size());
+		float precio = calcularPrecioCompleto(idC);
 		//Establezco la información a la inscripcion
 		RegistrationDTO inscripcion = new RegistrationDTO();
 		inscripcion.setIdCampamento(idC);
@@ -101,7 +101,7 @@ public class GestorInscripciones {
 		if((campamento = dbC.readAvailable(idC)) == null || dbA.read(idA) == null || dbI.read(idC, idA) != null)
 			return false;
 		//Calculo el precio
-		float precio = calcularPrecioParcial(dbC.readActivitiesCamp(idC).size());
+		float precio = calcularPrecioParcial(idC);
 		//Establezco la información a la inscripcion
 		RegistrationDTO inscripcion = new RegistrationDTO();
 		inscripcion.setIdCampamento(idC);
@@ -129,16 +129,26 @@ public class GestorInscripciones {
 	 * @param nActividades Number of activities
 	 * @return float Price
 	 */
-	private float calcularPrecioCompleto(int nActividades) {
-		return 300 + 20 * nActividades;
+	public float calcularPrecioCompleto(int idC) {
+		CampamentoDAO dbC = CampamentoDAO.getInstance();
+		if(dbC.readAvailable(idC) != null) {
+			return 300 + 20 * dbC.readActivitiesCamp(idC).size();
+		}
+		else
+			return -1.0;
 	}
 	/**
 	 * Method that calculate the price of the partial registrations
 	 * @param nActividades Number of activities
 	 * @return float Price 
 	 */
-	private float calcularPrecioParcial(int nActividades) {
-		return 100 + 20 * nActividades;
+	public float calcularPrecioParcial(int idC) {
+		CampamentoDAO dbC = CampamentoDAO.getInstance();
+		if(dbC.readAvailable(idC) != null) {
+			return 100 + 20 * dbC.readActivitiesCamp(idC).size();
+		}
+		else
+			return -1.0;
 	}
 	/**
 	 * Method that returns all available camps
