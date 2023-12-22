@@ -45,14 +45,14 @@
 		%>
    
 
-<h1>¿Cómo quieres hacer la reserva?</h1>
+<h1>How do you want to make the reservation?</h1>
     
     <!-- Botones de opción -->
     <form action="doRegisterPartialView.jsp" method="post">
-        <input type="submit" name="tipo_reserva" value="Reserva Parcial">
+        <input type="submit" name="type" value="Register Partial">
     </form>
     <form action="doRegisterCompleteView.jsp" method="post">
-         <input type="submit" name="tipo_reserva" value="Reserva Completa">  
+         <input type="submit" name="type" value="Register Complete">  
     </form>
     
     <p><a href="/Proyecto-Programacion-Web/index.jsp">Return</a></p>
