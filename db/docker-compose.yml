@@ -1,0 +1,17 @@
+version: '3'
+volumes:
+  data:
+services:
+  db:
+    image: mariadb
+    container_name: camps_database
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: CampsManager
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: adminpassword
+    volumes:
+      - /opt/mariadb:/var/lib/mysql
+      - ./:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
