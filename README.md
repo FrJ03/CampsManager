@@ -10,6 +10,7 @@
 1. Requeriments
 1. Technologies
 1. Configuration
+1. Contributions
 
 ## Purpose
 The purpose of this program is to manage the camps of a Camps agency.
@@ -43,3 +44,6 @@ The purpose of this program is to manage the camps of a Camps agency.
 1. Copy the WAR file to the `webapps/` directory of Tomcat.
 1. Run `startup.sh` (Linux) or `startup.bat` (Windows) located in the Tomcat `bin/` directory.
 1. Open a browser tab and find `localhost:8080/CampsManager`.
+
+## Contributions
+Contributions to this project are welcomed. If you have a feature request or find a bug, please open an issue. If you wish to contribute code, please open a pull request.
