@@ -11,6 +11,7 @@
 1. Technologies
 1. Configuration
 1. Contributions
+1. License
 
 ## Purpose
 The purpose of this program is to manage the camps of a Camps agency.
