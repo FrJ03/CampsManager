@@ -47,3 +47,6 @@ The purpose of this program is to manage the camps of a Camps agency.
 
 ## Contributions
 Contributions to this project are welcomed. If you have a feature request or find a bug, please open an issue. If you wish to contribute code, please open a pull request.
+
+## License
+[![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)
